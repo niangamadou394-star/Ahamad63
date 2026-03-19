@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Amadou Niang — Accompagnement · Commercial · Pédagogie a Clermont-Ferrand.">
+<meta name="theme-color" content="#060606">
+<title>Amadou Niang — Accompagnement · Commercial · Pédagogie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060606;--bg2:#0d0d0d;--bg3:#141414;--bg4:#1c1c1c;--gold:#f0a500;--gold2:#f5c040;--gold3:#fde68a;--glow:rgba(240,165,0,.12);--gline:rgba(240,165,0,.22);--coral:#ff6b47;--teal:#0fa594;--purple:#9b5de5;--text:#f4efe6;--t2:#9a9080;--t3:#5a5048;--b1:rgba(255,255,255,.06);--b2:rgba(240,165,0,.2);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:var(--sans);cursor:pointer;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:28px 52px;transition:all .4s;}
+#nav.sticky{background:rgba(6,6,6,.97);backdrop-filter:blur(24px);padding:16px 52px;border-bottom:1px solid var(--b1);}
+.logo{font-family:var(--serif);font-size:20px;font-weight:900;letter-spacing:1px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--t2);transition:color .25s;}
+.nav-links a:hover{color:var(--gold3);}
+.nav-cta{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gline);padding:10px 22px;border-radius:2px;transition:all .25s;background:transparent;}
+.nav-cta:hover{background:var(--glow);color:var(--gold3);}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.burger span{display:block;width:24px;height:1.5px;background:var(--t2);}
+#mob{display:none;position:fixed;inset:0;z-index:190;background:rgba(6,6,6,.98);flex-direction:column;align-items:center;justify-content:center;gap:40px;}
+#mob.open{display:flex;}
+#mob a{font-family:var(--serif);font-size:28px;color:var(--text);}
+#mob a:hover{color:var(--gold3);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:140px 52px 100px;position:relative;overflow:hidden;}
+.orb-a{position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(240,165,0,.07),transparent 65%);pointer-events:none;}
+.orb-b{position:absolute;bottom:-20%;left:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,71,.05),transparent 65%);pointer-events:none;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:860px;}
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;animation:up .8s .1s both;}
+.eyebrow::before{content:'';width:44px;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold3));}
+.hero-title{font-family:var(--serif);font-weight:900;font-size:clamp(48px,8vw,100px);line-height:1.02;letter-spacing:-2px;margin-bottom:32px;animation:up .8s .25s both;}
+.hero-title .acc{display:block;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:17px;color:var(--t2);max-width:540px;line-height:1.9;margin-bottom:50px;animation:up .8s .4s both;}
+.hero-sub strong{color:var(--text);font-weight:500;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:up .8s .55s both;}
+.btn-fill{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#060606;background:linear-gradient(135deg,var(--gold2),var(--gold));padding:15px 32px;border-radius:2px;border:none;transition:all .25s;}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(240,165,0,.3);}
+.btn-line{display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--t2);border:1px solid var(--b2);padding:15px 32px;border-radius:2px;transition:all .25s;}
+.btn-line:hover{color:var(--gold3);border-color:var(--gold);background:var(--glow);}
+.scroll-hint{position:absolute;bottom:44px;left:52px;z-index:1;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);animation:up .8s .9s both;}
+.sline{width:44px;height:1px;background:var(--t3);overflow:hidden;position:relative;}
+.sline::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);animation:scan 2.4s ease-in-out infinite;}
+@keyframes scan{0%{left:-100%}50%{left:0}100%{left:100%}}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS */
+.stats{background:var(--bg2);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:34px 20px;text-align:center;border-right:1px solid var(--b1);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:var(--serif);font-size:42px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-l{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-top:7px;}
+
+/* SECTIONS */
+.sec{padding:110px 52px;}
+.sec.alt{background:var(--bg2);}
+.sec.alt2{background:var(--bg3);}
+.s-lbl{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+.s-lbl::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold3));}
+.s-ttl{font-family:var(--serif);font-weight:700;font-size:clamp(32px,5vw,62px);line-height:1.08;letter-spacing:-.5px;margin-bottom:16px;}
+.s-ttl em{font-style:italic;color:var(--gold3);}
+.s-intro{font-size:16px;color:var(--t2);max-width:580px;line-height:1.9;margin-bottom:64px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:90px;align-items:start;}
+.about-text p{font-size:16px;color:var(--t2);line-height:2;margin-bottom:22px;}
+.about-text p strong{color:var(--text);font-weight:600;}
+.about-text em{font-family:var(--serif);font-style:italic;color:var(--gold3);font-size:18px;}
+.info-list{display:flex;flex-direction:column;}
+.info-row{display:flex;align-items:flex-start;gap:16px;padding:17px 0;border-bottom:1px solid var(--b1);}
+.info-row:last-child{border-bottom:none;}
+.info-ico{width:40px;height:40px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.info-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:4px;}
+.info-val{font-size:14px;font-weight:500;line-height:1.5;}
+.info-sub{font-size:12px;color:var(--t2);margin-top:2px;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(240,165,0,.1));}
+.t-item{position:relative;padding:0 0 48px 40px;}
+.t-item:last-child{padding-bottom:0;}
+.t-dot{position:absolute;left:-35px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);transition:background .25s;}
+.t-item:hover .t-dot{background:var(--gold);}
+.t-per{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:7px;}
+.t-role{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:4px;line-height:1.2;}
+.t-co{font-size:13px;font-weight:500;color:var(--t2);margin-bottom:14px;}
+.t-tasks li{font-size:14px;color:var(--t2);display:flex;align-items:flex-start;gap:10px;line-height:1.65;padding:3px 0;}
+.t-tasks li::before{content:'→';color:var(--gold);font-size:11px;flex-shrink:0;margin-top:3px;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--b1);}
+.svc{background:var(--bg2);padding:44px 36px;position:relative;overflow:hidden;transition:background .3s;}
+.svc:hover{background:var(--bg3);}
+.svc-bar{position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.svc:hover .svc-bar{transform:scaleX(1);}
+.svc-num{font-family:var(--serif);font-size:88px;font-weight:900;position:absolute;top:8px;right:18px;line-height:1;opacity:.05;}
+.svc-ico{width:50px;height:50px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px;}
+.svc-name{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:12px;line-height:1.2;}
+.svc-desc{font-size:14px;color:var(--t2);line-height:1.9;margin-bottom:24px;}
+.svc-list li{font-size:13px;color:var(--t2);padding:7px 0;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px;}
+.svc-list li:last-child{border-bottom:none;}
+.sdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* FORFAITS */
+.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.fcard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:38px 28px;position:relative;transition:transform .3s;}
+.fcard:hover{transform:translateY(-5px);}
+.fcard.hot{border-color:var(--gline);background:linear-gradient(145deg,rgba(240,165,0,.07),var(--bg2));}
+.fcard.hot::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold2),var(--gold3));border-radius:4px 4px 0 0;}
+.f-badge{position:absolute;top:16px;right:16px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#060606;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;}
+.f-name{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.f-price{font-family:var(--serif);font-size:54px;font-weight:900;line-height:1;margin-bottom:5px;}
+.f-price sup{font-size:20px;color:var(--t3);font-family:var(--sans);}
+.f-period{font-size:13px;color:var(--t3);margin-bottom:28px;}
+.f-items li{font-size:13px;color:var(--t2);padding:8px 0;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.f-items li:last-child{border-bottom:none;}
+.f-items li::before{content:'checkmark';color:var(--gold);font-weight:700;flex-shrink:0;}
+.f-btn{display:block;text-align:center;padding:13px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;font-family:var(--sans);margin-top:28px;transition:all .25s;}
+.f-btn.solid{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#060606;}
+.f-btn.solid:hover{box-shadow:0 8px 28px rgba(240,165,0,.3);}
+.f-btn.outline{background:transparent;border:1px solid var(--gline);color:var(--gold);}
+.f-btn.outline:hover{background:var(--glow);}
+
+/* PROCESS */
+.p-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;position:relative;}
+.p-grid::before{content:'';position:absolute;top:35px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--gline),var(--gline),transparent);}
+.step{padding:0 20px;text-align:center;}
+.step-n{width:70px;height:70px;border-radius:50%;border:1px solid var(--gline);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);background:var(--bg2);position:relative;z-index:1;}
+.step-t{font-size:15px;font-weight:600;margin-bottom:10px;}
+.step-d{font-size:13px;color:var(--t2);line-height:1.75;}
+
+/* ENGAGEMENT */
+.eng-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.ecard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .25s,transform .25s;}
+.ecard:hover{border-color:var(--gline);transform:translateX(4px);}
+.eico{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.e-yr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.e-ttl{font-size:14px;font-weight:600;margin-bottom:5px;line-height:1.3;}
+.e-desc{font-size:13px;color:var(--t2);line-height:1.6;}
+
+/* SKILLS */
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px;}
+.sk{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:24px 18px;text-align:center;transition:border-color .25s;}
+.sk:hover{border-color:var(--gline);}
+.sk-ico{font-size:26px;margin-bottom:12px;}
+.sk-name{font-size:13px;font-weight:600;margin-bottom:5px;}
+.sk-sub{font-size:11px;color:var(--t3);}
+
+/* VISION */
+.v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.vcard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:30px 24px;position:relative;overflow:hidden;transition:border-color .25s;}
+.vcard:hover{border-color:var(--gline);}
+.vcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold3));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.vcard:hover::after{transform:scaleX(1);}
+.v-ico{font-size:26px;margin-bottom:14px;}
+.v-ttl{font-size:15px;font-weight:600;margin-bottom:8px;}
+.v-desc{font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:18px;}
+.bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.bar-f{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold3));border-radius:2px;}
+.bar-p{font-size:11px;color:var(--gold);margin-top:7px;font-weight:600;}
+
+/* QUOTE */
+.qband{background:linear-gradient(135deg,#080600,#0f0a00,#080600);border-top:1px solid var(--gline);border-bottom:1px solid var(--gline);padding:80px 52px;text-align:center;position:relative;overflow:hidden;}
+.qband::before{content:'"';font-family:var(--serif);font-size:400px;font-weight:900;position:absolute;top:-120px;left:16px;color:rgba(240,165,0,.04);line-height:1;pointer-events:none;}
+.q-in{max-width:840px;margin:0 auto;position:relative;z-index:1;}
+.q-txt{font-family:var(--serif);font-size:clamp(22px,3.5vw,36px);font-weight:400;font-style:italic;line-height:1.45;color:var(--text);margin-bottom:26px;}
+.q-txt em{font-style:normal;font-weight:700;color:var(--gold3);}
+.q-by{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);}
+.q-dots{display:flex;gap:8px;justify-content:center;margin-top:28px;}
+.qdot{width:6px;height:6px;border-radius:50%;background:var(--t3);border:none;cursor:pointer;transition:all .3s;padding:0;}
+.qdot.on{background:var(--gold);transform:scale(1.5);}
+
+/* CONTACT */
+.ct-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:90px;align-items:start;}
+.ct-h{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.2;margin-bottom:18px;}
+.ct-p{font-size:15px;color:var(--t2);line-height:1.95;margin-bottom:8px;}
+.ct-links{margin-top:32px;}
+.cl{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--b1);transition:all .25s;}
+.cl:last-child{border-bottom:none;}
+.cl:hover{padding-left:6px;}
+.cl-ico{width:44px;height:44px;border:1px solid var(--b2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;transition:all .25s;}
+.cl:hover .cl-ico{background:var(--glow);border-color:var(--gold);}
+.cl-ttl{font-size:13px;font-weight:600;color:var(--text);}
+.cl-sub{font-size:12px;color:var(--t3);margin-top:2px;}
+.cl-arr{margin-left:auto;font-size:17px;color:var(--t3);transition:all .25s;}
+.cl:hover .cl-arr{transform:translateX(4px);color:var(--gold);}
+.cform{background:var(--bg2);border:1px solid var(--b1);padding:40px;}
+.cf-ttl{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:5px;}
+.cf-sub{font-size:13px;color:var(--t3);margin-bottom:28px;}
+.frow{margin-bottom:18px;}
+.flbl{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;}
+.finp,.fsel,.ftxt{width:100%;background:var(--bg3);border:1px solid var(--b1);padding:12px 15px;font-size:14px;color:var(--text);font-family:var(--sans);outline:none;transition:border-color .25s;-webkit-appearance:none;border-radius:0;}
+.finp:focus,.fsel:focus,.ftxt:focus{border-color:var(--gline);}
+.finp::placeholder,.ftxt::placeholder{color:var(--t3);}
+.ftxt{resize:vertical;min-height:120px;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--b1);padding:52px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;}
+.f-logo-name{font-family:var(--serif);font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.f-logo-sub{font-size:12px;color:var(--t3);margin-top:3px;}
+.f-qt{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--t3);text-align:center;}
+.f-cp{text-align:right;font-size:12px;color:var(--t3);line-height:1.7;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.rv.vis{opacity:1;transform:none;}
+.rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}.rv.d4{transition-delay:.4s;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .svc-grid,.f-grid{grid-template-columns:1fr;}
+  .about-grid,.ct-grid{grid-template-columns:1fr;gap:52px;}
+  .v-grid{grid-template-columns:1fr 1fr;}
+  .sk-grid{grid-template-columns:repeat(2,1fr);}
+  .p-grid{grid-template-columns:1fr 1fr;gap:36px;}
+  .p-grid::before{display:none;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  footer{grid-template-columns:1fr;text-align:center;}
+  .f-cp{text-align:center;}
+}
+@media(max-width:768px){
+  .sec,.hero{padding-left:24px;padding-right:24px;}
+  .sec{padding-top:72px;padding-bottom:72px;}
+  .hero{padding-top:130px;padding-bottom:80px;}
+  #nav{padding:20px 24px;}
+  #nav.sticky{padding:13px 24px;}
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:flex;}
+  .eng-grid,.v-grid{grid-template-columns:1fr;}
+  footer{padding:40px 24px;}
+  .scroll-hint{display:none;}
+  .qband{padding:60px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="logo">Amadou Niang</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#experience">Expériences</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#forfaits">Forfaits</a></li>
+    
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Me contacter</button>
+  <div class="burger" id="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div id="mob">
+  <a href="#about" onclick="document.getElementById('mob').classList.remove('open')">À propos</a>
+  <a href="#experience" onclick="document.getElementById('mob').classList.remove('open')">Expériences</a>
+  <a href="#services" onclick="document.getElementById('mob').classList.remove('open')">Services</a>
+  <a href="#forfaits" onclick="document.getElementById('mob').classList.remove('open')">Forfaits</a>
+  <a href="#vision" onclick="document.getElementById('mob').classList.remove('open')">Vision</a>
+  <a href="#contact" onclick="document.getElementById('mob').classList.remove('open')">Contact</a>
+</div>
+
+<section class="hero">
+  <div class="orb-a"></div>
+  <div class="orb-b"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Amadou Niang - Accompagnement · Commercial · Pédagogie - Clermont-Ferrand</div>
+    <h1 class="hero-title">Je libère<br><span class="acc">votre temps.</span>Vous faites<br>votre metier.</h1>
+    <p class="hero-sub">Entrepreneurs, porteurs de projets, indépendants —<br><strong>Je prends tout ca en charge. A partir de 150€s par mois.</strong></p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-fill">Me faire accompagner →</a>
+      <a href="#services" class="btn-line">Voir les services</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="sline"></div>Défiler</div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">48h</div><div class="stat-l">Réponse garantie</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">Forfaits adaptés</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Satisfaction garantie</div></div>
+  <div class="stat"><div class="stat-n">0€</div><div class="stat-l">1er échange gratuit</div></div>
+</div>
+
+<section class="sec alt" id="about">
+  <div class="s-lbl">Qui suis-je</div>
+  <div class="about-grid">
+    <div class="about-text rv">
+      <p>Je m'appelle <strong>Amadou Niang</strong>. Entrepreneur, leader associatif et freelance base a <strong>Clermont-Ferrand</strong>. Mon parcours - du Sénégal à la France - m'a forgé une conviction profonde :</p>
+      <p><em>J'avance avec intention, travail et vision.</em></p>
+      <p>Chaque etape de mon parcours est guidee par une envie claire : <strong>créer de la valeur, résoudre de vrais problèmes et faire bouger les lignes.</strong></p>
+      <p>Aujourd'hui je propose aux artisans et commercants de Clermont-Ferrand un service d'<strong>assistance commerciale externalisée</strong> pour qu'ils récupèrent leur temps.</p>
+    </div>
+    <div class="info-list rv d1">
+      <div class="info-row"><div class="info-ico" style="background:rgba(240,165,0,.1)">&#x1F4CD;</div><div><div class="info-lbl">Localisation</div><div class="info-val">Clermont-Ferrand, France</div></div></div>
+      <div class="info-row"><div class="info-ico" style="background:rgba(15,165,148,.1)">&#x2709;&#xFE0F;</div><div><div class="info-lbl">Email</div><div class="info-val">niangamadou394@gmail.com</div></div></div>
+      <div class="info-row"><div class="info-ico" style="background:rgba(155,93,229,.1)">&#x1F4F1;</div><div><div class="info-lbl">Telephone</div><div class="info-val">06 17 56 63 42</div><div class="info-sub">Lun-Ven 17h-20h</div></div></div>
+      <div class="info-row"><div class="info-ico" style="background:rgba(255,107,71,.1)">&#x1F393;</div><div><div class="info-lbl">Formation</div><div class="info-val">Master Manager Commercial & Marketing</div><div class="info-sub">2025–2027 · La Banque Postale · Alternance</div></div></div>
+      <div class="info-row"><div class="info-ico" style="background:rgba(240,165,0,.1)">&#x1F1EB;&#x1F1F7;</div><div><div class="info-lbl">Langues</div><div class="info-val">Français (C1) · Anglais</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt2" id="experience">
+  <div class="s-lbl">Parcours</div>
+  <h2 class="s-ttl rv">Mes <em>expériences</em> professionnelles</h2>
+  <div class="timeline">
+    <div class="t-item rv"><div class="t-dot"></div><div class="t-per">2025–2027</div><div class="t-role">Chargé de Développement Commercial</div><div class="t-co">La Banque Postale · Clermont-Ferrand</div><ul class="t-tasks"><li>Suivi et mise en place des animations commerciales</li><li>Rédaction de règlements et creation de supports</li><li>Double écoute et accompagnement des conseillers bancaires</li><li>Mise à jour des reportings formations</li></ul></div>
+    <div class="t-item rv d1"><div class="t-dot"></div><div class="t-per">2026–Aujourd'hui</div><div class="t-role">Professeur Particulier · Mathématiques</div><div class="t-co">Acadomia · Clermont-Ferrand</div><ul class="t-tasks"><li>Cours de mathématiques niveau collège et lycée</li><li>Soutien scolaire personnalisé adapté a chaque eleve</li><li>Suivi de la progression et communication avec les familles</li><li>Préparation aux évaluations et renforcement des bases</li></ul></div>
+    <div class="t-item rv d2"><div class="t-dot"></div><div class="t-per">2026–Aujourd'hui</div><div class="t-role">Professeur Particulier · Mathématiques</div><div class="t-co">Complétude · Clermont-Ferrand</div><ul class="t-tasks"><li>Cours de mathematiques et soutien scolaire général</li><li>Accompagnement individualisé pour élèves en difficulté</li><li>Methodes pédagogiques adaptées au profil de chaque apprenant</li><li>Suivi régulier des objectifs et des résultats scolaires</li></ul></div>
+    <div class="t-item rv d3"><div class="t-dot"></div><div class="t-per">2025</div><div class="t-role">Co-fondateur</div><div class="t-co">SNS&AN Consulting · France/Sénégal</div><ul class="t-tasks"><li>Veille stratégique et intelligence économique</li><li>Accompagnement de porteurs de projets : structuration, business plan, go-to-market</li><li>Conseil en développement commercial et stratégie d'entreprise</li><li>Prospection clients et animation du portefeuille</li></ul></div>
+    <div class="t-item rv d4"><div class="t-dot"></div><div class="t-per">2025</div><div class="t-role">Co-fondateur</div><div class="t-co">Ferme Agro-élevage · Sénégal</div><ul class="t-tasks"><li>Porteur de projet entrepreneurial à impact social</li><li>Développement d'une activité agricole et d'elevage</li></ul></div>
+  </div>
+</section>
+
+<section class="sec alt" id="services">
+  <div class="s-lbl">Ce que je propose</div>
+  <h2 class="s-ttl rv">Des missions <em>concrètes</em> adaptées à votre réalité</h2>
+  <p class="s-intro rv">Des missions adaptées à votre profil, exécutées avec rigueur et engagement.</p>
+  <div class="svc-grid">
+    <div class="svc rv"><div class="svc-bar" style="background:linear-gradient(90deg,var(--gold),var(--gold3))"></div><div class="svc-num" style="color:var(--gold)">01</div><div class="svc-ico" style="background:rgba(240,165,0,.1)">🚀</div><div class="svc-name">Accompagnement Entrepreneurial</div><div class="svc-desc">Tu as une idée mais tu ne sais pas comment la structurer ? Je t'accompagne de l'idée au projet concret, pas à pas.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--gold)"></div>Structuration de l'idée et du concept</li><li><div class="sdot" style="background:var(--gold)"></div>Validation du marché et de la cible</li><li><div class="sdot" style="background:var(--gold)"></div>Construction du business model</li><li><div class="sdot" style="background:var(--gold)"></div>Plan d'action et premières étapes</li></ul></div>
+    <div class="svc rv d1"><div class="svc-bar" style="background:linear-gradient(90deg,var(--coral),#ff9a80)"></div><div class="svc-num" style="color:var(--coral)">02</div><div class="svc-ico" style="background:rgba(255,107,71,.1)">📈</div><div class="svc-name">Prospection & Développement Commercial</div><div class="svc-desc">Tu veux trouver des clients mais tu ne sais pas par où commencer ? Je structure ta démarche commerciale et gère la prospection.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--coral)"></div>Identification et qualification des prospects</li><li><div class="sdot" style="background:var(--coral)"></div>Rédaction d'argumentaires commerciaux</li><li><div class="sdot" style="background:var(--coral)"></div>Suivi et relance des contacts</li><li><div class="sdot" style="background:var(--coral)"></div>Reporting commercial mensuel</li></ul></div>
+    <div class="svc rv d2"><div class="svc-bar" style="background:linear-gradient(90deg,var(--teal),#5eead4)"></div><div class="svc-num" style="color:var(--teal)">03</div><div class="svc-ico" style="background:rgba(15,165,148,.1)">🎨</div><div class="svc-name">Création de Supports & Communication</div><div class="svc-desc">CV, présentations, supports commerciaux ou visuels pour réseaux sociaux — je crée des outils qui valorisent votre image.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--teal)"></div>CV et profil LinkedIn optimisés</li><li><div class="sdot" style="background:var(--teal)"></div>Présentations et pitchs Canva</li><li><div class="sdot" style="background:var(--teal)"></div>Supports commerciaux et flyers</li><li><div class="sdot" style="background:var(--teal)"></div>Contenu pour réseaux sociaux</li></ul></div>
+    <div class="svc rv d3"><div class="svc-bar" style="background:linear-gradient(90deg,var(--purple),#c084fc)"></div><div class="svc-num" style="color:var(--purple)">04</div><div class="svc-ico" style="background:rgba(155,93,229,.1)">📐</div><div class="svc-name">Cours Particuliers · Mathématiques</div><div class="svc-desc">Cours personnalisés niveau collège et lycée pour progresser durablement et reprendre confiance en soi.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--purple)"></div>Cours de maths collège et lycée</li><li><div class="sdot" style="background:var(--purple)"></div>Soutien scolaire général</li><li><div class="sdot" style="background:var(--purple)"></div>Préparation examens (Brevet, Bac)</li><li><div class="sdot" style="background:var(--purple)"></div>Suivi régulier et bilan parents</li></ul></div>
+  </div>
+</section>
+
+<section class="sec" id="forfaits">
+  <div class="s-lbl">Tarifs</div>
+  <h2 class="s-ttl rv">Des forfaits <em>transparents</em>, sans mauvaise surprise</h2>
+  <p class="s-intro rv">Pas d'engagement. Résiliable à tout moment. 1er mois satisfait ou remboursé.</p>
+  <div style="background:rgba(15,165,148,.08);border:1px solid rgba(15,165,148,.2);border-radius:4px;padding:20px 24px;margin-bottom:36px;display:flex;align-items:flex-start;gap:14px;">
+    <div style="font-size:22px;flex-shrink:0">🔒</div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#5eead4;margin-bottom:5px;letter-spacing:.5px;">Confidentialité & sécurité garanties</div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.7;">Toutes vos informations et accès sont traités avec une confidentialité totale. Un accord de non-divulgation (NDA) peut être signé avant toute collaboration. Vos données ne sont jamais partagées avec des tiers.</div>
+    </div>
+  </div>
+  <div class="f-grid">
+    <div class="fcard rv"><div class="f-name">Starter</div><div class="f-price">150<sup>EUR</sup></div><div class="f-period">par mois · Pour démarrer</div><ul class="f-items"><li>5 devis / factures par mois</li><li>10 relances clients</li><li>Tableau de suivi partage</li><li>Reponse sous 24h</li></ul><a href="#contact" class="f-btn outline">Choisir Starter</a></div>
+    <div class="fcard hot rv d1"><div class="f-badge">Populaire</div><div class="f-name">Essentiel</div><div class="f-price">250<sup>EUR</sup></div><div class="f-period">par mois · Le plus choisi</div><ul class="f-items"><li>Tout le Starter inclus</li><li>Gestion e-mails 5h/mois</li><li>Gestion agenda basique</li><li>Rapport mensuel détaillé</li><li>Reponse sous 12h</li></ul><a href="#contact" class="f-btn solid">Choisir Essentiel</a></div>
+    <div class="fcard rv d2"><div class="f-name">Premium</div><div class="f-price">400<sup>EUR</sup></div><div class="f-period">par mois · Délégation totale</div><ul class="f-items"><li>Tout l'Essentiel inclus</li><li>E-mails & agenda illimités</li><li>Suivi commercial complet</li><li>Appel bilan mensuel 30min</li><li>Reponse sous 4h</li></ul><a href="#contact" class="f-btn outline">Choisir Premium</a></div>
+  </div>
+</section>
+
+<section class="sec alt2">
+  <div class="s-lbl">Comment ça marche</div>
+  <h2 class="s-ttl rv">En <em>4 étapes</em> simples</h2>
+  <div class="p-grid">
+    <div class="step rv"><div class="step-n">1</div><div class="step-t">Échange découverte</div><div class="step-d">30 minutes pour comprendre votre activité. Gratuit, sans engagement.</div></div>
+    <div class="step rv d1"><div class="step-n">2</div><div class="step-t">Mise en place</div><div class="step-d">Je configure votre espace de suivi et accède à vos outils.</div></div>
+    <div class="step rv d2"><div class="step-n">3</div><div class="step-t">Je prends en charge</div><div class="step-d">Vous transmettez vos infos, je gère. Vous validez, j'envoie.</div></div>
+    <div class="step rv d3"><div class="step-n">4</div><div class="step-t">Bilan mensuel</div><div class="step-d">Un récap de ce qui a été fait. On ajuste si besoin.</div></div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<div class="qband">
+  <div class="q-in">
+    <div class="q-txt" id="qt">"J'avance avec <em>intention</em>, travail et vision. Ce que je construis, je le fais avec exigence, sens et determination."</div>
+    <div class="q-by" id="qb">- Amadou Niang</div>
+    <div class="q-dots">
+      <button class="qdot on" onclick="setQ(0)"></button>
+      <button class="qdot" onclick="setQ(1)"></button>
+      <button class="qdot" onclick="setQ(2)"></button>
+    </div>
+  </div>
+</div>
+
+<section class="sec alt2" id="contact">
+  <div class="s-lbl">Contact</div>
+  <div class="ct-grid">
+    <div class="rv">
+      <h3 class="ct-h">Parlons de votre projet</h3>
+      <p class="ct-p">Porteur de projet, indépendant, entrepreneur — prenons 30 minutes pour voir comment je peux vous aider.</p>
+      <p style="font-size:13px;color:var(--t3);">Premier échange toujours gratuit. Pas d'engagement.</p>
+      <div class="ct-links">
+        <a href="mailto:niangamadou394@gmail.com" class="cl"><div class="cl-ico">&#x2709;&#xFE0F;</div><div><div class="cl-ttl">Email</div><div class="cl-sub">niangamadou394@gmail.com</div></div><span class="cl-arr">&#x2192;</span></a>
+        <a href="tel:+33617566342" class="cl"><div class="cl-ico">&#x1F4F1;</div><div><div class="cl-ttl">Telephone</div><div class="cl-sub">06 17 56 63 42</div></div><span class="cl-arr">&#x2192;</span></a>
+        <a href="https://linkedin.com" target="_blank" class="cl"><div class="cl-ico">&#x1F4BC;</div><div><div class="cl-ttl">LinkedIn</div><div class="cl-sub">Amadou Niang</div></div><span class="cl-arr">&#x2192;</span></a>
+      </div>
+    </div>
+    <div class="cform rv d1">
+      <div class="cf-ttl">Demande de contact</div>
+      <div class="cf-sub">Réponse sous 48h garantie</div>
+      <div class="frow"><label class="flbl">Votre nom</label><input class="finp" type="text" placeholder="Jean Dupont"></div>
+      <div class="frow"><label class="flbl">Votre situation</label><select class="fsel"><option value="">Sélectionner...</option><option>Porteur de projet / Entrepreneur</option><option>Freelance / Indépendant</option><option>Étudiant / Alternant</option><option>Dirigeant TPE/PME</option><option>Autre</option></select></div>
+      <div class="frow"><label class="flbl">Email</label><input class="finp" type="email" placeholder="jean@monentreprise.fr"></div>
+      <div class="frow"><label class="flbl">Votre besoin</label><textarea class="ftxt" placeholder="Décrivez votre projet ou votre besoin..."></textarea></div>
+      <button class="btn-fill" style="width:100%;justify-content:center;margin-top:6px;" onclick="alert('Merci ! Je vous reponds sous 48h.')">Envoyer ma demande</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec alt" style="text-align:center;">
+  <div class="s-lbl" style="justify-content:center;">Partager</div>
+  <h2 class="s-ttl" style="text-align:center;margin-bottom:12px;">Mon <em>QR Code</em></h2>
+  <p style="font-size:15px;color:var(--t2);margin-bottom:36px;">Scannez pour accéder directement à mon site</p>
+  <div style="display:inline-block;background:white;padding:20px;border-radius:8px;margin-bottom:20px;">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://niangamadou394-star.github.io/Amadou.N/" alt="QR Code Amadou Niang" style="width:180px;height:180px;display:block;">
+  </div>
+  <p style="font-size:13px;color:var(--t3);">niangamadou394-star.github.io/Amadou.N</p>
+</section>
+<footer>
+  <div><div class="f-logo-name">Amadou Niang</div><div class="f-logo-sub">Accompagnement · Commercial · Pédagogie</div></div>
+  <div class="f-qt">"Créer de la valeur, résoudre de vrais problèmes et faire bouger les lignes."</div>
+  <div class="f-cp">© 2026 Amadou Niang · Clermont-Ferrand<br>niangamadou394@gmail.com · 06 17 56 63 42</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+emailjs.init('PBZQ41QsMw8SnxELq');
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submit-btn');
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+      var params = {
+        nom: document.getElementById('nom').value,
+        situation: document.getElementById('situation').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
+      emailjs.send('service_he02y7z', 'template_udrr7z9', params)
+        .then(function() {
+          document.getElementById('form-success').style.display = 'block';
+          document.getElementById('form-error').style.display = 'none';
+          form.reset();
+          btn.textContent = 'Envoyer ma demande →';
+          btn.disabled = false;
+        }, function() {
+          document.getElementById('form-error').style.display = 'block';
+          document.getElementById('form-success').style.display = 'none';
+          btn.textContent = 'Envoyer ma demande →';
+          btn.disabled = false;
+        });
+    });
+  }
+});
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('sticky',window.scrollY>60);});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+var QQ=[
+  {t:'"J\'avance avec <em>intention</em>, travail et vision. Ce que je construis, je le fais avec exigence."',b:'- Amadou Niang'},
+  {t:'"Votre temps vaut plus que <em>150€s par mois</em>. Chaque heure recuperee est une heure investie dans votre vraie valeur."',b:'- Amadou Niang'},
+  {t:'"Creer de la valeur, resoudre de vrais problemes et <em>faire bouger les lignes</em>."',b:'- Amadou Niang'}
+];
+var qi=0;
+function setQ(i){qi=i;document.getElementById('qt').innerHTML=QQ[i].t;document.getElementById('qb').textContent=QQ[i].b;document.querySelectorAll('.qdot').forEach(function(d,j){d.classList.toggle('on',j===i);});}
+setInterval(function(){setQ((qi+1)%QQ.length);},5000);
+</script>
+</body>
+</html>
