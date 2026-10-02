@@ -2,476 +2,525 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Amadou Niang — Accompagnement · Commercial · Pédagogie a Clermont-Ferrand.">
-<meta name="theme-color" content="#060606">
-<title>Amadou Niang — Accompagnement · Commercial · Pédagogie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amadou Niang - Développement commercial, entrepreneuriat et prise de parole</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#060606;--bg2:#0d0d0d;--bg3:#141414;--bg4:#1c1c1c;--gold:#f0a500;--gold2:#f5c040;--gold3:#fde68a;--glow:rgba(240,165,0,.12);--gline:rgba(240,165,0,.22);--coral:#ff6b47;--teal:#0fa594;--purple:#9b5de5;--text:#f4efe6;--t2:#9a9080;--t3:#5a5048;--b1:rgba(255,255,255,.06);--b2:rgba(240,165,0,.2);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
-ul{list-style:none;}
-button{font-family:var(--sans);cursor:pointer;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--gold);}
-
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:28px 52px;transition:all .4s;}
-#nav.sticky{background:rgba(6,6,6,.97);backdrop-filter:blur(24px);padding:16px 52px;border-bottom:1px solid var(--b1);}
-.logo{font-family:var(--serif);font-size:20px;font-weight:900;letter-spacing:1px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nav-links{display:flex;gap:32px;}
-.nav-links a{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--t2);transition:color .25s;}
-.nav-links a:hover{color:var(--gold3);}
-.nav-cta{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gline);padding:10px 22px;border-radius:2px;transition:all .25s;background:transparent;}
-.nav-cta:hover{background:var(--glow);color:var(--gold3);}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
-.burger span{display:block;width:24px;height:1.5px;background:var(--t2);}
-#mob{display:none;position:fixed;inset:0;z-index:190;background:rgba(6,6,6,.98);flex-direction:column;align-items:center;justify-content:center;gap:40px;}
-#mob.open{display:flex;}
-#mob a{font-family:var(--serif);font-size:28px;color:var(--text);}
-#mob a:hover{color:var(--gold3);}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:140px 52px 100px;position:relative;overflow:hidden;}
-.orb-a{position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(240,165,0,.07),transparent 65%);pointer-events:none;}
-.orb-b{position:absolute;bottom:-20%;left:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,71,.05),transparent 65%);pointer-events:none;}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:860px;}
-.eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;animation:up .8s .1s both;}
-.eyebrow::before{content:'';width:44px;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold3));}
-.hero-title{font-family:var(--serif);font-weight:900;font-size:clamp(48px,8vw,100px);line-height:1.02;letter-spacing:-2px;margin-bottom:32px;animation:up .8s .25s both;}
-.hero-title .acc{display:block;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:17px;color:var(--t2);max-width:540px;line-height:1.9;margin-bottom:50px;animation:up .8s .4s both;}
-.hero-sub strong{color:var(--text);font-weight:500;}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:up .8s .55s both;}
-.btn-fill{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#060606;background:linear-gradient(135deg,var(--gold2),var(--gold));padding:15px 32px;border-radius:2px;border:none;transition:all .25s;}
-.btn-fill:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(240,165,0,.3);}
-.btn-line{display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--t2);border:1px solid var(--b2);padding:15px 32px;border-radius:2px;transition:all .25s;}
-.btn-line:hover{color:var(--gold3);border-color:var(--gold);background:var(--glow);}
-.scroll-hint{position:absolute;bottom:44px;left:52px;z-index:1;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);animation:up .8s .9s both;}
-.sline{width:44px;height:1px;background:var(--t3);overflow:hidden;position:relative;}
-.sline::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);animation:scan 2.4s ease-in-out infinite;}
-@keyframes scan{0%{left:-100%}50%{left:0}100%{left:100%}}
-@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-/* STATS */
-.stats{background:var(--bg2);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);display:grid;grid-template-columns:repeat(4,1fr);}
-.stat{padding:34px 20px;text-align:center;border-right:1px solid var(--b1);}
-.stat:last-child{border-right:none;}
-.stat-n{font-family:var(--serif);font-size:42px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.stat-l{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-top:7px;}
-
-/* SECTIONS */
-.sec{padding:110px 52px;}
-.sec.alt{background:var(--bg2);}
-.sec.alt2{background:var(--bg3);}
-.s-lbl{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
-.s-lbl::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold3));}
-.s-ttl{font-family:var(--serif);font-weight:700;font-size:clamp(32px,5vw,62px);line-height:1.08;letter-spacing:-.5px;margin-bottom:16px;}
-.s-ttl em{font-style:italic;color:var(--gold3);}
-.s-intro{font-size:16px;color:var(--t2);max-width:580px;line-height:1.9;margin-bottom:64px;}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:90px;align-items:start;}
-.about-text p{font-size:16px;color:var(--t2);line-height:2;margin-bottom:22px;}
-.about-text p strong{color:var(--text);font-weight:600;}
-.about-text em{font-family:var(--serif);font-style:italic;color:var(--gold3);font-size:18px;}
-.info-list{display:flex;flex-direction:column;}
-.info-row{display:flex;align-items:flex-start;gap:16px;padding:17px 0;border-bottom:1px solid var(--b1);}
-.info-row:last-child{border-bottom:none;}
-.info-ico{width:40px;height:40px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-.info-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:4px;}
-.info-val{font-size:14px;font-weight:500;line-height:1.5;}
-.info-sub{font-size:12px;color:var(--t2);margin-top:2px;}
-
-/* TIMELINE */
-.timeline{position:relative;padding-left:28px;}
-.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(240,165,0,.1));}
-.t-item{position:relative;padding:0 0 48px 40px;}
-.t-item:last-child{padding-bottom:0;}
-.t-dot{position:absolute;left:-35px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);transition:background .25s;}
-.t-item:hover .t-dot{background:var(--gold);}
-.t-per{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:7px;}
-.t-role{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:4px;line-height:1.2;}
-.t-co{font-size:13px;font-weight:500;color:var(--t2);margin-bottom:14px;}
-.t-tasks li{font-size:14px;color:var(--t2);display:flex;align-items:flex-start;gap:10px;line-height:1.65;padding:3px 0;}
-.t-tasks li::before{content:'→';color:var(--gold);font-size:11px;flex-shrink:0;margin-top:3px;}
-
-/* SERVICES */
-.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--b1);}
-.svc{background:var(--bg2);padding:44px 36px;position:relative;overflow:hidden;transition:background .3s;}
-.svc:hover{background:var(--bg3);}
-.svc-bar{position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.svc:hover .svc-bar{transform:scaleX(1);}
-.svc-num{font-family:var(--serif);font-size:88px;font-weight:900;position:absolute;top:8px;right:18px;line-height:1;opacity:.05;}
-.svc-ico{width:50px;height:50px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px;}
-.svc-name{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:12px;line-height:1.2;}
-.svc-desc{font-size:14px;color:var(--t2);line-height:1.9;margin-bottom:24px;}
-.svc-list li{font-size:13px;color:var(--t2);padding:7px 0;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px;}
-.svc-list li:last-child{border-bottom:none;}
-.sdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-
-/* FORFAITS */
-.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.fcard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:38px 28px;position:relative;transition:transform .3s;}
-.fcard:hover{transform:translateY(-5px);}
-.fcard.hot{border-color:var(--gline);background:linear-gradient(145deg,rgba(240,165,0,.07),var(--bg2));}
-.fcard.hot::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold2),var(--gold3));border-radius:4px 4px 0 0;}
-.f-badge{position:absolute;top:16px;right:16px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#060606;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;}
-.f-name{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-.f-price{font-family:var(--serif);font-size:54px;font-weight:900;line-height:1;margin-bottom:5px;}
-.f-price sup{font-size:20px;color:var(--t3);font-family:var(--sans);}
-.f-period{font-size:13px;color:var(--t3);margin-bottom:28px;}
-.f-items li{font-size:13px;color:var(--t2);padding:8px 0;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
-.f-items li:last-child{border-bottom:none;}
-.f-items li::before{content:'checkmark';color:var(--gold);font-weight:700;flex-shrink:0;}
-.f-btn{display:block;text-align:center;padding:13px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;font-family:var(--sans);margin-top:28px;transition:all .25s;}
-.f-btn.solid{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#060606;}
-.f-btn.solid:hover{box-shadow:0 8px 28px rgba(240,165,0,.3);}
-.f-btn.outline{background:transparent;border:1px solid var(--gline);color:var(--gold);}
-.f-btn.outline:hover{background:var(--glow);}
-
-/* PROCESS */
-.p-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;position:relative;}
-.p-grid::before{content:'';position:absolute;top:35px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--gline),var(--gline),transparent);}
-.step{padding:0 20px;text-align:center;}
-.step-n{width:70px;height:70px;border-radius:50%;border:1px solid var(--gline);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);background:var(--bg2);position:relative;z-index:1;}
-.step-t{font-size:15px;font-weight:600;margin-bottom:10px;}
-.step-d{font-size:13px;color:var(--t2);line-height:1.75;}
-
-/* ENGAGEMENT */
-.eng-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-.ecard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .25s,transform .25s;}
-.ecard:hover{border-color:var(--gline);transform:translateX(4px);}
-.eico{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.e-yr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
-.e-ttl{font-size:14px;font-weight:600;margin-bottom:5px;line-height:1.3;}
-.e-desc{font-size:13px;color:var(--t2);line-height:1.6;}
-
-/* SKILLS */
-.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px;}
-.sk{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:24px 18px;text-align:center;transition:border-color .25s;}
-.sk:hover{border-color:var(--gline);}
-.sk-ico{font-size:26px;margin-bottom:12px;}
-.sk-name{font-size:13px;font-weight:600;margin-bottom:5px;}
-.sk-sub{font-size:11px;color:var(--t3);}
-
-/* VISION */
-.v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.vcard{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:30px 24px;position:relative;overflow:hidden;transition:border-color .25s;}
-.vcard:hover{border-color:var(--gline);}
-.vcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold3));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.vcard:hover::after{transform:scaleX(1);}
-.v-ico{font-size:26px;margin-bottom:14px;}
-.v-ttl{font-size:15px;font-weight:600;margin-bottom:8px;}
-.v-desc{font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:18px;}
-.bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
-.bar-f{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold3));border-radius:2px;}
-.bar-p{font-size:11px;color:var(--gold);margin-top:7px;font-weight:600;}
-
-/* QUOTE */
-.qband{background:linear-gradient(135deg,#080600,#0f0a00,#080600);border-top:1px solid var(--gline);border-bottom:1px solid var(--gline);padding:80px 52px;text-align:center;position:relative;overflow:hidden;}
-.qband::before{content:'"';font-family:var(--serif);font-size:400px;font-weight:900;position:absolute;top:-120px;left:16px;color:rgba(240,165,0,.04);line-height:1;pointer-events:none;}
-.q-in{max-width:840px;margin:0 auto;position:relative;z-index:1;}
-.q-txt{font-family:var(--serif);font-size:clamp(22px,3.5vw,36px);font-weight:400;font-style:italic;line-height:1.45;color:var(--text);margin-bottom:26px;}
-.q-txt em{font-style:normal;font-weight:700;color:var(--gold3);}
-.q-by{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);}
-.q-dots{display:flex;gap:8px;justify-content:center;margin-top:28px;}
-.qdot{width:6px;height:6px;border-radius:50%;background:var(--t3);border:none;cursor:pointer;transition:all .3s;padding:0;}
-.qdot.on{background:var(--gold);transform:scale(1.5);}
-
-/* CONTACT */
-.ct-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:90px;align-items:start;}
-.ct-h{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.2;margin-bottom:18px;}
-.ct-p{font-size:15px;color:var(--t2);line-height:1.95;margin-bottom:8px;}
-.ct-links{margin-top:32px;}
-.cl{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--b1);transition:all .25s;}
-.cl:last-child{border-bottom:none;}
-.cl:hover{padding-left:6px;}
-.cl-ico{width:44px;height:44px;border:1px solid var(--b2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;transition:all .25s;}
-.cl:hover .cl-ico{background:var(--glow);border-color:var(--gold);}
-.cl-ttl{font-size:13px;font-weight:600;color:var(--text);}
-.cl-sub{font-size:12px;color:var(--t3);margin-top:2px;}
-.cl-arr{margin-left:auto;font-size:17px;color:var(--t3);transition:all .25s;}
-.cl:hover .cl-arr{transform:translateX(4px);color:var(--gold);}
-.cform{background:var(--bg2);border:1px solid var(--b1);padding:40px;}
-.cf-ttl{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:5px;}
-.cf-sub{font-size:13px;color:var(--t3);margin-bottom:28px;}
-.frow{margin-bottom:18px;}
-.flbl{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;}
-.finp,.fsel,.ftxt{width:100%;background:var(--bg3);border:1px solid var(--b1);padding:12px 15px;font-size:14px;color:var(--text);font-family:var(--sans);outline:none;transition:border-color .25s;-webkit-appearance:none;border-radius:0;}
-.finp:focus,.fsel:focus,.ftxt:focus{border-color:var(--gline);}
-.finp::placeholder,.ftxt::placeholder{color:var(--t3);}
-.ftxt{resize:vertical;min-height:120px;}
-
-/* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--b1);padding:52px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;}
-.f-logo-name{font-family:var(--serif);font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.f-logo-sub{font-size:12px;color:var(--t3);margin-top:3px;}
-.f-qt{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--t3);text-align:center;}
-.f-cp{text-align:right;font-size:12px;color:var(--t3);line-height:1.7;}
-
-/* REVEAL */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
-.rv.vis{opacity:1;transform:none;}
-.rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}.rv.d4{transition-delay:.4s;}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-  .svc-grid,.f-grid{grid-template-columns:1fr;}
-  .about-grid,.ct-grid{grid-template-columns:1fr;gap:52px;}
-  .v-grid{grid-template-columns:1fr 1fr;}
-  .sk-grid{grid-template-columns:repeat(2,1fr);}
-  .p-grid{grid-template-columns:1fr 1fr;gap:36px;}
-  .p-grid::before{display:none;}
-  .stats{grid-template-columns:repeat(2,1fr);}
-  footer{grid-template-columns:1fr;text-align:center;}
-  .f-cp{text-align:center;}
+:root{
+  --pine:#000000; --pine-2:#1C1C1C; --paper:#FFFFFF; --card:#F3F3F3;
+  --ink:#000000; --muted:#5E5E5E; --brass:#000000; --on-brass:#FFFFFF; --brass-ink:#000000;
+  --line:rgba(0,0,0,.14);
+  --display:'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --serif:'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+  --body:'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media(max-width:768px){
-  .sec,.hero{padding-left:24px;padding-right:24px;}
-  .sec{padding-top:72px;padding-bottom:72px;}
-  .hero{padding-top:130px;padding-bottom:80px;}
-  #nav{padding:20px 24px;}
-  #nav.sticky{padding:13px 24px;}
-  .nav-links,.nav-cta{display:none;}
-  .burger{display:flex;}
-  .eng-grid,.v-grid{grid-template-columns:1fr;}
-  footer{padding:40px 24px;}
-  .scroll-hint{display:none;}
-  .qband{padding:60px 24px;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A0A0A; --card:#141414; --ink:#F2F2F2; --muted:#A8A8A8; --line:rgba(255,255,255,.16); --pine:#000000; --pine-2:#1C1C1C; --brass:#FFFFFF; --on-brass:#000000; --brass-ink:#FFFFFF;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A0A0A; --card:#141414; --ink:#F2F2F2; --muted:#A8A8A8; --line:rgba(255,255,255,.16); --pine:#000000; --pine-2:#1C1C1C; --brass:#FFFFFF; --on-brass:#000000; --brass-ink:#FFFFFF;
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.125rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+/* contextes sombres */
+header,.hero,.medoq,footer,.mbar,.contact{--brass:#FFFFFF;--on-brass:#000000;--brass-ink:#FFFFFF}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--pine);color:#FFFFFF}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:72px}
+.logo{font-family:var(--serif);font-weight:700;letter-spacing:.01em;font-size:1.25rem;letter-spacing:-.01em;text-decoration:none}
+.nav ul{display:flex;gap:1.75rem;list-style:none;font-family:var(--display);font-weight:500;font-size:.98rem}
+.nav ul a{text-decoration:none;opacity:.85}
+.nav ul a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--brass)}
+.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:1rem;text-decoration:none;padding:.85rem 1.6rem;border-radius:0;letter-spacing:.02em;background:var(--brass);color:var(--on-brass);border:2px solid var(--brass);transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--brass)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.ghost:hover{background:#fff;color:#000;border-color:#fff}
+.menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.6);color:#FFFFFF;border-radius:0;padding:.45rem 1rem;font-family:var(--display);font-weight:600;font-size:.95rem;cursor:pointer}
+
+/* hero */
+.hero{background:var(--pine);color:#FFFFFF;padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,7vw,6rem)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(3.4rem,10vw,8.2rem);line-height:.88;letter-spacing:-.035em}
+.hero .role{font-family:var(--display);font-weight:500;font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--brass);margin:1.4rem 0 1rem}
+.hero p.lede{font-size:clamp(1.15rem,1.7vw,1.35rem);max-width:34ch;opacity:.92}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.arch{position:relative;border-radius:999px 999px 0 0;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--brass);background:var(--pine-2)}
+.arch img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
+.arch-cap{margin-top:.9rem;font-style:italic;opacity:.8;font-size:1rem;text-align:center}
+
+/* marquee */
+.ribbon{background:var(--paper);color:var(--ink);overflow:hidden;border-block:1px solid var(--ink)}
+.track{display:flex;width:max-content;animation:slide 32s linear infinite}
+.track span{font-family:var(--serif);font-weight:500;font-style:italic;font-size:clamp(1.2rem,2.4vw,1.75rem);padding:.85rem 1.4rem;white-space:nowrap;display:flex;align-items:center;gap:2.8rem}
+.track span::after{content:"";width:.45rem;height:.45rem;background:var(--ink);transform:rotate(45deg);display:inline-block}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.track{animation:none;flex-wrap:wrap;width:auto}}
+
+/* sections */
+section{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.kicker{font-style:italic;color:var(--muted);font-size:1.1rem;margin-bottom:.4rem}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1;letter-spacing:-.025em;max-width:18ch}
+
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.6rem 3.5rem;margin-top:3rem}
+.service{border-left:1px solid var(--ink);padding-left:1.4rem}
+.service h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.1;margin-bottom:.6rem}
+.service p{color:var(--muted);max-width:46ch}
+.service ul{list-style:none;margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.45rem}
+.service li{font-family:var(--display);font-size:.85rem;font-weight:500;border:1px solid var(--line);border-radius:0;padding:.25rem .75rem}
+.after-services{margin-top:3rem}
+
+.sectors{background:var(--card);border-block:1px solid var(--line)}
+.sector-list{margin-top:1.8rem;font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,5vw,3.6rem);line-height:1.15;letter-spacing:-.02em}
+.sector-list span{white-space:nowrap}
+.sector-list span:not(:last-child)::after{content:" /";color:var(--brass)}
+.sector-list .more{color:var(--muted);font-weight:500}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.about-photo img{filter:grayscale(100%)}
+.about-photo{border-radius:0;overflow:hidden;border:1px solid var(--ink);position:sticky;top:100px}
+.about h2{max-width:none}
+.about .title{font-family:var(--display);font-weight:600;color:var(--brass-ink);margin:1rem 0 .2rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .about .title{color:var(--brass)}}
+.about .bio{font-size:1.2rem;max-width:56ch;margin:1.2rem 0 2rem}
+.taggroup{margin-top:1.6rem}
+.taggroup h3{font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tags span{font-family:var(--display);font-size:.9rem;font-weight:500;background:transparent;border:1px solid var(--line);border-radius:0;padding:.35rem .8rem}
+.checks{list-style:none;margin-top:2rem;display:grid;gap:.6rem}
+.checks li{padding-left:1.8rem;position:relative}
+.checks li::before{content:"";position:absolute;left:0;top:.5em;width:.9rem;height:.5rem;border-left:3px solid var(--brass);border-bottom:3px solid var(--brass);transform:rotate(-45deg)}
+.about .ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
+.about .btn.ghost{color:var(--ink)}
+.about .btn.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* medoq */
+.medoq{background:var(--pine);color:#FFFFFF}
+.medoq .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem)}
+.medoq .kicker{color:#BDBDBD}
+.status{display:inline-block;font-family:var(--display);font-weight:600;font-size:.9rem;background:transparent;color:var(--brass);border:1px solid var(--brass);border-radius:0;padding:.3rem .9rem;margin-top:1.2rem;letter-spacing:.04em}
+.medoq p{opacity:.9;max-width:50ch;margin-top:1.2rem}
+.steps{list-style:none;display:grid;gap:1.1rem;align-content:start}
+.steps li{border-top:1px solid rgba(238,243,239,.22);padding-top:1rem}
+.steps strong{font-family:var(--display);display:block;font-size:1.15rem;margin-bottom:.15rem}
+.steps span{opacity:.82}
+
+/* engagement */
+.roles{margin-top:2.6rem;display:grid;gap:0;border-top:1px solid var(--line)}
+.role-row{display:grid;grid-template-columns:8rem 1fr;gap:1.5rem;padding:1.15rem 0;border-bottom:1px solid var(--line)}
+.role-row time{font-family:var(--display);font-weight:600;color:var(--muted)}
+.role-row strong{font-family:var(--display);font-weight:700;font-size:1.15rem;display:block}
+.role-row span{color:var(--muted)}
+
+/* contact */
+.contact{background:#000;color:#fff;text-align:center}
+.contact h2{margin:0 auto;max-width:16ch}
+.contact p{max-width:46ch;margin:1.2rem auto 2rem;font-size:1.2rem}
+.contact .mail{font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,3.6vw,2.4rem);text-decoration:underline;text-underline-offset:8px;word-break:break-word}
+.contact .alt{margin-top:1.6rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem}
+.contact .btn{background:#fff;color:#000;border-color:#fff}
+.contact .btn:hover{background:transparent;color:#fff}
+
+footer{background:var(--pine);color:#BDBDBD;padding:3rem 0 2.5rem;font-size:1rem}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+.foot h3{font-family:var(--display);font-size:1rem;color:#FFFFFF;margin-bottom:.7rem}
+.foot ul{list-style:none;display:grid;gap:.35rem}
+.foot a{text-decoration:none}.foot a:hover{color:var(--brass)}
+.copy{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid rgba(238,243,239,.15);font-size:.92rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+/* mobile nav */
+.mobile-menu{display:none}
+@media (max-width:900px){
+  .nav ul,.nav .btn{display:none}
+  .menu-btn{display:inline-block}
+  .mobile-menu.open{display:grid;gap:.2rem;padding:0 1.25rem 1.2rem;background:var(--pine)}
+  .mobile-menu a{font-family:var(--display);font-weight:600;font-size:1.2rem;padding:.6rem 0;text-decoration:none;border-bottom:1px solid rgba(238,243,239,.12)}
+  .hero .wrap,.about .wrap,.medoq .wrap{grid-template-columns:1fr}
+  .arch{max-width:340px;margin:0 auto}
+  .about-photo{position:static;max-width:340px}
+  .services{grid-template-columns:1fr}
+  .role-row{grid-template-columns:1fr;gap:.2rem}
+  .foot{grid-template-columns:1fr}
+}
+
+/* ergonomie */
+.nav ul a.active{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--brass);text-decoration-thickness:2px}
+.svc-link{display:inline-block;margin-top:1rem;font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--brass);text-decoration-thickness:2px;text-underline-offset:5px}
+.interventions{background:var(--card);border-block:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:1rem;margin:2.6rem 0 2.4rem}
+.g{position:relative;border:0;padding:0;cursor:zoom-in;border-radius:14px;overflow:hidden;background:var(--pine);aspect-ratio:4/5;display:block;color:#fff;text-align:left}
+.g-wide{grid-column:span 2;aspect-ratio:auto}
+.g img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.g:hover img{transform:scale(1.03)}
+.g span{position:absolute;left:0;right:0;bottom:0;padding:2.2rem .9rem .8rem;font-family:var(--display);font-weight:600;font-size:.95rem;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.events{list-style:none;border-top:1px solid var(--line);margin-bottom:2.2rem}
+.events li{display:grid;grid-template-columns:8rem 1fr;gap:1.5rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.events time{font-family:var(--display);font-weight:600;color:var(--muted)}
+.events strong{font-family:var(--display);font-weight:700;display:block}
+.events span{color:var(--muted)}
+.sectors{background:var(--paper)}
+dialog#lb{border:0;padding:0;background:transparent;max-width:min(92vw,1100px);max-height:92vh;margin:auto;color:#fff}
+dialog#lb::backdrop{background:rgba(8,20,18,.88)}
+dialog#lb img{max-height:80vh;width:auto;max-width:100%;border-radius:12px;margin:0 auto}
+dialog#lb p{text-align:center;margin-top:.8rem;font-size:1.05rem}
+.lb-close{display:block;margin:0 0 .7rem auto;background:var(--brass);color:var(--on-brass);border:0;border-radius:999px;padding:.5rem 1.1rem;font-family:var(--display);font-weight:700;cursor:pointer}
+.to-top{position:fixed;right:1.2rem;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));width:3rem;height:3rem;border-radius:0;background:#000;color:#fff;border:1px solid #fff;display:grid;place-items:center;text-decoration:none;font-size:1.3rem;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+.to-top.show{opacity:1;pointer-events:auto}
+.mbar{display:none}
+@media (max-width:900px){
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .events li{grid-template-columns:1fr;gap:.15rem}
+  .hero h1{font-size:clamp(3rem,15vw,4.4rem)}
+  .hero .wrap{gap:1.6rem}
+  .hero figure{order:-1}
+  .arch{max-width:230px}
+  .arch-cap{font-size:.9rem}
+  .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--pine);border-top:1px solid #fff;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mbar a{color:#FFFFFF;text-align:center;padding:.9rem 0;font-family:var(--display);font-weight:700;text-decoration:none}
+  .mbar a:first-child{background:#fff;color:#000}
+  body{padding-bottom:3.4rem}
+  .to-top{bottom:calc(4.4rem + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion: reduce){.g img{transition:none}}
+
+/* premium stories */
+.frame:hover img{filter:grayscale(0)}
+.intro{max-width:60ch;color:var(--muted);font-size:1.2rem;margin-top:1.2rem}
+.story{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,5vw,5rem);align-items:center;margin-top:clamp(3rem,7vw,5.5rem)}
+.story.reverse .frame{order:2}
+.story .frame{max-width:520px;width:100%;justify-self:center}
+.story.reverse .frame{max-width:none}
+.frame{position:relative;margin:0}
+.frame img{width:100%;border-radius:0;filter:grayscale(100%);transition:filter .5s;position:relative;z-index:1;box-shadow:none}
+.ph{position:relative}
+.ph::before{content:"";position:absolute;inset:1.1rem -1.1rem -1.1rem 1.1rem;border:1px solid var(--brass);border-radius:0;z-index:0}
+.story.reverse .ph::before{inset:1.1rem 1.1rem -1.1rem -1.1rem}
+.frame figcaption{margin-top:1.8rem;font-style:italic;color:var(--muted);font-size:.98rem}
+.frame.dark figcaption{color:#BDBDBD}
+.meta{font-family:var(--display);font-weight:600;color:var(--brass-ink);font-size:.98rem;margin-bottom:.6rem}
+.interventions .meta{color:var(--brass-ink)}
+.story-text h3,.sub{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,2.8vw,2.3rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+.story-text p{font-size:1.15rem;line-height:1.7;max-width:56ch}
+.facts{display:grid;gap:.9rem;margin-top:1.8rem;border-top:1px solid var(--line);padding-top:1.4rem}
+.facts div{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem}
+.facts dt{font-family:var(--display);font-weight:700;font-size:.95rem}
+.facts dd{color:var(--muted)}
+.interventions{background:var(--card);border-block:1px solid var(--line)}
+.medoq-head{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,4rem);align-items:end}
+.medoq-head p{font-size:1.2rem}
+.medoq-body{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2.5rem,6vw,5rem);margin-top:clamp(3rem,6vw,4.5rem);align-items:start}
+.medoq .sub{color:#fff}
+.medoq .lead{opacity:.9;margin:0 0 2rem;font-size:1.15rem;max-width:56ch}
+.medoq .wrap{display:block}
+.roles-title{margin-top:clamp(3rem,7vw,5rem);font-size:1.6rem}
+.contact-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,6vw,5rem);align-items:center;text-align:left}
+.contact .contact-grid h2{margin:0;max-width:14ch}
+.contact .contact-grid p{margin:1.2rem 0 2rem}
+.contact .alt{justify-content:flex-start}
+.frame.on-brass .ph::before{border-color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .meta{color:var(--brass)}}
+:root[data-theme="dark"] .meta{color:var(--brass)}
+@media (max-width:900px){
+  .story,.medoq-head,.medoq-body,.contact-grid{grid-template-columns:1fr}
+  .story.reverse .frame{order:0}
+  .frame::before,.story.reverse .ph::before{inset:.7rem -.7rem -.7rem .7rem}
+  .facts div{grid-template-columns:1fr;gap:.1rem}
+  .contact-grid .frame{max-width:300px}
+}
+
+/* ergonomie v2 */
+.skip{position:absolute;left:-999px;top:0;z-index:50;background:#000;color:#fff;padding:.8rem 1.2rem}
+.skip:focus{left:1rem;top:1rem}
+.ribbon:hover .track{animation-play-state:paused}
+.acc{margin-top:1.6rem;border-top:1px solid var(--ink)}
+.acc details,.more-roles{border-bottom:1px solid var(--line)}
+.acc summary,.more-roles summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0;font-family:var(--display);font-weight:700;font-size:1.08rem;min-height:48px}
+.acc summary::-webkit-details-marker,.more-roles summary::-webkit-details-marker{display:none}
+.acc summary::after,.more-roles summary::after{content:"+";font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1}
+.acc details[open] summary::after,.more-roles[open] summary::after{content:"\2212"}
+.acc-list{list-style:none;display:grid;gap:1rem;padding:0 0 1.4rem}
+.acc-list strong{display:block;font-family:var(--display);font-weight:600}
+.acc-list span{color:var(--muted);font-size:1rem}
+.acc .tags{padding-bottom:1.4rem}
+.more-roles summary{color:var(--ink);border-top:none}
+.more-roles[open]{border-bottom:none}
+.foot ul{gap:.7rem}
+.foot a{display:inline-block;padding:.15rem 0}
+.service li{font-size:.9rem}
+body{font-size:1.0625rem}
+@media (max-width:900px){
+  .service ul{display:none}
+  .services{gap:2rem}
+  .story{margin-top:3rem}
+  .hero .ctas{margin-top:1.4rem}
+  .about-photo{max-width:260px}
+  .mobile-menu.open{position:fixed;inset:72px 0 0 0;align-content:start;padding-top:1rem;overflow:auto}
+  .mobile-menu a{font-size:1.4rem;padding:1rem 0}
 }
 </style>
 </head>
 <body>
-
-<nav id="nav">
-  <a href="#" class="logo">Amadou Niang</a>
-  <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#experience">Expériences</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#forfaits">Forfaits</a></li>
-    
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Me contacter</button>
-  <div class="burger" id="burger" onclick="document.getElementById('mob').classList.toggle('open')">
-    <span></span><span></span><span></span>
+<a class="skip" href="#services">Aller au contenu</a>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">Amadou Niang</a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#interventions">Interventions</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#medoq">Medoq</a></li>
+      <li><a href="#engagement">Engagement</a></li>
+    </ul>
+    <a class="btn" href="mailto:niangamadou394@gmail.com">Me contacter</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="mm">Menu</button>
   </div>
-</nav>
+  <nav class="mobile-menu" id="mm" aria-label="Menu mobile">
+    <a href="#services">Services</a><a href="#interventions">Interventions</a><a href="#parcours">Parcours</a><a href="#medoq">Medoq</a><a href="#engagement">Engagement</a><a href="mailto:niangamadou394@gmail.com">Me contacter</a>
+  </nav>
+</header>
 
-<div id="mob">
-  <a href="#about" onclick="document.getElementById('mob').classList.remove('open')">À propos</a>
-  <a href="#experience" onclick="document.getElementById('mob').classList.remove('open')">Expériences</a>
-  <a href="#services" onclick="document.getElementById('mob').classList.remove('open')">Services</a>
-  <a href="#forfaits" onclick="document.getElementById('mob').classList.remove('open')">Forfaits</a>
-  <a href="#vision" onclick="document.getElementById('mob').classList.remove('open')">Vision</a>
-  <a href="#contact" onclick="document.getElementById('mob').classList.remove('open')">Contact</a>
-</div>
-
-<section class="hero">
-  <div class="orb-a"></div>
-  <div class="orb-b"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="eyebrow">Amadou Niang - Accompagnement · Commercial · Pédagogie - Clermont-Ferrand</div>
-    <h1 class="hero-title">Je libère<br><span class="acc">votre temps.</span>Vous faites<br>votre metier.</h1>
-    <p class="hero-sub">Entrepreneurs, porteurs de projets, indépendants —<br><strong>Je prends tout ca en charge. A partir de 150€s par mois.</strong></p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-fill">Me faire accompagner →</a>
-      <a href="#services" class="btn-line">Voir les services</a>
-    </div>
-  </div>
-  <div class="scroll-hint"><div class="sline"></div>Défiler</div>
-</section>
-
-<div class="stats">
-  <div class="stat"><div class="stat-n">48h</div><div class="stat-l">Réponse garantie</div></div>
-  <div class="stat"><div class="stat-n">3</div><div class="stat-l">Forfaits adaptés</div></div>
-  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Satisfaction garantie</div></div>
-  <div class="stat"><div class="stat-n">0€</div><div class="stat-l">1er échange gratuit</div></div>
-</div>
-
-<section class="sec alt" id="about">
-  <div class="s-lbl">Qui suis-je</div>
-  <div class="about-grid">
-    <div class="about-text rv">
-      <p>Je m'appelle <strong>Amadou Niang</strong>. Entrepreneur, leader associatif et freelance base a <strong>Clermont-Ferrand</strong>. Mon parcours - du Sénégal à la France - m'a forgé une conviction profonde :</p>
-      <p><em>J'avance avec intention, travail et vision.</em></p>
-      <p>Chaque etape de mon parcours est guidee par une envie claire : <strong>créer de la valeur, résoudre de vrais problèmes et faire bouger les lignes.</strong></p>
-      <p>Aujourd'hui je propose aux artisans et commercants de Clermont-Ferrand un service d'<strong>assistance commerciale externalisée</strong> pour qu'ils récupèrent leur temps.</p>
-    </div>
-    <div class="info-list rv d1">
-      <div class="info-row"><div class="info-ico" style="background:rgba(240,165,0,.1)">&#x1F4CD;</div><div><div class="info-lbl">Localisation</div><div class="info-val">Clermont-Ferrand, France</div></div></div>
-      <div class="info-row"><div class="info-ico" style="background:rgba(15,165,148,.1)">&#x2709;&#xFE0F;</div><div><div class="info-lbl">Email</div><div class="info-val">niangamadou394@gmail.com</div></div></div>
-      <div class="info-row"><div class="info-ico" style="background:rgba(155,93,229,.1)">&#x1F4F1;</div><div><div class="info-lbl">Telephone</div><div class="info-val">06 17 56 63 42</div><div class="info-sub">Lun-Ven 17h-20h</div></div></div>
-      <div class="info-row"><div class="info-ico" style="background:rgba(255,107,71,.1)">&#x1F393;</div><div><div class="info-lbl">Formation</div><div class="info-val">Master Manager Commercial & Marketing</div><div class="info-sub">2025–2027 · La Banque Postale · Alternance</div></div></div>
-      <div class="info-row"><div class="info-ico" style="background:rgba(240,165,0,.1)">&#x1F1EB;&#x1F1F7;</div><div><div class="info-lbl">Langues</div><div class="info-val">Français (C1) · Anglais</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt2" id="experience">
-  <div class="s-lbl">Parcours</div>
-  <h2 class="s-ttl rv">Mes <em>expériences</em> professionnelles</h2>
-  <div class="timeline">
-    <div class="t-item rv"><div class="t-dot"></div><div class="t-per">2025–2027</div><div class="t-role">Chargé de Développement Commercial</div><div class="t-co">La Banque Postale · Clermont-Ferrand</div><ul class="t-tasks"><li>Suivi et mise en place des animations commerciales</li><li>Rédaction de règlements et creation de supports</li><li>Double écoute et accompagnement des conseillers bancaires</li><li>Mise à jour des reportings formations</li></ul></div>
-    <div class="t-item rv d1"><div class="t-dot"></div><div class="t-per">2026–Aujourd'hui</div><div class="t-role">Professeur Particulier · Mathématiques</div><div class="t-co">Acadomia · Clermont-Ferrand</div><ul class="t-tasks"><li>Cours de mathématiques niveau collège et lycée</li><li>Soutien scolaire personnalisé adapté a chaque eleve</li><li>Suivi de la progression et communication avec les familles</li><li>Préparation aux évaluations et renforcement des bases</li></ul></div>
-    <div class="t-item rv d2"><div class="t-dot"></div><div class="t-per">2026–Aujourd'hui</div><div class="t-role">Professeur Particulier · Mathématiques</div><div class="t-co">Complétude · Clermont-Ferrand</div><ul class="t-tasks"><li>Cours de mathematiques et soutien scolaire général</li><li>Accompagnement individualisé pour élèves en difficulté</li><li>Methodes pédagogiques adaptées au profil de chaque apprenant</li><li>Suivi régulier des objectifs et des résultats scolaires</li></ul></div>
-    <div class="t-item rv d3"><div class="t-dot"></div><div class="t-per">2025</div><div class="t-role">Co-fondateur</div><div class="t-co">SNS&AN Consulting · France/Sénégal</div><ul class="t-tasks"><li>Veille stratégique et intelligence économique</li><li>Accompagnement de porteurs de projets : structuration, business plan, go-to-market</li><li>Conseil en développement commercial et stratégie d'entreprise</li><li>Prospection clients et animation du portefeuille</li></ul></div>
-    <div class="t-item rv d4"><div class="t-dot"></div><div class="t-per">2025</div><div class="t-role">Co-fondateur</div><div class="t-co">Ferme Agro-élevage · Sénégal</div><ul class="t-tasks"><li>Porteur de projet entrepreneurial à impact social</li><li>Développement d'une activité agricole et d'elevage</li></ul></div>
-  </div>
-</section>
-
-<section class="sec alt" id="services">
-  <div class="s-lbl">Ce que je propose</div>
-  <h2 class="s-ttl rv">Des missions <em>concrètes</em> adaptées à votre réalité</h2>
-  <p class="s-intro rv">Des missions adaptées à votre profil, exécutées avec rigueur et engagement.</p>
-  <div class="svc-grid">
-    <div class="svc rv"><div class="svc-bar" style="background:linear-gradient(90deg,var(--gold),var(--gold3))"></div><div class="svc-num" style="color:var(--gold)">01</div><div class="svc-ico" style="background:rgba(240,165,0,.1)">🚀</div><div class="svc-name">Accompagnement Entrepreneurial</div><div class="svc-desc">Tu as une idée mais tu ne sais pas comment la structurer ? Je t'accompagne de l'idée au projet concret, pas à pas.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--gold)"></div>Structuration de l'idée et du concept</li><li><div class="sdot" style="background:var(--gold)"></div>Validation du marché et de la cible</li><li><div class="sdot" style="background:var(--gold)"></div>Construction du business model</li><li><div class="sdot" style="background:var(--gold)"></div>Plan d'action et premières étapes</li></ul></div>
-    <div class="svc rv d1"><div class="svc-bar" style="background:linear-gradient(90deg,var(--coral),#ff9a80)"></div><div class="svc-num" style="color:var(--coral)">02</div><div class="svc-ico" style="background:rgba(255,107,71,.1)">📈</div><div class="svc-name">Prospection & Développement Commercial</div><div class="svc-desc">Tu veux trouver des clients mais tu ne sais pas par où commencer ? Je structure ta démarche commerciale et gère la prospection.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--coral)"></div>Identification et qualification des prospects</li><li><div class="sdot" style="background:var(--coral)"></div>Rédaction d'argumentaires commerciaux</li><li><div class="sdot" style="background:var(--coral)"></div>Suivi et relance des contacts</li><li><div class="sdot" style="background:var(--coral)"></div>Reporting commercial mensuel</li></ul></div>
-    <div class="svc rv d2"><div class="svc-bar" style="background:linear-gradient(90deg,var(--teal),#5eead4)"></div><div class="svc-num" style="color:var(--teal)">03</div><div class="svc-ico" style="background:rgba(15,165,148,.1)">🎨</div><div class="svc-name">Création de Supports & Communication</div><div class="svc-desc">CV, présentations, supports commerciaux ou visuels pour réseaux sociaux — je crée des outils qui valorisent votre image.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--teal)"></div>CV et profil LinkedIn optimisés</li><li><div class="sdot" style="background:var(--teal)"></div>Présentations et pitchs Canva</li><li><div class="sdot" style="background:var(--teal)"></div>Supports commerciaux et flyers</li><li><div class="sdot" style="background:var(--teal)"></div>Contenu pour réseaux sociaux</li></ul></div>
-    <div class="svc rv d3"><div class="svc-bar" style="background:linear-gradient(90deg,var(--purple),#c084fc)"></div><div class="svc-num" style="color:var(--purple)">04</div><div class="svc-ico" style="background:rgba(155,93,229,.1)">📐</div><div class="svc-name">Cours Particuliers · Mathématiques</div><div class="svc-desc">Cours personnalisés niveau collège et lycée pour progresser durablement et reprendre confiance en soi.</div><ul class="svc-list"><li><div class="sdot" style="background:var(--purple)"></div>Cours de maths collège et lycée</li><li><div class="sdot" style="background:var(--purple)"></div>Soutien scolaire général</li><li><div class="sdot" style="background:var(--purple)"></div>Préparation examens (Brevet, Bac)</li><li><div class="sdot" style="background:var(--purple)"></div>Suivi régulier et bilan parents</li></ul></div>
-  </div>
-</section>
-
-<section class="sec" id="forfaits">
-  <div class="s-lbl">Tarifs</div>
-  <h2 class="s-ttl rv">Des forfaits <em>transparents</em>, sans mauvaise surprise</h2>
-  <p class="s-intro rv">Pas d'engagement. Résiliable à tout moment. 1er mois satisfait ou remboursé.</p>
-  <div style="background:rgba(15,165,148,.08);border:1px solid rgba(15,165,148,.2);border-radius:4px;padding:20px 24px;margin-bottom:36px;display:flex;align-items:flex-start;gap:14px;">
-    <div style="font-size:22px;flex-shrink:0">🔒</div>
+<main id="top">
+<section class="hero" aria-label="Présentation">
+  <div class="wrap">
     <div>
-      <div style="font-size:13px;font-weight:600;color:#5eead4;margin-bottom:5px;letter-spacing:.5px;">Confidentialité & sécurité garanties</div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.7;">Toutes vos informations et accès sont traités avec une confidentialité totale. Un accord de non-divulgation (NDA) peut être signé avant toute collaboration. Vos données ne sont jamais partagées avec des tiers.</div>
-    </div>
-  </div>
-  <div class="f-grid">
-    <div class="fcard rv"><div class="f-name">Starter</div><div class="f-price">150<sup>EUR</sup></div><div class="f-period">par mois · Pour démarrer</div><ul class="f-items"><li>5 devis / factures par mois</li><li>10 relances clients</li><li>Tableau de suivi partage</li><li>Reponse sous 24h</li></ul><a href="#contact" class="f-btn outline">Choisir Starter</a></div>
-    <div class="fcard hot rv d1"><div class="f-badge">Populaire</div><div class="f-name">Essentiel</div><div class="f-price">250<sup>EUR</sup></div><div class="f-period">par mois · Le plus choisi</div><ul class="f-items"><li>Tout le Starter inclus</li><li>Gestion e-mails 5h/mois</li><li>Gestion agenda basique</li><li>Rapport mensuel détaillé</li><li>Reponse sous 12h</li></ul><a href="#contact" class="f-btn solid">Choisir Essentiel</a></div>
-    <div class="fcard rv d2"><div class="f-name">Premium</div><div class="f-price">400<sup>EUR</sup></div><div class="f-period">par mois · Délégation totale</div><ul class="f-items"><li>Tout l'Essentiel inclus</li><li>E-mails & agenda illimités</li><li>Suivi commercial complet</li><li>Appel bilan mensuel 30min</li><li>Reponse sous 4h</li></ul><a href="#contact" class="f-btn outline">Choisir Premium</a></div>
-  </div>
-</section>
-
-<section class="sec alt2">
-  <div class="s-lbl">Comment ça marche</div>
-  <h2 class="s-ttl rv">En <em>4 étapes</em> simples</h2>
-  <div class="p-grid">
-    <div class="step rv"><div class="step-n">1</div><div class="step-t">Échange découverte</div><div class="step-d">30 minutes pour comprendre votre activité. Gratuit, sans engagement.</div></div>
-    <div class="step rv d1"><div class="step-n">2</div><div class="step-t">Mise en place</div><div class="step-d">Je configure votre espace de suivi et accède à vos outils.</div></div>
-    <div class="step rv d2"><div class="step-n">3</div><div class="step-t">Je prends en charge</div><div class="step-d">Vous transmettez vos infos, je gère. Vous validez, j'envoie.</div></div>
-    <div class="step rv d3"><div class="step-n">4</div><div class="step-t">Bilan mensuel</div><div class="step-d">Un récap de ce qui a été fait. On ajuste si besoin.</div></div>
-  </div>
-</section>
-
-
-
-
-
-
-
-<div class="qband">
-  <div class="q-in">
-    <div class="q-txt" id="qt">"J'avance avec <em>intention</em>, travail et vision. Ce que je construis, je le fais avec exigence, sens et determination."</div>
-    <div class="q-by" id="qb">- Amadou Niang</div>
-    <div class="q-dots">
-      <button class="qdot on" onclick="setQ(0)"></button>
-      <button class="qdot" onclick="setQ(1)"></button>
-      <button class="qdot" onclick="setQ(2)"></button>
-    </div>
-  </div>
-</div>
-
-<section class="sec alt2" id="contact">
-  <div class="s-lbl">Contact</div>
-  <div class="ct-grid">
-    <div class="rv">
-      <h3 class="ct-h">Parlons de votre projet</h3>
-      <p class="ct-p">Porteur de projet, indépendant, entrepreneur — prenons 30 minutes pour voir comment je peux vous aider.</p>
-      <p style="font-size:13px;color:var(--t3);">Premier échange toujours gratuit. Pas d'engagement.</p>
-      <div class="ct-links">
-        <a href="mailto:niangamadou394@gmail.com" class="cl"><div class="cl-ico">&#x2709;&#xFE0F;</div><div><div class="cl-ttl">Email</div><div class="cl-sub">niangamadou394@gmail.com</div></div><span class="cl-arr">&#x2192;</span></a>
-        <a href="tel:+33617566342" class="cl"><div class="cl-ico">&#x1F4F1;</div><div><div class="cl-ttl">Telephone</div><div class="cl-sub">06 17 56 63 42</div></div><span class="cl-arr">&#x2192;</span></a>
-        <a href="https://linkedin.com" target="_blank" class="cl"><div class="cl-ico">&#x1F4BC;</div><div><div class="cl-ttl">LinkedIn</div><div class="cl-sub">Amadou Niang</div></div><span class="cl-arr">&#x2192;</span></a>
+      <h1>Amadou<br>Niang</h1>
+      <p class="role">Développement commercial, entrepreneuriat et prise de parole</p>
+      <p class="lede">J'aide les porteurs de projets et les équipes commerciales à passer de l'idée au terrain&nbsp;: structurer, convaincre, financer.</p>
+      <div class="ctas">
+        <a class="btn" href="mailto:niangamadou394@gmail.com">Prendre contact</a>
+        <a class="btn ghost" href="#services">Voir mes services</a>
       </div>
     </div>
-    <div class="cform rv d1">
-      <div class="cf-ttl">Demande de contact</div>
-      <div class="cf-sub">Réponse sous 48h garantie</div>
-      <div class="frow"><label class="flbl">Votre nom</label><input class="finp" type="text" placeholder="Jean Dupont"></div>
-      <div class="frow"><label class="flbl">Votre situation</label><select class="fsel"><option value="">Sélectionner...</option><option>Porteur de projet / Entrepreneur</option><option>Freelance / Indépendant</option><option>Étudiant / Alternant</option><option>Dirigeant TPE/PME</option><option>Autre</option></select></div>
-      <div class="frow"><label class="flbl">Email</label><input class="finp" type="email" placeholder="jean@monentreprise.fr"></div>
-      <div class="frow"><label class="flbl">Votre besoin</label><textarea class="ftxt" placeholder="Décrivez votre projet ou votre besoin..."></textarea></div>
-      <button class="btn-fill" style="width:100%;justify-content:center;margin-top:6px;" onclick="alert('Merci ! Je vous reponds sous 48h.')">Envoyer ma demande</button>
+    <figure>
+      <div class="arch"><img src="images/hero.jpg" alt="Amadou Niang prenant la parole au micro lors d'un événement de l'AMEERAS"></div>
+      <figcaption class="arch-cap">Basé à Clermont-Ferrand, actif en France et au Sénégal</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="ribbon" aria-hidden="true">
+  <div class="track">
+    <span>Développement commercial</span><span>Accompagnement entrepreneurial</span><span>Prise de parole</span><span>Conseil stratégique</span>
+    <span>Développement commercial</span><span>Accompagnement entrepreneurial</span><span>Prise de parole</span><span>Conseil stratégique</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <p class="kicker">Ce que je propose</p>
+    <h2>Une expertise de terrain, mise au service de vos projets</h2>
+    <div class="services">
+      <article class="service">
+        <h3>Développement commercial</h3>
+        <p>Conception et suivi d'animations commerciales, création de supports et accompagnement des équipes pour faire monter leurs résultats.</p>
+        <ul><li>Animations commerciales</li><li>Supports et règlements</li><li>Montée en compétences</li></ul>
+        <a class="svc-link" href="mailto:niangamadou394@gmail.com">En parler avec moi</a>
+      </article>
+      <article class="service">
+        <h3>Accompagnement entrepreneurial</h3>
+        <p>Pour les jeunes porteurs de projets&nbsp;: clarifier l'idée, structurer le projet, préparer les dossiers et aller chercher les bons soutiens.</p>
+        <ul><li>Structuration de projet</li><li>Recherche de financement</li><li>Étude de marché</li></ul>
+        <a class="svc-link" href="mailto:niangamadou394@gmail.com">En parler avec moi</a>
+      </article>
+      <article class="service">
+        <h3>Prise de parole</h3>
+        <p>Interventions sur l'entrepreneuriat et les stratégies des jeunes porteurs de projets, auprès d'étudiants, d'associations et de réseaux de la diaspora sénégalaise.</p>
+        <ul><li>Conférences</li><li>Tables rondes</li><li>Ateliers associatifs</li></ul>
+        <a class="svc-link" href="mailto:niangamadou394@gmail.com">En parler avec moi</a>
+      </article>
+      <article class="service">
+        <h3>Conseil stratégique</h3>
+        <p>Un regard concret pour les fondateurs et les associations&nbsp;: positionnement, mise en réseau institutionnelle et entrée sur le marché sénégalais.</p>
+        <ul><li>Positionnement</li><li>Réseau institutionnel</li><li>Marché sénégalais</li></ul>
+        <a class="svc-link" href="mailto:niangamadou394@gmail.com">En parler avec moi</a>
+      </article>
+    </div>
+    <div class="after-services"><a class="btn" href="mailto:niangamadou394@gmail.com?subject=Demande%20d'accompagnement">Demander un échange</a></div>
+  </div>
+</section>
+
+<section id="interventions" class="interventions">
+  <div class="wrap">
+    <p class="kicker">Sur scène, sur le terrain</p>
+    <h2>Prendre la parole pour faire avancer les projets</h2>
+    <p class="intro">Forums, tables rondes, rencontres de la diaspora&nbsp;: j'interviens là où les jeunes porteurs de projets cherchent des repères concrets. Voici quelques moments qui résument cette démarche.</p>
+    <article class="story ">
+      <figure class="frame"><div class="ph"><img src="images/forum-aere-lao.jpg" alt="Affiche du Forum international sur les métiers du numérique et l'entrepreneuriat annonçant l'intervention d'Amadou Niang"></div><figcaption>Affiche officielle de l'intervention</figcaption></figure>
+      <div class="story-text">
+        <p class="meta">Aéré Lao, Sénégal · 18 juillet 2026</p>
+        <h3>Forum international sur les métiers du numérique et l'entrepreneuriat</h3>
+        <p>Pour la 4e édition de ce forum organisé par 10 000 Codeurs et l'AREAL (Regroupement des Élèves et Étudiants de Aéré Lao), j'ai été invité comme intervenant. Revenir à Aéré Lao, où j'ai fait mon lycée, pour parler d'entrepreneuriat aux élèves et étudiants a un sens particulier&nbsp;: montrer qu'un projet peut naître ici et se construire entre le Sénégal et la France.</p>
+        <dl class="facts"><div><dt>Mon rôle</dt><dd>Intervenant</dd></div><div><dt>Public</dt><dd>Élèves, étudiants, jeunes porteurs de projets</dd></div><div><dt>Thème</dt><dd>Numérique et entrepreneuriat</dd></div></dl>
+      </div>
+    </article>
+    <article class="story reverse">
+      <figure class="frame"><div class="ph"><img src="images/table-ronde.jpg" alt="Amadou Niang au micro lors d'une table ronde, entouré d'autres intervenants"></div><figcaption>En table ronde, aux côtés d'autres intervenants</figcaption></figure>
+      <div class="story-text">
+        <p class="meta">Table ronde</p>
+        <h3>Partager un parcours, pas une théorie</h3>
+        <p>En table ronde, je parle de ce que je vis&nbsp;: lancer Medoq, monter un dossier de financement, frapper aux bonnes portes. L'objectif est que chaque participant reparte avec des étapes claires et des contacts utiles, plutôt qu'avec des généralités.</p>
+        <dl class="facts"><div><dt>Format</dt><dd>Échange avec le public</dd></div><div><dt>Sujets</dt><dd>Structuration de projet, financement, réseau</dd></div></dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sectors" aria-labelledby="sec-h">
+  <div class="wrap">
+    <p class="kicker">Où j'interviens</p>
+    <h2 id="sec-h">Des secteurs que je connais de l'intérieur</h2>
+    <p class="sector-list"><span>Banque</span> <span>Santé et healthtech</span> <span>Restauration</span> <span>Agroélevage</span> <span>Conseil</span> <span>Vie associative</span> <span class="more">et plus encore</span></p>
+  </div>
+</section>
+
+<section class="about" id="parcours">
+  <div class="wrap">
+    <div class="about-photo"><img src="images/portrait.jpg" alt="Amadou Niang"></div>
+    <div>
+      <p class="kicker">Mon parcours</p>
+      <h2>Un parcours entre banque, terrain et entrepreneuriat</h2>
+      <p class="title">Chargé de développement commercial · Fondateur de Medoq</p>
+      <p class="bio">J'avance avec intention, travail et vision. En alternance à La Banque Postale et en Master 2 Développement Commercial et Marketing, je construis en parallèle des projets entrepreneuriaux entre la France et le Sénégal. Ce qui me guide&nbsp;: créer de la valeur, résoudre de vrais problèmes et faire bouger les lignes.</p>
+
+      <div class="acc">
+        <details open><summary>Expériences professionnelles</summary>
+          <ul class="acc-list">
+            <li><strong>La Banque Postale, Clermont-Ferrand</strong><span>Chargé de développement commercial en alternance, depuis 2025. Animations commerciales, supports, double écoute et montée en compétences des conseillers.</span></li>
+            <li><strong>Chicken Street, Clermont-Ferrand</strong><span>Assistant manager depuis 2022. Stocks, planning des équipes, organisation du service et clôture de caisse.</span></li>
+          </ul>
+        </details>
+        <details><summary>Projets entrepreneuriaux</summary>
+          <ul class="acc-list">
+            <li><strong>Medoq</strong><span>Plateforme healthtech en cours de création.</span></li>
+            <li><strong>SNS&amp;AN Consulting</strong><span>Co-fondateur, 2025.</span></li>
+            <li><strong>Ferme agroélevage</strong><span>Co-fondateur, 2025.</span></li>
+            <li><strong>Statut Étudiant-Entrepreneur</strong><span>Pépite Auvergne, 2025.</span></li>
+          </ul>
+        </details>
+        <details><summary>Formations</summary>
+          <ul class="acc-list">
+            <li><strong>Master 2 Développement Commercial et Marketing</strong><span>WESFORD Clermont-Ferrand</span></li>
+            <li><strong>Licence en Analyse et Politique Économique</strong><span>Université Clermont Auvergne</span></li>
+            <li><strong>Bac+3 Économie Appliquée</strong><span>Université Gaston Berger</span></li>
+            <li><strong>Prise de parole en public</strong><span>Formation certifiante</span></li>
+          </ul>
+        </details>
+        <details><summary>Compétences et langues</summary>
+          <div class="tags"><span>Microsoft Office</span><span>Canva</span><span>R et RStudio</span><span>E-Views</span><span>Gestion de projet</span><span>Leadership</span><span>Français</span><span>Anglais</span><span>Pulaar</span></div>
+        </details>
+      </div>
+      <div class="ctas">
+        <a class="btn" href="https://fr.linkedin.com/in/amadou-niang-2b69a0223" target="_blank" rel="noopener">Me suivre sur LinkedIn</a>
+        <a class="btn ghost" href="mailto:niangamadou394@gmail.com">M'écrire</a>
+      </div>
     </div>
   </div>
 </section>
 
-
-<section class="sec alt" style="text-align:center;">
-  <div class="s-lbl" style="justify-content:center;">Partager</div>
-  <h2 class="s-ttl" style="text-align:center;margin-bottom:12px;">Mon <em>QR Code</em></h2>
-  <p style="font-size:15px;color:var(--t2);margin-bottom:36px;">Scannez pour accéder directement à mon site</p>
-  <div style="display:inline-block;background:white;padding:20px;border-radius:8px;margin-bottom:20px;">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://niangamadou394-star.github.io/Amadou.N/" alt="QR Code Amadou Niang" style="width:180px;height:180px;display:block;">
+<section class="medoq" id="medoq">
+  <div class="wrap">
+    <div class="medoq-head">
+      <div>
+        <p class="kicker">Projet en cours</p>
+        <h2>Medoq</h2>
+        <span class="status">En cours de création</span>
+      </div>
+      <p>Une plateforme healthtech qui connecte patients et pharmacies en temps réel, pour savoir où trouver un médicament disponible sans multiplier les appels. Le marché visé&nbsp;: les pharmacies privées du Sénégal.</p>
+    </div>
+    <div class="medoq-body">
+      <figure class="frame dark"><div class="ph"><img src="images/forum-price.jpg" alt="Amadou Niang en costume devant le mur des partenaires du Forum économique PRICE à Paris"></div><figcaption>Forum économique PRICE, Mairie de Paris 15e, avril 2026</figcaption></figure>
+      <div>
+        <h3 class="sub">Présenter Medoq aux bons interlocuteurs</h3>
+        <p class="lead">Au Forum économique PRICE, organisé avec l'Ambassade du Sénégal en France pour la promotion des investissements, j'étais présent au sein de la délégation partenaire. Une occasion directe d'échanger avec les institutions qui accompagnent l'entrepreneuriat au Sénégal.</p>
+        <ul class="steps">
+          <li><strong>Étude de marché sur le terrain</strong><span>Menée directement au Sénégal auprès des acteurs du secteur.</span></li>
+          <li><strong>Développement technique</strong><span>En partenariat avec Futurixa.</span></li>
+          <li><strong>Réseau institutionnel</strong><span>Échanges avec l'APIX, la BNDE, le FONGIP, le FONSIS et l'ADEPME.</span></li>
+          <li><strong>Financement</strong><span>Dossier déposé auprès de la DSE, candidatures aux dispositifs Pépite.</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <p style="font-size:13px;color:var(--t3);">niangamadou394-star.github.io/Amadou.N</p>
 </section>
-<footer>
-  <div><div class="f-logo-name">Amadou Niang</div><div class="f-logo-sub">Accompagnement · Commercial · Pédagogie</div></div>
-  <div class="f-qt">"Créer de la valeur, résoudre de vrais problèmes et faire bouger les lignes."</div>
-  <div class="f-cp">© 2026 Amadou Niang · Clermont-Ferrand<br>niangamadou394@gmail.com · 06 17 56 63 42</div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<section id="engagement">
+  <div class="wrap">
+    <p class="kicker">Vie associative</p>
+    <h2>Fédérer, représenter, faire avancer</h2>
+    <article class="story ">
+      <figure class="frame"><div class="ph"><img src="images/risce.jpg" alt="Amadou Niang en costume avec un badge invité devant le mur Connect and Learn by RISCE"></div><figcaption>Connect &amp; Learn by RISCE, badge Diaspora Connect'In</figcaption></figure>
+      <div class="story-text">
+        <p class="meta">Réseau de la diaspora · 2026</p>
+        <h3>Connect &amp; Learn by RISCE</h3>
+        <p>Invité à Connect &amp; Learn, l'événement du RISCE (Réseau International des Sénégalais Cadres de l'Extérieur), j'ai rejoint un réseau qui mobilise la diaspora autour de l'entraide et de l'impact. C'est le prolongement naturel de près de dix ans d'engagement associatif.</p>
+        <dl class="facts"><div><dt>Statut</dt><dd>Invité</dd></div><div><dt>Réseau</dt><dd>Cadres et entrepreneurs de la diaspora sénégalaise</dd></div></dl>
+      </div>
+    </article>
+    <h3 class="sub roles-title">Responsabilités associatives</h3>
+    <div class="roles">
+      <div class="role-row"><time>2024</time><div><strong>Secrétaire</strong><span>Association des Étudiants Sénégalais de Clermont-Ferrand</span></div></div>
+      <div class="role-row"><time>2023</time><div><strong>Président et fondateur, H2A</strong><span>Halpoular Harmonie d'Aide</span></div></div>
+      <div class="role-row"><time>2022</time><div><strong>Président et candidat, Parti ELITE</strong><span>Amicale des Étudiants de l'UFR Sciences Économiques et Gestion</span></div></div>
+      <details class="more-roles"><summary>Voir les engagements de 2017 à 2022</summary><div class="role-row"><time>2021 - 2022</time><div><strong>Président, AMEERAS</strong><span>Amicale des Élèves et Étudiants Ressortissants d'Aéré Lao à Saint-Louis</span></div></div>
+      <div class="role-row"><time>2020 - 2021</time><div><strong>Vice-président, AMEERAS</strong><span>Amicale des Élèves et Étudiants Ressortissants d'Aéré Lao à Saint-Louis</span></div></div>
+      <div class="role-row"><time>2017 - 2020</time><div><strong>Président, AJDC</strong><span>Association des Jeunes pour le Développement de la Cité Bara Tall</span></div></div>
+    </details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <figure class="frame on-brass"><div class="ph"><img src="images/micro.jpg" alt="Amadou Niang parlant au micro"></div></figure>
+    <div>
+    <h2>Parlons de votre projet</h2>
+    <p>Une intervention, un accompagnement ou un échange sur le développement commercial&nbsp;: écrivez-moi.</p>
+    <a class="mail" href="mailto:niangamadou394@gmail.com">niangamadou394@gmail.com</a>
+    <div class="alt">
+      <a class="btn" href="tel:+33617566342">Appeler le 06 17 56 63 42</a>
+      <a class="btn" href="https://fr.linkedin.com/in/amadou-niang-2b69a0223" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<a class="to-top" href="#top" aria-label="Retour en haut">↑</a>
+<div class="mbar"><a href="mailto:niangamadou394@gmail.com">Écrire</a><a href="tel:+33617566342">Appeler</a><a href="https://fr.linkedin.com/in/amadou-niang-2b69a0223" target="_blank" rel="noopener">LinkedIn</a></div>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><p class="logo" style="color:#FFFFFF">Amadou Niang</p><p style="margin-top:.6rem;max-width:34ch">Développement commercial, entrepreneuriat et prise de parole. Clermont-Ferrand.</p></div>
+      <div><h3>Explorer</h3><ul><li><a href="#services">Services</a></li><li><a href="#interventions">Interventions</a></li><li><a href="#parcours">Parcours</a></li><li><a href="#medoq">Medoq</a></li><li><a href="#engagement">Engagement</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="mailto:niangamadou394@gmail.com">E-mail</a></li><li><a href="tel:+33617566342">Téléphone</a></li><li><a href="https://fr.linkedin.com/in/amadou-niang-2b69a0223" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 Amadou Niang</span><a href="#top">Retour en haut</a></div>
+  </div>
+</footer>
 <script>
-emailjs.init('PBZQ41QsMw8SnxELq');
-document.addEventListener('DOMContentLoaded', function() {
-  var form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = document.getElementById('submit-btn');
-      btn.textContent = 'Envoi en cours...';
-      btn.disabled = true;
-      var params = {
-        nom: document.getElementById('nom').value,
-        situation: document.getElementById('situation').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-      };
-      emailjs.send('service_he02y7z', 'template_udrr7z9', params)
-        .then(function() {
-          document.getElementById('form-success').style.display = 'block';
-          document.getElementById('form-error').style.display = 'none';
-          form.reset();
-          btn.textContent = 'Envoyer ma demande →';
-          btn.disabled = false;
-        }, function() {
-          document.getElementById('form-error').style.display = 'block';
-          document.getElementById('form-success').style.display = 'none';
-          btn.textContent = 'Envoyer ma demande →';
-          btn.disabled = false;
-        });
-    });
-  }
-});
-window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('sticky',window.scrollY>60);});
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:0.08});
-document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
-var QQ=[
-  {t:'"J\'avance avec <em>intention</em>, travail et vision. Ce que je construis, je le fais avec exigence."',b:'- Amadou Niang'},
-  {t:'"Votre temps vaut plus que <em>150€s par mois</em>. Chaque heure recuperee est une heure investie dans votre vraie valeur."',b:'- Amadou Niang'},
-  {t:'"Creer de la valeur, resoudre de vrais problemes et <em>faire bouger les lignes</em>."',b:'- Amadou Niang'}
-];
-var qi=0;
-function setQ(i){qi=i;document.getElementById('qt').innerHTML=QQ[i].t;document.getElementById('qb').textContent=QQ[i].b;document.querySelectorAll('.qdot').forEach(function(d,j){d.classList.toggle('on',j===i);});}
-setInterval(function(){setQ((qi+1)%QQ.length);},5000);
+const b=document.querySelector('.menu-btn'),m=document.getElementById('mm');
+b.addEventListener('click',()=>{const o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);b.textContent=o?'Fermer':'Menu';});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.setAttribute('aria-expanded','false');b.textContent='Menu';b.focus();}});
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open');b.setAttribute('aria-expanded','false');b.textContent='Menu';}));
+
+const links=[...document.querySelectorAll('.nav ul a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
+['services','interventions','parcours','medoq','engagement'].forEach(id=>{const s=document.getElementById(id);if(s)io.observe(s);});
+const tt=document.querySelector('.to-top');
+addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>700),{passive:true});
 </script>
 </body>
 </html>
