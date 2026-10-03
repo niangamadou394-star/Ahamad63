@@ -503,9 +503,6 @@
         if (p) anim(p, 'pulseRing', 1.6, at + .6, 'soft', 'both', 'infinite');
       });
       root.append(acts);
-      const sig = div('sig', `<span class="mono">AN</span><span><b>Amadou Niang</b>Accompagnement de porteurs de projet</span>`);
-      root.append(sig);
-      anim(sig, 'fadeIn', 1, t + 1.6, 'soft');
       ctx.cue(t, 'whoosh');
     },
   };
