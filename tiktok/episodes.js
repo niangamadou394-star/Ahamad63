@@ -161,7 +161,7 @@ window.EPISODES = [
         ['J-7', 'Révèle l’offre de lancement, limitée.'],
         ['J-1', 'Rappel à toute ta liste.'],
       ] },
-      { type: 'text', lines: ['Le jour J, tu ne', 'cherches pas des clients.', 'Tu préviens *ceux', 'qui attendent.*'], size: 80 },
+      { type: 'text', lines: ['Le jour J, tu ne', 'cherches pas des clients.', 'Tu préviens *ceux*', '*qui attendent.*'], size: 80 },
       { type: 'cta', next: 'Le *jour J*', nextSub: 'Et surtout : ce qui se passe après.' },
     ],
   },
@@ -169,7 +169,7 @@ window.EPISODES = [
   {
     n: 10, slug: 'lancement', accent: 'coral', title: 'Le lancement',
     scenes: [
-      { type: 'hook', kicker: 'Épisode 10', lines: ['Jour J.', '*Ce n’est que', 'le début.*'] },
+      { type: 'hook', kicker: 'Épisode 10', lines: ['Jour J.', '*Ce n’est que*', '*le début.*'] },
       { type: 'chapter', title: 'Le lancement', desc: 'Ouvrir les portes. Puis apprendre.', stage: 'Lancement' },
       { type: 'checklist', kicker: 'Check-list du jour J', title: 'Avant d’appuyer *sur le bouton.*', items: [
         'Page de vente testée',
