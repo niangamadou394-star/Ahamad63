@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrousel LinkedIn — De l’idée au lancement</title>
+<link rel="stylesheet" href="carousel.css">
+</head>
+<body>
+<script src="../tiktok/episodes.js"></script>
+<script src="carousel.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const n = +(q.get('ep') || 1);
+  if (!q.has('print')) document.body.className = 'preview';
+  const ep = EPISODES.find(e => e.n === n) || EPISODES[0];
+  document.title = `Carrousel ${String(ep.n).padStart(2, '0')} — ${ep.title}`;
+  window.__slides = Carousel.build(ep, document.body);
+  await document.fonts.ready;
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
