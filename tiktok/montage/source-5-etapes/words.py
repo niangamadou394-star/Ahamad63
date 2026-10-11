@@ -1,10 +1,12 @@
 # Texte prononcé, rangé par plage de parole du rush (temps source). *mot* = mot-clé en or.
 # Les mots sont répartis dans leur plage selon leur longueur.
-from edl import spans, FPS, ISLANDS as _ISL
-ISLANDS = [(a, b, t) for a, b, t in _ISL]
+from edl import spans, FPS, ISLANDS as _ISL, to_pts
+ISLANDS = [x[:3] for x in _ISL]
 
 SPANS = spans()
-def src2edit(t):
+def src2edit(t, pts=False):
+    """temps d'analyse (ou pts si pts=True) -> temps du montage"""
+    if not pts: t = to_pts(t)
     acc = 0.0
     for s, e in SPANS:
         if t < s:

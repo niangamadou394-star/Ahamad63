@@ -2,6 +2,20 @@
 # choisies parmi ses prises ; pauses raccourcies, reprises et hésitations retirées.
 FPS = 60.0
 SRC = "/mnt/project-files/Vidéo du jour - vertical.mp4"
+# Les temps ci-dessous viennent de l'analyse du son décodé échantillon par échantillon. Dans ce
+# fichier, l'audio contient plus d'échantillons que sa durée (horodatage) : le décalage grandit
+# par paliers jusqu'à 0,66 s en fin de rush. On convertit donc chaque temps vers l'horloge du
+# fichier (celle d'atrim et de la vidéo). Paliers mesurés : (pts, décalage).
+DRIFT = [(0.0, 0.0), (9.003, 0.0213), (18.003, 0.0453), (27.003, 0.0693), (27.005, 0.0887), (35.986, 0.11),
+         (35.988, 0.1293), (44.969, 0.1506), (53.969, 0.1746), (62.969, 0.1986), (71.969, 0.2226), (71.971, 0.242),
+         (80.953, 0.2633), (80.955, 0.2827), (89.936, 0.304), (98.936, 0.328), (107.936, 0.352), (107.938, 0.3713),
+         (116.919, 0.3926), (116.921, 0.412), (125.903, 0.486), (134.853, 0.5073), (143.853, 0.5313),
+         (152.853, 0.5553), (152.855, 0.5747), (161.836, 0.596), (161.838, 0.6153), (170.819, 0.6366), (170.821, 0.656)]
+def to_pts(t):
+    d = 0.0
+    for p, dd in DRIFT:
+        if p + dd <= t: d = dd
+    return t - d
 # (début, fin, texte) ; *mot* = mot-clé en or
 ISLANDS = [
     (18.71, 22.32, "Tu ne vas jamais réussir ton projet sans valider les *5* *étapes* suivantes."),
@@ -32,8 +46,8 @@ ISLANDS = [
     (162.82, 164.89, "Tu risques de jamais atteindre un certain *niveau,*"),
     (165.20, 167.06, "vu que tu as besoin forcément *d'argent*"),
     (167.40, 167.99, "pour pouvoir"),
-    (168.73, 169.20, "développer,"),
-    (169.67, 171.36, "*agrandir* le projet."),
+    (168.73, 169.20, "développer,", {"post": 0.22}),
+    (170.30, 171.36, "*agrandir* le projet.", {"pre": 0.01}),   # respiration avant « agrandir » retirée
 ]
 SHORT, LONG = 0.16, 0.28   # pause gardée dans une phrase / après un point
 TAIL_END = 173.2           # il reste assis jusque-là : fond flouté de l'écran de fin
@@ -41,9 +55,12 @@ PAD = 0.07                  # marge de part et d'autre d'une plage (souffle de f
 
 def spans():
     out = []
-    for i, (s, e, txt) in enumerate(ISLANDS):
-        prev = ISLANDS[i - 1] if i else None
-        nxt = ISLANDS[i + 1] if i + 1 < len(ISLANDS) else None
+    for i, isl in enumerate(ISLANDS):
+        s, e, txt = to_pts(isl[0]), to_pts(isl[1]), isl[2]
+        ov = isl[3] if len(isl) > 3 else {}
+        cv = lambda x: (to_pts(x[0]), to_pts(x[1]), x[2])
+        prev = cv(ISLANDS[i - 1]) if i else None
+        nxt = cv(ISLANDS[i + 1]) if i + 1 < len(ISLANDS) else None
         # pause gardée après cette plage : si la suivante suit dans la même prise, on garde une partie du silence
         def keep(gap, end_txt):
             want = LONG if end_txt.rstrip()[-1] in ".?" else SHORT
@@ -55,12 +72,13 @@ def spans():
         if nxt and 0 <= nxt[0] - e < 1.2:
             post = keep(nxt[0] - e, txt) / 2
         else:
-            post = PAD if nxt else TAIL_END - e
+            post = PAD if nxt else 0.3
         # entre deux prises, la pause vient du rush de chaque côté
         if nxt and not (0 <= nxt[0] - e < 1.2):
             post = keep(0.6, txt) / 2
         if prev and not (0 <= s - prev[1] < 1.2):
             pre = keep(0.6, prev[2]) / 2
+        pre, post = ov.get("pre", pre), ov.get("post", post)
         out.append([s - pre, e + post])
     m = []
     for s, e in out:

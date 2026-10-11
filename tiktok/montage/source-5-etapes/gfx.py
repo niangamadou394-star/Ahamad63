@@ -9,7 +9,7 @@ from words import captions, src2edit, SPANS, TOTAL_SPEECH
 
 W, H = 1080, 1920
 FPS = 60.0
-HOLD = 2.6
+HOLD = 4.6
 TOTAL = TOTAL_SPEECH + HOLD
 WHITE = (255, 255, 255)
 GOLD = (255, 210, 63)   # v2 : jaune vif (accent unique)
@@ -374,19 +374,34 @@ def make_full(n):
             p.circle(x, 1270, 13 if i != n else 18, fill=rgba(GOLD if done else WHITE, k1 * (1 if done else 0.35)))
     return fn
 
+# icônes des 5 étapes pour l'écran de fin (dessinées en INK dans un carré blanc)
+def ic_bulb(p, x, y, s, a, fg):
+    p.circle(x, y - 6 * s, 20 * s, fill=rgba(fg, a))
+    p.rbox(x - 9 * s, y + 12 * s, x + 9 * s, y + 24 * s, 3 * s, fill=rgba(fg, a))
+def ic_target(p, x, y, s, a, fg):
+    for r, f in [(26, fg), (18, WHITE), (10, fg)]:
+        p.circle(x, y, r * s, fill=rgba(f, a))
+def ic_euro(p, x, y, s, a, fg):
+    p.circle(x, y, 26 * s, fill=rgba(fg, a))
+    p.text(x, y + 1, "€", "InterDisplay-Black", int(32 * s), rgba(WHITE, a))
+END_ICONS = [ic_bulb, ic_check, ic_target, ic_people, ic_euro]
+END_BG = (16, 16, 20)
+
 def full_final(p, t):
     a = FULLS[-1][0]
-    k0 = appear(t, a)
+    k0 = appear(t, a + 0.1)
     p.text(540, 330 + (1 - k0) * 20, "TU BLOQUES À", "InterDisplay-Black", 92, rgba(WHITE, k0))
-    highlight(p, 540, 450, "QUELLE ÉTAPE ?", 92, t, a + 0.2)
+    highlight(p, 540, 450, "QUELLE ÉTAPE ?", 92, t, a + 0.3)
     for i, (l1, l2) in enumerate(STEPS):
-        t0 = a + 0.55 + i * 0.16
+        t0 = a + 0.6 + i * 0.16
         sc, k = pop(t, t0, 0.35)
         if k <= 0: continue
-        y = 640 + i * 112
-        p.circle(150, y, 40 * sc, fill=rgba(GOLD, k))
-        p.text(150, y + 2, str(i + 1), "InterDisplay-Black", int(44 * sc), rgba(INK, k))
-        p.text(215, y + 2, f"{l1} {l2}".capitalize(), "Inter-ExtraBold", 44, rgba(WHITE, k), anchor="lm")
+        y = 640 + i * 118
+        p.circle(130, y, 38 * sc, fill=rgba(GOLD, k))
+        p.text(130, y + 2, str(i + 1), "InterDisplay-Black", int(42 * sc), rgba(INK, k))
+        p.rbox(196, y - 44 * sc, 284, y + 44 * sc, 20 * sc, fill=rgba(WHITE, k))
+        END_ICONS[i](p, 240, y, 0.95 * sc, k, INK if i != 1 else INK)
+        p.text(316, y + 2, f"{l1} {l2}".capitalize(), "Inter-ExtraBold", 44, rgba(WHITE, k), anchor="lm")
     sticker(p, 540, 1320, 900, 130, t, a + 1.6, "Écris le numéro en commentaire", 46, icon=ic_comment)
 
 # ---------- programme ----------
@@ -484,6 +499,10 @@ def frame(t):
     cov = full_cover(t)
     if cov > 0:
         frosts.append(((0, 0, W, H), 0, cov, 0.5))
+    fa = FULLS[-1][0]
+    kb = ease_io((t - (fa - 0.1)) / 0.35)
+    if kb > 0:
+        ImageDraw.Draw(img).rectangle((0, 0, W, H), fill=END_BG + (int(255 * kb),))
     for a, b, fn in FULLS:
         if a - PRE - 0.05 <= t < b + PRE + 0.05:
             kc = env(t, a - 0.08, b + 0.25, 0.3, 0.25) if b < TOTAL else ease_io((t - (a - 0.08)) / 0.3)
