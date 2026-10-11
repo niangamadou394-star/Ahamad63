@@ -190,4 +190,29 @@ window.EPISODES = [
       ], dur: 6.5 },
     ],
   },
+  // ------------------------------------------------------------ HORS-SÉRIE
+  {
+    n: 11, slug: '5-etapes', file: 'hors-serie-5-etapes', badge: 'Hors-série', ghost: '5',
+    accent: 'coral', title: 'Les 5 étapes',
+    scenes: [
+      { type: 'hook', kicker: 'Hors-série', lines: ['Tu ne vas jamais', 'réussir ton projet', 'sans ces *5 étapes.*'], size: 120, sub: 'Enregistre la vidéo, tu en auras besoin.' },
+      { type: 'chapter', n: 1, of: 5, ends: ['', ''], title: 'Clarifie *ton projet*', stage: 'Clarifier', desc: 'Explique-le en une phrase : pour qui, quel problème, quelle solution.', dur: 5 },
+      { type: 'chapter', n: 2, of: 5, ends: ['', ''], title: 'Valide *le besoin*', stage: 'Valider', desc: 'Parle à 10 personnes de ta cible avant de dépenser 1 €.', dur: 5 },
+      { type: 'chapter', n: 3, of: 5, ends: ['', ''], title: 'Fixe *un objectif*', stage: 'Objectif', desc: 'Un chiffre et une date : 3 clients en 90 jours. Pas « un jour ».', dur: 5 },
+      { type: 'chapter', n: 4, of: 5, ends: ['', ''], title: 'Entoure-toi *bien*', stage: 'Réseau', desc: 'Parle de ton projet aux bonnes personnes : mentors, clients, partenaires.', dur: 5 },
+      { type: 'chapter', n: 5, of: 5, ends: ['', ''], title: 'Agis *chaque semaine*', stage: 'Agir', desc: 'Une action concrète par semaine. La régularité bat la motivation.', dur: 5 },
+      { type: 'checklist', kicker: 'Récap', title: 'Ton projet en *5 étapes.*', items: [
+        'Clarifie ton projet',
+        'Valide le besoin',
+        'Fixe un objectif chiffré',
+        'Entoure-toi des bonnes personnes',
+        'Agis chaque semaine',
+      ] },
+      { type: 'text', lines: ['Un projet ne se', 'réussit pas', 'en une fois.', 'Il se construit', '*étape par étape.*'], size: 84 },
+      { type: 'cta', big: 'Tu bloques à *quelle étape ?*', comment: 'Commente 1, 2, 3, 4 ou 5', actions: [
+        ['plus', 'Abonne-toi', 'pour avancer sur ton projet'],
+        ['bookmark', 'Enregistre la vidéo', 'tu en auras besoin plus tard'],
+      ], dur: 6.5 },
+    ],
+  },
 ];

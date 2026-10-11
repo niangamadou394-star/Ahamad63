@@ -52,8 +52,8 @@ function run(cmd, argv, opts = {}) {
 
 async function renderEpisode(browser, n) {
   const page = await open(browser, n);
-  const { duration, cues, starts } = await page.evaluate(() => ({ duration: window.__duration, cues: window.__cues, starts: window.__starts }));
-  const name = `ep${pad(n)}`;
+  const { duration, cues, starts, file } = await page.evaluate(() => ({ duration: window.__duration, cues: window.__cues, starts: window.__starts, file: window.__file }));
+  const name = file ?? `ep${pad(n)}`;
 
   if (stills) {
     const dir = path.join(OUT, 'stills');

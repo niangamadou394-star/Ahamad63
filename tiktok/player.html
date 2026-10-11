@@ -22,7 +22,7 @@
   const capture = q.has('capture');
   document.body.className = capture ? 'capture' : 'preview';
   const ep = EPISODES.find(e => e.n === n) || EPISODES[0];
-  document.title = `Ép. ${String(ep.n).padStart(2, '0')} — ${ep.title}`;
+  document.title = `${ep.badge ?? `Ép. ${String(ep.n).padStart(2, '0')}`} — ${ep.title}`;
   await document.fonts.load('900 100px "Playfair Display"');
   await document.fonts.load('italic 700 100px "Playfair Display"');
   await document.fonts.load('400 100px "DM Sans"');
@@ -36,6 +36,7 @@
   window.__duration = v.total;
   window.__cues = v.cues;
   window.__starts = v.starts;
+  window.__file = ep.file;
   window.__seek = t => { for (const a of all()) { a.pause(); a.currentTime = t * 1000; } };
 
   if (capture) { window.__seek(0); window.__ready = true; return; }

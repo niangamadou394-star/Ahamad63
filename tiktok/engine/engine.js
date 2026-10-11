@@ -120,11 +120,14 @@
   SCENES.chapter = {
     dur: d => d.dur ?? 3.4,
     build(root, d, t, ctx) {
-      const n = ctx.ep.n;
+      // Par défaut : l'étape = l'épisode sur le parcours des 10. Un hors-série
+      // peut donner son propre parcours (d.n sur d.of, repères d.ends).
+      const n = d.n ?? ctx.ep.n;
+      const of = d.of ?? TOTAL_EPISODES;
       const num = div('ch-num', String(n).padStart(2, '0'));
       root.append(num);
       anim(num, 'blurIn', 1.2, t, 'out');
-      kicker(root, `Étape ${String(n).padStart(2, '0')} / ${TOTAL_EPISODES}`, t + .25, ctx);
+      kicker(root, `Étape ${String(n).padStart(2, '0')} / ${String(of).padStart(2, '0')}`, t + .25, ctx);
       const [m, mi] = maskLine(fmt(d.title), 'ch-title');
       root.append(m);
       anim(mi, 'revealUp', 1, t + .35, 'out');
@@ -137,13 +140,13 @@
       const tr = div('track');
       const line = div('track-line');
       const fill = div('track-fill');
-      const pos = k => (k - 1) / (TOTAL_EPISODES - 1);
+      const pos = k => (k - 1) / (of - 1);
       fill.style.setProperty('--from', Math.max(0, pos(n - 1)));
       fill.style.setProperty('--to', pos(n));
       tr.append(line, fill);
       anim(tr, 'fadeIn', .6, t + .5, 'soft');
       anim(fill, 'trackFill', 1.2, t + .8, 'inOut');
-      for (let k = 1; k <= TOTAL_EPISODES; k++) {
+      for (let k = 1; k <= of; k++) {
         const nd = div('node' + (k < n ? ' done' : k === n ? ' now' : ''));
         nd.style.left = pos(k) * 100 + '%';
         if (k === n) {
@@ -157,14 +160,15 @@
         tr.append(nd);
       }
       // Repères de début/fin, masqués quand ils chevaucheraient l'étiquette courante
-      const ends = div('track-ends', `<span>${n > 3 ? 'Idée' : ''}</span><span>${n < 6 ? 'Lancement' : ''}</span>`);
+      const [e0, e1] = d.ends ?? ['Idée', 'Lancement'];
+      const ends = div('track-ends', `<span>${pos(n) > .3 ? e0 : ''}</span><span>${pos(n) < .55 ? e1 : ''}</span>`);
       tr.append(ends);
       const lbl = div('track-lbl');
       const lbi = el('span', '', d.stage || d.title.replace(/\*/g, ''));
       lbl.append(lbi);
       lbl.style.left = pos(n) * 100 + '%';
       if (n === 1) lbl.style.transform = 'translateX(-13px)';
-      if (n === TOTAL_EPISODES) lbl.style.transform = 'translateX(calc(-100% + 13px))';
+      if (n === of) lbl.style.transform = 'translateX(calc(-100% + 13px))';
       tr.append(lbl);
       lbi.style.display = 'inline-block';
       anim(lbi, 'fadeUp', .7, t + 2, 'out');
@@ -521,7 +525,7 @@
     const orbs = div('layer');
     const oa = div('orb orb-a'), ob = div('orb orb-b');
     orbs.append(oa, ob);
-    const ghost = div('ghost', String(ep.n).padStart(2, '0'));
+    const ghost = div('ghost', ep.ghost ?? String(ep.n).padStart(2, '0'));
     const grain = div('layer grain');
     const vig = div('layer vignette');
     stage.append(grid, orbs, ghost);
@@ -560,7 +564,7 @@
     anim(grain, 'grain', .5, 0, 'steps(5)', 'both', 'infinite');
 
     // En-tête + barre de progression de l'épisode
-    const hdr = div('hdr', `<div class="brand"><span class="mono">AN</span><span class="series">De l’idée <b>au lancement</b></span></div><div class="epno">Ép. ${String(ep.n).padStart(2, '0')}/${TOTAL_EPISODES}</div>`);
+    const hdr = div('hdr', `<div class="brand"><span class="mono">AN</span><span class="series">De l’idée <b>au lancement</b></span></div><div class="epno">${ep.badge ?? `Ép. ${String(ep.n).padStart(2, '0')}/${TOTAL_EPISODES}`}</div>`);
     const prog = div('progress', '<i></i>');
     anim(hdr, 'hdrIn', 1, .1, 'out');
     anim(prog, 'fadeIn', .8, .3, 'soft');
