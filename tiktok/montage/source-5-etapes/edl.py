@@ -33,9 +33,10 @@ ISLANDS = [
     (165.20, 167.06, "vu que tu as besoin forcément *d'argent*"),
     (167.40, 167.99, "pour pouvoir"),
     (168.73, 169.20, "développer,"),
-    (170.31, 171.36, "*grandir* le projet."),
+    (169.67, 171.36, "*agrandir* le projet."),
 ]
 SHORT, LONG = 0.16, 0.28   # pause gardée dans une phrase / après un point
+TAIL_END = 173.2           # il reste assis jusque-là : fond flouté de l'écran de fin
 PAD = 0.07                  # marge de part et d'autre d'une plage (souffle de fin de mot)
 
 def spans():
@@ -54,7 +55,7 @@ def spans():
         if nxt and 0 <= nxt[0] - e < 1.2:
             post = keep(nxt[0] - e, txt) / 2
         else:
-            post = PAD if nxt else 0.25
+            post = PAD if nxt else TAIL_END - e
         # entre deux prises, la pause vient du rush de chaque côté
         if nxt and not (0 <= nxt[0] - e < 1.2):
             post = keep(0.6, txt) / 2
