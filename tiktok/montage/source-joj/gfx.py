@@ -482,10 +482,19 @@ def full_70(p, t):
     ka = appear(t, t_marches)
     if ka > 0: p.text(540, 950 + (1 - ka) * 20, "confiés à des", "Inter-Bold", 50, rgba(GREY, ka))
     highlight(p, 540, 1060, "ENTREPRISES SÉNÉGALAISES", 66, t, t_senega - 0.3)
-    if t > t_senega:
-        for i, c in enumerate([(0, 133, 63), (253, 239, 66), (227, 27, 35)]):
-            sc, a = pop(t, t_senega + i * 0.08)
-            if a > 0: p.rbox(390 + i * 100, 1160, 390 + i * 100 + 100 * sc, 1200, 6, fill=rgba(c, a))
+    if t > t_senega:   # drapeau du Sénégal : vert, jaune, rouge, étoile verte au centre
+        sc, a = pop(t, t_senega)
+        if a > 0:
+            fw, fh = 270 * sc, 180 * sc; x0, y0 = 540 - fw / 2, 1250 - fh / 2
+            p.rbox(x0 + 6, y0 + 10, x0 + fw + 6, y0 + fh + 10, 10 * sc, fill=rgba((0, 0, 0), 0.35 * a))
+            p.rbox(x0, y0, x0 + fw, y0 + fh, 10 * sc, fill=rgba((253, 239, 66), a))
+            p.rbox(x0, y0, x0 + fw / 3, y0 + fh, 10 * sc, fill=rgba((0, 133, 63), a))
+            p.rbox(x0 + fw * 2 / 3, y0, x0 + fw, y0 + fh, 10 * sc, fill=rgba((227, 27, 35), a))
+            p.rbox(x0 + fw / 3 - 12 * sc, y0, x0 + fw / 3, y0 + fh, 0, fill=rgba((253, 239, 66), a))
+            p.rbox(x0 + fw * 2 / 3, y0, x0 + fw * 2 / 3 + 12 * sc, y0 + fh, 0, fill=rgba((253, 239, 66), a))
+            p.rbox(x0 + fw / 3 - 14 * sc, y0, x0 + fw / 3 + 1, y0 + fh, 0, fill=rgba((0, 133, 63), a))
+            p.rbox(x0 + fw * 2 / 3 - 1, y0, x0 + fw * 2 / 3 + 14 * sc, y0 + fh, 0, fill=rgba((227, 27, 35), a))
+            star(p, 540, 1250, 40 * sc, rgba((0, 133, 63), a))
 
 def full_lever(n, name, txt, sub):
     def fn(p, t):
