@@ -29,7 +29,7 @@ SEGMENTS = [
  ("A", [(133.70, 138.41, "prends le temps de réfléchir, et vois exactement si le fait de revendre un produit déjà existant"),
         (138.66, 140.10, "n'est pas plus *stratégique.*")]),
 ]
-HEAD = {0: 1.30}   # le jingle « Kirène avec Orange » passe pendant cette pause (cachée sous l'écran d'ouverture)
+HEAD = {1: 1.40}   # v2 : le jingle « Kirène avec Orange » passe dans cette pause, après sa 1re phrase (caché sous l'écran vert)
 TAIL = {5: 0.3}
 
 def _r(t):
@@ -61,14 +61,15 @@ CUT_GAP = 0.30
 SHORT, LONG = 0.12, 0.20   # plus rythmé que d'habitude
 
 def spans():
-    out = [[ISLANDS[0][0] - JINGLE, None]]   # jingle seul, puis premier mot
+    out = [[ISLANDS[0][0] - 0.0, None]]   # premier mot dès l'image 0
     for j, ((s0, e0, t0), (s1, e1, t1)) in enumerate(zip(ISLANDS, ISLANDS[1:])):
         gap = s1 - e0
         if gap < CUT_GAP and ISEG[j] == ISEG[j + 1]:   # une jonction de segments est toujours une coupe
             continue
         want = LONG if t0.rstrip()[-1] in ".?" else SHORT
         out[-1][1] = e0 + min(want / 2, TAIL.get(ISEG[j], 1) if ISEG[j] != ISEG[j + 1] else 1)
-        out.append([s1 - min(want / 2, HEAD.get(ISEG[j + 1], 1) if ISEG[j] != ISEG[j + 1] else 1), None])
+        lead = JINGLE + want / 2 if (ISEG[j], ISEG[j + 1]) == (0, 1) else min(want / 2, HEAD.get(ISEG[j + 1], 1) if ISEG[j] != ISEG[j + 1] else 1)
+        out.append([s1 - lead, None])
     out[-1][1] = ISLANDS[-1][1] + 0.12
     return [(round(s * FPS) / FPS, round(e * FPS) / FPS) for s, e in out]
 

@@ -288,7 +288,9 @@ t_prends = T0("prends")
 t_strat2 = T0("stratégique", t_prends)
 
 from edl import ISLANDS as _I
-INTRO_END = E(_I[0][0]) - 0.02          # le jingle « Kirène avec Orange » joue seul jusqu'au 1er mot
+INTRO_END = 0.0
+JSTART = E(_I[1][1]) + 0.1          # v2 : le jingle passe juste après sa 1re phrase (« …Kirène avec Orange. »)
+JEND = JSTART + 1.15
 
 def green_bg(img, a):
     if a <= 0: return
@@ -312,6 +314,9 @@ def intro_screen(img, t, a):
         p.rbox(540 - 300 * sc, 860 - 300 * sc, 540 + 300 * sc, 860 + 300 * sc, 60 * sc, fill=rgba(WHITE, k))
         paste(p, load(PHOTOS["logo"]), 540 + dx, 860 + dy, 560 * sc * z, k)
     img.alpha_composite(draw_area(top, t, (0, 150, 1080, 1250), a), (0, 150))
+
+def jingle_screen(img, t, a):
+    intro_screen(img, t, a)
 
 def end_bg(img, t, a):
     green_bg(img, a)
@@ -527,7 +532,7 @@ FULLS_D = {}
 def add_full(name, a, b, fn, opaque=False):
     FULLS.append((a, b, fn, opaque)); FULLS_D[name] = (a, b)
 END0 = END_SPEECH + 0.3
-add_full("principe", cut_near(t_principe - 0.1), t_15 - 0.12, full_principe)
+add_full("principe", JEND, t_15 - 0.12, full_principe)
 add_full("2lecons", cut_near(t_etla - 0.1), t_dabord - 0.08, full_2lecons)
 add_full("l1", t_dabord - 0.08, t_aujourd - 0.08, full_lever(1, "l1", "VENDS TA MARQUE", "plutôt que ton produit"))
 add_full("l2", cut_near(t_deuxieme - 0.1), t_parfois - 0.08, full_lever(2, "l2", "PAS BESOIN D'INVENTER", "sois stratégique"))
@@ -536,12 +541,12 @@ add_full("end", END0, TOTAL + 1, full_end, True)
 FULLS.sort(key=lambda f: f[0])
 assert FULLS[-1][2] is full_end
 
-OPAQUE = [(0.0, INTRO_END, intro_screen, 0.0, 0.06), (END0 - 0.1, TOTAL + 1, end_bg, 0.35, 0.0)]
+OPAQUE = [(JSTART - 0.22, JEND, jingle_screen, 0.15, 0.18), (END0 - 0.1, TOTAL + 1, end_bg, 0.35, 0.0)]
 
 CARD_KAO = t_kao - 0.2
 CARDS = [
     (INTRO_END, CARD_KAO, card_hook),
-    (CARD_KAO, FULLS_D["principe"][0], card_kao),
+    (CARD_KAO, JSTART, card_kao),
     (FULLS_D["principe"][1], FULLS_D["2lecons"][0], card_15),
     (FULLS_D["l1"][1], FULLS_D["l2"][0], card_marque),
     (FULLS_D["l2"][1], FULLS_D["choix"][0], card_strat),

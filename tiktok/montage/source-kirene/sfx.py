@@ -72,7 +72,7 @@ from gfx import *
 pop, logo_pop = _pop, _lpop
 EVENTS = []
 EVENTS += [(a - 0.28, whoosh, 0.9) for a, b, _, _ in FULLS[:-1]]
-EVENTS += [(FULLS[-1][0] - 0.15, whoosh, 0.7), (INTRO_END - 0.15, whoosh, 0.7)]
+EVENTS += [(FULLS[-1][0] - 0.15, whoosh, 0.7), (JSTART - 0.2, whoosh, 0.7)]
 EVENTS += [(t_2009 - 0.1, thud, 0.6), (t_eau - 0.15, pop, 0.6), (t_puces - 0.1, pop, 0.6), (CARD_KAO, logo_pop, 0.7), (t_kao, ding, 0.35)]
 EVENTS += [(t_minutes - 0.2, pop, 0.5), (t_minutes + 0.25, pop, 0.5), (t_revendre + 0.3, logo_pop, 0.6)] + [(t_utilis - 0.25 + i * 0.08, pop, 0.35) for i in range(3)]
 EVENTS += [(t_15 - 0.15, thud, 0.6), (t_toujours - 0.1, ding, 0.4), (t_puce2 - 0.15, pop, 0.5)]
@@ -101,7 +101,9 @@ if __name__ == "__main__":
     j, _ = sf.read(JINGLE_WAV, dtype="float64")
     j = j.mean(axis=1) if j.ndim == 2 else j
     n = min(len(j), len(mono))
-    mono[:n] += j[:n]
+    i0 = int(JSTART * SR)
+    n = min(len(j), len(mono) - i0)
+    mono[i0:i0 + n] += j[:n]
     mono = mono + fx
     out = np.stack([mono, mono], axis=1)
     peak = np.abs(out).max()
