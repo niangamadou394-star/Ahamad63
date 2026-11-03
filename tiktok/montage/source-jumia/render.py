@@ -14,8 +14,8 @@ FPS = gfx.FPS
 # visage dans la fenêtre 1080x1440 (px) : on zoome autour de ce point (le visage reste affiché vers y = 480 + 440).
 # Téléphone un peu plus proche que pour Wari : zoom 1,15 pour garder la même taille de visage (cadrage large qu'il préfère).
 FACE = {"A": (510, 410)}
-BASE = {"A": 1.5}
-ZOOM_B = 1.35   # changement de cadrage net (plan serré) à chaque coupe visible
+BASE = {"A": 1.0}
+ZOOM_B = 1.25   # changement de cadrage net (plan serré) à chaque coupe visible
 
 # ---------- conversion sRGB -> HLG BT.2020 (blanc graphique = 75 % HLG, BT.2408) ----------
 M709_2020 = np.array([[0.6274, 0.3293, 0.0433], [0.0691, 0.9195, 0.0114], [0.0164, 0.0880, 0.8956]], np.float32)
@@ -92,6 +92,7 @@ def crop_planes(Y, U, V, z, k):
     y0 = FACE[k][1] * (1 - 1 / z)
     x0, y0 = int(round(x0 / 2)) * 2, int(round(y0 / 2)) * 2
     ww, hh = int(round(ww / 2)) * 2, int(round(hh / 2)) * 2
+    x0, y0 = min(max(x0, 0), SW - ww), min(max(y0, 0), SH - hh)   # fenêtre toujours dans le rush
     st = int(round(STRIP / z / 2)) * 2
     out = []
     for P, f, base in ((Y, 1, 64), (U, 2, 512), (V, 2, 512)):
