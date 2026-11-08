@@ -7,7 +7,8 @@ Couleur d'accent proposée : rouge / orange (perte), une seule couleur.
 Musique : musique-de-fond.m4a en boucle, baissée sous la voix.
 
 ## Texte face caméra
-1. (0-2 s) « Trois perdants. Un gagnant. »
+1. (0-2 s) « Ils vivaient de toi. » (puis enchaîner : « Trois perdants. Un gagnant. »)
+   Variantes d'accroche : « Qui paie la gratuité ? » / « 8 000 francs. Trois perdants. » / « Trois perdants. Un gagnant. » (v2)
 2. (2-9 s) « Depuis le 2 novembre, banques, Wave, Orange Money : tout le monde doit passer par PI-SPI, la plateforme de la BCEAO. Et envoyer d'une appli à une autre devient gratuit jusqu'à 8 000 francs par jour. »
 3. (9-17 s) « Perdant numéro un : Wave. Il prend 1 % quand tu envoies. Difficile à défendre quand l'envoi vers une autre appli est gratuit. »
 4. (17-23 s) « Numéro deux : les banques. Elles gagnaient sur les transferts vers Wave et Orange Money. Ecobank a déjà coupé ses anciens transferts. »
