@@ -11,7 +11,7 @@ Musique : musique-de-fond.m4a en boucle, baissée sous la voix.
 2. (2-9 s) « Depuis le 2 novembre, banques, Wave, Orange Money : tout le monde doit passer par PI-SPI, la plateforme de la BCEAO. Et envoyer d'une appli à une autre devient gratuit jusqu'à 8 000 francs par jour. »
 3. (9-17 s) « Perdant numéro un : Wave. Il prend 1 % quand tu envoies. Difficile à défendre quand l'envoi vers une autre appli est gratuit. »
 4. (17-23 s) « Numéro deux : les banques. Elles gagnaient sur les transferts vers Wave et Orange Money. Ecobank a déjà coupé ses anciens transferts. »
-5. (23-28 s) « Numéro trois : les petites plateformes qui vivaient des ponts entre applis. Le pont est devenu gratuit. Le gagnant ? Toi. »
+5. (23-30 s) « Numéro trois : les intermédiaires, comme PayDunya ou InTouch. Leur métier : relier les applis entre elles. Leur défi : PI-SPI le fait maintenant gratuitement pour les particuliers. Le gagnant ? Toi. »
 6. (28-41 s) « Trois leçons. Un : ne vends jamais seulement un passage. Deux : quand la route devient gratuite, vends ce qu'il y a autour. Trois : garde ton client par le service, pas en l'enfermant. »
 7. (41-44 s) « Et toi, tu restes sur ton appli ou tu changes ? »
 
@@ -34,6 +34,8 @@ Musique : musique-de-fond.m4a en boucle, baissée sous la voix.
 - Banques : tiraient des commissions des transferts vers les portefeuilles mobiles (Jeune Afrique via SenePlus, 2 oct. ; Seneweb, 27 sept. : « les banques perdront une partie des revenus des transferts »). Ecobank a suspendu ses anciens transferts vers Orange Money et Wave le 2 nov., remplacés par la rubrique PI-SPI (Leral, 2 nov. ; Dakar92, 5 nov. : « Bank to Wallet » et « Wallet to Bank » suspendus).
 - Petites plateformes : les petites fintechs qui exploitent agrégateurs et plateformes d'interopérabilité « risquent de pâtir le plus » (intervenant RTS, via SenePlus 6 nov.). Ancien modèle de connexions bilatérales coûteuses remplacé par la standardisation (Socialnetlink, 6 nov.). Économiste Youssou Koanda (Ecofin, via Dakar92 et Madar) : la gratuité obligatoire retire à la connexion sa rentabilité.
 - Wave a intégré PI-SPI au Sénégal et en Côte d'Ivoire selon Financial Afrik (6 nov.) ; au 2 nov. l'option n'était pas encore visible dans l'appli (AfricActu, Tambacounda). Ne rien dire sur l'état exact de Wave.
+
+- Exemples d'intermédiaires (ajout du 8 nov.) : PayDunya, « agrégateur de paiement » lancé en 2015, 1re fintech agréée établissement de paiement au Sénégal (agrément EPSN.001/2025) ; InTouch, créée en 2014, « spécialisée dans l'agrégation de moyens de paiement », licence EME au Sénégal (Osiris 15 mars 2022 et 6 mai 2025 ; Digital Mag CI 8 juil. 2025). AUCUNE source ne dit qu'ils perdent de l'argent : d'où « leur défi », pas « ils perdent ». Leur cœur de métier est surtout l'encaissement pour les commerçants, que la gratuité PI-SPI (transferts entre particuliers) ne vise pas directement. InTouch se présente même comme plateforme d'intégration à PI-SPI pour les petits établissements (Papa Ousmane Diop, Forbes Afrique, 28 juil. 2026) : bon exemple de la leçon 2.
 
 ## Pas dit (non vérifié ou trop risqué)
 - Montants perdus : aucune source ne chiffre la perte d'une entreprise (Seneweb : « prématuré » de calculer).
