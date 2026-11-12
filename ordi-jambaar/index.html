@@ -461,7 +461,7 @@ const waLink = t => `https://wa.me/${WA}?text=` + encodeURIComponent(t);
 const $ = id => document.getElementById(id);
 
 /* Catalogue : pour ajouter un produit ou un prix, modifier cette liste (ex. prix: "250 000 F") */
-const PCS = [
+let PCS = [
   { id:"dell-latitude-3390", cat:"2-en-1 & tactiles", marque:"Dell", nom:"Dell Latitude 3390 2-en-1", accroche:"Écran tactile qui se retourne : PC, tente ou tablette. Plusieurs exemplaires en stock.", usages:["Études & bureautique","Pro & multitâche"],
     imgs:["dell-3390-4","dell-3390-2","dell-3390-3","dell-3390-6","dell-3390-8","dell-3390-1"],
     specs:[["Format","2-en-1, écran tactile rabattable à 360°"],["Processeur","Intel Core"],["Système","Windows 11"],["Configuration exacte","Sur demande"]] },
@@ -542,6 +542,46 @@ const PCS = [
     specs:[["Écran","8 pouces"],["Système","Android"],["Configuration exacte","Sur demande"]] },
 ];
 PCS.forEach(p => p.img = p.imgs[0]);
+
+/* Catalogue en ligne : le site lit le Google Sheet du client ; si le tableau est inaccessible, il garde la liste ci-dessus. */
+const SHEET_ID = "1GDWfkpDKcX9qami3fsLBmfHRYUCiXVhAW7Fz0f0mxIs";
+const photo = x => {
+  x = x.trim();
+  const d = x.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*id=)([\w-]{20,})/);
+  if (d) return `https://drive.google.com/thumbnail?id=${d[1]}&sz=w1400`;
+  return /^https?:/.test(x) ? x : `img/p/${x.replace(/\.jpe?g$/i, "")}.jpg`;
+};
+function parseCSV(t) {
+  const rows = []; let row = [], f = "", q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(f); f = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; }
+    else f += c;
+  }
+  if (f || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+const slug = t => t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+async function loadSheet() {
+  const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&_=${Date.now()}`);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const t = await r.text();
+  if (/^\s*</.test(t)) throw new Error("tableau non partagé");
+  const list = parseCSV(t).filter(r => r.some(c => c.trim())).slice(1).map(c => {
+    const [aff, cat, marque, nom, prix, acc, usages, specs, photos, id] = c.map(x => (x || "").trim());
+    if (!nom || /^non$/i.test(aff)) return null;
+    const imgs = (photos || "").split(/[,\n]+/).map(x => x.trim()).filter(Boolean);
+    return { id: id || slug(nom), cat: cat || "Autres", marque, nom, prix, accroche: acc,
+      usages: usages.split(",").map(x => x.trim()).filter(Boolean),
+      specs: specs.split("|").map(x => { const k = x.indexOf(":"); return k < 0 ? ["Info", x.trim()] : [x.slice(0, k).trim(), x.slice(k + 1).trim()]; }).filter(x => x[1]),
+      imgs: imgs.length ? imgs : ["https://ordi-jambaar.onrender.com/img/icon.jpg"] };
+  }).filter(Boolean);
+  if (!list.length) throw new Error("tableau vide");
+  return list;
+}
 const byId = id => PCS.find(p => p.id === id);
 const short = p => p.specs.filter(s => s[1] !== "Sur demande" && !s[0].startsWith("Config") && !s[0].startsWith("Modèle")).map(s => s[1].split(" (")[0]).slice(0, 3);
 const plus = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>', check = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>';
@@ -559,7 +599,7 @@ function syncCart(bump) {
   const m = $("madd"); if (m.dataset.id) m.textContent = cart[m.dataset.id] ? "✓ Dans ma sélection" : "+ Ma sélection";
   const ids = Object.keys(cart);
   $("items").innerHTML = ids.length ? ids.map(id => { const p = byId(id); return `
-    <div class="it"><img src="img/p/${p.img}.jpg" alt=""><div><b>${p.nom}</b><small>${p.prix || "Prix sur demande"}</small>
+    <div class="it"><img src="${photo(p.img)}" alt=""><div><b>${p.nom}</b><small>${p.prix || "Prix sur demande"}</small>
       <div class="qty"><button type="button" data-q="-1" data-id="${id}" aria-label="Retirer un">−</button><span>${cart[id]}</span><button type="button" data-q="1" data-id="${id}" aria-label="Ajouter un">+</button></div></div>
       <button class="rm" type="button" data-rm="${id}" aria-label="Supprimer">✕</button></div>`; }).join("")
     : `<p class="nothing">Votre sélection est vide.<br>Ajoutez des PC depuis le catalogue.</p>`;
@@ -592,7 +632,8 @@ function chips(el, values, cur, set) {
   values.forEach(v => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; if (v === cur) b.classList.add("on");
     b.onclick = () => { set(v); el.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); draw(); }; el.appendChild(b); });
 }
-chips($("fb"), ["Tout", ...new Set(PCS.map(p => p.cat))], fMarque, v => fMarque = v);
+const buildCats = () => { $("fb").innerHTML = ""; chips($("fb"), ["Tout", ...new Set(PCS.map(p => p.cat))], fMarque, v => fMarque = v); };
+buildCats();
 chips($("fu"), ["Tous usages", "Études & bureautique", "Pro & multitâche", "Création"], fUsage, v => fUsage = v);
 function setUsage(v) { fUsage = v; $("fu").querySelectorAll("button").forEach(x => x.classList.toggle("on", x.textContent === v)); draw(); }
 
@@ -603,7 +644,7 @@ function draw() {
     words.every(w => (p.nom + " " + p.marque + " " + p.cat + " " + p.specs.flat().join(" ")).toLowerCase().includes(w)));
   grid.innerHTML = list.map((p, i) => `
     <article class="p tilt" style="animation-delay:${i * 40}ms">
-      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="img/p/${p.img}.jpg" alt="${p.nom}" loading="lazy"><span class="br">${p.marque.toUpperCase()}</span>${p.imgs.length > 1 ? `<span class="nph">${p.imgs.length} photos</span>` : ""}<span class="view">Voir la fiche</span></div>
+      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="${photo(p.img)}" alt="${p.nom}" loading="lazy"><span class="br">${p.marque.toUpperCase()}</span>${p.imgs.length > 1 ? `<span class="nph">${p.imgs.length} photos</span>` : ""}<span class="view">Voir la fiche</span></div>
       <div class="bd"><h3 data-open="${p.id}">${p.nom}</h3>${p.usages.length ? `<div class="for">${p.usages.join(" · ")}</div>` : ""}
         <div class="sp">${short(p).map(s => `<span>${s}</span>`).join("") || "<span>Caractéristiques sur demande</span>"}</div>
         <div class="ft"><div class="pr">${p.prix || "Prix sur demande"}<small>En boutique</small></div>
@@ -633,7 +674,7 @@ function openSheet(id) {
   $("mwa").href = waLink(`Bonjour ORDI JAMBAAR, je suis intéressé(e) par : ${p.nom}. Est-il disponible et quel est son prix ?`);
   $("madd").dataset.id = id;
   const sims = PCS.filter(x => x.id !== id && (x.marque === p.marque || x.usages.some(u => p.usages.includes(u)))).slice(0, 3);
-  $("msim").innerHTML = sims.map(s => `<button type="button" data-sim="${s.id}"><img src="img/p/${s.img}.jpg" alt=""><span>${s.nom}</span></button>`).join("");
+  $("msim").innerHTML = sims.map(s => `<button type="button" data-sim="${s.id}"><img src="${photo(s.img)}" alt=""><span>${s.nom}</span></button>`).join("");
   modal.classList.add("open"); document.body.style.overflow = "hidden"; modal.querySelector(".sheet").scrollTop = 0;
   history.replaceState(null, "", "#" + id); syncCart(); $("mx").focus();
 }
@@ -641,8 +682,8 @@ let cur = null, ph = 0;
 function setPhoto(i) {
   ph = (i + cur.imgs.length) % cur.imgs.length;
   const mi = $("mi"); mi.style.opacity = 0;
-  setTimeout(() => { mi.src = `img/p/${cur.imgs[ph]}.jpg`; mi.alt = `${cur.nom}, photo ${ph + 1}`; mi.style.opacity = 1; }, 120);
-  $("mth").innerHTML = cur.imgs.length > 1 ? cur.imgs.map((x, k) => `<button type="button" data-ph="${k}" class="${k === ph ? "on" : ""}" aria-label="Photo ${k + 1}"><img src="img/p/${x}.jpg" alt=""></button>`).join("") : "";
+  setTimeout(() => { mi.src = photo(cur.imgs[ph]); mi.alt = `${cur.nom}, photo ${ph + 1}`; mi.style.opacity = 1; }, 120);
+  $("mth").innerHTML = cur.imgs.length > 1 ? cur.imgs.map((x, k) => `<button type="button" data-ph="${k}" class="${k === ph ? "on" : ""}" aria-label="Photo ${k + 1}"><img src="${photo(x)}" alt=""></button>`).join("") : "";
   $("mprev").style.display = $("mnext").style.display = cur.imgs.length > 1 ? "" : "none";
 }
 $("mprev").onclick = () => setPhoto(ph - 1);
@@ -688,6 +729,12 @@ if (fine) {
 
 draw();
 if (location.hash && byId(location.hash.slice(1))) openSheet(location.hash.slice(1));
+loadSheet().then(list => {
+  PCS = list; PCS.forEach(p => p.img = p.imgs[0]);
+  if (!PCS.some(p => p.cat === fMarque)) fMarque = "Tout";
+  Object.keys(cart).forEach(id => { if (!byId(id)) delete cart[id]; }); save();
+  buildCats(); draw();
+}).catch(e => console.info("Catalogue intégré utilisé :", e.message));
 </script>
 </body>
 </html>
