@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ORDI JAMBAAR — PC portables professionnels à Dakar</title>
-<meta name="description" content="ORDI JAMBAAR : PC portables HP, Lenovo ThinkPad, Dell, Apple MacBook et Microsoft Surface à Dakar, 87 Avenue Lamine Guèye. Commandez sur WhatsApp au 78 171 75 38.">
-<meta property="og:title" content="ORDI JAMBAAR — PC portables à Dakar">
+<title>ORDI JAMBAAR : PC portables, iPad et iPhone à Dakar</title>
+<meta name="description" content="ORDI JAMBAAR : PC portables HP, Dell, Lenovo ThinkPad, MacBook, Surface, iPad et iPhone à Dakar, 87 Avenue Lamine Guèye. Commandez sur WhatsApp au 78 171 75 38.">
+<meta property="og:title" content="ORDI JAMBAAR : PC portables, iPad et iPhone à Dakar">
 <meta property="og:description" content="HP, Lenovo, Dell, Apple, Microsoft. Commandez sur WhatsApp : 78 171 75 38.">
-<meta property="og:image" content="img/hp-845-g7.jpg">
+<meta property="og:image" content="img/p/hp-elitebook-840-3.jpg">
 <meta name="theme-color" content="#0b0b0c">
 <link rel="icon" href="img/icon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,6 +82,11 @@ header.scrolled{background:#0b0b0ceb;backdrop-filter:blur(14px) saturate(140%);b
 .phone::before{content:"";position:absolute;top:22px;left:50%;width:88px;height:24px;margin-left:-44px;background:#000;border-radius:14px;z-index:2}
 .phone::after{content:"";position:absolute;inset:11px;border-radius:40px;background:linear-gradient(115deg,#ffffff22,transparent 38%);pointer-events:none}
 .sound{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;background:#000c;border:1px solid #ffffff40;color:#fff;padding:.5rem .95rem;border-radius:999px;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap}
+.cut{position:absolute;z-index:2;filter:drop-shadow(0 30px 40px #000c) drop-shadow(0 0 30px #E3061320);animation:fl 6s ease-in-out infinite;pointer-events:none}
+.cut.c1{width:42%;left:-6%;top:4%;--r0:-6deg}
+.cut.c2{width:34%;right:-4%;top:10%;--r0:8deg;animation-delay:-2s}
+.cut.c3{width:44%;left:-8%;bottom:2%;--r0:4deg;animation-delay:-4s}
+.cut.c4{width:24%;right:0;bottom:6%;--r0:-8deg;animation-delay:-3s}
 .fl{position:absolute;width:150px;border-radius:18px;overflow:hidden;box-shadow:0 30px 50px #000c,0 0 0 1px #ffffff22;animation:fl 6s ease-in-out infinite;background:#000}
 .fl img{width:100%;aspect-ratio:1;object-fit:cover}
 .fl b{display:block;padding:.45rem .6rem;font-size:.7rem;font-weight:800;background:#111}
@@ -144,6 +149,14 @@ header.scrolled{background:#0b0b0ceb;backdrop-filter:blur(14px) saturate(140%);b
 @keyframes up{from{transform:translateY(30px);opacity:0}}
 .sheet .gal{background:#000;position:relative;min-height:460px}
 .sheet .gal img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.sheet .gal img#mi{transition:opacity .15s}
+.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;backdrop-filter:blur(6px)}
+.nav.pv{left:12px}.nav.nx{right:12px}
+.thumbs{position:absolute;left:0;right:0;bottom:12px;z-index:3;display:flex;justify-content:center;gap:8px;padding:0 12px;overflow-x:auto;scrollbar-width:none}
+.thumbs button{flex:none;width:54px;height:54px;border-radius:10px;overflow:hidden;border:2px solid #ffffff40;padding:0;background:#000;cursor:pointer;opacity:.7;transition:all .2s}
+.thumbs button.on{border-color:var(--red);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.p .nph{position:absolute;bottom:12px;right:12px;z-index:1;background:#000b;backdrop-filter:blur(6px);padding:.3rem .6rem;border-radius:8px;font-size:.68rem;font-weight:700}
 .x{position:absolute;top:14px;right:14px;width:46px;height:46px;border-radius:50%;border:0;background:#000c;color:#fff;font-size:1.5rem;cursor:pointer;z-index:3;backdrop-filter:blur(6px)}
 .sheet .info{padding:2.2rem;display:flex;flex-direction:column}
 .sheet h3{font-size:1.75rem;font-weight:900;line-height:1.08;letter-spacing:-.02em;margin:.45rem 0 .5rem}
@@ -298,9 +311,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   <div class="giant" aria-hidden="true">JAMBAAR</div>
   <div class="wrap hero-grid">
     <div>
-      <div class="kicker rv">PC portables · Dakar</div>
+      <div class="kicker rv">PC · iPad · iPhone · Dakar</div>
       <h1 class="rv">Le bon PC,<br>au <span class="bar"><span>bon prix.</span></span></h1>
-      <p class="lead rv">HP, Lenovo ThinkPad, Dell, Apple MacBook, Microsoft Surface : des PC portables professionnels pour étudiants, entrepreneurs et entreprises. Choisissez en ligne, commandez sur WhatsApp.</p>
+      <p class="lead rv">PC portables HP, Dell, Lenovo ThinkPad, MacBook, Surface, mais aussi iPad et iPhone : pour étudiants, entrepreneurs et entreprises. Choisissez en ligne, commandez sur WhatsApp.</p>
       <div class="ctas rv">
         <a class="btn btn-red" href="#catalogue">Voir le catalogue <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-wa wa" href="#"><svg class="ico wa-ico" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>78 171 75 38</a>
@@ -312,27 +325,28 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
         <video id="vid" src="pub.mp4#t=2.5" autoplay muted loop playsinline preload="metadata" poster="img/pub-poster.jpg"></video>
         <button class="sound" id="sound" type="button">🔊 Activer le son</button>
       </div>
-      <div class="fl" style="left:0;top:8%;--r0:-8deg"><img src="img/hp-845-g7.jpg" alt=""><b>HP EliteBook 845 G7</b></div>
-      <div class="fl" style="right:0;top:22%;--r0:7deg;animation-delay:-2s"><img src="img/surface-laptop.jpg" alt=""><b>Surface Laptop</b></div>
-      <div class="fl" style="left:4%;bottom:6%;--r0:5deg;animation-delay:-4s"><img src="img/thinkpad-l380.jpg" alt=""><b>ThinkPad L380</b></div>
+      <img class="cut c1" src="img/cut/hp-elitebook-840-3.webp" alt="">
+      <img class="cut c2" src="img/cut/macbook-pro-touchbar.webp" alt="">
+      <img class="cut c3" src="img/cut/gigabyte-g6-1.webp" alt="">
+      <img class="cut c4" src="img/cut/iphone-13-2.webp" alt="">
     </div>
   </div>
 </section>
 
 <div class="mq-w" aria-hidden="true"><div class="mq"><div class="tr">
-  <span>HP</span><span>LENOVO THINKPAD</span><span>DELL</span><span>APPLE MACBOOK</span><span>MICROSOFT SURFACE</span><span>ORDI JAMBAAR</span>
-  <span>HP</span><span>LENOVO THINKPAD</span><span>DELL</span><span>APPLE MACBOOK</span><span>MICROSOFT SURFACE</span><span>ORDI JAMBAAR</span>
+  <span>HP</span><span>DELL</span><span>LENOVO THINKPAD</span><span>APPLE</span><span>MICROSOFT SURFACE</span><span>ASUS</span><span>GIGABYTE</span><span>SAMSUNG</span><span>ORDI JAMBAAR</span>
+  <span>HP</span><span>DELL</span><span>LENOVO THINKPAD</span><span>APPLE</span><span>MICROSOFT SURFACE</span><span>ASUS</span><span>GIGABYTE</span><span>SAMSUNG</span><span>ORDI JAMBAAR</span>
 </div></div></div>
 
 <section class="catalog" id="catalogue">
   <div class="wrap">
     <div class="kicker rv">Catalogue</div>
-    <h2 class="rv">Nos PC <span class="red">disponibles.</span></h2>
-    <p class="lead rv">Ajoutez un ou plusieurs PC à votre sélection, puis envoyez-la en un clic sur WhatsApp.</p>
+    <h2 class="rv">Nos produits <span class="red">disponibles.</span></h2>
+    <p class="lead rv">PC portables, 2-en-1, MacBook, iPad, iPhone : photos réelles, prises en boutique. Ajoutez vos choix à votre sélection et envoyez-la en un clic sur WhatsApp.</p>
     <div class="tools">
       <div class="row">
-        <div class="chips" id="fb" aria-label="Filtrer par marque"></div>
-        <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Rechercher : i5, 16 Go, MacBook…" aria-label="Rechercher un PC"></label>
+        <div class="chips" id="fb" aria-label="Filtrer par catégorie"></div>
+        <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Rechercher : ThinkPad, iPad, Ryzen…" aria-label="Rechercher un PC"></label>
       </div>
       <div class="row">
         <div class="chips uchips" id="fu" aria-label="Filtrer par usage"></div>
@@ -340,7 +354,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       </div>
     </div>
     <div class="grid" id="grid"></div>
-    <p class="empty" id="empty">Aucun PC ne correspond. <a class="red wa" href="#">Demandez-nous sur WhatsApp</a> : on a peut-être ce qu'il vous faut.</p>
+    <p class="empty" id="empty">Aucun produit ne correspond. <a class="red wa" href="#">Demandez-nous sur WhatsApp</a> : on a peut-être ce qu'il vous faut.</p>
   </div>
 </section>
 
@@ -348,7 +362,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   <div class="wrap">
     <div class="kicker rv">Besoin d'aide ?</div>
     <h2 class="rv">Quel PC <span class="red">pour vous ?</span></h2>
-    <p class="lead rv">Choisissez votre usage : on vous montre les PC adaptés.</p>
+    <p class="lead rv">Choisissez votre usage : on vous montre les produits adaptés.</p>
     <div class="uses">
       <button class="use rv" type="button" data-use="Études & bureautique"><span class="em">🎓</span><h3>Études & bureautique</h3><p>Cours, Word, Excel, Internet, visio. Léger et fiable pour tous les jours.</p><b>Voir les PC →</b></button>
       <button class="use rv" type="button" data-use="Pro & multitâche"><span class="em">💼</span><h3>Pro & multitâche</h3><p>Plusieurs logiciels ouverts, gestion, comptabilité, beaucoup d'onglets.</p><b>Voir les PC →</b></button>
@@ -362,7 +376,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
     <div class="kicker rv">Comment commander</div>
     <h2 class="rv">Simple comme <span class="red">1, 2, 3.</span></h2>
     <div class="steps">
-      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><h3>Ajoutez à votre sélection</h3><p>Un ou plusieurs PC, depuis le catalogue ou la fiche produit.</p></div>
+      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><h3>Ajoutez à votre sélection</h3><p>Un ou plusieurs produits, depuis le catalogue ou la fiche produit.</p></div>
       <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"/></svg></div><h3>Envoyez sur WhatsApp</h3><p>Votre message est déjà rédigé : on vous confirme la disponibilité et le prix.</p></div>
       <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Récupérez votre PC</h3><p>En boutique au 87 Avenue Lamine Guèye, ou on organise la remise ensemble.</p></div>
     </div>
@@ -371,7 +385,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 
 <section class="shop" id="boutique">
   <div class="wrap shop-grid">
-    <div class="shop-card rv"><img src="img/hp-elitebook-x360.jpg" alt="Boutique ORDI JAMBAAR avec ses PC HP en vitrine" loading="lazy"></div>
+    <div class="shop-card rv"><img src="img/p/hp-probook-ryzen7-2.jpg" alt="Vitrine de la boutique ORDI JAMBAAR avec des PC HP" loading="lazy"></div>
     <div>
       <div class="kicker rv">Notre boutique</div>
       <h2 class="rv">Passez nous <span class="red">voir.</span></h2>
@@ -388,7 +402,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 
 <footer>
   <div class="wrap">
-    <span>© <span id="y"></span> ORDI JAMBAAR · PC portables à Dakar</span>
+    <span>© <span id="y"></span> ORDI JAMBAAR · PC, iPad et iPhone à Dakar</span>
     <span>Site réalisé par <a href="https://yokk.onrender.com" target="_blank" rel="noopener" style="color:#E9C46A;font-weight:700">YOKK</a></span>
   </div>
 </footer>
@@ -396,7 +410,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <!-- fiche produit -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
   <div class="sheet">
-    <div class="gal"><img id="mi" alt=""><button class="x" id="mx" type="button" aria-label="Fermer">×</button></div>
+    <div class="gal"><img id="mi" alt=""><button class="x" id="mx" type="button" aria-label="Fermer">×</button><button class="nav pv" id="mprev" type="button" aria-label="Photo précédente">‹</button><button class="nav nx" id="mnext" type="button" aria-label="Photo suivante">›</button><div class="thumbs" id="mth"></div></div>
     <div class="info">
       <div class="kicker" id="mb"></div>
       <h3 id="mt"></h3>
@@ -404,7 +418,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       <div class="use-tags" id="mu"></div>
       <ul class="specs" id="msp"></ul>
       <div class="acts">
-        <a class="btn btn-wa" id="mwa" target="_blank" rel="noopener"><svg class="ico wa-ico" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3z"/></svg>Commander ce PC</a>
+        <a class="btn btn-wa" id="mwa" target="_blank" rel="noopener"><svg class="ico wa-ico" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3z"/></svg>Commander sur WhatsApp</a>
         <div class="two">
           <button class="btn btn-line" id="madd" type="button">+ Ma sélection</button>
           <button class="btn btn-line" id="mshare" type="button">Partager</button>
@@ -446,35 +460,90 @@ const WA = "221781717538";
 const waLink = t => `https://wa.me/${WA}?text=` + encodeURIComponent(t);
 const $ = id => document.getElementById(id);
 
-/* Catalogue : pour ajouter un PC ou un prix, modifier cette liste (ex. prix: "250 000 F") */
+/* Catalogue : pour ajouter un produit ou un prix, modifier cette liste (ex. prix: "250 000 F") */
 const PCS = [
-  { id:"hp-845-g7", marque:"HP", nom:"HP EliteBook 845 G7", img:"hp-845-g7", accroche:"Performance & fiabilité", usages:["Pro & multitâche","Création"],
-    specs:[["Processeur","AMD Ryzen 5 Pro 4650U (6 cœurs / 12 threads)"],["Mémoire","16 Go DDR4"],["Stockage","SSD 512 Go"],["Écran","14\" Full HD antireflet"],["Graphique","AMD Radeon Graphics"],["Système","Windows 11 Pro"]] },
-  { id:"hp-445-g7", marque:"HP", nom:"HP ProBook 445 G7", img:"hp-probook-445-g7", accroche:"Puissance & fiabilité professionnelle", usages:["Études & bureautique","Pro & multitâche"],
-    specs:[["Processeur","AMD Ryzen 3 4300U (4 cœurs, jusqu'à 3,7 GHz)"],["Mémoire","16 Go DDR4"],["Stockage","SSD 512 Go"],["Graphique","AMD Radeon Graphics (Vega)"],["Connectique","Wi-Fi, Ethernet RJ-45"]] },
-  { id:"hp-x360-435-g8", marque:"HP", nom:"HP ProBook x360 435 G8", img:"hp-probook-x360-435-g8", accroche:"Puissance & flexibilité : écran convertible", usages:["Pro & multitâche","Création"],
-    specs:[["Processeur","AMD Ryzen 7 PRO 5850U (8 cœurs / 16 threads)"],["Mémoire","8 Go DDR4"],["Stockage","SSD NVMe 256 Go"],["Graphique","AMD Radeon Graphics"],["Format","Convertible x360"]] },
-  { id:"hp-elitebook-x360", marque:"HP", nom:"HP EliteBook x360 (bleu nuit)", img:"hp-elitebook-x360", accroche:"Convertible haut de gamme", usages:["Pro & multitâche"],
-    specs:[["Format","Convertible x360"],["Caractéristiques","Sur demande"]] },
-  { id:"hp-blanc", marque:"HP", nom:"HP — nouvel arrivage (argent)", img:"hp-blanc", accroche:"Plusieurs exemplaires en boutique", usages:[],
-    specs:[["Modèle et caractéristiques","Sur demande"]] },
-  { id:"thinkpad-l380", marque:"Lenovo", nom:"Lenovo ThinkPad L380", img:"thinkpad-l380", accroche:"Puissance & mobilité professionnelle", usages:["Études & bureautique","Pro & multitâche"],
-    specs:[["Processeur","Intel Core i5 8e génération"],["Mémoire","8 Go DDR4"],["Stockage","SSD 256 Go"],["Écran","13,3\" Full HD antireflet"]] },
-  { id:"thinkpad-t14", marque:"Lenovo", nom:"Lenovo ThinkPad T14", img:"thinkpad-t14", accroche:"La référence des PC pro", usages:["Pro & multitâche"],
-    specs:[["Processeur","Intel Core"],["Caractéristiques","Sur demande"]] },
-  { id:"dell-latitude", marque:"Dell", nom:"Dell Latitude", img:"dell-latitude", accroche:"Compact et robuste, plusieurs exemplaires", usages:["Études & bureautique","Pro & multitâche"],
-    specs:[["Processeur","Intel Core"],["Système","Windows 11"],["Caractéristiques","Sur demande"]] },
-  { id:"macbook-pro-touchbar", marque:"Apple", nom:"MacBook Pro 13\" Touch Bar", img:"macbook-pro-touchbar", accroche:"Élégance et performance Apple", usages:["Création"],
-    specs:[["Écran","13 pouces Retina"],["Clavier","Avec Touch Bar"],["Caractéristiques","Sur demande"]] },
-  { id:"macbook-pro-2017", marque:"Apple", nom:"MacBook Pro 13\" (2017)", img:"macbook-pro-2017", accroche:"Sans Touch Bar", usages:["Études & bureautique","Création"],
-    specs:[["Année","2017"],["Écran","13 pouces"],["Mémoire","8 Go"],["Stockage","256 Go"],["Clavier","Sans Touch Bar"]] },
-  { id:"macbook-air", marque:"Apple", nom:"MacBook Air (Minuit)", img:"macbook-air", accroche:"Fin, léger, silencieux", usages:["Études & bureautique"],
-    specs:[["Couleur","Minuit"],["Caractéristiques","Sur demande"]] },
-  { id:"surface-laptop", marque:"Microsoft", nom:"Microsoft Surface Laptop", img:"surface-laptop", accroche:"Élégance & performance, écran tactile", usages:["Études & bureautique"],
-    specs:[["Processeur","Intel Core i5 7e génération"],["Mémoire","8 Go"],["Stockage","SSD 128 Go"],["Écran","13,5\" tactile PixelSense 2K"],["Graphique","Intel HD Graphics 620"],["Clavier","Rétroéclairé, finition Alcantara"]] },
+  { id:"dell-latitude-3390", cat:"2-en-1 & tactiles", marque:"Dell", nom:"Dell Latitude 3390 2-en-1", accroche:"Écran tactile qui se retourne : PC, tente ou tablette. Plusieurs exemplaires en stock.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["dell-3390-4","dell-3390-2","dell-3390-3","dell-3390-6","dell-3390-8","dell-3390-1"],
+    specs:[["Format","2-en-1, écran tactile rabattable à 360°"],["Processeur","Intel Core"],["Système","Windows 11"],["Configuration exacte","Sur demande"]] },
+  { id:"thinkpad-x395", cat:"PC portables pro", marque:"Lenovo", nom:"Lenovo ThinkPad X395", accroche:"Compact et robuste, le classique des professionnels. Plusieurs exemplaires.", usages:["Pro & multitâche","Études & bureautique"],
+    imgs:["thinkpad-x395-4","thinkpad-x395-2","thinkpad-x395-1","thinkpad-x395-3"],
+    specs:[["Processeur","AMD Ryzen PRO"],["Écran","13,3 pouces"],["Configuration exacte","Sur demande"]] },
+  { id:"asus-vivobook-17", cat:"PC portables pro", marque:"Asus", nom:"Asus VivoBook 17", accroche:"Grand écran 17 pouces pour travailler confortablement.", usages:["Études & bureautique"],
+    imgs:["asus-vivobook-17-bios","asus-vivobook-17-ports"],
+    specs:[["Processeur","Intel Pentium Gold 7505"],["Mémoire","8 Go"],["Stockage","SSD NVMe 256 Go"],["Graphique","Intel UHD Graphics"],["Écran","17 pouces"],["Ports","USB-C, HDMI, USB, lecteur de carte"]] },
+  { id:"hp-elitebook-14", cat:"PC portables pro", marque:"HP", nom:"HP EliteBook 14 pouces", accroche:"Le PC pro HP en aluminium, léger et élégant.", usages:["Pro & multitâche","Études & bureautique"],
+    imgs:["hp-elitebook-840-3","hp-elitebook-840-1","hp-elitebook-840-2"],
+    specs:[["Processeur","Intel Core"],["Écran","14 pouces"],["Système","Windows 11"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-probook-intel", cat:"PC portables pro", marque:"HP", nom:"HP ProBook 14 pouces (Intel)", accroche:"Fiable et complet, avec tous les ports utiles (HDMI, VGA, Ethernet). Plusieurs exemplaires.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["hp-probook-640-1","hp-elitebook-ports"],
+    specs:[["Processeur","Intel Core"],["Ports","USB-C, USB, HDMI, VGA, Ethernet, lecteur de carte"],["Système","Windows 11"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-probook-ryzen7", cat:"PC portables pro", marque:"HP", nom:"HP ProBook (AMD Ryzen 7)", accroche:"Puissant pour le multitâche, en vitrine en boutique.", usages:["Pro & multitâche","Création"],
+    imgs:["hp-probook-ryzen7-1","hp-probook-ryzen7-4","hp-probook-ryzen7-3","hp-probook-ryzen7-2"],
+    specs:[["Processeur","AMD Ryzen 7 avec Radeon Graphics"],["Système","Windows 11"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-probook-x360-435-g8", cat:"2-en-1 & tactiles", marque:"HP", nom:"HP ProBook x360 435 G8", accroche:"Convertible tactile et puissant. Grand stock disponible.", usages:["Pro & multitâche","Création"],
+    imgs:["hp-probook-x360-435-g8"],
+    specs:[["Processeur","AMD Ryzen 7 PRO 5850U (8 cœurs / 16 threads)"],["Mémoire","8 Go DDR4"],["Stockage","SSD NVMe 256 Go"],["Format","Convertible x360, tactile"]] },
+  { id:"hp-elitebook-bo", cat:"PC portables pro", marque:"HP", nom:"HP EliteBook (son Bang & Olufsen)", accroche:"Finition premium et son Bang & Olufsen.", usages:["Pro & multitâche"],
+    imgs:["hp-elitebook-g7-1","hp-elitebook-g7-2"],
+    specs:[["Processeur","Intel Core"],["Audio","Bang & Olufsen"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-nouvelle-gen", cat:"PC portables pro", marque:"HP", nom:"HP nouvelle génération (blanc)", accroche:"Le nouveau design HP, en vitrine en boutique.", usages:["Pro & multitâche"],
+    imgs:["hp-envy-blanc-1","hp-envy-blanc-2"],
+    specs:[["Modèle et configuration","Sur demande"]] },
+  { id:"lenovo-thinkbook", cat:"PC portables pro", marque:"Lenovo", nom:"Lenovo ThinkBook (AMD Ryzen)", accroche:"Moderne et polyvalent, avec deux ports USB-C. Plusieurs exemplaires.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["lenovo-thinkbook-ryzen-1"],
+    specs:[["Processeur","AMD Ryzen avec Radeon Graphics"],["Ports","2 USB-C, HDMI, USB"],["Configuration exacte","Sur demande"]] },
+  { id:"thinkpad-l13-yoga", cat:"2-en-1 & tactiles", marque:"Lenovo", nom:"Lenovo ThinkPad L13 Yoga", accroche:"Tactile et rabattable, avec son stylet intégré.", usages:["Pro & multitâche","Création"],
+    imgs:["thinkpad-l13-yoga-2","thinkpad-l13-yoga-1","thinkpad-l13-yoga-3"],
+    specs:[["Format","2-en-1, écran tactile rabattable"],["Stylet","Inclus"],["Lecteur d'empreintes","Oui"],["Configuration exacte","Sur demande"]] },
+  { id:"thinkpad-l380-yoga", cat:"2-en-1 & tactiles", marque:"Lenovo", nom:"Lenovo ThinkPad L380 Yoga", accroche:"Le 2-en-1 robuste pour travailler partout.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["thinkpad-l380-yoga"],
+    specs:[["Format","2-en-1, écran tactile rabattable"],["Configuration exacte","Sur demande"]] },
+  { id:"dell-inspiron-14-2en1", cat:"2-en-1 & tactiles", marque:"Dell", nom:"Dell Inspiron 14 2-en-1", accroche:"Élégant bleu, tactile et rabattable.", usages:["Études & bureautique","Création"],
+    imgs:["dell-inspiron-14-2en1-2","dell-inspiron-14-2en1-1"],
+    specs:[["Processeur","AMD Ryzen avec Radeon Graphics"],["Écran","14 pouces Full HD, tactile"],["Format","2-en-1 rabattable"],["Configuration exacte","Sur demande"]] },
+  { id:"dell-2en1-argent", cat:"2-en-1 & tactiles", marque:"Dell", nom:"Dell 2-en-1 (argent)", accroche:"Rabattable en mode tente ou tablette. Plusieurs exemplaires.", usages:["Pro & multitâche"],
+    imgs:["dell-latitude-2en1-argent"],
+    specs:[["Format","2-en-1 rabattable"],["Modèle et configuration","Sur demande"]] },
+  { id:"dell-latitude-14", cat:"PC portables pro", marque:"Dell", nom:"Dell Latitude 14 pouces", accroche:"Le PC pro Dell, solide et confortable.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["dell-latitude-5400","dell-latitude-5400-2"],
+    specs:[["Processeur","Intel Core"],["Écran","14 pouces"],["Configuration exacte","Sur demande"]] },
+  { id:"dell-xps", cat:"Création & gaming", marque:"Dell", nom:"Dell XPS", accroche:"Le haut de gamme Dell : écran bord à bord et finition carbone.", usages:["Création","Pro & multitâche"],
+    imgs:["dell-xps-1","dell-xps-3","dell-xps-2"],
+    specs:[["Processeur","Intel Core"],["Configuration exacte","Sur demande"]] },
+  { id:"gigabyte-gaming", cat:"Création & gaming", marque:"Gigabyte", nom:"PC gamer Gigabyte", accroche:"Carte graphique NVIDIA et clavier rétroéclairé, pour le jeu et le montage vidéo.", usages:["Création"],
+    imgs:["gigabyte-g6-1","gigabyte-g6-3","gigabyte-g6-2"],
+    specs:[["Processeur","Intel Core"],["Carte graphique","NVIDIA GeForce"],["Clavier","Rétroéclairé"],["Configuration exacte","Sur demande"]] },
+  { id:"macbook-pro-16", cat:"Apple", marque:"Apple", nom:"MacBook Pro 16 pouces", accroche:"Grand écran Retina et Touch Bar, idéal pour la création.", usages:["Création"],
+    imgs:["macbook-pro-16"],
+    specs:[["Écran","16 pouces Retina"],["Clavier","Avec Touch Bar"],["Configuration exacte","Sur demande"]] },
+  { id:"macbook-pro-13", cat:"Apple", marque:"Apple", nom:"MacBook Pro 13 pouces Touch Bar", accroche:"Compact, léger et performant.", usages:["Création","Études & bureautique"],
+    imgs:["macbook-pro-touchbar","macbook-pro-1","macbook-pro-2"],
+    specs:[["Écran","13 pouces Retina"],["Clavier","Avec Touch Bar"],["Configuration exacte","Sur demande"]] },
+  { id:"surface-laptop-noir", cat:"PC portables pro", marque:"Microsoft", nom:"Microsoft Surface Laptop (noir)", accroche:"Fin, élégant et écran tactile haute résolution.", usages:["Études & bureautique","Pro & multitâche"],
+    imgs:["surface-laptop-noir-4","surface-laptop-noir-1","surface-laptop-noir-3","surface-laptop-noir-2"],
+    specs:[["Couleur","Noir mat"],["Écran","Tactile"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-elite-x2", cat:"2-en-1 & tactiles", marque:"HP", nom:"HP Elite x2 (tablette détachable)", accroche:"Une tablette Windows avec son clavier détachable et le son Bang & Olufsen.", usages:["Pro & multitâche"],
+    imgs:["hp-elite-x2-3","hp-elite-x2-1","hp-elite-x2-5","hp-elite-x2-2","hp-elite-x2-4"],
+    specs:[["Format","Tablette avec clavier détachable"],["Processeur","Intel Core"],["Audio","Bang & Olufsen"],["Configuration exacte","Sur demande"]] },
+  { id:"hp-eliteone", cat:"PC de bureau", marque:"HP", nom:"HP EliteOne tout-en-un", accroche:"Écran et ordinateur réunis, avec le son Bang & Olufsen. Idéal pour un bureau ou un accueil.", usages:["Pro & multitâche"],
+    imgs:["hp-eliteone-aio-1","hp-eliteone-aio-3","hp-eliteone-aio-2"],
+    specs:[["Format","Ordinateur tout-en-un"],["Audio","Bang & Olufsen"],["Configuration exacte","Sur demande"]] },
+  { id:"ipad-pro-12", cat:"Tablettes & téléphones", marque:"Apple", nom:"iPad Pro 12,9 pouces (5e génération)", accroche:"La tablette Apple la plus puissante, grand écran.", usages:["Création"],
+    imgs:["ipad-pro-12-1","ipad-pro-12-3","ipad-pro-12-2"],
+    specs:[["Écran","12,9 pouces"],["Stockage","256 Go"],["Génération","5e"]] },
+  { id:"ipad-air-m1", cat:"Tablettes & téléphones", marque:"Apple", nom:"iPad Air M1", accroche:"Puce Apple M1, plusieurs couleurs.", usages:["Études & bureautique","Création"],
+    imgs:["ipad-air-m1-2","ipad-air-m1","ipad-air-m1-3"],
+    specs:[["Puce","Apple M1"],["Stockage","64 Go"],["Couleurs","Bleu, gris sidéral, argent"]] },
+  { id:"iphone-13", cat:"Tablettes & téléphones", marque:"Apple", nom:"iPhone 13", accroche:"Débloqué, plusieurs couleurs disponibles.", usages:[],
+    imgs:["iphone-13-2","iphone-13-1","iphone-13-3"],
+    specs:[["Stockage","128 Go"],["Couleurs","Vert, bleu, blanc, rouge, minuit"],["Réseau","Débloqué"]] },
+  { id:"galaxy-tab-a", cat:"Tablettes & téléphones", marque:"Samsung", nom:"Samsung Galaxy Tab A 8 pouces", accroche:"Tablette Android compacte, pour les enfants ou les cours.", usages:["Études & bureautique"],
+    imgs:["samsung-galaxy-tab-a-8"],
+    specs:[["Écran","8 pouces"],["Système","Android"],["Configuration exacte","Sur demande"]] },
 ];
+PCS.forEach(p => p.img = p.imgs[0]);
 const byId = id => PCS.find(p => p.id === id);
-const short = p => p.specs.filter(s => s[1] !== "Sur demande").map(s => s[1].split(" (")[0]).slice(0, 3);
+const short = p => p.specs.filter(s => s[1] !== "Sur demande" && !s[0].startsWith("Config") && !s[0].startsWith("Modèle")).map(s => s[1].split(" (")[0]).slice(0, 3);
 const plus = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>', check = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>';
 
 /* --- sélection (enregistrée dans le navigateur si possible) --- */
@@ -490,7 +559,7 @@ function syncCart(bump) {
   const m = $("madd"); if (m.dataset.id) m.textContent = cart[m.dataset.id] ? "✓ Dans ma sélection" : "+ Ma sélection";
   const ids = Object.keys(cart);
   $("items").innerHTML = ids.length ? ids.map(id => { const p = byId(id); return `
-    <div class="it"><img src="img/${p.img}.jpg" alt=""><div><b>${p.nom}</b><small>${p.prix || "Prix sur demande"}</small>
+    <div class="it"><img src="img/p/${p.img}.jpg" alt=""><div><b>${p.nom}</b><small>${p.prix || "Prix sur demande"}</small>
       <div class="qty"><button type="button" data-q="-1" data-id="${id}" aria-label="Retirer un">−</button><span>${cart[id]}</span><button type="button" data-q="1" data-id="${id}" aria-label="Ajouter un">+</button></div></div>
       <button class="rm" type="button" data-rm="${id}" aria-label="Supprimer">✕</button></div>`; }).join("")
     : `<p class="nothing">Votre sélection est vide.<br>Ajoutez des PC depuis le catalogue.</p>`;
@@ -518,23 +587,23 @@ $("send").addEventListener("click", () => {
 });
 
 /* --- filtres --- */
-let fMarque = "Toutes", fUsage = "Tous usages", q = "";
+let fMarque = "Tout", fUsage = "Tous usages", q = "";
 function chips(el, values, cur, set) {
   values.forEach(v => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; if (v === cur) b.classList.add("on");
     b.onclick = () => { set(v); el.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); draw(); }; el.appendChild(b); });
 }
-chips($("fb"), ["Toutes", ...new Set(PCS.map(p => p.marque))], fMarque, v => fMarque = v);
+chips($("fb"), ["Tout", ...new Set(PCS.map(p => p.cat))], fMarque, v => fMarque = v);
 chips($("fu"), ["Tous usages", "Études & bureautique", "Pro & multitâche", "Création"], fUsage, v => fUsage = v);
 function setUsage(v) { fUsage = v; $("fu").querySelectorAll("button").forEach(x => x.classList.toggle("on", x.textContent === v)); draw(); }
 
 const grid = $("grid");
 function draw() {
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
-  const list = PCS.filter(p => (fMarque === "Toutes" || p.marque === fMarque) && (fUsage === "Tous usages" || p.usages.includes(fUsage)) &&
-    words.every(w => (p.nom + " " + p.marque + " " + p.specs.flat().join(" ")).toLowerCase().includes(w)));
+  const list = PCS.filter(p => (fMarque === "Tout" || p.cat === fMarque) && (fUsage === "Tous usages" || p.usages.includes(fUsage)) &&
+    words.every(w => (p.nom + " " + p.marque + " " + p.cat + " " + p.specs.flat().join(" ")).toLowerCase().includes(w)));
   grid.innerHTML = list.map((p, i) => `
     <article class="p tilt" style="animation-delay:${i * 40}ms">
-      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="img/${p.img}.jpg" alt="${p.nom}" loading="lazy"><span class="br">${p.marque.toUpperCase()}</span><span class="view">Voir la fiche</span></div>
+      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="img/p/${p.img}.jpg" alt="${p.nom}" loading="lazy"><span class="br">${p.marque.toUpperCase()}</span>${p.imgs.length > 1 ? `<span class="nph">${p.imgs.length} photos</span>` : ""}<span class="view">Voir la fiche</span></div>
       <div class="bd"><h3 data-open="${p.id}">${p.nom}</h3>${p.usages.length ? `<div class="for">${p.usages.join(" · ")}</div>` : ""}
         <div class="sp">${short(p).map(s => `<span>${s}</span>`).join("") || "<span>Caractéristiques sur demande</span>"}</div>
         <div class="ft"><div class="pr">${p.prix || "Prix sur demande"}<small>En boutique</small></div>
@@ -542,7 +611,7 @@ function draw() {
       </div>
     </article>`).join("");
   $("empty").style.display = list.length ? "none" : "block";
-  $("res").textContent = `${list.length} PC`;
+  $("res").textContent = `${list.length} produit${list.length > 1 ? "s" : ""}`;
   syncCart(); bindTilt();
 }
 $("q").addEventListener("input", e => { q = e.target.value; draw(); });
@@ -557,17 +626,31 @@ document.querySelectorAll("[data-use]").forEach(b => b.addEventListener("click",
 const modal = $("modal");
 function openSheet(id) {
   const p = byId(id); if (!p) return;
-  $("mi").src = `img/${p.img}.jpg`; $("mi").alt = p.nom;
+  cur = p; setPhoto(0);
   $("mb").textContent = p.marque; $("mt").textContent = p.nom; $("ms").textContent = p.accroche;
   $("mu").innerHTML = p.usages.map(u => `<span>Idéal : ${u}</span>`).join("");
   $("msp").innerHTML = p.specs.map(s => `<li><b>${s[0]}</b><span>${s[1]}</span></li>`).join("") + `<li><b>Prix</b><span>${p.prix || "Sur demande"}</span></li>`;
-  $("mwa").href = waLink(`Bonjour ORDI JAMBAAR, je suis intéressé(e) par le ${p.nom}. Est-il disponible et quel est son prix ?`);
+  $("mwa").href = waLink(`Bonjour ORDI JAMBAAR, je suis intéressé(e) par : ${p.nom}. Est-il disponible et quel est son prix ?`);
   $("madd").dataset.id = id;
   const sims = PCS.filter(x => x.id !== id && (x.marque === p.marque || x.usages.some(u => p.usages.includes(u)))).slice(0, 3);
-  $("msim").innerHTML = sims.map(s => `<button type="button" data-sim="${s.id}"><img src="img/${s.img}.jpg" alt=""><span>${s.nom}</span></button>`).join("");
+  $("msim").innerHTML = sims.map(s => `<button type="button" data-sim="${s.id}"><img src="img/p/${s.img}.jpg" alt=""><span>${s.nom}</span></button>`).join("");
   modal.classList.add("open"); document.body.style.overflow = "hidden"; modal.querySelector(".sheet").scrollTop = 0;
   history.replaceState(null, "", "#" + id); syncCart(); $("mx").focus();
 }
+let cur = null, ph = 0;
+function setPhoto(i) {
+  ph = (i + cur.imgs.length) % cur.imgs.length;
+  const mi = $("mi"); mi.style.opacity = 0;
+  setTimeout(() => { mi.src = `img/p/${cur.imgs[ph]}.jpg`; mi.alt = `${cur.nom}, photo ${ph + 1}`; mi.style.opacity = 1; }, 120);
+  $("mth").innerHTML = cur.imgs.length > 1 ? cur.imgs.map((x, k) => `<button type="button" data-ph="${k}" class="${k === ph ? "on" : ""}" aria-label="Photo ${k + 1}"><img src="img/p/${x}.jpg" alt=""></button>`).join("") : "";
+  $("mprev").style.display = $("mnext").style.display = cur.imgs.length > 1 ? "" : "none";
+}
+$("mprev").onclick = () => setPhoto(ph - 1);
+$("mnext").onclick = () => setPhoto(ph + 1);
+$("mth").addEventListener("click", e => { const b = e.target.closest("[data-ph]"); if (b) setPhoto(+b.dataset.ph); });
+let tx = 0;
+$("mi").parentElement.addEventListener("touchstart", e => tx = e.touches[0].clientX, { passive: true });
+$("mi").parentElement.addEventListener("touchend", e => { const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 40 && cur && cur.imgs.length > 1) setPhoto(ph + (d < 0 ? 1 : -1)); }, { passive: true });
 function closeSheet() { if (!modal.classList.contains("open")) return; modal.classList.remove("open"); document.body.style.overflow = ""; history.replaceState(null, "", location.pathname); }
 $("mx").onclick = closeSheet;
 modal.addEventListener("click", e => { if (e.target === modal) closeSheet(); const s = e.target.closest("[data-sim]"); if (s) openSheet(s.dataset.sim); });
@@ -579,7 +662,7 @@ $("mshare").onclick = async () => {
 addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); openDrawer(false); } });
 
 /* --- divers --- */
-document.querySelectorAll(".wa").forEach(a => { a.href = waLink("Bonjour ORDI JAMBAAR, je cherche un PC portable."); a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll(".wa").forEach(a => { a.href = waLink("Bonjour ORDI JAMBAAR, je souhaite un renseignement."); a.target = "_blank"; a.rel = "noopener"; });
 $("y").textContent = new Date().getFullYear();
 addEventListener("scroll", () => $("hd").classList.toggle("scrolled", scrollY > 30), { passive: true });
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
