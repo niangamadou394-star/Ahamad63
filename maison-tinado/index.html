@@ -132,6 +132,46 @@ footer{background:var(--ink);color:#F6F1E980;font-size:.78rem;padding:46px 0;let
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
 footer .mark b{color:var(--sand)}
 
+/* scène cinématographique */
+.cine{height:420vh;position:relative;background:#1d1610;padding:0}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.bg{position:absolute;inset:-4%;opacity:0;will-change:transform,opacity;background-size:cover;background-position:center}
+.b1{opacity:1;background:linear-gradient(180deg,#9fb3bf 0%,#d9c6aa 55%,#b08a57 100%)}
+.b2{background:radial-gradient(ellipse 70% 60% at 50% 60%,#e8c690 0%,#8a6440 45%,#3a2a1c 100%)}
+.b3{background:linear-gradient(180deg,#c9d3d6 0%,#efe3cf 45%,#9fb8b6 70%,#6f8f8c 100%)}
+.bg.has{background-color:#1d1610}
+.glow{position:absolute;border-radius:50%;filter:blur(40px)}
+.g1{width:42vw;height:42vw;right:8%;top:-6%;background:#fff1cf;opacity:.65}
+.g2{width:50vw;height:50vw;left:25%;top:20%;background:#ffd99a;opacity:.35}
+.g3{width:60vw;height:30vw;left:20%;top:30%;background:#fff;opacity:.4}
+.arcade{position:absolute;left:0;right:0;bottom:0;height:62%;display:flex;justify-content:center;gap:2.5vw;padding:0 8vw}
+.arcade span{flex:1;max-width:22vw;border-radius:999px 999px 0 0;background:linear-gradient(180deg,#f2e6d4,#d6c09f);box-shadow:inset 0 -40px 80px #8a644033}
+.arcade span:nth-child(2){transform:translateY(-6%);background:linear-gradient(180deg,#f7eddf,#dccaab)}
+.room{position:absolute;inset:0}
+.room i{position:absolute;bottom:0;width:30%;height:70%;border-radius:999px 999px 0 0;border:1px solid #f6e3c255;background:linear-gradient(180deg,#f6e3c222,transparent)}
+.room i:first-child{left:14%}.room i:last-child{right:14%}
+.water{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,#8fb7b5,#4f7d7a);opacity:.85}
+.grain{position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,#00000038 0%,transparent 30%,transparent 55%,#00000066 100%)}
+.cx{position:absolute;left:0;right:0;padding:0 6vw;color:#fff;opacity:0;will-change:opacity,transform}
+.ct1{bottom:12vh;opacity:1}
+.ct1 h1,.ct3 h1{font-size:clamp(3rem,8vw,7.2rem);line-height:.98;margin:.8rem 0 2rem;text-shadow:0 10px 40px #0004}
+.ct1 h1 i,.ct2 h1 i,.ct3 h1 i{color:#fff;font-style:italic}
+.kk{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;opacity:.85}
+.ct2{top:50%;transform:translateY(-50%);text-align:center}
+.huge{font-size:clamp(4.5rem,16vw,15rem);line-height:1}
+.ct3{bottom:12vh}
+.ct3 p{max-width:480px;font-weight:300;font-size:1.05rem;opacity:.9}
+.btn-ivory{background:#F6F1E9;color:var(--ink)}
+.btn-ivory:hover{background:#fff}
+.cue{position:absolute;right:6vw;bottom:5vh;color:#fff;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;display:flex;align-items:center;gap:.8rem;opacity:.8}
+.cue span{width:1px;height:40px;background:#fff;animation:cue 2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+header.top .mark b,header.top .links a.l{color:#fff}header.top .mark small{color:#f0dcbc}
+header.top .mono{color:#fff;border-color:#ffffff99}header.top .burger{border-color:#ffffff88}header.top .burger span{background:#fff}
+header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.cine{height:auto}.stage{position:relative;height:100svh}}
+
 .float{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--ink);color:var(--sand);display:grid;place-items:center;box-shadow:0 12px 30px #2b211855}
 .float svg{width:28px;height:28px}
 .rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -174,24 +214,17 @@ footer .mark b{color:var(--sand)}
 </header>
 
 <main>
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="k rv">Appartements meublés · Dakar</div>
-      <h1 class="rv">L'art de recevoir<br><i>à l'Africaine.</i></h1>
-      <div class="rule rv"></div>
-      <p class="lead rv">Des appartements meublés haut de gamme, prêts à vivre, pour quelques nuits ou plusieurs mois. Pour vos séjours, ceux de votre famille ou de vos collaborateurs.</p>
-      <div class="ctas rv">
-        <a class="btn btn-dark" href="#appartements">Voir les appartements</a>
-        <a class="btn btn-line ct" href="#">Demander une disponibilité</a>
-      </div>
-      <div class="facts rv"><span>Séjours courts et longue durée</span><span>Offre entreprise</span><span>Accueil personnalisé</span></div>
-    </div>
-    <div class="arches rv" aria-hidden="true">
-      <div class="sun"></div>
-      <div class="arch a1"><div class="pattern"></div><div class="tx">MAISON TINADO</div></div>
-      <div class="arch a2"><div class="pattern"></div></div>
-    </div>
+<section class="cine" id="cine">
+  <div class="stage">
+    <div class="bg b1" data-photo="0"><div class="glow g1"></div><div class="arcade"><span></span><span></span><span></span></div></div>
+    <div class="bg b2" data-photo="1"><div class="glow g2"></div><div class="room"><i></i><i></i></div></div>
+    <div class="bg b3" data-photo="2"><div class="glow g3"></div><div class="water"></div></div>
+    <div class="grain"></div><div class="shade"></div>
+    <div class="ct1 cx"><div class="kk">Appartements meublés · Dakar</div><h1>Pour ceux qui<br><i>remarquent les détails.</i></h1>
+      <a class="btn btn-ivory" href="#appartements">Découvrir</a></div>
+    <div class="ct2 cx"><h1 class="huge"><i>Bienvenue.</i></h1></div>
+    <div class="ct3 cx"><h1>Ici, on ne compte<br><i>plus les jours.</i></h1><p>Quelques nuits ou plusieurs mois : un appartement prêt à vivre, l'art de recevoir à l'Africaine.</p></div>
+    <div class="cue"><span></span>Défiler</div>
   </div>
 </section>
 
@@ -309,11 +342,30 @@ document.querySelectorAll(".ct").forEach(a => {
 });
 document.getElementById("y").textContent = new Date().getFullYear();
 const hd = document.getElementById("hd");
-addEventListener("scroll", () => hd.classList.toggle("s", scrollY > 30), { passive: true });
+addEventListener("scroll", () => hd.classList.toggle("s", scrollY > 30 && !hd.classList.contains("top")), { passive: true });
 const burger = document.getElementById("burger");
 const menu = o => { document.body.classList.toggle("mo", o); burger.setAttribute("aria-expanded", o); };
 burger.onclick = () => menu(!document.body.classList.contains("mo"));
 document.querySelectorAll("#links a").forEach(a => a.addEventListener("click", () => menu(false)));
+
+/* Photos plein écran de la scène d'ouverture (extérieur, intérieur, détente) : mettre les noms de fichiers du dossier img/ */
+const CINE = ["", "", ""];
+document.querySelectorAll(".bg[data-photo]").forEach(el => { const f = CINE[+el.dataset.photo]; if (f) { el.style.backgroundImage = `url(img/${f})`; el.classList.add("has"); el.innerHTML = ""; } });
+const cine = document.getElementById("cine"), lay = [...document.querySelectorAll(".bg")], [c1, c2, c3] = [".ct1", ".ct2", ".ct3"].map(q => document.querySelector(q));
+const cl = x => Math.max(0, Math.min(1, x)), win = (p, a, b, f = .06) => Math.min(cl((p - a) / f), cl((b - p) / f));
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+function cineFrame() {
+  if (reduce) return;
+  const r = cine.getBoundingClientRect(), p = cl(-r.top / (r.height - innerHeight));
+  hd.classList.toggle("top", p < .98 && r.top <= 0 || scrollY < 30);
+  lay[0].style.opacity = 1 - cl((p - .26) / .1); lay[0].style.transform = `scale(${1 + p * .9})`;
+  lay[1].style.opacity = cl((p - .24) / .1) * (1 - cl((p - .62) / .1)); lay[1].style.transform = `scale(${1.25 - cl((p - .24) / .45) * .2})`;
+  lay[2].style.opacity = cl((p - .6) / .1); lay[2].style.transform = `scale(${1.15 - cl((p - .6) / .4) * .15})`;
+  const o1 = 1 - cl(p / .16); c1.style.opacity = o1; c1.style.transform = `translateY(${-p * 300}px)`; c1.style.filter = `blur(${(1 - o1) * 10}px)`;
+  const o2 = win(p, .3, .56); c2.style.opacity = o2; c2.style.transform = `translateY(-50%) scale(${.9 + cl((p - .3) / .26) * .15})`; c2.style.filter = `blur(${(1 - o2) * 12}px)`;
+  const o3 = win(p, .68, 1.2, .08); c3.style.opacity = o3; c3.style.transform = `translateY(${(1 - o3) * 40}px)`;
+}
+addEventListener("scroll", cineFrame, { passive: true }); addEventListener("resize", cineFrame); cineFrame();
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
 </script>
