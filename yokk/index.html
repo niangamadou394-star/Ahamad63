@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YOKK — Agence de croissance pour entrepreneurs et commerçants au Sénégal</title>
+<meta name="description" content="YOKK accompagne les entrepreneurs et commerçants du Sénégal : site pour vendre, branding, vidéo de présentation, vidéo pub et stratégie de croissance. Yokk sa business.">
+<meta property="og:title" content="YOKK — Yokk sa business.">
+<meta property="og:description" content="Site pour vendre, branding, vidéos et stratégie de croissance pour les entrepreneurs et commerçants du Sénégal.">
+<meta property="og:image" content="affiche.jpg">
+<meta name="theme-color" content="#05201A">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#05201A; --emerald:#0B3B2E; --green:#15553F; --night:#03140F;
+  --gold:#E9C46A; --gold-d:#B07D2B; --gold-l:#F7E2A6;
+  --ivory:#F7F2E8; --ink:#062019; --muted:#F7F2E8a8; --line:#E9C46A2e;
+  --gold-grad:linear-gradient(100deg,#B07D2B,#E9C46A 55%,#F7E2A6);
+  --r:28px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:Montserrat,system-ui,sans-serif;background:var(--deep);color:var(--ivory);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+img,video{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.serif{font-family:"Playfair Display",Georgia,serif}
+.gold{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kicker{display:inline-flex;align-items:center;gap:.7rem;font-weight:700;font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.kicker::before{content:"";width:28px;height:1.5px;background:var(--gold)}
+h2{font-family:"Playfair Display",Georgia,serif;font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.08;margin:.9rem 0 1rem;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:1.07rem;max-width:600px}
+section{padding:120px 0;position:relative}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3.2rem}
+
+/* boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.7rem;border-radius:999px;border:0;cursor:pointer;
+  font-weight:700;font-size:.97rem;transition:transform .3s var(--ease),box-shadow .3s,background .3s;white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-gold{background:var(--gold-grad);color:var(--ink);box-shadow:0 12px 34px #E9C46A30,inset 0 1px 0 #ffffff80}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 44px #E9C46A50,inset 0 1px 0 #ffffff80}
+.btn-ghost{background:#ffffff08;border:1.5px solid #E9C46A70;color:var(--ivory);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:#E9C46A18}
+.arrow{transition:transform .3s var(--ease)} .btn:hover .arrow{transform:translateX(4px)}
+
+/* tuile icône 3D */
+.ti{--s:64px;width:var(--s);height:var(--s);border-radius:calc(var(--s)*.26);display:grid;place-items:center;flex:none;position:relative;
+  background:linear-gradient(150deg,#1d7a59,#0B3B2E 60%,#062a20);
+  box-shadow:0 1px 0 #ffffff30 inset,0 -3px 0 #00000040 inset,0 6px 0 #7a5520,0 8px 0 #4a3412,0 18px 30px #0008}
+.ti::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,#ffffff45,#ffffff08 35%,transparent 50%)}
+.ti svg{width:56%;height:56%;stroke:var(--gold-l);fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
+.ti.g{background:linear-gradient(150deg,#F7E2A6,#E9C46A 50%,#B07D2B);box-shadow:0 1px 0 #ffffffa0 inset,0 -3px 0 #00000025 inset,0 6px 0 #6b4a18,0 8px 0 #3f2b0d,0 18px 30px #0008}
+.ti.g svg{stroke:var(--ink)}
+
+/* navigation */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s,transform .4s var(--ease)}
+header.scrolled{background:#05201Ad9;backdrop-filter:blur(16px) saturate(140%);box-shadow:0 1px 0 var(--line)}
+header.hide{transform:translateY(-100%)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+.brand{display:flex;align-items:center;gap:.8rem}
+.brand img{width:44px;height:44px}
+.brand b{font-weight:800;font-size:1.3rem;letter-spacing:.17em;line-height:1}
+.brand small{display:block;font-size:.52rem;letter-spacing:.42em;color:var(--gold);font-weight:600;margin-top:5px}
+.links{display:flex;gap:2.2rem;align-items:center;font-weight:600;font-size:.9rem}
+.links a.l{position:relative;opacity:.8;transition:opacity .3s}
+.links a.l::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .35s var(--ease)}
+.links a.l:hover,.links a.l.on{opacity:1}.links a.l.on::after,.links a.l:hover::after{transform:scaleX(1)}
+.links .btn{min-height:46px;padding:0 1.3rem;font-size:.88rem}
+.burger{display:none;width:48px;height:48px;border-radius:50%;border:1.5px solid #E9C46A60;background:#ffffff08;cursor:pointer;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--ivory);margin:4px auto;transition:transform .35s var(--ease),opacity .2s}
+.menu-open .burger span:nth-child(1){transform:translateY(10px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){opacity:0}
+.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
+
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:130px 0 90px;overflow:hidden;
+  background:radial-gradient(ellipse 80% 70% at 72% 40%,var(--green) 0%,var(--emerald) 38%,var(--deep) 75%)}
+.rings{position:absolute;right:-12%;top:50%;width:min(1100px,120vw);aspect-ratio:1;transform:translateY(-50%);pointer-events:none;opacity:.5;
+  background:repeating-radial-gradient(circle,#E9C46A22 0 2px,transparent 2px 64px);
+  -webkit-mask:radial-gradient(circle,#000 20%,transparent 68%);mask:radial-gradient(circle,#000 20%,transparent 68%);animation:pulse 8s linear infinite}
+@keyframes pulse{from{background-size:100% 100%}to{background-size:112% 112%}}
+.giant{position:absolute;left:0;bottom:-.18em;font-weight:900;font-size:clamp(9rem,26vw,24rem);line-height:1;letter-spacing:-.03em;white-space:nowrap;
+  color:transparent;-webkit-text-stroke:1.5px #E9C46A20;pointer-events:none;user-select:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;position:relative}
+.hero h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(2.7rem,6.4vw,5.3rem);line-height:1.02;margin:1.3rem 0 1.5rem;letter-spacing:-.015em}
+.hero h1 .w{display:inline-block}
+.hero .lead{font-size:1.15rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.3rem}
+.trust{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:2.2rem;font-size:.88rem;color:var(--muted);font-weight:500}
+.trust span{display:inline-flex;align-items:center;gap:.5rem}
+.trust i{width:20px;height:20px;border-radius:50%;background:#E9C46A22;display:grid;place-items:center;color:var(--gold);font-style:normal;font-size:.7rem;font-weight:900}
+
+.stage{position:relative;height:640px;perspective:1400px}
+.phone3d{position:absolute;left:50%;top:50%;width:290px;height:600px;margin:-300px 0 0 -145px;border-radius:48px;padding:11px;
+  background:linear-gradient(150deg,#2a2f2d,#0c100f);transform-style:preserve-3d;
+  box-shadow:0 0 0 1.5px #555,0 0 0 3px #111,40px 60px 90px #000b,0 0 120px #E9C46A22;
+  transform:rotateY(-18deg) rotateX(8deg) rotateZ(3deg);transition:transform .6s var(--ease)}
+.phone3d video{width:100%;height:100%;object-fit:cover;border-radius:38px;background:var(--emerald)}
+.phone3d::before{content:"";position:absolute;top:22px;left:50%;width:86px;height:24px;margin-left:-43px;background:#000;border-radius:14px;z-index:2}
+.phone3d::after{content:"";position:absolute;inset:11px;border-radius:38px;background:linear-gradient(115deg,#ffffff24,transparent 38%);pointer-events:none}
+.float{position:absolute;animation:fl 6s ease-in-out infinite}
+.float .ti{--s:84px}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(var(--r0,0deg))}50%{transform:translateY(-16px) rotate(calc(var(--r0,0deg) + 4deg))}}
+.sound{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;background:#05201Acc;border:1px solid #E9C46A70;color:var(--ivory);
+  padding:.55rem 1rem;border-radius:999px;font-weight:700;font-size:.78rem;cursor:pointer;backdrop-filter:blur(6px);white-space:nowrap}
+.scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:26px;height:42px;border:1.5px solid #E9C46A80;border-radius:14px}
+.scroll-cue::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--gold);animation:cue 1.8s infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+
+/* bandeau défilant */
+.mq-wrap{overflow:hidden;position:relative;z-index:2;padding:26px 0 40px;margin:-40px 0 -40px}
+.marquee{background:var(--gold-grad);color:var(--ink);overflow:hidden;padding:20px 0;transform:rotate(-1.5deg);margin:0 -10px;box-shadow:0 20px 40px #0006}
+.marquee .tr{display:flex;width:max-content;animation:mq 28s linear infinite}
+.marquee span{font-weight:800;font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;padding:0 1.4rem;display:flex;align-items:center;gap:2.8rem;white-space:nowrap}
+.marquee span::after{content:"✦";font-size:1rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* services bento */
+.services{background:var(--deep);padding-top:150px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.card{position:relative;grid-column:span 2;padding:2.2rem;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;
+  background:linear-gradient(160deg,#ffffff0e,#ffffff03 60%);transform-style:preserve-3d;transition:border-color .4s,box-shadow .4s;will-change:transform}
+.card>*{position:relative}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(500px circle at var(--mx,50%) var(--my,0%),#E9C46A1c,transparent 45%);opacity:0;transition:opacity .4s}
+.card:hover{border-color:#E9C46A80;box-shadow:0 30px 60px #0007}.card:hover::before{opacity:1}
+.card.big{grid-column:span 4;background:linear-gradient(135deg,#17604a,#0B3B2E 60%,#082c22)}
+.card.half{grid-column:span 3}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start}
+.card .num{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--gold);opacity:.8}
+.card h3{font-size:1.4rem;margin:1.6rem 0 .6rem;font-weight:800;letter-spacing:-.01em}
+.card p{color:var(--muted);font-size:.96rem}
+.card ul{list-style:none;margin-top:1.1rem;display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1rem;font-size:.92rem}
+.card li{display:flex;gap:.55rem;align-items:center}.card li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+.card .go{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.5rem;font-weight:700;font-size:.9rem;color:var(--gold)}
+.card .go:hover{gap:.7rem}
+
+/* avant / après */
+.compare{background:linear-gradient(180deg,var(--deep),var(--emerald))}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.col{padding:2.4rem;border-radius:var(--r);border:1px solid #ffffff14;background:#00000025}
+.col.yes{border-color:#E9C46A80;background:linear-gradient(160deg,#E9C46A18,#ffffff05);box-shadow:0 30px 60px #0005}
+.col h3{font-size:1.15rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem}
+.col li{list-style:none;display:flex;gap:.9rem;padding:.85rem 0;border-top:1px solid #ffffff10;font-size:1rem}
+.col li b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.75rem}
+.col.no li{color:#F7F2E8a0}.col.no li b{background:#ffffff12;color:#F7F2E880}
+.col.yes li b{background:var(--gold);color:var(--ink)}
+.who{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.6rem}
+.who span{padding:.65rem 1.1rem;border-radius:999px;background:#ffffff0a;border:1px solid var(--line);font-weight:600;font-size:.88rem}
+
+/* méthode */
+.method{background:var(--emerald)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.steps::before{content:"";position:absolute;left:5%;right:5%;top:32px;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 15%,var(--gold) 85%,transparent);opacity:.5}
+.step{position:relative;padding-top:0}
+.step .ti{--s:64px;margin-bottom:1.6rem}
+.step .ti span{position:relative;z-index:1;font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:700;color:var(--gold-l)}
+.step h3{font-size:1.15rem;margin-bottom:.5rem}
+.step p{color:var(--muted);font-size:.94rem}
+
+/* offres */
+.offers{background:radial-gradient(ellipse at 20% 0%,var(--green),var(--deep) 60%)}
+.grid-o{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.offer{display:flex;flex-direction:column;padding:2.4rem 2rem;border-radius:var(--r);border:1px solid var(--line);background:#ffffff07;position:relative;transition:transform .4s var(--ease),border-color .4s}
+.offer:hover{transform:translateY(-6px);border-color:#E9C46A80}
+.offer.best{background:linear-gradient(170deg,#E9C46A24,#ffffff06 60%);border-color:var(--gold);box-shadow:0 30px 70px #0007}
+.badge{position:absolute;top:-14px;left:2rem;background:var(--gold-grad);color:var(--ink);font-weight:800;font-size:.72rem;letter-spacing:.06em;padding:.4rem .9rem;border-radius:999px}
+.offer h3{font-family:"Playfair Display",serif;font-size:1.8rem}
+.offer .for{color:var(--gold);font-size:.85rem;font-weight:700;margin:.3rem 0 1.5rem}
+.offer ul{list-style:none;flex:1;margin-bottom:2rem}
+.offer li{padding:.6rem 0;border-bottom:1px solid #ffffff12;font-size:.95rem;display:flex;gap:.7rem}
+.offer li::before{content:"✓";color:var(--gold);font-weight:900}
+.note{text-align:center;color:var(--muted);margin-top:2.2rem;font-size:.92rem}
+
+/* créations */
+.work{background:var(--night)}
+.gal{display:grid;grid-template-columns:.8fr 1.2fr;grid-template-rows:auto auto;gap:20px}
+.gal figure{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#000}
+.gal figure img,.gal figure video{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.gal figure:hover img,.gal figure:hover video{transform:scale(1.04)}
+.gal .v{grid-row:span 2}
+.gal figure:not(.v){aspect-ratio:16/10}
+.gal figcaption{position:absolute;left:16px;bottom:16px;padding:.5rem .9rem;border-radius:999px;background:#05201Acc;backdrop-filter:blur(8px);font-size:.8rem;font-weight:700;border:1px solid var(--line)}
+
+/* brief */
+.brief{background:radial-gradient(ellipse at 80% 20%,var(--green),var(--emerald) 45%,var(--deep))}
+.brief-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}
+.form{padding:2.4rem;border-radius:var(--r);background:#05201Ab3;border:1px solid var(--line);backdrop-filter:blur(10px);box-shadow:0 40px 80px #0006}
+.field{margin-bottom:1.4rem}
+.field>label,.field>.lab{display:block;font-weight:700;font-size:.85rem;margin-bottom:.55rem;letter-spacing:.02em}
+.field input,.field select,.field textarea{width:100%;min-height:54px;padding:.9rem 1.1rem;border-radius:16px;border:1.5px solid #ffffff1c;background:#ffffff08;font-size:1rem;transition:border-color .3s,background .3s}
+.field textarea{min-height:110px;resize:vertical}
+.field select option{color:#062019}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--gold);background:#ffffff0e}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chips label{cursor:pointer;position:relative}
+.chips input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;min-height:46px;padding:0 1.05rem;border-radius:999px;border:1.5px solid #ffffff22;font-weight:600;font-size:.9rem;transition:all .25s}
+.chips input:checked+span{background:var(--gold-grad);color:var(--ink);border-color:transparent}
+.chips input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form .btn{width:100%;margin-top:.4rem}
+.form small{display:block;text-align:center;color:var(--muted);margin-top:1rem;font-size:.82rem}
+.direct{margin-top:2.2rem;display:grid;gap:1rem}
+.direct a{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;border-radius:20px;border:1px solid var(--line);background:#ffffff07;transition:border-color .3s,background .3s}
+.direct a:hover{border-color:var(--gold);background:#E9C46A10}
+.direct .ti{--s:52px}
+.direct b{display:block}.direct span{color:var(--muted);font-size:.88rem}
+
+/* faq */
+.faq{background:var(--deep)}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.4rem 0;min-height:64px}
+summary::-webkit-details-marker{display:none}
+summary i{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid #E9C46A70;display:grid;place-items:center;color:var(--gold);font-style:normal;font-size:1.2rem;transition:transform .35s var(--ease),background .3s}
+details[open] summary i{transform:rotate(45deg);background:#E9C46A20}
+details p{color:var(--muted);padding:0 3rem 1.5rem 0}
+
+/* final */
+.final{padding:140px 0;text-align:center;background:var(--gold-grad);color:var(--ink);overflow:hidden}
+.final .giant{-webkit-text-stroke:2px #06201922;left:50%;transform:translateX(-50%);bottom:-.22em}
+.final p.serif{font-size:clamp(2.8rem,8vw,6rem);line-height:1;font-weight:700;position:relative}
+.final .sub{position:relative;margin:1.2rem 0 2.4rem;font-weight:700;letter-spacing:.3em;font-size:.8rem}
+.final .btn{background:var(--ink);color:var(--gold-l);box-shadow:0 18px 40px #06201955;position:relative}
+footer{background:var(--night);padding:50px 0 40px;color:#F7F2E880;font-size:.86rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem}
+footer nav{display:flex;gap:1.6rem;flex-wrap:wrap}
+footer nav a:hover{color:var(--gold)}
+
+/* barre mobile */
+.mbar{display:none}
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 30px #0008;transition:transform .3s var(--ease)}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+
+/* apparitions */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* responsive */
+@media (max-width:1020px){
+  .hero-grid,.brief-grid,.faq-grid{grid-template-columns:1fr}
+  .stage{height:600px}
+  .bento{grid-template-columns:1fr 1fr}
+  .card,.card.big,.card.half{grid-column:span 1}.card.big{grid-column:span 2}
+  .steps{grid-template-columns:1fr 1fr;gap:40px 20px}.steps::before{display:none}
+  .gal{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  section{padding:84px 0}
+  .services{padding-top:110px}
+  .nav{height:72px}
+  .burger{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .links{position:fixed;inset:0;z-index:-1;flex-direction:column;justify-content:center;gap:1.8rem;font-size:1.5rem;
+    background:radial-gradient(ellipse at 50% 30%,var(--green),var(--deep) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
+  .menu-open .links{opacity:1;pointer-events:auto}
+  .links a.l{opacity:1;font-family:"Playfair Display",serif}
+  .links .btn{font-size:1rem;min-height:56px;padding:0 2rem}
+  .hero{padding:110px 0 60px;min-height:auto}
+  .hero .ctas .btn{flex:1 1 100%}
+  .stage{height:540px}
+  .phone3d{width:250px;height:520px;margin:-260px 0 0 -125px}
+  .float .ti{--s:64px}
+  .scroll-cue{display:none}
+  .bento,.vs,.row2{grid-template-columns:1fr}
+  .card.big{grid-column:span 1}
+  .card ul{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .grid-o{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin:0 -20px;padding:16px 20px 10px;scrollbar-width:none}
+  .grid-o::-webkit-scrollbar{display:none}
+  .offer{flex:0 0 84%;scroll-snap-align:center}
+  .swipe{display:block!important}
+  .gal{grid-template-columns:1fr}.gal .v{grid-row:auto;aspect-ratio:9/16}
+  .form{padding:1.6rem}
+  details p{padding-right:0}
+  .wa-float{display:none}
+  .mbar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;gap:10px;padding:8px;border-radius:999px;
+    background:#05201Ae6;backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 16px 40px #000a;transform:translateY(140%);transition:transform .45s var(--ease)}
+  .mbar.show{transform:none}
+  .mbar .btn{flex:1;min-height:50px;font-size:.92rem;padding:0 1rem}
+  footer{padding-bottom:110px}
+}
+.swipe{display:none;text-align:center;color:var(--muted);font-size:.82rem;margin-top:.6rem}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="YOKK, retour en haut"><img src="logo.svg" alt=""><div><b>YOKK</b><small>AGENCE DE CROISSANCE</small></div></a>
+    <nav class="links" id="links" aria-label="Navigation principale">
+      <a class="l" href="#services">Services</a>
+      <a class="l" href="#methode">Méthode</a>
+      <a class="l" href="#offres">Offres</a>
+      <a class="l" href="#creations">Créations</a>
+      <a class="l" href="#faq">FAQ</a>
+      <a class="btn btn-gold" href="#projet">Démarrer mon projet</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="rings"></div>
+  <div class="giant" aria-hidden="true">YOKK</div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker rv">Entrepreneurs · Commerçants · Sénégal</div>
+      <h1 class="rv" style="--d:.08s">Votre business<br>mérite de <span class="gold">grandir.</span></h1>
+      <p class="lead rv" style="--d:.16s">On crée votre image et vos outils de vente : site pour vendre, branding, vidéos et stratégie de croissance. Vous, vous développez votre chiffre d'affaires.</p>
+      <div class="ctas rv" style="--d:.24s">
+        <a class="btn btn-gold" href="#projet">Démarrer mon projet <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost wa" href="#"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>WhatsApp</a>
+      </div>
+      <div class="trust rv" style="--d:.32s"><span><i>✓</i>Premier échange gratuit</span><span><i>✓</i>Pensé pour le Sénégal</span><span><i>✓</i>Wave & Orange Money</span></div>
+    </div>
+    <div class="stage rv" id="stage" style="--d:.2s">
+      <div class="phone3d" id="phone">
+        <video id="vid" src="presentation.mp4" autoplay muted loop playsinline preload="metadata" poster="poster.jpg"></video>
+        <button class="sound" id="sound" type="button">🔊 Activer le son</button>
+      </div>
+      <div class="float" style="left:4%;top:10%;--r0:-10deg"><div class="ti"><svg viewBox="0 0 140 140"><path d="M20 30h16l14 66h60l12-46H44"/><circle cx="58" cy="114" r="7"/><circle cx="104" cy="114" r="7"/></svg></div></div>
+      <div class="float" style="right:4%;top:16%;--r0:12deg;animation-delay:-2s"><div class="ti g"><svg viewBox="0 0 140 140"><path d="M70 20l44 34-44 66-44-66z"/><path d="M26 54h88M52 20l18 34 18-34M70 54v66"/></svg></div></div>
+      <div class="float" style="left:0;bottom:22%;--r0:8deg;animation-delay:-4s"><div class="ti g"><svg viewBox="0 0 140 140"><rect x="18" y="36" width="80" height="68" rx="10"/><path d="M98 60l26-16v52l-26-16"/></svg></div></div>
+      <div class="float" style="right:2%;bottom:14%;--r0:-8deg;animation-delay:-1s"><div class="ti"><svg viewBox="0 0 140 140"><path d="M20 116h104"/><path d="M28 96l30-30 22 18 38-44"/><path d="M98 40h20v20"/></svg></div></div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<div class="mq-wrap" aria-hidden="true"><div class="marquee"><div class="tr">
+  <span>Site pour vendre</span><span>Branding</span><span>Vidéo de présentation</span><span>Vidéo pub</span><span>Stratégie de croissance</span><span>Yokk sa business</span>
+  <span>Site pour vendre</span><span>Branding</span><span>Vidéo de présentation</span><span>Vidéo pub</span><span>Stratégie de croissance</span><span>Yokk sa business</span>
+</div></div></div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="kicker rv">Nos services</div><h2 class="rv">Tout pour <span class="gold">vendre plus.</span></h2></div>
+      <p class="lead rv">Un seul interlocuteur pour votre image, vos contenus et votre croissance, pensé pour la réalité du marché sénégalais.</p>
+    </div>
+    <div class="bento">
+      <article class="card big tilt rv">
+        <div class="top"><div class="ti g" style="--s:72px"><svg viewBox="0 0 140 140"><path d="M20 30h16l14 66h60l12-46H44"/><circle cx="58" cy="114" r="7"/><circle cx="104" cy="114" r="7"/></svg></div><span class="num">01</span></div>
+        <h3>Site pour vendre</h3>
+        <p>Une boutique en ligne professionnelle, rapide sur mobile, qui transforme vos visiteurs en clients.</p>
+        <ul><li>Catalogue produits et prix</li><li>Commandes sur WhatsApp</li><li>Paiement Wave et Orange Money</li><li>Visible sur Google</li></ul>
+        <a class="go svc" data-svc="un site pour vendre" href="#projet">Je veux mon site →</a>
+      </article>
+      <article class="card tilt rv" style="--d:.08s">
+        <div class="top"><div class="ti" style="--s:72px"><svg viewBox="0 0 140 140"><path d="M70 20l44 34-44 66-44-66z"/><path d="M26 54h88M52 20l18 34 18-34M70 54v66"/></svg></div><span class="num">02</span></div>
+        <h3>Branding</h3>
+        <p>Nom, logo, couleurs et supports : une identité premium qui inspire confiance.</p>
+        <a class="go svc" data-svc="le branding" href="#projet">Créer ma marque →</a>
+      </article>
+      <article class="card tilt rv">
+        <div class="top"><div class="ti" style="--s:72px"><svg viewBox="0 0 140 140"><rect x="18" y="36" width="80" height="68" rx="10"/><path d="M98 60l26-16v52l-26-16"/></svg></div><span class="num">03</span></div>
+        <h3>Vidéo de présentation</h3>
+        <p>Votre histoire et votre savoir-faire racontés en images et en motion design 3D.</p>
+        <a class="go svc" data-svc="une vidéo de présentation" href="#projet">Ma vidéo →</a>
+      </article>
+      <article class="card tilt rv" style="--d:.08s">
+        <div class="top"><div class="ti g" style="--s:72px"><svg viewBox="0 0 140 140"><path d="M22 58v24h18l40 26V32L40 58z"/><path d="M96 50c8 6 8 34 0 40M108 40c16 12 16 48 0 60"/></svg></div><span class="num">04</span></div>
+        <h3>Vidéo publicitaire</h3>
+        <p>Des pubs pour TikTok, Instagram, Facebook et les statuts WhatsApp, qui arrêtent le scroll.</p>
+        <a class="go svc" data-svc="une vidéo publicitaire" href="#projet">Ma pub →</a>
+      </article>
+      <article class="card tilt rv" style="--d:.16s">
+        <div class="top"><div class="ti" style="--s:72px"><svg viewBox="0 0 140 140"><path d="M20 116h104"/><path d="M28 96l30-30 22 18 38-44"/><path d="M98 40h20v20"/></svg></div><span class="num">05</span></div>
+        <h3>Stratégie de croissance</h3>
+        <p>Quoi publier, où, quand, et comment transformer votre audience en ventes.</p>
+        <a class="go svc" data-svc="une stratégie de croissance" href="#projet">Mon plan →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="kicker rv">Pourquoi YOKK</div><h2 class="rv">Vous avez le talent.<br><span class="gold">Vos clients doivent le voir.</span></h2></div>
+    </div>
+    <div class="vs">
+      <div class="col no rv">
+        <h3>Sans accompagnement</h3>
+        <ul><li><b>✕</b>Une image qui ne reflète pas la qualité de vos produits</li><li><b>✕</b>Des ventes surtout au bouche-à-oreille</li><li><b>✕</b>Des publications sans stratégie ni résultats</li><li><b>✕</b>Des commandes perdues dans les messages</li></ul>
+      </div>
+      <div class="col yes rv" style="--d:.1s">
+        <h3><img src="logo.svg" alt="" style="width:30px">Avec YOKK</h3>
+        <ul><li><b>✓</b>Une marque premium qui inspire confiance</li><li><b>✓</b>Un site qui vend pour vous, jour et nuit</li><li><b>✓</b>Des vidéos qui attirent de nouveaux clients</li><li><b>✓</b>Un plan clair pour faire grandir vos ventes</li></ul>
+      </div>
+    </div>
+    <div class="who rv"><span>Boutiques & commerçants</span><span>Restaurants & traiteurs</span><span>Mode & cosmétiques</span><span>Artisans</span><span>Prestataires de services</span><span>Startups</span><span>Vente en ligne</span><span>Diaspora qui investit au pays</span></div>
+  </div>
+</section>
+
+<section class="method" id="methode">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker rv">Notre méthode</div><h2 class="rv">4 étapes, <span class="gold">zéro flou.</span></h2></div>
+      <p class="lead rv">Vous savez à chaque instant où en est votre projet.</p></div>
+    <div class="steps">
+      <div class="step rv"><div class="ti g"><span style="color:var(--ink)">1</span></div><h3>Diagnostic gratuit</h3><p>On échange sur votre activité, vos clients et vos objectifs.</p></div>
+      <div class="step rv" style="--d:.08s"><div class="ti"><span>2</span></div><h3>Stratégie</h3><p>Un plan clair : les actions prioritaires, le budget et les délais.</p></div>
+      <div class="step rv" style="--d:.16s"><div class="ti"><span>3</span></div><h3>Création</h3><p>Identité, site et vidéos, avec vos retours à chaque étape.</p></div>
+      <div class="step rv" style="--d:.24s"><div class="ti g"><span style="color:var(--ink)">4</span></div><h3>Croissance</h3><p>On lance, on mesure les résultats et on ajuste.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="offers" id="offres">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker rv">Nos offres</div><h2 class="rv">Une formule pour <span class="gold">chaque étape.</span></h2></div>
+      <p class="lead rv">Devis clair et adapté à votre budget, après un premier échange gratuit.</p></div>
+    <div class="grid-o">
+      <div class="offer rv">
+        <h3>Lancement</h3><div class="for">Vous démarrez votre activité</div>
+        <ul><li>Nom et slogan</li><li>Logo et charte couleurs</li><li>Visuels pour vos réseaux</li><li>Affiche de lancement</li></ul>
+        <a class="btn btn-ghost svc" data-svc="l'offre Lancement" href="#projet">Choisir Lancement</a>
+      </div>
+      <div class="offer best rv" style="--d:.08s">
+        <span class="badge">LE PLUS DEMANDÉ</span>
+        <h3>Visibilité</h3><div class="for">Vous voulez vendre en ligne</div>
+        <ul><li>Site pour vendre (mobile)</li><li>Commande WhatsApp et paiement mobile</li><li>Vidéo de présentation</li><li>Vidéo publicitaire</li></ul>
+        <a class="btn btn-gold svc" data-svc="l'offre Visibilité" href="#projet">Choisir Visibilité</a>
+      </div>
+      <div class="offer rv" style="--d:.16s">
+        <h3>Croissance</h3><div class="for">Vous voulez accélérer</div>
+        <ul><li>Stratégie de communication</li><li>Calendrier de contenus</li><li>Vidéos pub régulières</li><li>Suivi des résultats</li></ul>
+        <a class="btn btn-ghost svc" data-svc="l'offre Croissance" href="#projet">Choisir Croissance</a>
+      </div>
+    </div>
+    <p class="swipe">← Glissez pour voir les offres →</p>
+    <p class="note rv">Besoin d'un seul service (un logo, une vidéo, un site) ? C'est possible aussi.</p>
+  </div>
+</section>
+
+<section class="work" id="creations">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker rv">Nos créations</div><h2 class="rv">La qualité <span class="gold">YOKK.</span></h2></div>
+      <p class="lead rv">Notre propre identité, créée en interne : le niveau que nous mettons dans chaque projet.</p></div>
+    <div class="gal">
+      <figure class="v rv"><video src="presentation.mp4" muted loop playsinline preload="none" poster="poster.jpg" class="lazyv"></video><figcaption>Vidéo motion design 3D</figcaption></figure>
+      <figure class="rv" style="--d:.08s"><img src="logo-planche.jpg" alt="Logo YOKK sur fond vert et sur fond clair" loading="lazy"><figcaption>Branding & logo</figcaption></figure>
+      <figure class="rv" style="--d:.16s"><img src="affiche.jpg" alt="Affiche YOKK : votre business mérite de grandir" loading="lazy" style="object-position:top"><figcaption>Affiche réseaux sociaux</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="brief" id="projet">
+  <div class="wrap brief-grid">
+    <div>
+      <div class="kicker rv">Démarrer mon projet</div>
+      <h2 class="rv">Parlez-nous de<br>votre <span class="gold">business.</span></h2>
+      <p class="lead rv">Remplissez ces quelques champs : votre demande arrive directement sur notre WhatsApp, déjà rédigée. Réponse rapide, premier échange gratuit.</p>
+      <div class="direct rv">
+        <a class="wa" href="#"><div class="ti g"><svg viewBox="0 0 140 140"><path d="M30 110l8-26a44 44 0 1 1 18 18z"/></svg></div><div><b>WhatsApp</b><span>+33 6 17 56 63 42</span></div></a>
+        <a href="mailto:niangamadou394@gmail.com?subject=Projet%20YOKK"><div class="ti"><svg viewBox="0 0 140 140"><rect x="18" y="34" width="104" height="72" rx="10"/><path d="M22 40l48 36 48-36"/></svg></div><div><b>E-mail</b><span>niangamadou394@gmail.com</span></div></a>
+      </div>
+    </div>
+    <form class="form rv" id="form" style="--d:.1s" novalidate>
+      <div class="row2">
+        <div class="field"><label for="nom">Votre prénom</label><input id="nom" name="nom" autocomplete="given-name" placeholder="Ex. Aminata" required></div>
+        <div class="field"><label for="act">Votre activité</label><input id="act" name="act" placeholder="Ex. boutique de tissus" required></div>
+      </div>
+      <div class="field"><span class="lab">Ce dont vous avez besoin</span>
+        <div class="chips" id="needs">
+          <label><input type="checkbox" value="un site pour vendre"><span>Site pour vendre</span></label>
+          <label><input type="checkbox" value="le branding"><span>Branding</span></label>
+          <label><input type="checkbox" value="une vidéo de présentation"><span>Vidéo de présentation</span></label>
+          <label><input type="checkbox" value="une vidéo publicitaire"><span>Vidéo pub</span></label>
+          <label><input type="checkbox" value="une stratégie de croissance"><span>Stratégie</span></label>
+          <label><input type="checkbox" value="l'offre Lancement"><span>Offre Lancement</span></label>
+          <label><input type="checkbox" value="l'offre Visibilité"><span>Offre Visibilité</span></label>
+          <label><input type="checkbox" value="l'offre Croissance"><span>Offre Croissance</span></label>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="ville">Ville</label><input id="ville" name="ville" placeholder="Ex. Dakar"></div>
+        <div class="field"><label for="delai">Quand voulez-vous démarrer ?</label>
+          <select id="delai"><option>Dès que possible</option><option>Dans le mois</option><option>Dans les 3 mois</option><option>Je me renseigne</option></select></div>
+      </div>
+      <div class="field"><label for="msg">Votre projet en quelques mots <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><textarea id="msg" placeholder="Ex. Je veux vendre mes produits en ligne et être plus visible sur TikTok."></textarea></div>
+      <button class="btn btn-gold" type="submit"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3z"/></svg>Envoyer sur WhatsApp</button>
+      <small id="hint">Votre message s'ouvre dans WhatsApp, vous n'avez plus qu'à l'envoyer.</small>
+    </form>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div><div class="kicker rv">Questions fréquentes</div><h2 class="rv">Vous vous demandez <span class="gold">peut-être…</span></h2>
+      <p class="lead rv">Une autre question ? Écrivez-nous, on répond vite.</p></div>
+    <div>
+      <details class="rv"><summary>Combien coûte un projet ?<i>+</i></summary><p>Cela dépend de vos besoins. Après un premier échange gratuit, nous vous envoyons un devis clair, sans surprise, adapté à votre budget.</p></details>
+      <details class="rv"><summary>Je n'ai ni nom ni logo, vous pouvez m'aider ?<i>+</i></summary><p>Oui. Nous créons votre nom, votre slogan, votre logo et toute votre identité visuelle, de zéro.</p></details>
+      <details class="rv"><summary>Mes clients pourront payer avec Wave ou Orange Money ?<i>+</i></summary><p>Oui. Nos sites pour vendre sont pensés pour le Sénégal : commande sur WhatsApp et paiement mobile.</p></details>
+      <details class="rv"><summary>Je suis à l'étranger, on peut travailler ensemble ?<i>+</i></summary><p>Bien sûr. Tout se fait à distance, sur WhatsApp et en visio. Idéal aussi pour la diaspora qui lance un projet au pays.</p></details>
+      <details class="rv"><summary>Comment se passe la première étape ?<i>+</i></summary><p>Remplissez le formulaire ou écrivez-nous sur WhatsApp. On fixe un appel pour comprendre votre activité, puis on vous propose un plan d'action.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="giant" aria-hidden="true">YOKK</div>
+  <div class="wrap">
+    <p class="serif rv">Yokk sa business.</p>
+    <p class="sub rv">FAITES GRANDIR VOTRE BUSINESS</p>
+    <a class="btn rv" href="#projet">Démarrer mon projet <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#" class="brand"><img src="logo.svg" alt="" style="width:36px;height:36px"><div><b style="font-size:1rem">YOKK</b><small>AGENCE DE CROISSANCE</small></div></a>
+    <nav aria-label="Pied de page"><a href="#services">Services</a><a href="#offres">Offres</a><a href="#creations">Créations</a><a href="#projet">Contact</a></nav>
+    <span>© <span id="y"></span> YOKK · Sénégal</span>
+  </div>
+</footer>
+
+<a class="wa-float wa" href="#" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg></a>
+
+<div class="mbar" id="mbar">
+  <a class="btn btn-ghost wa" href="#">WhatsApp</a>
+  <a class="btn btn-gold" href="#projet">Mon projet</a>
+</div>
+
+<script>
+const WA = "33617566342";
+const waLink = txt => `https://wa.me/${WA}?text=` + encodeURIComponent(txt);
+document.querySelectorAll(".wa").forEach(a => {
+  a.href = waLink("Bonjour YOKK, je souhaite parler de mon projet.");
+  a.target = "_blank"; a.rel = "noopener";
+});
+document.getElementById("y").textContent = new Date().getFullYear();
+
+/* en-tête : fond au défilement, se cache en descendant */
+const hd = document.getElementById("hd"), mbar = document.getElementById("mbar");
+let lastY = 0;
+addEventListener("scroll", () => {
+  const y = scrollY;
+  hd.classList.toggle("scrolled", y > 30);
+  hd.classList.toggle("hide", y > 500 && y > lastY && !document.body.classList.contains("menu-open"));
+  mbar.classList.toggle("show", y > 500);
+  lastY = y;
+}, { passive: true });
+
+/* menu mobile */
+const burger = document.getElementById("burger");
+const toggleMenu = open => {
+  document.body.classList.toggle("menu-open", open);
+  burger.setAttribute("aria-expanded", open);
+  document.body.style.overflow = open ? "hidden" : "";
+};
+burger.onclick = () => toggleMenu(!document.body.classList.contains("menu-open"));
+document.querySelectorAll("#links a").forEach(a => a.addEventListener("click", () => toggleMenu(false)));
+addEventListener("keydown", e => e.key === "Escape" && toggleMenu(false));
+
+/* lien actif dans le menu */
+const navLinks = [...document.querySelectorAll("#links a.l")];
+const secObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id));
+}), { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("section[id]").forEach(s => secObs.observe(s));
+
+/* son de la vidéo */
+const vid = document.getElementById("vid"), sound = document.getElementById("sound");
+sound.onclick = () => { vid.muted = !vid.muted; if (!vid.muted) { vid.currentTime = 0; vid.play(); } sound.textContent = vid.muted ? "🔊 Activer le son" : "🔇 Couper le son"; };
+
+/* vidéo de la galerie : lecture seulement quand elle est visible */
+const lazy = new IntersectionObserver(es => es.forEach(e => { const v = e.target; e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }), { threshold: .3 });
+document.querySelectorAll(".lazyv").forEach(v => lazy.observe(v));
+
+/* apparitions au défilement */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* effets 3D (souris uniquement) */
+const fine = matchMedia("(hover:hover) and (pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches;
+if (fine) {
+  const stage = document.getElementById("stage"), phone = document.getElementById("phone");
+  stage.addEventListener("mousemove", e => {
+    const r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    phone.style.transform = `rotateY(${-18 + x * 22}deg) rotateX(${8 - y * 16}deg) rotateZ(3deg)`;
+  });
+  stage.addEventListener("mouseleave", () => phone.style.transform = "");
+  document.querySelectorAll(".tilt").forEach(c => {
+    c.addEventListener("mousemove", e => {
+      const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.transform = `perspective(900px) rotateY(${(x - .5) * 8}deg) rotateX(${(.5 - y) * 8}deg) translateY(-4px)`;
+      c.style.setProperty("--mx", x * 100 + "%"); c.style.setProperty("--my", y * 100 + "%");
+    });
+    c.addEventListener("mouseleave", () => c.style.transform = "");
+  });
+}
+
+/* formulaire → message WhatsApp prérempli */
+const form = document.getElementById("form"), needs = [...document.querySelectorAll("#needs input")];
+document.querySelectorAll(".svc").forEach(a => a.addEventListener("click", () => {
+  needs.forEach(n => { if (n.value === a.dataset.svc) n.checked = true; });
+}));
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const nom = form.nom.value.trim(), act = form.act.value.trim();
+  if (!nom || !act) {
+    const f = !nom ? form.nom : form.act; f.focus(); f.style.borderColor = "#e07a5f";
+    document.getElementById("hint").textContent = "Indiquez au moins votre prénom et votre activité.";
+    return;
+  }
+  const choix = needs.filter(n => n.checked).map(n => n.value);
+  const lignes = [
+    `Bonjour YOKK, je m'appelle ${nom}.`,
+    `Mon activité : ${act}${form.ville.value.trim() ? " (" + form.ville.value.trim() + ")" : ""}.`,
+    choix.length ? `J'ai besoin de : ${choix.join(", ")}.` : "",
+    `Démarrage souhaité : ${form.delai.value}.`,
+    document.getElementById("msg").value.trim() ? `Mon projet : ${document.getElementById("msg").value.trim()}` : ""
+  ].filter(Boolean);
+  window.open(waLink(lignes.join("\n")), "_blank", "noopener");
+});
+form.querySelectorAll("input").forEach(i => i.addEventListener("input", () => i.style.borderColor = ""));
+</script>
+</body>
+</html>
