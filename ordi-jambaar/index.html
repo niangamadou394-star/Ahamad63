@@ -150,8 +150,8 @@ header.scrolled{background:#0b0b0ceb;backdrop-filter:blur(14px) saturate(140%);b
 .sheet .gal{background:#000;position:relative;min-height:460px}
 .sheet .gal img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .sheet .gal img#mi{transition:opacity .15s}
-.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;backdrop-filter:blur(6px)}
-.nav.pv{left:12px}.nav.nx{right:12px}
+.gnav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;backdrop-filter:blur(6px)}
+.gnav.pv{left:12px}.gnav.nx{right:12px}
 .thumbs{position:absolute;left:0;right:0;bottom:12px;z-index:3;display:flex;justify-content:center;gap:8px;padding:0 12px;overflow-x:auto;scrollbar-width:none}
 .thumbs button{flex:none;width:54px;height:54px;border-radius:10px;overflow:hidden;border:2px solid #ffffff40;padding:0;background:#000;cursor:pointer;opacity:.7;transition:all .2s}
 .thumbs button.on{border-color:var(--red);opacity:1}
@@ -246,6 +246,50 @@ header.scrolled{background:#0b0b0ceb;backdrop-filter:blur(14px) saturate(140%);b
 footer{background:#050506;padding:44px 0 40px;color:#ffffff80;font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
 
+
+/* 2e photo au survol */
+.p .im img.alt{position:absolute;inset:0;opacity:0;transition:opacity .5s,transform .8s var(--ease)}
+.p:hover .im img.alt{opacity:1}
+/* tri */
+.sort{min-height:42px;border-radius:999px;border:1.5px solid var(--line2);background:#ffffff08;padding:0 2.2rem 0 1rem;font-weight:700;font-size:.84rem;cursor:pointer;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;background-size:14px}
+.sort option{background:#17171a}
+.rgt{display:flex;align-items:center;gap:.8rem}
+/* comparateur */
+.cmp{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:0 .7rem;border-radius:9px;border:1px solid #ffffff30;background:#000b;backdrop-filter:blur(6px);color:#fff;font-weight:800;font-size:.7rem;cursor:pointer;transition:all .25s}
+.cmp:hover{border-color:#fff}
+.cmp.on{background:#fff;color:#111;border-color:#fff}
+.cmp i{width:14px;height:14px;border-radius:4px;border:1.6px solid currentColor;display:grid;place-items:center;font-style:normal;font-size:.6rem;line-height:1}
+.cmp em{font-style:normal}
+.cbar{position:fixed;left:50%;bottom:24px;z-index:70;transform:translate(-50%,160%);transition:transform .45s var(--ease);display:flex;align-items:center;gap:.9rem;padding:.6rem .6rem .6rem 1rem;border-radius:20px;background:#fff;color:#111;box-shadow:0 24px 60px #000c;max-width:calc(100% - 20px)}
+.cbar.on{transform:translate(-50%,0)}
+.cbar .th{display:flex}
+.cbar .th img{width:42px;height:42px;border-radius:10px;object-fit:cover;border:2px solid #fff;margin-left:-10px;box-shadow:0 4px 10px #0003}
+.cbar .th img:first-child{margin-left:0}
+.cbar b{font-size:.86rem;white-space:nowrap}
+.cbar .btn{min-height:44px;padding:0 1.1rem;font-size:.86rem}
+.cbar .btn:disabled{opacity:.45;cursor:default;transform:none}
+.cbar .clr{border:0;background:none;color:#666;font-weight:700;font-size:.8rem;cursor:pointer;padding:0 .4rem}
+.ctab{width:min(1100px,100%);max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:28px;position:relative;animation:up .4s var(--ease);padding:2rem;overscroll-behavior:contain}
+.ctab h3{font-size:1.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:1.4rem;padding-right:3rem}
+.ctab .x{background:#ffffff10}
+.ctab .scr{overflow-x:auto;margin:0 -2rem;padding:0 2rem}
+.ctab table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:560px}
+.ctab th,.ctab td{padding:.8rem .9rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:.9rem}
+.ctab thead td{border:0;padding-bottom:1.1rem}
+.ctab thead img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;margin-bottom:.7rem;cursor:pointer}
+.ctab thead b{display:block;font-size:.98rem;line-height:1.25}
+.ctab thead small{color:var(--red);font-size:.7rem;font-weight:800;letter-spacing:.12em}
+.ctab tbody th{color:var(--muted);font-weight:600;width:150px}
+.ctab tbody td{font-weight:700}
+.ctab tbody td.no{color:#ffffff40;font-weight:500}
+.ctab tfoot td{border:0;padding-top:1.2rem}
+.ctab tfoot .btn{width:100%;min-height:46px;font-size:.84rem;padding:0 .6rem;white-space:normal}
+.ctab tfoot .rmc{display:block;margin:.6rem auto 0;border:0;background:none;color:var(--muted);font-weight:700;font-size:.78rem;cursor:pointer}
+/* carte */
+.map{margin-top:50px;border-radius:28px;overflow:hidden;border:1px solid var(--line);height:380px;box-shadow:0 40px 80px #000a;background:#17171a}
+.map iframe{width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(180deg) saturate(.6) contrast(.95)}
+
 .mbar{display:none}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.in{opacity:1;transform:none}
@@ -286,6 +330,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   .mbar .w{background:var(--wa);color:#062b14}.mbar .w svg{fill:#062b14;stroke:none}
   .mbar .count{top:2px;right:calc(50% - 26px)}
   .toast{bottom:96px}
+  .stats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-20px;padding-right:20px}
+  .stats::-webkit-scrollbar{display:none}.stats span{flex:none}
+  .p .im img.alt{display:none}
+  .cmp{top:8px;right:8px;min-height:30px;padding:0 .55rem;font-size:.66rem}
+  .rgt{width:100%}.sort{flex:1}
+  .cbar{bottom:calc(84px + env(safe-area-inset-bottom));gap:.6rem;padding:.5rem .5rem .5rem .7rem}
+  .cbar .th{display:none}.cbar{padding:.5rem .5rem .5rem 1rem}
+  .ctab{border-radius:24px 24px 0 0;padding:1.4rem;max-height:94vh}.ctab .scr{margin:0 -1.4rem;padding:0 1.4rem}
+  .ctab table{min-width:520px}.ctab tbody th{width:110px}
+  .map{height:300px;margin-top:36px;border-radius:22px}
   footer{padding-bottom:110px}
 }
 </style>
@@ -342,7 +396,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   <div class="wrap">
     <div class="kicker rv">Catalogue</div>
     <h2 class="rv">Nos produits <span class="red">disponibles.</span></h2>
-    <p class="lead rv">PC portables, 2-en-1, MacBook, iPad, iPhone : photos réelles, prises en boutique. Ajoutez vos choix à votre sélection et envoyez-la en un clic sur WhatsApp.</p>
+    <p class="lead rv">PC portables, 2-en-1, MacBook, iPad, iPhone : photos réelles, prises en boutique. Comparez jusqu'à 3 produits, ajoutez vos choix à votre sélection et envoyez-la en un clic sur WhatsApp.</p>
     <div class="tools">
       <div class="row">
         <div class="chips" id="fb" aria-label="Filtrer par catégorie"></div>
@@ -350,7 +404,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       </div>
       <div class="row">
         <div class="chips uchips" id="fu" aria-label="Filtrer par usage"></div>
-        <span class="result" id="res"></span>
+        <div class="rgt"><select class="sort" id="sort" aria-label="Trier par prix" hidden><option value="">Recommandés</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select><span class="result" id="res"></span></div>
       </div>
     </div>
     <div class="grid" id="grid"></div>
@@ -397,6 +451,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       </div>
     </div>
   </div>
+  <div class="wrap"><div class="map rv"><iframe title="Plan d'accès : ORDI JAMBAAR, 87 Avenue Lamine Guèye, Dakar" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=87+Avenue+Lamine+Gu%C3%A8ye,+Dakar,+S%C3%A9n%C3%A9gal&z=16&output=embed"></iframe></div></div>
 </section>
 </main>
 
@@ -410,7 +465,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <!-- fiche produit -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
   <div class="sheet">
-    <div class="gal"><img id="mi" alt=""><button class="x" id="mx" type="button" aria-label="Fermer">×</button><button class="nav pv" id="mprev" type="button" aria-label="Photo précédente">‹</button><button class="nav nx" id="mnext" type="button" aria-label="Photo suivante">›</button><div class="thumbs" id="mth"></div></div>
+    <div class="gal"><img id="mi" alt=""><button class="x" id="mx" type="button" aria-label="Fermer">×</button><button class="gnav pv" id="mprev" type="button" aria-label="Photo précédente">‹</button><button class="gnav nx" id="mnext" type="button" aria-label="Photo suivante">›</button><div class="thumbs" id="mth"></div></div>
     <div class="info">
       <div class="kicker" id="mb"></div>
       <h3 id="mt"></h3>
@@ -445,6 +500,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       <button class="btn btn-wa" id="send" type="button"><svg class="ico wa-ico" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3z"/></svg>Envoyer ma sélection</button>
     </div>
   </aside>
+</div>
+
+<div class="cbar" id="cbar" role="region" aria-label="Comparateur"><div class="th" id="cth"></div><b id="cnb"></b><button class="btn btn-red" id="cgo" type="button">Comparer</button><button class="clr" id="cclr" type="button">Effacer</button></div>
+
+<div class="modal cmpm" id="cmodal" role="dialog" aria-modal="true" aria-labelledby="ctt">
+  <div class="ctab"><button class="x" id="cx" type="button" aria-label="Fermer">×</button><h3 id="ctt">Comparer</h3><div class="scr"><table id="ctable"></table></div></div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -640,11 +701,13 @@ function setUsage(v) { fUsage = v; $("fu").querySelectorAll("button").forEach(x 
 const grid = $("grid");
 function draw() {
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
-  const list = PCS.filter(p => (fMarque === "Tout" || p.cat === fMarque) && (fUsage === "Tous usages" || p.usages.includes(fUsage)) &&
+  let list = PCS.filter(p => (fMarque === "Tout" || p.cat === fMarque) && (fUsage === "Tous usages" || p.usages.includes(fUsage)) &&
     words.every(w => (p.nom + " " + p.marque + " " + p.cat + " " + p.specs.flat().join(" ")).toLowerCase().includes(w)));
+  if (sortBy) list = list.slice().sort((a, b) => { const x = price(a), y = price(b); if (x == null) return 1; if (y == null) return -1; return sortBy === "asc" ? x - y : y - x; });
+  $("sort").hidden = PCS.filter(p => price(p) != null).length < 2;
   grid.innerHTML = list.map((p, i) => `
-    <article class="p tilt" style="animation-delay:${i * 40}ms">
-      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="${photo(p.img)}" alt="${p.nom}" loading="lazy"><span class="br">${p.marque.toUpperCase()}</span>${p.imgs.length > 1 ? `<span class="nph">${p.imgs.length} photos</span>` : ""}<span class="view">Voir la fiche</span></div>
+    <article class="p tilt" style="animation-delay:${i * 40}ms"><button class="cmp" type="button" data-cmp="${p.id}"></button>
+      <div class="im" data-open="${p.id}" role="button" tabindex="0" aria-label="Voir ${p.nom}"><img src="${photo(p.img)}" alt="${p.nom}" loading="lazy">${p.imgs.length > 1 ? `<img class="alt" src="${photo(p.imgs[1])}" alt="" loading="lazy">` : ""}<span class="br">${p.marque.toUpperCase()}</span>${p.imgs.length > 1 ? `<span class="nph">${p.imgs.length} photos</span>` : ""}</div>
       <div class="bd"><h3 data-open="${p.id}">${p.nom}</h3>${p.usages.length ? `<div class="for">${p.usages.join(" · ")}</div>` : ""}
         <div class="sp">${short(p).map(s => `<span>${s}</span>`).join("") || "<span>Caractéristiques sur demande</span>"}</div>
         <div class="ft"><div class="pr">${p.prix || "Prix sur demande"}<small>En boutique</small></div>
@@ -653,11 +716,52 @@ function draw() {
     </article>`).join("");
   $("empty").style.display = list.length ? "none" : "block";
   $("res").textContent = `${list.length} produit${list.length > 1 ? "s" : ""}`;
-  syncCart(); bindTilt();
+  syncCart(); syncCmp(); bindTilt();
 }
 $("q").addEventListener("input", e => { q = e.target.value; draw(); });
+let sortBy = "";
+const price = p => { const n = (p.prix || "").replace(/[^\d]/g, ""); return n ? +n : null; };
+$("sort").addEventListener("change", e => { sortBy = e.target.value; draw(); });
+
+/* --- comparateur (3 produits maximum) --- */
+let cmp = [];
+function syncCmp() {
+  cmp = cmp.filter(byId);
+  document.querySelectorAll(".cmp[data-cmp]").forEach(b => { const on = cmp.includes(b.dataset.cmp); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.innerHTML = `<i>${on ? "✓" : ""}</i><em>Comparer</em>`; b.setAttribute("aria-label", "Comparer " + byId(b.dataset.cmp).nom); });
+  $("cbar").classList.toggle("on", cmp.length > 0);
+  $("cth").innerHTML = cmp.map(id => `<img src="${photo(byId(id).img)}" alt="">`).join("");
+  $("cnb").textContent = cmp.length < 2 ? "Choisissez un 2e produit" : `${cmp.length} produits`;
+  $("cgo").disabled = cmp.length < 2;
+}
+function toggleCmp(id) {
+  if (cmp.includes(id)) cmp = cmp.filter(x => x !== id);
+  else { if (cmp.length >= 3) return toast("3 produits maximum"); cmp.push(id); }
+  syncCmp();
+}
+const cmodal = $("cmodal");
+function openCmp() {
+  const ps = cmp.map(byId), skip = /^(config|modèle)/i;
+  const keys = [...new Set(ps.flatMap(p => p.specs.map(s => s[0]).filter(k => !skip.test(k))))];
+  const cell = (v) => v ? `<td>${v}</td>` : `<td class="no">—</td>`;
+  const rows = [["Prix", p => p.prix || "Sur demande"], ["Catégorie", p => p.cat], ["Idéal pour", p => p.usages.join(", ")],
+    ...keys.map(k => [k, p => (p.specs.find(s => s[0] === k) || [])[1]])];
+  $("ctable").innerHTML = `<thead><tr><th></th>${ps.map(p => `<td><img src="${photo(p.img)}" alt="${p.nom}" data-copen="${p.id}"><small>${p.marque.toUpperCase()}</small><b>${p.nom}</b></td>`).join("")}</tr></thead>
+    <tbody>${rows.map(([k, f]) => `<tr><th>${k}</th>${ps.map(p => cell(f(p))).join("")}</tr>`).join("")}</tbody>
+    <tfoot><tr><th></th>${ps.map(p => `<td><a class="btn btn-wa" target="_blank" rel="noopener" href="${waLink(`Bonjour ORDI JAMBAAR, je suis intéressé(e) par : ${p.nom}. Est-il disponible et quel est son prix ?`)}">Commander</a><button class="rmc" type="button" data-crm="${p.id}">Retirer</button></td>`).join("")}</tr></tfoot>`;
+  cmodal.classList.add("open"); document.body.style.overflow = "hidden"; $("cx").focus();
+}
+function closeCmp() { if (!cmodal.classList.contains("open")) return; cmodal.classList.remove("open"); document.body.style.overflow = ""; }
+$("cgo").onclick = openCmp;
+$("cclr").onclick = () => { cmp = []; syncCmp(); };
+$("cx").onclick = closeCmp;
+cmodal.addEventListener("click", e => {
+  if (e.target === cmodal) return closeCmp();
+  const r = e.target.closest("[data-crm]"); if (r) { toggleCmp(r.dataset.crm); if (cmp.length < 2) closeCmp(); else openCmp(); }
+  const o = e.target.closest("[data-copen]"); if (o) { closeCmp(); openSheet(o.dataset.copen); }
+});
 grid.addEventListener("click", e => {
   const a = e.target.closest(".add"); if (a) return toggleCart(a.dataset.id);
+  const c = e.target.closest("[data-cmp]"); if (c) return toggleCmp(c.dataset.cmp);
   const o = e.target.closest("[data-open]"); if (o) openSheet(o.dataset.open);
 });
 grid.addEventListener("keydown", e => { const o = e.target.closest("[data-open]"); if (o && e.key === "Enter") openSheet(o.dataset.open); });
@@ -700,7 +804,10 @@ $("mshare").onclick = async () => {
   const url = location.origin + location.pathname + "#" + $("madd").dataset.id;
   try { if (navigator.share) await navigator.share({ title: $("mt").textContent, url }); else { await navigator.clipboard.writeText(url); toast("Lien copié"); } } catch (e) {}
 };
-addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); openDrawer(false); } });
+addEventListener("keydown", e => {
+  if (e.key === "Escape") { closeSheet(); closeCmp(); openDrawer(false); }
+  if (modal.classList.contains("open") && cur && cur.imgs.length > 1 && (e.key === "ArrowRight" || e.key === "ArrowLeft")) setPhoto(ph + (e.key === "ArrowRight" ? 1 : -1));
+});
 
 /* --- divers --- */
 document.querySelectorAll(".wa").forEach(a => { a.href = waLink("Bonjour ORDI JAMBAAR, je souhaite un renseignement."); a.target = "_blank"; a.rel = "noopener"; });
@@ -734,6 +841,7 @@ loadSheet().then(list => {
   if (!PCS.some(p => p.cat === fMarque)) fMarque = "Tout";
   Object.keys(cart).forEach(id => { if (!byId(id)) delete cart[id]; }); save();
   buildCats(); draw();
+  const h = location.hash.slice(1); if (h && byId(h) && !modal.classList.contains("open")) openSheet(h);
 }).catch(e => console.info("Catalogue intégré utilisé :", e.message));
 </script>
 </body>
