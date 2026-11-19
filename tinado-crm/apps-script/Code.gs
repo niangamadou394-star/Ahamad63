@@ -6,7 +6,12 @@ const CODE_ACCES = "CHANGER-MOI";
 const COLS = ["reservations", "contacts", "commandes", "activite"];
 
 function sheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) { // script créé hors d'un Google Sheet : on crée (une seule fois) le tableau
+    const p = PropertiesService.getScriptProperties(), id = p.getProperty("sheetId");
+    ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create("Maison Tinado - Gestion");
+    if (!id) p.setProperty("sheetId", ss.getId());
+  }
   let sh = ss.getSheetByName("donnees");
   if (!sh) { sh = ss.insertSheet("donnees"); sh.appendRow(["collection", "id", "contenu", "maj"]); sh.setFrozenRows(1); }
   return sh;
@@ -17,6 +22,9 @@ function bump_() { PropertiesService.getScriptProperties().setProperty("v", Stri
 
 function doGet() { return out_({ ok: true, service: "CRM Maison Tinado" }); }
 function doPost(e) {
+  try { return handle_(e); } catch (err) { return out_({ error: "server", message: String(err) }); }
+}
+function handle_(e) {
   let b; try { b = JSON.parse(e.postData.contents); } catch (x) { return out_({ error: "bad" }); }
   if (b.code !== CODE_ACCES) return out_({ error: "auth" });
   if (b.action === "login") return out_({ ok: true });

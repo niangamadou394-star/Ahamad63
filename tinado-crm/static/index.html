@@ -191,7 +191,8 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
     document.body.appendChild(d); document.getElementById("ln").value = who() === "Équipe" ? "" : who();
     document.getElementById("lf").onsubmit = async e => { e.preventDefault(); const c = document.getElementById("lc").value, p = document.getElementById("le");
       try { const r = await fetch(window.TINADO_API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "login", code: c }) }); const j = await r.json();
-        if (!j.ok) { p.hidden = false; p.textContent = "Code incorrect."; return; } } catch (x) { p.hidden = false; p.textContent = "Serveur injoignable. Vérifiez la connexion."; return; }
+        if (!j.ok) { p.hidden = false; p.textContent = "Code incorrect."; return; } } catch (x) { p.hidden = false; p.textContent = "Serveur injoignable : vérifiez que le déploiement Apps Script est en accès « Tout le monde »."; return; }
+        if (j.error === "server") { p.hidden = false; p.textContent = "Erreur du serveur Google : " + (j.message || ""); return; }
       try { localStorage.setItem("tinado-code", c); localStorage.setItem("tinado-nom", document.getElementById("ln").value.trim() || "Équipe"); } catch (x) {}
       location.reload(); };
   }
