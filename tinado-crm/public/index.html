@@ -1,0 +1,577 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><link rel="icon" href="data:,"><title>Maison Tinado · Gestion</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* Layout : en-tête collant avec onglets ; contenu en grilles qui passent en une colonne sur téléphone */
+:root{
+  --bg:#f6f1e9; --surface:#fffdf9; --surface2:#efe7da; --line:#e2d6c4; --fg:#2b2118; --muted:#76685a;
+  --accent:#8a5f36; --accent-fg:#fffdf9; --gold:#b08a57; --gold-soft:#f1e3cb;
+  --ok:#2f7a4b; --warn:#a8701b; --bad:#b4442a; --info:#3c6a96;
+  --serif:"Cormorant Garamond",Georgia,serif; --body:Inter,ui-sans-serif,system-ui,sans-serif;
+  --r:12px; --shadow:0 1px 2px #2b21180d,0 8px 24px #2b211812;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17120e; --surface:#211a14; --surface2:#2a221a; --line:#3a2f25; --fg:#f2e9dc; --muted:#b3a593;
+  --accent:#d6a874; --accent-fg:#1d1610; --gold:#d9b27a; --gold-soft:#3b2e1d;
+  --ok:#6cc58f; --warn:#e5b25a; --bad:#ec8467; --info:#8fb6e0; --shadow:0 1px 2px #0006,0 8px 24px #0005; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17120e; --surface:#211a14; --surface2:#2a221a; --line:#3a2f25; --fg:#f2e9dc; --muted:#b3a593;
+  --accent:#d6a874; --accent-fg:#1d1610; --gold:#d9b27a; --gold-soft:#3b2e1d;
+  --ok:#6cc58f; --warn:#e5b25a; --bad:#ec8467; --info:#8fb6e0; --shadow:0 1px 2px #0006,0 8px 24px #0005; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:.18em}
+.brand small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn.sm{padding:5px 11px;font-size:12.5px}
+.btn.danger{color:var(--bad)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{padding:10px 14px;border-bottom:2px solid transparent;color:var(--muted);text-decoration:none;font-weight:600;white-space:nowrap}
+nav.tabs a.on{color:var(--fg);border-color:var(--gold)}
+main{padding-block:22px 70px}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 18px}
+.note{font-size:12.5px;color:var(--muted);background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:16px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.row>*{min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.kpi small{display:block;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.kpi b{display:block;font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1;margin-top:4px}
+.kpi em{font-style:normal;font-size:12px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+.grid2>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.panel+.panel{margin-top:16px}
+.occ{display:grid;gap:14px}
+.occ .l{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.track{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.fill{height:100%;background:var(--gold);border-radius:6px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer}
+.list li:last-child{border-bottom:0}
+.list small{display:block;color:var(--muted);font-size:12px}
+.list .r{text-align:right;white-space:nowrap}
+.empty{color:var(--muted);text-align:center;padding:24px 10px;font-size:13.5px}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--surface2);color:var(--muted)}
+.p-ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.p-warn{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.p-info{background:color-mix(in srgb,var(--info) 14%,transparent);color:var(--info)}
+.p-bad{background:color-mix(in srgb,var(--bad) 13%,transparent);color:var(--bad)}
+.p-gold{background:var(--gold-soft);color:var(--accent)}
+/* calendrier */
+.calw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.cal{display:grid;gap:3px;min-width:860px}
+.cal .h{font-size:11px;color:var(--muted);text-align:center}
+.cal .h.we{color:var(--gold)}
+.cal .apt{font-family:var(--serif);font-weight:600;font-size:16px;align-self:center;padding-right:8px;white-space:nowrap}
+.cal .d{height:44px;border-radius:5px;background:var(--surface2)}
+.cal .d.today{outline:1.5px solid var(--gold)}
+.cal .bk{height:44px;border-radius:7px;padding:4px 7px;font-size:11.5px;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;color:#fff}
+.bk.s-Demande{background:#a38d6f}.bk.s-Confirmée{background:#3c6a96}.bk.s-Payée{background:#2f7a4b}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+/* tableaux */
+.tblw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{text-align:left;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px}
+tr.r{cursor:pointer}tr.r:hover td{background:var(--surface2)}
+/* pipeline */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:10px;overflow-x:auto;padding-bottom:6px}
+.col{background:var(--surface2);border:1px solid var(--line);border-radius:var(--r);padding:10px;min-height:160px}
+.col h3{display:flex;justify-content:space-between;font-family:var(--serif);font-size:17px;margin:2px 4px 10px}
+.col h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.card:hover{border-color:var(--accent)}
+.card b{display:block}
+.card small{color:var(--muted);font-size:12px}
+.due{font-size:12px;font-weight:600}.due.late{color:var(--bad)}.due.today{color:var(--warn)}
+/* senteurs */
+.scents{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;text-align:center}
+.sc b{display:block;font-family:var(--serif);font-size:20px}
+.sc small{color:var(--muted);font-size:11.5px}
+.sc .n{font-family:var(--serif);font-size:26px;margin-top:4px}
+/* formulaire */
+.drawer{position:fixed;inset:0;z-index:20;display:none}
+.drawer.open{display:block}
+.drawer .ov{position:absolute;inset:0;background:#0007}
+.drawer .pn{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--surface);overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 20px}
+.drawer .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form label{display:grid;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+.form .full{grid-column:1/-1}
+input,select,textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+.qty{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.qty label{text-align:center}
+.calc{font-size:13px;background:var(--gold-soft);border-radius:9px;padding:8px 10px;color:var(--accent)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.err{color:var(--bad);font-size:12.5px}
+.feed{list-style:none;margin:0;padding:0;max-height:420px;overflow:auto}
+.feed li{padding:8px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.feed time{display:block;color:var(--muted);font-size:11.5px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:10px;font-weight:600;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+#r3{position:relative;height:calc(100vh - 118px);min-height:520px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,var(--surface),var(--bg) 75%);border-bottom:1px solid var(--line)}
+#r3c{position:absolute;inset:0}#r3c canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#r3l{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.l3{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform}
+.l3.apt{display:grid;justify-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 14px;box-shadow:var(--shadow)}
+.l3.apt b{font-family:var(--serif);font-size:19px;font-weight:600}.l3.apt span{font-size:12px;color:var(--muted)}.l3.apt em{font-style:normal;font-size:12px;color:var(--accent);font-weight:600}
+.l3.apt.on{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft),var(--shadow)}
+.l3.bt3{font-family:var(--serif);font-size:14px;font-weight:600;background:color-mix(in srgb,var(--surface) 85%,transparent);border-radius:6px;padding:0 6px}
+.l3.bt3 span{font-family:var(--body);font-size:11px;color:var(--accent)}
+#r3top{position:absolute;top:14px;left:max(14px,env(safe-area-inset-left,0px));display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 28px)}
+#r3top .k3{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:7px 12px;box-shadow:var(--shadow)}
+#r3top small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}#r3top b{font-family:var(--serif);font-size:20px}
+#r3tools{position:absolute;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#r3tools span{font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+#r3p{position:absolute;top:14px;right:max(14px,env(safe-area-inset-right,0px));width:min(340px,calc(100% - 28px));max-height:calc(100% - 28px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.ph3{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.ph3 b{font-family:var(--serif);font-size:22px}
+.kv3{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.kv3 div{background:var(--surface2);border-radius:10px;padding:8px 10px}.kv3 small{display:block;font-size:11px;color:var(--muted)}.kv3 b{font-size:14px}
+#r3p h3{font-family:var(--serif);font-size:17px;margin:6px 0}
+@media (max-width:700px){#r3p{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));width:auto;max-height:55%}#r3top .k3:nth-child(n+3){display:none}#r3tools span{display:none}}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.scents{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.sp .btn:not(.pri){display:none}.l3.apt span,.l3.apt em{display:none}.l3.apt{padding:4px 10px}.l3.apt b{font-size:16px}.form{grid-template-columns:1fr}.scents{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:26px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+#login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 30%,var(--surface),var(--bg) 70%);display:grid;place-items:center;padding:20px}
+#login form{width:min(380px,100%);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;box-shadow:var(--shadow);text-align:center}
+#login .lb{font-family:var(--serif);font-size:38px;font-weight:600;letter-spacing:.3em;padding-left:.3em}
+#login small{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+#login label{display:grid;gap:4px;text-align:left;font-size:12px;font-weight:600;color:var(--muted)}
+#login .btn{justify-content:center;margin-top:6px}
+</style>
+
+</head><body><script>
+/* Adaptateur : remplace le stockage de claude.ai par l'API du serveur Maison Tinado */
+(() => {
+  const L = {}, cache = { reservations: [], contacts: [], commandes: [], activite: [] }; let ver = -1, started = false;
+  const who = () => { try { return localStorage.getItem("tinado-nom") || "Équipe"; } catch (e) { return "Équipe"; } };
+  const snap = c => ({ docs: cache[c].map(d => { const { id, ...rest } = d; return { id, exists: true, data: () => rest }; }), size: cache[c].length, empty: !cache[c].length, metadata: { fromCache: false, hasPendingWrites: false } });
+  const emit = () => Object.entries(L).forEach(([c, fs]) => fs.forEach(f => f(snap(c))));
+  async function pull(force) {
+    try {
+      if (!force) { const r = await fetch("/api/version"); if (r.status === 401) return showLogin(); const { v } = await r.json(); if (v === ver) return; }
+      const r = await fetch("/api/all"); if (r.status === 401) return showLogin();
+      const j = await r.json(); ver = j.v; Object.assign(cache, j.data); emit();
+    } catch (e) {}
+  }
+  const start = () => { if (started) return; started = true; pull(true); setInterval(pull, 8000); document.addEventListener("visibilitychange", () => !document.hidden && pull()); };
+  const req = async (method, col, id, body) => { const r = await fetch(`/api/${col}/${encodeURIComponent(id)}`, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+    if (r.status === 401) { showLogin(); throw { code: "unavailable" }; } if (!r.ok) throw { code: r.status === 400 ? "invalid_argument" : "unavailable" }; pull(true); };
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const docRef = (col, id) => ({ id, path: col + "/" + id,
+    set: data => req("PUT", col, id, data),
+    update: data => { const cur = cache[col].find(d => d.id === id) || {}; const { id: _, ...rest } = cur; return req("PUT", col, id, { ...rest, ...data }); },
+    delete: () => req("DELETE", col, id) });
+  const collection = c => { const q = { orderBy() { return q; }, limit() { return q; }, where() { return q; },
+      onSnapshot(next) { (L[c] = L[c] || []).push(next); start(); if (ver >= 0) setTimeout(() => next(snap(c)), 0); return () => { L[c] = L[c].filter(f => f !== next); }; },
+      get: async () => snap(c), doc: id => docRef(c, id || newId()), add: async data => { const id = newId(); await req("PUT", c, id, data); return docRef(c, id); } }; return q; };
+  const db = { collection, doc: p => { const [c, id] = p.split("/"); return docRef(c, id); } };
+  const user = { id: async () => who(), can: async () => true, isOwner: async () => true, canEdit: async () => true,
+    profiles: async ids => Object.fromEntries([].concat(ids).map(i => [i, { id: i, name: i, avatarUrl: "", color: "#b08a57" }])) };
+  window.claude = { use: async n => ({ db, user })[n] || null };
+  function showLogin() {
+    if (document.getElementById("login")) return;
+    const d = document.createElement("div"); d.id = "login";
+    d.innerHTML = `<form id="lf"><div class="lb">TINADO</div><small>Maison · Dakar · Gestion</small>
+      <label>Votre prénom<input id="ln" required autocomplete="given-name" value="${who() === "Équipe" ? "" : who()}"></label>
+      <label>Code d'accès<input id="lc" type="password" required autocomplete="current-password"></label>
+      <button class="btn pri" type="submit">Entrer</button><p id="le" class="err" hidden></p></form>`;
+    document.body.appendChild(d);
+    document.getElementById("lf").onsubmit = async e => { e.preventDefault();
+      const r = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: document.getElementById("lc").value }) });
+      if (!r.ok) { const p = document.getElementById("le"); p.hidden = false; p.textContent = "Code incorrect."; return; }
+      try { localStorage.setItem("tinado-nom", document.getElementById("ln").value.trim() || "Équipe"); } catch (e) {}
+      location.reload(); };
+  }
+})();
+</script>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><b>TINADO</b><small>Gestion</small></div>
+    <div class="sp">
+      <button class="btn pri" type="button" data-new="resa">+ Réservation</button>
+      <button class="btn" type="button" data-new="contact">+ Contact</button>
+      <button class="btn" type="button" data-new="cmd">+ Commande senteurs</button>
+    </div>
+  </div>
+  <div class="wrap"><nav class="tabs" id="tabs">
+    <a href="#residence" data-v="residence">Résidence 3D</a>
+    <a href="#bord" data-v="bord">Tableau de bord</a>
+    <a href="#calendrier" data-v="calendrier">Calendrier</a>
+    <a href="#reservations" data-v="reservations">Réservations</a>
+    <a href="#entreprises" data-v="entreprises">Entreprises</a>
+    <a href="#proprietaires" data-v="proprietaires">Propriétaires</a>
+    <a href="#senteurs" data-v="senteurs">Senteurs</a>
+    <a href="#journal" data-v="journal">Journal</a>
+  </nav></div>
+</header>
+<section id="r3" hidden aria-label="La résidence en 3D"><div id="r3c"></div><div id="r3l"></div><div id="r3top"></div>
+  <div id="r3tools"><button class="btn sm" type="button" data-reset3>Recentrer</button><span>Glissez pour tourner · molette ou pincer pour zoomer · touchez un appartement, une case du calendrier ou un flacon</span></div><aside id="r3p" hidden></aside></section>
+<main class="wrap" id="main"><p class="note">Chargement des données de Maison Tinado…</p></main>
+<div class="drawer" id="drawer" aria-hidden="true"><div class="ov" data-close></div><aside class="pn" role="dialog" aria-modal="true" aria-labelledby="dT"><div id="dB"></div></aside></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const F = n => (n || n === 0) && n !== "" && !isNaN(n) ? Math.round(Number(n)).toLocaleString("fr-FR").replace(/ | /g, " ") + " F" : "—";
+const toast = m => { const t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 1800); };
+const D = s => new Date(s + "T00:00");
+const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+const today = () => iso(new Date());
+const nights = (a, b) => a && b ? Math.max(0, Math.round((D(b) - D(a)) / 864e5)) : 0;
+const fmtD = s => s ? D(s).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : "";
+const ago = t => { if (!t) return ""; const s = (Date.now() - t) / 1e3; if (s < 60) return "à l'instant"; if (s < 3600) return `il y a ${Math.floor(s / 60)} min`; if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`; return new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
+
+const APTS = [{ id: "f3", nom: "F3 · Point E", court: "F3", nuit: 65000, mois: 1000000 }, { id: "cs", nom: "Chambre-salon", court: "Chambre-salon", nuit: 45000, mois: 850000 }];
+const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Bouche-à-oreille", "Instagram", "Site internet"];
+const RSTAT = ["Demande", "Confirmée", "Payée", "Annulée"];
+const RPILL = { "Demande": "p-gold", "Confirmée": "p-info", "Payée": "p-ok", "Annulée": "p-bad" };
+const STAGES = ["À contacter", "Contacté", "Rendez-vous", "Offre envoyée", "Signé", "Perdu"];
+const SCENTS = [["syraa", "Syraa"], ["weldi", "Weldi"], ["yobalema", "Yobalema"], ["upendo", "Upendo"], ["omaad", "Omaad"]];
+const CSTAT = ["À livrer", "Livrée", "Payée"];
+
+let db = null, user = null, me = null, canWrite = true;
+let R = [], C = [], O = [], A = [], names = {}, view = "bord", ym = today().slice(0, 7), loaded = false;
+
+/* ---------- calculs ---------- */
+const monthDays = m => { const [y, mo] = m.split("-").map(Number); return new Date(y, mo, 0).getDate(); };
+const active = r => r.statut !== "Annulée";
+function nightsInMonth(r, m) { // nuits de la réservation qui tombent dans le mois m
+  const [y, mo] = m.split("-").map(Number); const s = new Date(y, mo - 1, 1), e = new Date(y, mo, 1);
+  const a = Math.max(D(r.arrivee), s), b = Math.min(D(r.depart), e); return Math.max(0, Math.round((b - a) / 864e5));
+}
+const revInMonth = (r, m) => { const n = nights(r.arrivee, r.depart); return n ? (Number(r.prix) || 0) * nightsInMonth(r, m) / n : 0; };
+function stats(m) {
+  const days = monthDays(m), act = R.filter(active);
+  const per = APTS.map(a => { const rs = act.filter(r => r.apt === a.id); const n = rs.reduce((s, r) => s + nightsInMonth(r, m), 0); return { ...a, nuits: n, occ: Math.min(1, n / days), ca: rs.reduce((s, r) => s + revInMonth(r, m), 0) }; });
+  const ca = per.reduce((s, a) => s + a.ca, 0), nu = per.reduce((s, a) => s + a.nuits, 0);
+  const [y, mo] = m.split("-").map(Number); const s0 = new Date(y, mo - 1, 1).getTime(), e0 = new Date(y, mo, 1).getTime();
+  const cmds = O.filter(o => o.date && D(o.date).getTime() >= s0 && D(o.date).getTime() < e0);
+  return { per, ca, nu, occ: nu / (days * APTS.length), sca: cmds.reduce((s, o) => s + (Number(o.montant) || 0), 0), sn: cmds.reduce((s, o) => s + Object.values(o.qte || {}).reduce((a, b) => a + (Number(b) || 0), 0), 0) };
+}
+function overlap(r, skipId) { return R.find(x => x.id !== skipId && active(x) && x.apt === r.apt && D(x.arrivee) < D(r.depart) && D(r.arrivee) < D(x.depart)); }
+
+/* ---------- écritures ---------- */
+async function guard(fn) { try { await fn(); return true; } catch (e) { if (e && e.code === "invalid_argument") { canWrite = false; toast("Lecture seule : demandez l'accès Contributeur"); } else if (e && e.code === "quota_exceeded") toast("La base est pleine"); else toast("Enregistrement impossible, réessayez"); return false; } }
+async function log(texte) { if (!db) return; try { await db.collection("activite").add({ texte, par: me, le: Date.now() }); } catch (e) {} }
+async function save(col, id, data, label) {
+  const now = Date.now(); const isNew = !id; const ref = isNew ? db.collection(col).doc() : db.doc(col + "/" + id);
+  const ok = await guard(() => isNew ? ref.set({ ...data, creePar: me, creeLe: now, majLe: now }) : ref.update({ ...data, majLe: now }));
+  if (ok) { log((isNew ? "a ajouté " : "a modifié ") + label); toast(isNew ? "Ajouté" : "Enregistré"); }
+  return ok;
+}
+async function remove(col, id, label) { if (await guard(() => db.doc(col + "/" + id).delete())) { log("a supprimé " + label); toast("Supprimé"); return true; } return false; }
+
+/* ---------- vues ---------- */
+const monthPicker = () => { const opts = []; const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 6); for (let i = 0; i < 13; i++) { const m = iso(d).slice(0, 7); opts.push(`<option value="${m}" ${m === ym ? "selected" : ""}>${d.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}</option>`); d.setMonth(d.getMonth() + 1); } return `<select id="ym" aria-label="Mois" style="width:auto">${opts.join("")}</select>`; };
+function vBord() {
+  const s = stats(ym), t = today();
+  const arr = R.filter(r => active(r) && r.arrivee >= t).sort((a, b) => a.arrivee.localeCompare(b.arrivee)).slice(0, 6);
+  const acts = C.filter(c => !["Signé", "Perdu"].includes(c.etape) && c.dateAction).sort((a, b) => a.dateAction.localeCompare(b.dateAction)).slice(0, 6);
+  const toPay = R.filter(r => r.statut === "Confirmée");
+  return `<h1>Tableau de bord</h1><div class="row">${monthPicker()}</div>
+  <div class="kpis">
+    <div class="kpi"><small>Chiffre d'affaires séjours</small><b class="num">${F(s.ca)}</b><em>${s.nu} nuit${s.nu > 1 ? "s" : ""} louée${s.nu > 1 ? "s" : ""}</em></div>
+    <div class="kpi"><small>Taux d'occupation</small><b class="num">${Math.round(s.occ * 100)} %</b><em>les deux appartements</em></div>
+    <div class="kpi"><small>Senteurs vendues</small><b class="num">${s.sn}</b><em>${F(s.sca)}</em></div>
+    <div class="kpi"><small>À encaisser</small><b class="num">${F(toPay.reduce((a, r) => a + (Number(r.prix) || 0), 0))}</b><em>${toPay.length} réservation${toPay.length > 1 ? "s" : ""} confirmée${toPay.length > 1 ? "s" : ""} non payée${toPay.length > 1 ? "s" : ""}</em></div>
+  </div>
+  <div class="grid2"><div>
+    <section class="panel"><h2>Occupation du mois</h2><div class="occ">${s.per.map(a => `<div><div class="l"><b>${esc(a.nom)}</b><span class="num">${a.nuits} / ${monthDays(ym)} nuits · ${F(a.ca)}</span></div><div class="track"><div class="fill" style="width:${a.occ * 100}%"></div></div></div>`).join("")}</div>
+    <p class="sub" style="margin:12px 0 0;font-size:12.5px">Repère : le F3 rapporte plus à la nuit qu'au mois à partir de 16 nuits (au mois : ${F(1000000)}).</p></section>
+    <section class="panel"><h2>Prochaines arrivées</h2>${arr.length ? `<ul class="list">${arr.map(r => `<li data-open="resa:${esc(r.id)}"><span><b>${esc(r.client || "Sans nom")}</b><small>${esc(APTS.find(a => a.id === r.apt)?.court || "")} · ${nights(r.arrivee, r.depart)} nuits</small></span><span class="r">${fmtD(r.arrivee)}<br><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></span></li>`).join("")}</ul>` : `<p class="empty">Aucune arrivée prévue. Ajoutez une réservation avec « + Réservation ».</p>`}</section>
+  </div><div>
+    <section class="panel"><h2>Relances à faire</h2>${acts.length ? `<ul class="list">${acts.map(c => { const l = c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<li data-open="contact:${esc(c.id)}"><span><b>${esc(c.nom)}</b><small>${esc(c.prochaineAction || "Relancer")} · ${esc(c.type)}</small></span><span class="r due ${l}">${l === "late" ? "En retard · " : ""}${fmtD(c.dateAction)}</span></li>`; }).join("")}</ul>` : `<p class="empty">Aucune relance planifiée.</p>`}</section>
+    <section class="panel"><h2>Pipeline</h2><ul class="list">${["Entreprise", "Propriétaire"].map(ty => { const cs = C.filter(c => c.type === ty); return `<li data-go="${ty === "Entreprise" ? "entreprises" : "proprietaires"}"><span><b>${ty}s</b><small>${cs.filter(c => c.etape === "Signé").length} signé(s)</small></span><span class="r num">${cs.filter(c => !["Signé", "Perdu"].includes(c.etape)).length} en cours</span></li>`; }).join("")}</ul></section>
+  </div></div>`;
+}
+function vCal() {
+  const days = monthDays(ym), [y, mo] = ym.split("-").map(Number), t = today();
+  const cols = `grid-template-columns:130px repeat(${days},minmax(22px,1fr))`;
+  let h = `<div></div>`;
+  for (let d = 1; d <= days; d++) { const dt = new Date(y, mo - 1, d); const we = dt.getDay() === 0 || dt.getDay() === 6; h += `<div class="h ${we ? "we" : ""}">${"dlmmjvs"[dt.getDay()]}<br>${d}</div>`; }
+  for (const a of APTS) {
+    h += `<div class="apt" style="grid-row:span 1">${esc(a.court)}</div>`;
+    const rs = R.filter(r => active(r) && r.apt === a.id && nightsInMonth(r, ym) > 0).sort((p, q) => p.arrivee.localeCompare(q.arrivee));
+    let day = 1;
+    for (const r of rs) {
+      const s = Math.max(1, D(r.arrivee) < new Date(y, mo - 1, 1) ? 1 : D(r.arrivee).getDate()), n = nightsInMonth(r, ym);
+      while (day < s) { h += `<div class="d ${`${ym}-${String(day).padStart(2, "0")}` === t ? "today" : ""}" data-add="${a.id}:${ym}-${String(day).padStart(2, "0")}" title="Libre"></div>`; day++; }
+      h += `<div class="bk s-${esc(r.statut)}" style="grid-column:span ${n}" data-open="resa:${esc(r.id)}" title="${esc(r.client)} · ${fmtD(r.arrivee)} → ${fmtD(r.depart)}">${esc(r.client || "Réservé")}</div>`; day += n;
+    }
+    while (day <= days) { h += `<div class="d ${`${ym}-${String(day).padStart(2, "0")}` === t ? "today" : ""}" data-add="${a.id}:${ym}-${String(day).padStart(2, "0")}" title="Libre"></div>`; day++; }
+  }
+  return `<h1>Calendrier</h1><p class="sub">Une case = une nuit. Touchez une case vide pour créer une réservation à cette date.</p><div class="row">${monthPicker()}</div>
+  <div class="calw"><div class="cal" style="${cols}">${h}</div>
+  <div class="legend"><span><i style="background:#a38d6f"></i>Demande</span><span><i style="background:#3c6a96"></i>Confirmée</span><span><i style="background:#2f7a4b"></i>Payée</span></div></div>`;
+}
+let fR = "";
+function vResa() {
+  const list = R.filter(r => !fR || r.statut === fR).sort((a, b) => (b.arrivee || "").localeCompare(a.arrivee || ""));
+  return `<h1>Réservations</h1><div class="row"><button class="btn sm pri" type="button" data-new="resa">+ Réservation</button><select id="fR" style="width:auto" aria-label="Statut"><option value="">Tous les statuts</option>${RSTAT.map(s => `<option ${fR === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+  ${list.length ? `<div class="tblw"><table><thead><tr><th>Client</th><th>Appartement</th><th>Dates</th><th>Nuits</th><th>Montant</th><th>Source</th><th>Statut</th></tr></thead><tbody>
+  ${list.map(r => `<tr class="r" data-open="resa:${esc(r.id)}"><td><b>${esc(r.client)}</b>${r.entreprise ? `<br><small style="color:var(--muted)">${esc(r.entreprise)}</small>` : ""}</td><td>${esc(APTS.find(a => a.id === r.apt)?.court || "")}</td><td>${fmtD(r.arrivee)} → ${fmtD(r.depart)}</td><td class="num">${nights(r.arrivee, r.depart)}</td><td class="num">${F(r.prix)}</td><td>${esc(r.source || "")}</td><td><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></td></tr>`).join("")}
+  </tbody></table></div>` : `<p class="empty">Aucune réservation. Ajoutez la première avec « + Réservation ».</p>`}`;
+}
+function vPipe(type) {
+  const t = today(), cs = C.filter(c => c.type === type);
+  const title = type === "Entreprise" ? "Entreprises" : "Propriétaires", sub = type === "Entreprise" ? "Les sociétés qui logent leurs collaborateurs : de la prise de contact à la convention signée." : "Les propriétaires qui pourraient confier leur appartement en gestion.";
+  return `<h1>${title}</h1><p class="sub">${sub}</p><div class="row"><button class="btn sm" type="button" data-new="contact" data-type="${type}">+ ${type}</button></div>
+  <div class="board">${STAGES.map(s => { const l = cs.filter(c => c.etape === s); return `<section class="col"><h3>${s}<span>${l.length}</span></h3>${l.map(c => { const lt = c.dateAction && c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<div class="card" data-open="contact:${esc(c.id)}"><b>${esc(c.nom)}</b><small>${esc(c.contact || "")}</small>${c.prochaineAction ? `<div class="due ${lt}" style="margin-top:6px">${esc(c.prochaineAction)}${c.dateAction ? " · " + fmtD(c.dateAction) : ""}</div>` : ""}</div>`; }).join("") || `<p class="empty" style="padding:10px">—</p>`}</section>`; }).join("")}</div>`;
+}
+function vSent() {
+  const s = stats(ym), [y, mo] = ym.split("-").map(Number), s0 = new Date(y, mo - 1, 1), e0 = new Date(y, mo, 1);
+  const cm = O.filter(o => o.date && D(o.date) >= s0 && D(o.date) < e0);
+  const tot = Object.fromEntries(SCENTS.map(([k]) => [k, cm.reduce((a, o) => a + (Number(o.qte?.[k]) || 0), 0)]));
+  const list = O.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  return `<h1>Senteurs</h1><p class="sub">Commandes de sprays d'ambiance. ${s.sn} flacon${s.sn > 1 ? "s" : ""} vendu${s.sn > 1 ? "s" : ""} ce mois-ci, ${F(s.sca)}.</p><div class="row">${monthPicker()}<button class="btn sm pri" type="button" data-new="cmd">+ Commande</button></div>
+  <div class="scents">${SCENTS.map(([k, n]) => `<div class="sc"><b>${n}</b><div class="n num">${tot[k]}</div><small>vendus ce mois</small></div>`).join("")}</div>
+  ${list.length ? `<div class="tblw"><table><thead><tr><th>Date</th><th>Client</th><th>Senteurs</th><th>Montant</th><th>Statut</th></tr></thead><tbody>
+  ${list.map(o => `<tr class="r" data-open="cmd:${esc(o.id)}"><td>${fmtD(o.date)}</td><td><b>${esc(o.client)}</b></td><td>${SCENTS.filter(([k]) => Number(o.qte?.[k])).map(([k, n]) => `${n} × ${o.qte[k]}`).join(", ")}</td><td class="num">${F(o.montant)}</td><td><span class="pill ${o.statut === "Payée" ? "p-ok" : o.statut === "Livrée" ? "p-info" : "p-gold"}">${esc(o.statut)}</span></td></tr>`).join("")}
+  </tbody></table></div>` : `<p class="empty">Aucune commande. Ajoutez-en une avec « + Commande senteurs ».</p>`}`;
+}
+function vJournal() {
+  return `<h1>Journal</h1><p class="sub">Qui a fait quoi, et quand.</p><section class="panel">${A.length ? `<ul class="feed">${A.map(a => `<li><b>${esc(names[a.par]?.name || "Quelqu'un")}</b> ${esc(a.texte)}<time>${ago(a.le)}</time></li>`).join("")}</ul>` : `<p class="empty">Rien pour l'instant.</p>`}</section>`;
+}
+
+/* ---------- formulaires ---------- */
+function openDrawer(html) { $("dB").innerHTML = html; $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false"); }
+function closeDrawer() { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); }
+const head = t => `<div class="hd"><h2 id="dT">${t}</h2><button class="btn sm" type="button" data-close aria-label="Fermer">✕</button></div>`;
+function formResa(id, preset = {}) {
+  const r = id ? R.find(x => x.id === id) : { apt: preset.apt || "f3", arrivee: preset.date || today(), depart: "", statut: "Demande", source: SOURCES[0] };
+  openDrawer(`${head(id ? "Réservation" : "Nouvelle réservation")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label class="full">Client<input id="fc" required value="${esc(r.client)}" placeholder="Nom du voyageur"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(r.telephone)}" placeholder="+221 …"></label>
+   <label>Entreprise<input id="fe" value="${esc(r.entreprise)}" placeholder="Si séjour d'entreprise"></label>
+   <label>Appartement<select id="fa">${APTS.map(a => `<option value="${a.id}" ${r.apt === a.id ? "selected" : ""}>${a.nom}</option>`).join("")}</select></label>
+   <label>Source<select id="fs">${SOURCES.map(s => `<option ${r.source === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label>Arrivée<input id="fd1" type="date" required value="${esc(r.arrivee)}"></label>
+   <label>Départ<input id="fd2" type="date" required value="${esc(r.depart)}"></label>
+   <label>Montant total (F)<input id="fp" type="number" min="0" step="1000" value="${esc(r.prix ?? "")}"></label>
+   <label>Statut<select id="fst">${RSTAT.map(s => `<option ${r.statut === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <div class="full calc" id="calc"></div>
+   <label class="full">Notes<textarea id="fn" rows="3" placeholder="Heure d'arrivée, demandes particulières…">${esc(r.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  const upd = () => { const n = nights($("fd1").value, $("fd2").value), a = APTS.find(x => x.id === $("fa").value); const sug = n >= 28 ? a.mois * n / 30 : a.nuit * n;
+    $("calc").innerHTML = n ? `${n} nuit${n > 1 ? "s" : ""} · tarif de référence ${F(sug)} ${n >= 28 ? "(au mois)" : `(${F(a.nuit)} / nuit)`} <button class="btn sm" type="button" id="use">Utiliser</button>` : "Choisissez les dates pour voir le nombre de nuits.";
+    $("use")?.addEventListener("click", () => $("fp").value = Math.round(sug)); };
+  ["fd1", "fd2", "fa"].forEach(k => $(k).addEventListener("change", upd)); upd();
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), entreprise: $("fe").value.trim(), apt: $("fa").value, source: $("fs").value, arrivee: $("fd1").value, depart: $("fd2").value, prix: $("fp").value === "" ? null : Number($("fp").value), statut: $("fst").value, notes: $("fn").value };
+    if (!d.client || nights(d.arrivee, d.depart) < 1) { $("er").hidden = false; $("er").textContent = "Indiquez le client et un départ après l'arrivée."; return; }
+    const ov = d.statut !== "Annulée" && overlap(d, id); if (ov) { $("er").hidden = false; $("er").textContent = `Ces dates chevauchent la réservation de ${ov.client} (${fmtD(ov.arrivee)} → ${fmtD(ov.depart)}).`; return; }
+    if (await save("reservations", id, d, `la réservation de ${d.client}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("reservations", id, `la réservation de ${r.client}`)) closeDrawer(); });
+}
+function formContact(id, type) {
+  const c = id ? C.find(x => x.id === id) : { type: type || "Entreprise", etape: "À contacter" };
+  openDrawer(`${head(id ? esc(c.nom) : "Nouveau contact")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label>Type<select id="fy">${["Entreprise", "Propriétaire"].map(t => `<option ${c.type === t ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+   <label>Étape<select id="fg">${STAGES.map(s => `<option ${c.etape === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label class="full">Nom (société ou propriétaire)<input id="fo" required value="${esc(c.nom)}"></label>
+   <label>Personne à contacter<input id="fk" value="${esc(c.contact)}"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(c.telephone)}"></label>
+   <label>Prochaine action<input id="fx" value="${esc(c.prochaineAction)}" placeholder="Ex. Envoyer l'offre"></label>
+   <label>Date<input id="fz" type="date" value="${esc(c.dateAction)}"></label>
+   <label class="full">Notes<textarea id="fn" rows="4" placeholder="Besoins, nombre de collaborateurs, adresse de l'appartement…">${esc(c.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const d = { type: $("fy").value, etape: $("fg").value, nom: $("fo").value.trim(), contact: $("fk").value.trim(), telephone: $("ft").value.trim(), prochaineAction: $("fx").value.trim(), dateAction: $("fz").value, notes: $("fn").value };
+    if (!d.nom) { $("er").hidden = false; $("er").textContent = "Indiquez un nom."; return; }
+    if (await save("contacts", id, d, `${d.type.toLowerCase()} « ${d.nom} »${id && c.etape !== d.etape ? " (" + d.etape + ")" : ""}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("contacts", id, `« ${c.nom} »`)) closeDrawer(); });
+}
+function formCmd(id) {
+  const o = id ? O.find(x => x.id === id) : { date: today(), statut: "À livrer", qte: {} };
+  openDrawer(`${head(id ? "Commande" : "Nouvelle commande")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label>Client<input id="fc" required value="${esc(o.client)}"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(o.telephone)}"></label>
+   <div class="full"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">Flacons</div><div class="qty">${SCENTS.map(([k, n]) => `<label>${n}<input type="number" min="0" step="1" data-q="${k}" value="${esc(o.qte?.[k] ?? "")}" placeholder="0"></label>`).join("")}</div></div>
+   <label>Montant total (F)<input id="fp" type="number" min="0" step="500" value="${esc(o.montant ?? "")}"></label>
+   <label>Date<input id="fd" type="date" value="${esc(o.date)}"></label>
+   <label>Statut<select id="fst">${CSTAT.map(s => `<option ${o.statut === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label class="full">Notes<textarea id="fn" rows="2" placeholder="Adresse de livraison…">${esc(o.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const qte = {}; document.querySelectorAll("[data-q]").forEach(i => { if (Number(i.value) > 0) qte[i.dataset.q] = Number(i.value); });
+    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), qte, montant: $("fp").value === "" ? null : Number($("fp").value), date: $("fd").value, statut: $("fst").value, notes: $("fn").value };
+    if (!d.client || !Object.keys(qte).length) { $("er").hidden = false; $("er").textContent = "Indiquez le client et au moins un flacon."; return; }
+    if (await save("commandes", id, d, `une commande de senteurs pour ${d.client}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("commandes", id, `la commande de ${o.client}`)) closeDrawer(); });
+}
+
+/* ================= Résidence 3D ================= */
+let X3 = null, sel3 = null;
+const RM3 = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function m3(c, o = {}) { return new THREE.MeshStandardMaterial({ color: new THREE.Color(c), roughness: .8, metalness: .02, ...o }); }
+function bx(w, h, d, mat, x, y, z, parent) { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); b.position.set(x, y, z); b.castShadow = b.receiveShadow = true; (parent || X3.scene).add(b); return b; }
+function cy(rt, rb, h, mat, x, y, z, parent, seg = 24) { const c = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat); c.position.set(x, y, z); c.castShadow = true; (parent || X3.scene).add(c); return c; }
+const dark3 = () => document.documentElement.dataset.theme === "dark" || (matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light");
+
+function suite(apt, ox) {
+  const g = new THREE.Group(); g.position.x = ox; X3.scene.add(g);
+  const D3 = dark3(), wall = m3(D3 ? "#3a2f25" : "#fbf7f0"), floor = m3(D3 ? "#5a4330" : "#b8895a"), trim = m3("#b08a57", { metalness: .35, roughness: .4 });
+  const W = 9, Dp = 7, H = 2.2;
+  const fl = bx(W, .2, Dp, floor, 0, .1, 0, g); fl.userData = { kind: "apt", id: apt.id };
+  bx(W, H, .18, wall, 0, H / 2, -Dp / 2, g); bx(.18, H, Dp, wall, -W / 2, H / 2, 0, g);
+  bx(W, .06, .22, trim, 0, H + .03, -Dp / 2, g); bx(.22, .06, Dp, trim, -W / 2, H + .03, 0, g);
+  bx(.06, 1.3, 1.6, m3("#a9d6e6", { transparent: true, opacity: .55, emissive: new THREE.Color("#ffe9c4"), emissiveIntensity: .15 }), -W / 2 + .12, 1.25, -1, g);
+  const sofaM = m3(apt.id === "f3" ? "#e8e0d2" : "#cbb79c"), wood = m3("#7a5638");
+  // salon
+  bx(2.4, .45, .9, sofaM, -2.2, .45, -2.6, g); bx(2.4, .55, .25, sofaM, -2.2, .8, -3.0, g);
+  cy(.35, .35, .38, m3("#eee6d8"), -2.2, .4, -1.5, g); bx(2.6, .02, 1.8, m3("#efe7da"), -2.2, .21, -1.9, g);
+  // chambre
+  bx(2.2, .4, 2.8, m3("#f4efe6"), 2.4, .4, -1.6, g); bx(2.3, .9, .15, m3("#d9cbb5"), 2.4, .65, -3.05, g);
+  bx(.5, .5, .4, wood, 1.0, .35, -2.8, g); bx(.5, .5, .4, wood, 3.8, .35, -2.8, g);
+  cy(.12, .18, .5, trim, 3.8, .85, -2.8, g, 12);
+  // plante
+  cy(.25, .2, .45, m3("#e9e2d6"), -3.9, .32, 2.6, g); const lf = new THREE.Mesh(new THREE.SphereGeometry(.45, 14, 12), m3("#4f8a5c")); lf.position.set(-3.9, 1, 2.6); lf.castShadow = true; g.add(lf);
+  // lumière de nuit
+  const lamp = new THREE.PointLight(0xffc98a, 0, 9); lamp.position.set(0, 1.8, -1); g.add(lamp);
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(W - .3, Dp - .3), new THREE.MeshBasicMaterial({ color: 0xffd7a0, transparent: true, opacity: 0 }));
+  glow.rotation.x = -Math.PI / 2; glow.position.y = .22; g.add(glow);
+  // calendrier du mois en relief, au bord avant
+  const tiles = [];
+  for (let d = 0; d < 31; d++) { const t = new THREE.Mesh(new THREE.BoxGeometry(.24, .1, .5), m3(D3 ? "#3a2f25" : "#e9dfcf")); t.position.set(-W / 2 + .3 + d * .28, .25, Dp / 2 - .45); t.castShadow = true; t.userData = { kind: "day", apt: apt.id, day: d + 1 }; g.add(t); tiles.push(t); }
+  return { g, lamp, glow, tiles, apt, W, Dp };
+}
+function init3d() {
+  if (X3 || !window.THREE) return !!X3;
+  const host = $("r3c"), renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; host.appendChild(renderer.domElement);
+  const scene = new THREE.Scene(), cam = new THREE.OrthographicCamera(-10, 10, 10, -10, -200, 400);
+  scene.add(new THREE.HemisphereLight(0xfff8ee, 0xb9a688, .5));
+  const sun = new THREE.DirectionalLight(0xfff1dc, .5); sun.position.set(-14, 22, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 12, bottom: -12, near: 1, far: 60 }); scene.add(sun);
+  X3 = { renderer, scene, cam, host, th: -.72, ph: .95, zoom: 1, target: new THREE.Vector3(0, 0, 0), goal: null, t0: performance.now(), raf: 0, labels: {} };
+  bx(24, .3, 11, m3(dark3() ? "#221a13" : "#ece3d5"), 0, -.15, .2).receiveShadow = true;
+  X3.suites = [suite(APTS[0], -5), suite(APTS[1], 5)];
+  // étagère des senteurs
+  const sh = new THREE.Group(); sh.position.set(0, 0, 5.2); scene.add(sh);
+  bx(5.4, .12, .8, m3("#b08a57", { metalness: .3, roughness: .4 }), 0, .9, 0, sh); bx(.12, .9, .8, m3("#7a5638"), -2.6, .45, 0, sh); bx(.12, .9, .8, m3("#7a5638"), 2.6, .45, 0, sh);
+  const TINTS = { syraa: "#f2e2bf", weldi: "#e8d1b0", yobalema: "#cfe0c4", upendo: "#f2c9cf", omaad: "#efe8dd" };
+  X3.bottles = SCENTS.map(([k], i) => { const b = new THREE.Group(); b.position.set(-2 + i, .96, 0); sh.add(b);
+    const body = cy(.22, .22, .7, m3(TINTS[k], { transparent: true, opacity: .9, roughness: .2 }), 0, .35, 0, b); const cap = cy(.12, .12, .22, m3("#c9a25e", { metalness: .7, roughness: .25 }), 0, .82, 0, b);
+    body.userData = cap.userData = { kind: "scent", id: k }; b.userData = { kind: "scent", id: k }; return { b, k }; });
+  bind3d(); new ResizeObserver(resize3d).observe(host); resize3d(); return true;
+}
+function resize3d() { if (!X3) return; const w = X3.host.clientWidth, h = X3.host.clientHeight; X3.renderer.setSize(w, h, false); X3.aspect = w / h; cam3(); }
+function cam3() { const s = X3, half = (s.aspect < 1 ? 15 : 8.6) / s.zoom; s.cam.left = -half * s.aspect; s.cam.right = half * s.aspect; s.cam.top = half; s.cam.bottom = -half; s.cam.updateProjectionMatrix();
+  s.cam.position.set(s.target.x + 60 * Math.sin(s.ph) * Math.cos(s.th), 60 * Math.cos(s.ph), s.target.z - 60 * Math.sin(s.ph) * Math.sin(s.th)); s.cam.lookAt(s.target); }
+function bind3d() {
+  const el = X3.renderer.domElement, pts = new Map(); let st = null, moved = 0, pinch = null;
+  el.addEventListener("pointerdown", e => { el.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); st = { x: e.clientX, y: e.clientY, th: X3.th, ph: X3.ph }; moved = 0; if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), z: X3.zoom }; } });
+  el.addEventListener("pointermove", e => { if (!pts.has(e.pointerId)) { el.style.cursor = hit3d(e) ? "pointer" : "grab"; return; } pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2 && pinch) { const [a, b] = [...pts.values()]; X3.zoom = Math.min(3.5, Math.max(.7, pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d)); moved = 99; X3.goal = null; cam3(); return; }
+    const dx = e.clientX - st.x, dy = e.clientY - st.y; moved = Math.max(moved, Math.abs(dx) + Math.abs(dy)); if (moved > 6) { X3.th = st.th + dx * .006; X3.ph = Math.min(1.25, Math.max(.45, st.ph - dy * .004)); X3.goal = null; cam3(); } });
+  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size && moved <= 6 && e.type === "pointerup") pick3d(e); };
+  el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+  el.addEventListener("wheel", e => { e.preventDefault(); X3.zoom = Math.min(3.5, Math.max(.7, X3.zoom * (e.deltaY < 0 ? 1.1 : .9))); X3.goal = null; cam3(); }, { passive: false });
+}
+function hit3d(e) { const r = X3.renderer.domElement.getBoundingClientRect(), v = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(v, X3.cam);
+  const h = rc.intersectObjects(X3.scene.children, true).find(i => { let o = i.object; while (o && !o.userData.kind) o = o.parent; return o; }); if (!h) return null; let o = h.object; while (!o.userData.kind) o = o.parent; return o.userData; }
+function pick3d(e) { const h = hit3d(e); if (!h) { sel3 = null; panel3(); X3.goal = { x: 0, z: 0, zoom: 1 }; return; }
+  if (h.kind === "day") { const date = `${ym}-${String(h.day).padStart(2, "0")}`; const r = R.find(x => active(x) && x.apt === h.apt && x.arrivee <= date && date < x.depart); if (r) return formResa(r.id); if (canWrite) return formResa(null, { apt: h.apt, date }); return; }
+  sel3 = h; const s = h.kind === "apt" ? X3.suites.find(x => x.apt.id === h.id) : null; X3.goal = s ? { x: s.g.position.x, z: 0, zoom: 1.6 } : { x: 0, z: 4, zoom: 1.7 }; panel3(); }
+function sync3d() {
+  if (!X3) return; const days = monthDays(ym), t = today(), STC = { Demande: "#a38d6f", Confirmée: "#3c6a96", Payée: "#2f7a4b" };
+  X3.suites.forEach(s => { const rs = R.filter(r => active(r) && r.apt === s.apt.id);
+    s.tiles.forEach((tl, i) => { const date = `${ym}-${String(i + 1).padStart(2, "0")}`; tl.visible = i < days; const r = rs.find(x => x.arrivee <= date && date < x.depart);
+      tl.userData.h = r ? .55 : .1; tl.material.color.set(r ? STC[r.statut] : (dark3() ? "#3a2f25" : "#e9dfcf")); tl.material.emissive.set(date === t ? "#b08a57" : "#000"); tl.material.emissiveIntensity = date === t ? .5 : 0; });
+    s.tonight = rs.find(x => x.arrivee <= t && t < x.depart) || null; s.next = rs.filter(x => x.arrivee > t).sort((a, b) => a.arrivee.localeCompare(b.arrivee))[0] || null; });
+  const [y, mo] = ym.split("-").map(Number), s0 = new Date(y, mo - 1, 1), e0 = new Date(y, mo, 1), cm = O.filter(o => o.date && D(o.date) >= s0 && D(o.date) < e0);
+  X3.bottles.forEach(b => { b.n = cm.reduce((a, o) => a + (Number(o.qte?.[b.k]) || 0), 0); b.target = 1 + Math.min(1.2, b.n * .12); });
+  panel3();
+}
+function label3(key, html, cls) { let l = X3.labels[key]; if (!l) { l = document.createElement("div"); l.className = "l3 " + (cls || ""); $("r3l").appendChild(l); X3.labels[key] = l; } if (l._h !== html) { l.innerHTML = html; l._h = html; } return l; }
+function place3(l, v) { const p = v.clone().project(X3.cam), w = X3.host.clientWidth, h = X3.host.clientHeight; if (p.z > 1 || Math.abs(p.x) > 1.2 || Math.abs(p.y) > 1.2) { l.style.display = "none"; return; } l.style.display = ""; l.style.transform = `translate(${(p.x + 1) / 2 * w}px,${(1 - p.y) / 2 * h}px) translate(-50%,-100%)`; }
+function labels3() {
+  const st = stats(ym);
+  X3.suites.forEach(s => { const a = st.per.find(p => p.id === s.apt.id);
+    place3(label3("a" + s.apt.id, `<b>${esc(s.apt.nom)}</b><span>${s.tonight ? "Occupé ce soir · " + esc(s.tonight.client) : "Libre ce soir"}</span><em class="num">${Math.round(a.occ * 100)} % · ${F(a.ca)}</em>`, "apt" + (s.tonight ? " on" : "")), new THREE.Vector3(s.g.position.x, 3.1, -3.4)); });
+  place3(label3("sc", `<b>Senteurs</b><span>${X3.bottles.map(b => `${esc(SCENTS.find(x => x[0] === b.k)[1])} <b class="num" style="font-family:var(--body);font-size:12px">${b.n}</b>`).join(" · ")}</span>`, "apt"), new THREE.Vector3(0, 0, 6.6));
+}
+function panel3() {
+  const el = $("r3p"); if (!el) return; if (!sel3) { el.hidden = true; return; } el.hidden = false;
+  if (sel3.kind === "apt") { const s = X3.suites.find(x => x.apt.id === sel3.id), a = stats(ym).per.find(p => p.id === sel3.id), up = R.filter(r => active(r) && r.apt === sel3.id && r.depart >= today()).sort((p, q) => p.arrivee.localeCompare(q.arrivee)).slice(0, 5);
+    el.innerHTML = `<div class="ph3"><b>${esc(s.apt.nom)}</b><button class="btn sm" type="button" data-x3 aria-label="Fermer">✕</button></div>
+    <div class="kv3"><div><small>Ce soir</small><b>${s.tonight ? esc(s.tonight.client) : "Libre"}</b></div><div><small>Occupation</small><b class="num">${Math.round(a.occ * 100)} %</b></div><div><small>Nuits louées</small><b class="num">${a.nuits}</b></div><div><small>Chiffre du mois</small><b class="num">${F(a.ca)}</b></div></div>
+    <h3>Séjours à venir</h3>${up.length ? `<ul class="list">${up.map(r => `<li data-open="resa:${esc(r.id)}"><span><b>${esc(r.client)}</b><small>${fmtD(r.arrivee)} → ${fmtD(r.depart)}</small></span><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></li>`).join("")}</ul>` : `<p class="empty">Aucun séjour à venir.</p>`}
+    <div class="acts"><button class="btn pri" type="button" data-new3="${esc(sel3.id)}">+ Réservation ici</button></div>`; }
+  else { const st = stats(ym); el.innerHTML = `<div class="ph3"><b>Senteurs</b><button class="btn sm" type="button" data-x3 aria-label="Fermer">✕</button></div><p class="sub">${st.sn} flacon${st.sn > 1 ? "s" : ""} vendu${st.sn > 1 ? "s" : ""} ce mois, ${F(st.sca)}.</p>
+    <ul class="list">${X3.bottles.map(b => `<li><span><b>${esc(SCENTS.find(x => x[0] === b.k)[1])}</b></span><span class="num">${b.n}</span></li>`).join("")}</ul><div class="acts"><button class="btn pri" type="button" data-new="cmd">+ Commande</button><a class="btn" href="#senteurs">Voir les commandes</a></div>`; }
+}
+document.addEventListener("click", e => { if (e.target.closest("[data-x3]")) { sel3 = null; panel3(); if (X3) X3.goal = { x: 0, z: 0, zoom: 1 }; } const n = e.target.closest("[data-new3]"); if (n) formResa(null, { apt: n.dataset.new3, date: today() }); if (e.target.closest("[data-reset3]") && X3) { sel3 = null; panel3(); X3.th = -.72; X3.ph = .95; X3.goal = { x: 0, z: 0, zoom: 1 }; } });
+function loop3() {
+  if (!X3 || view !== "residence") { if (X3) X3.raf = 0; return; } X3.raf = requestAnimationFrame(loop3);
+  const t = (performance.now() - X3.t0) / 1e3;
+  if (X3.goal) { const g = X3.goal; X3.target.x += (g.x - X3.target.x) * .1; X3.target.z += (g.z - X3.target.z) * .1; X3.zoom += (g.zoom - X3.zoom) * .1; if (Math.abs(g.zoom - X3.zoom) < .004 && Math.abs(g.x - X3.target.x) < .01) X3.goal = null; cam3(); }
+  X3.suites.forEach(s => { const on = !!s.tonight; s.lamp.intensity += ((on ? .7 : 0) - s.lamp.intensity) * .08; s.glow.material.opacity += ((on ? .1 + (RM3 ? 0 : .03 * Math.sin(t * 2)) : 0) - s.glow.material.opacity) * .08;
+    s.tiles.forEach(tl => { const h = tl.userData.h || .1; tl.scale.y += (h / .1 - tl.scale.y) * .12; tl.position.y = .2 + tl.scale.y * .05; }); });
+  X3.bottles.forEach((b, i) => { b.b.scale.y += ((b.target || 1) - b.b.scale.y) * .1; if (!RM3) b.b.rotation.y = Math.sin(t * .6 + i) * .25; });
+  X3.renderer.render(X3.scene, X3.cam); labels3();
+}
+function show3d() { if (!window.THREE) { $("r3c").innerHTML = `<p class="empty">La vue 3D n'a pas pu se charger. Les autres onglets fonctionnent.</p>`; return; } if (!init3d()) return; resize3d(); sync3d(); if (!X3.raf) loop3(); }
+
+/* ---------- rendu et navigation ---------- */
+const VIEWS = { residence: () => "", bord: vBord, calendrier: vCal, reservations: vResa, entreprises: () => vPipe("Entreprise"), proprietaires: () => vPipe("Propriétaire"), senteurs: vSent, journal: vJournal };
+function render() {
+  document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === view));
+  if (!db) { $("main").innerHTML = `<p class="note">Connexion au serveur impossible. Vérifiez votre connexion internet puis rechargez la page.</p>`; return; }
+  const is3 = view === "residence"; $("r3").hidden = !is3; $("main").hidden = is3;
+  if (!loaded) return;
+  if (is3) { const s = stats(ym), ar = R.filter(r => active(r) && r.arrivee >= today()).sort((a, b) => a.arrivee.localeCompare(b.arrivee))[0];
+    $("r3top").innerHTML = `${monthPicker()}<div class="k3"><small>Chiffre du mois</small><b class="num">${F(s.ca)}</b></div><div class="k3"><small>Occupation</small><b class="num">${Math.round(s.occ * 100)} %</b></div><div class="k3"><small>Prochaine arrivée</small><b>${ar ? esc(ar.client) + " · " + fmtD(ar.arrivee) : "—"}</b></div>`;
+    $("ym")?.addEventListener("change", e => { ym = e.target.value; render(); }); show3d(); return; }
+  $("main").innerHTML = (canWrite ? "" : `<p class="note">Lecture seule : demandez l'accès Contributeur pour modifier.</p>`) + VIEWS[view]();
+  $("ym")?.addEventListener("change", e => { ym = e.target.value; render(); });
+  $("fR")?.addEventListener("change", e => { fR = e.target.value; render(); });
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-close]")) return closeDrawer();
+  const n = e.target.closest("[data-new]"); if (n) { const k = n.dataset.new; return k === "resa" ? formResa(null) : k === "contact" ? formContact(null, n.dataset.type) : formCmd(null); }
+  const o = e.target.closest("[data-open]"); if (o) { const [k, id] = o.dataset.open.split(":"); return k === "resa" ? formResa(id) : k === "contact" ? formContact(id) : formCmd(id); }
+  const a = e.target.closest("[data-add]"); if (a && canWrite) { const [apt, date] = a.dataset.add.split(":"); return formResa(null, { apt, date }); }
+  const g = e.target.closest("[data-go]"); if (g) location.hash = "#" + g.dataset.go;
+});
+addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+function route() { const h = location.hash.slice(1); view = VIEWS[h] ? h : "residence"; render(); }
+addEventListener("hashchange", route);
+
+(async () => {
+  route();
+  if (!window.claude?.use) return render();
+  [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+  if (user) { me = await user.id(); if (await user.can("data.write") === false) canWrite = false; }
+  if (!db) return render();
+  const timer = setTimeout(() => { if (!loaded) $("main").innerHTML = `<p class="note">Les données mettent du temps à arriver. La page se mettra à jour toute seule.</p>`; }, 10e3);
+  const err = () => { clearTimeout(timer); };
+  const resolve = async () => { if (!user) return; const ids = [...new Set(A.map(a => a.par).filter(Boolean))]; if (ids.length) { names = await user.profiles(ids); if (view === "journal") render(); } };
+  const got = { r: 0, c: 0, o: 0 }; const ready = () => { if (got.r && got.c && got.o && !loaded) { loaded = true; clearTimeout(timer); } render(); };
+  db.collection("reservations").onSnapshot(s => { R = s.docs.map(d => ({ id: d.id, ...d.data() })); got.r = 1; ready(); }, err);
+  db.collection("contacts").onSnapshot(s => { C = s.docs.map(d => ({ id: d.id, ...d.data() })); got.c = 1; ready(); }, err);
+  db.collection("commandes").onSnapshot(s => { O = s.docs.map(d => ({ id: d.id, ...d.data() })); got.o = 1; ready(); }, err);
+  db.collection("activite").orderBy("le", "desc").limit(200).onSnapshot(s => { A = s.docs.map(d => ({ id: d.id, ...d.data() })); if (view === "journal") render(); resolve(); }, err);
+})();
+</script>
+</body></html>
