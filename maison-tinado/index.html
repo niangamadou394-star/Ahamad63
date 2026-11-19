@@ -79,7 +79,7 @@ header.s{background:#F6F1E9ee;backdrop-filter:blur(12px);box-shadow:0 1px 0 var(
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:3.4rem;max-width:1080px}
 .apt{background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 1px 0 var(--line);transition:transform .5s var(--ease),box-shadow .5s}
 .apt:hover{transform:translateY(-6px);box-shadow:0 30px 60px #6b4a2e1f}
-.apt .im{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(165deg,var(--sand),var(--sand2))}
+.apt .im{aspect-ratio:1/1;position:relative;overflow:hidden;background:linear-gradient(165deg,var(--sand),var(--sand2))}
 .apt .im img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
 .apt:hover .im img{transform:scale(1.05)}
 .apt .ph-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--brown)}
@@ -322,14 +322,14 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 <script>
 /* Numéro WhatsApp de Maison Tinado (format international sans +, ex. 221771234567).
    Tant qu'il est vide, les boutons ouvrent les messages Instagram. */
-const WA = "";
+const WA = "221773324321";
 const contact = msg => WA ? `https://wa.me/${WA}?text=` + encodeURIComponent(msg) : "https://ig.me/m/maisontinado";
 
 /* Appartements : ajouter les vraies photos dans le dossier img/ et leur nom dans "photo" ; "prix" ex. "À partir de 45 000 F / nuit" */
 const APTS = [
   { nom: "Appartement F3 meublé", lieu: "Point E · Dakar", tag: "Quartier calme et sécurisé", prix: "65 000 F / nuit",
-    photos: ["f3-salon-2", "f3-sejour", "f3-salon", "f3-chambre", "f3-chambre-2", "f3-entree", "f3-salon-3", "f3-deco"],
-    infos: ["2 chambres", "2 salles de douche et WC, 1 toilette visiteur", "Salon et salle à manger spacieux et lumineux", "Cuisine entièrement équipée", "Ménage 2 fois par semaine", "1 place de parking"] },
+    photos: ["f3-p-salon", "f3-p-chambre-vue", "f3-p-repas", "f3-p-cuisine", "f3-p-chambre", "f3-p-chambre-bleue", "f3-p-sdb", "f3-p-sdb-2", "f3-p-couloir", "f3-p-detente", "f3-p-cafe", "f3-p-buanderie"],
+    infos: ["2 chambres, dont une avec vue sur la ville", "2 salles de douche et WC, 1 toilette visiteur", "Salon et salle à manger spacieux et lumineux", "Cuisine entièrement équipée, machine à café", "Machine à laver, coin détente", "Ménage 2 fois par semaine", "1 place de parking"] },
   { nom: "Chambre-salon meublée", lieu: "Dakar", tag: "Vue dégagée sur la ville", prix: "À partir de 40 000 F / nuit",
     photos: ["cs-salon", "cs-repas", "cs-entree", "cs-chambre", "cs-cuisine", "cs-vue", "cs-detail"],
     infos: ["1 chambre", "Salon avec coin repas", "Cuisine équipée", "Balcon avec vue sur la ville", "Télévision et wifi"] },
@@ -369,7 +369,7 @@ burger.onclick = () => menu(!document.body.classList.contains("mo"));
 document.querySelectorAll("#links a").forEach(a => a.addEventListener("click", () => menu(false)));
 
 /* Photos plein écran de la scène d'ouverture (extérieur, intérieur, détente) : mettre les noms de fichiers du dossier img/ */
-const CINE = ["f3-salon-2.jpg", "cs-salon.jpg", "f3-chambre.jpg"];
+const CINE = ["f3-p-salon.jpg", "f3-p-chambre-vue.jpg", "f3-p-repas.jpg"];
 document.querySelectorAll(".bg[data-photo]").forEach(el => { const f = CINE[+el.dataset.photo]; if (f) { el.style.setProperty("--img", `url(img/${f})`); el.classList.add("has"); el.innerHTML = ""; } });
 const cine = document.getElementById("cine"), lay = [...document.querySelectorAll(".bg")], [c1, c2, c3] = [".ct1", ".ct2", ".ct3"].map(q => document.querySelector(q));
 const cl = x => Math.max(0, Math.min(1, x)), win = (p, a, b, f = .06) => Math.min(cl((p - a) / f), cl((b - p) / f));
