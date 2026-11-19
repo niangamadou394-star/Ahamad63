@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Maison Tinado : appartements meublés haut de gamme à Dakar</title>
+<title>Maison Tinado : appartements meublés et senteurs, Dakar</title>
 <meta name="description" content="Maison Tinado : appartements meublés haut de gamme à Dakar, pour quelques nuits ou plusieurs mois. Séjours entreprise et gestion pour propriétaires. L'art de recevoir à l'Africaine.">
 <meta name="theme-color" content="#2B2118">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,6 +234,52 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 .door small{display:block;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sand2);margin-top:.5rem}
 @media (max-width:860px){.rm,.rm.r{grid-template-columns:1fr;gap:26px;margin-bottom:80px}.rm.r .ph{order:0}.doors{grid-template-columns:1fr}.door{aspect-ratio:16/10}.fullph{height:70vh}}
 
+
+/* logo de la maison */
+.mono.lg{border:0;border-radius:0;width:40px;height:44px;background:url(img/logo-maison.png) center/contain no-repeat;font-size:0}
+header.top .mono.lg{filter:brightness(0) invert(1) sepia(.3)}
+/* deux univers */
+.uni{padding:110px 0 30px}
+.uni .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:3rem}
+.uni a{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:2px;color:var(--ivory)}
+.uni a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.uni a:hover img{transform:scale(1.05)}
+.uni a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#1d161000 40%,#1d1610d9)}
+.uni a span{position:absolute;left:34px;right:34px;bottom:34px;z-index:1}
+.uni .num{font-family:var(--serif);font-style:italic;color:var(--sand2);font-size:1.1rem}
+.uni b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;margin:.3rem 0 .6rem}
+.uni small{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sand)}
+.uni .go{display:inline-block;margin-top:1.2rem;border-bottom:1px solid var(--sand2);padding-bottom:4px;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase}
+.chap{display:flex;align-items:center;gap:18px;font-family:var(--serif);font-style:italic;color:var(--clay);font-size:1.05rem}
+.chap::after{content:"";flex:1;height:1px;background:var(--line)}
+/* senteurs */
+.scent{background:#efe6d8;padding-top:0}
+.scent .hero-s{position:relative;height:min(70vh,640px);overflow:hidden}
+.scent .hero-s img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.scent .hero-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#00000000 50%,#efe6d8)}
+.scent .intro{max-width:620px;margin:-40px 0 3.2rem;position:relative;z-index:1}
+.scent .quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.3;color:var(--brown);margin:1rem 0 1.2rem}
+.bottles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.bt{background:var(--tint);border-radius:2px;padding:26px 18px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .6s var(--ease),box-shadow .6s}
+.bt:hover{transform:translateY(-6px);box-shadow:0 26px 50px #6b4a2e26}
+.bt .pic{height:250px;display:grid;place-items:end center;margin-bottom:18px}
+.bt .pic img{max-height:250px;width:auto;filter:drop-shadow(0 18px 18px #6b4a2e40)}
+.bt h3{font-size:1.9rem}
+.bt .notes{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:1.05rem;margin:.2rem 0 .7rem;min-height:2.6em}
+.bt .fmt{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--clay)}
+.bt .add{margin-top:1.1rem;width:100%;min-height:44px;border:1px solid var(--ink);background:transparent;font:inherit;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.bt .add:hover,.bt .add.on{background:var(--ink);color:var(--ivory)}
+.sbar{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);z-index:70;display:flex;align-items:center;gap:16px;background:var(--ink);color:var(--ivory);padding:10px 10px 10px 22px;border-radius:999px;box-shadow:0 20px 50px #2b211866;transition:transform .5s var(--ease);max-width:calc(100% - 24px)}
+.sbar.on{transform:translate(-50%,0)}
+body.sb .float{opacity:0;pointer-events:none}
+.bg.has+.bg,.stage .shade{}
+.cine .shade{background:linear-gradient(90deg,#1d1610b8 0%,#1d161066 45%,#1d161022 100%),linear-gradient(0deg,#1d161099,#0000 45%)!important}
+.sbar span{font-size:.8rem;letter-spacing:.06em;white-space:nowrap}
+.sbar a{background:var(--sand);color:var(--ink);border-radius:999px;padding:10px 18px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+@media (max-width:1080px){.bottles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){.uni .grid2{grid-template-columns:1fr}.uni a{aspect-ratio:4/4.4}}
+@media (max-width:620px){.bottles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bt{padding:18px 10px}.bt .pic{height:190px}.bt .pic img{max-height:190px}.bt h3{font-size:1.5rem}}
+
 @media (max-width:980px){
   .hero-grid,.two{grid-template-columns:1fr}
   .arches{height:440px}
@@ -258,10 +304,10 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 
 <header id="hd">
   <div class="wrap nav">
-    <a href="#" class="mark" aria-label="Maison Tinado, accueil"><span class="mono">T</span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></a>
+    <a href="#" class="mark" aria-label="Maison Tinado, accueil"><span class="mono lg" aria-hidden="true"></span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></a>
     <nav class="links" id="links">
-      <a class="l" href="#visite">Visite</a>
-      <a class="l" href="#appartements">Appartements</a>
+      <a class="l" href="#visite">Séjours</a>
+      <a class="l" href="#senteurs">Senteurs</a>
       <a class="l" href="#entreprises">Entreprises</a>
       <a class="l" href="#proprietaires">Propriétaires</a>
       <a class="l" href="#contact">Contact</a>
@@ -278,7 +324,7 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
     <div class="bg b2" data-photo="1"><div class="glow g2"></div><div class="room"><i></i><i></i></div></div>
     <div class="bg b3" data-photo="2"><div class="glow g3"></div><div class="water"></div></div>
     <div class="grain"></div><div class="shade"></div>
-    <div class="ct1 cx"><div class="kk">Appartements meublés · Dakar</div><h1>Pour ceux qui<br><i>remarquent les détails.</i></h1>
+    <div class="ct1 cx"><div class="kk">Séjours &amp; senteurs · Dakar</div><h1>Pour ceux qui<br><i>remarquent les détails.</i></h1>
       <a class="btn btn-ivory" href="#appartements">Découvrir</a></div>
     <div class="ct2 cx"><h1 class="huge"><i>Bienvenue.</i></h1></div>
     <div class="ct3 cx"><h1>Ici, on ne compte<br><i>plus les jours.</i></h1><p>Quelques nuits ou plusieurs mois : un appartement prêt à vivre, l'art de recevoir à l'Africaine.</p></div>
@@ -292,10 +338,23 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 </div></div>
 
 
+
+<section class="uni">
+  <div class="wrap">
+    <div class="k rv">Maison Tinado</div>
+    <h2 class="rv">Deux façons <i>de vous recevoir.</i></h2>
+    <div class="grid2">
+      <a class="rv" href="#visite"><img src="img/f3-p-salon.jpg" alt="Salon d'un appartement Maison Tinado" loading="lazy"><span><span class="num">I.</span><b>Séjourner</b><small>Appartements meublés · Dakar</small><br><span class="go">Visiter</span></span></a>
+      <a class="rv" href="#senteurs"><img src="img/senteurs-gamme.jpg" alt="Les cinq sprays d'ambiance Maison Tinado" loading="lazy" style="object-position:center 85%"><span><span class="num">II.</span><b>Les senteurs</b><small>Sprays d'ambiance · 100 ml</small><br><span class="go">Découvrir</span></span></a>
+    </div>
+  </div>
+</section>
+
 <section class="tour" id="visite">
   <div class="wrap">
     <div class="head">
-      <div class="k rv">La visite</div>
+      <div class="chap rv">I. Séjourner</div>
+      <div class="k rv" style="margin-top:2.2rem">La visite</div>
       <h2 class="rv">Entrez, <i>on vous montre.</i></h2>
       <p class="lead rv">Le F3 du Point E, pièce par pièce. Photos prises sur place, sans mise en scène de studio.</p>
     </div>
@@ -331,6 +390,20 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
     <div class="grid" id="apts"></div>
   </div>
 </section>
+
+
+<section class="scent" id="senteurs">
+  <div class="hero-s"><img src="img/senteurs-gamme.jpg" alt="Syraa, Weldi, Yobalema, Upendo et Omaad" loading="lazy"></div>
+  <div class="wrap">
+    <div class="intro">
+      <div class="chap rv">II. Les senteurs</div>
+      <p class="quote rv">« L'art de recevoir commence par une délicate attention. »</p>
+      <p class="lead rv">Cinq sprays d'ambiance, ceux que vous sentez en entrant dans nos appartements. Un pschitt sur les rideaux ou le canapé, et la maison sent comme chez nous.</p>
+    </div>
+    <div class="bottles" id="bottles"></div>
+  </div>
+</section>
+<div class="sbar" id="sbar"><span id="sbt"></span><a class="ct-s" id="sgo" href="#" target="_blank" rel="noopener">Commander</a></div>
 
 <section class="biz" id="entreprises">
   <div class="wrap two">
@@ -405,7 +478,7 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 
 <footer>
   <div class="wrap">
-    <span class="mark"><span class="mono" style="color:var(--sand);border-color:#B08A5788">T</span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></span>
+    <span class="mark"><span class="mono lg" aria-hidden="true" style="filter:brightness(0) invert(1) sepia(.4)"></span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></span>
     <span>© <span id="y"></span> Maison Tinado · L'art de recevoir à l'Africaine</span>
   </div>
 </footer>
@@ -449,6 +522,32 @@ document.querySelectorAll(".apt .im").forEach(im => {
   let x0 = 0; im.addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
   im.addEventListener("touchend", e => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); }, { passive: true });
 });
+
+/* senteurs : sélection envoyée sur WhatsApp */
+const SCENTS = [
+  { id: "syraa", nom: "Syraa", notes: "Fleur d'oranger & Musc", tint: "#f4ead6" },
+  { id: "weldi", nom: "Weldi", notes: "Bois précieux & Ambre", tint: "#efe0cc" },
+  { id: "yobalema", nom: "Yobalema", notes: "Trèfle vert & Aloe Vera", tint: "#e3eadb" },
+  { id: "upendo", nom: "Upendo", notes: "Bergamote & Vanille", tint: "#f4dfdf" },
+  { id: "omaad", nom: "Omaad", notes: "Lilas blanc", tint: "#f2ece4" },
+];
+const picked = new Set();
+document.getElementById("bottles").innerHTML = SCENTS.map(p => `
+  <article class="bt rv" style="--tint:${p.tint}">
+    <div class="pic"><img src="img/tn-${p.id}.webp" alt="Spray d'ambiance ${p.nom}" loading="lazy"></div>
+    <h3>${p.nom}</h3><div class="notes">${p.notes}</div><div class="fmt">Spray · 100 ml</div>
+    <button class="add" type="button" data-s="${p.id}">Ajouter</button>
+  </article>`).join("");
+function syncScents() {
+  document.querySelectorAll(".bt .add").forEach(b => { const on = picked.has(b.dataset.s); b.classList.toggle("on", on); b.textContent = on ? "Ajouté ✓" : "Ajouter"; });
+  const n = picked.size, list = SCENTS.filter(p => picked.has(p.id)).map(p => p.nom);
+  document.getElementById("sbar").classList.toggle("on", n > 0); document.body.classList.toggle("sb", n > 0);
+  document.getElementById("sbt").textContent = n === 1 ? "1 senteur choisie" : `${n} senteurs choisies`;
+  document.getElementById("sgo").href = contact(`Bonjour Maison Tinado, je voudrais commander : ${list.join(", ")}. Quel est le prix et comment se passe la livraison ?`);
+}
+document.getElementById("bottles").addEventListener("click", e => { const b = e.target.closest(".add"); if (!b) return; picked.has(b.dataset.s) ? picked.delete(b.dataset.s) : picked.add(b.dataset.s); syncScents(); });
+syncScents();
+
 document.querySelectorAll(".ct").forEach(a => {
   a.href = contact(a.dataset.msg || "Bonjour Maison Tinado, je souhaite des informations sur vos appartements.");
   a.target = "_blank"; a.rel = "noopener";
