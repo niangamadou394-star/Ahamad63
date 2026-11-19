@@ -76,7 +76,7 @@ header.s{background:#F6F1E9ee;backdrop-filter:blur(12px);box-shadow:0 1px 0 var(
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* appartements */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:3.4rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:3.4rem;max-width:1080px}
 .apt{background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 1px 0 var(--line);transition:transform .5s var(--ease),box-shadow .5s}
 .apt:hover{transform:translateY(-6px);box-shadow:0 30px 60px #6b4a2e1f}
 .apt .im{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(165deg,var(--sand),var(--sand2))}
@@ -85,7 +85,14 @@ header.s{background:#F6F1E9ee;backdrop-filter:blur(12px);box-shadow:0 1px 0 var(
 .apt .ph-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--brown)}
 .apt .ph-empty div{font-family:var(--serif);font-size:3.2rem;width:110px;height:110px;border-radius:50%;border:1px solid #6b4a2e55;display:grid;place-items:center;margin:0 auto 1rem}
 .apt .ph-empty small{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase}
-.apt .tag{position:absolute;top:16px;left:16px;background:#F6F1E9e8;padding:.4rem .8rem;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase}
+.apt .gal{position:absolute;inset:0}
+.apt .gal img{position:absolute;inset:0;opacity:0;transition:opacity .6s var(--ease),transform 1s var(--ease)}
+.apt .gal img.on{opacity:1}
+.apt .gn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:#F6F1E9e0;color:var(--ink);font-size:1.4rem;cursor:pointer;display:grid;place-items:center}
+.apt .gn.p{left:12px}.apt .gn.n{right:12px}
+.apt .dots{position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:6px}
+.apt .dots i{width:7px;height:7px;border-radius:50%;background:#F6F1E980}.apt .dots i.on{background:#F6F1E9;width:20px;border-radius:4px}
+.apt .tag{z-index:2;position:absolute;top:16px;left:16px;background:#F6F1E9e8;padding:.4rem .8rem;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase}
 .apt .bd{padding:1.8rem 1.8rem 2rem}
 .apt h3{font-size:2rem}
 .apt .where{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);margin-top:.4rem}
@@ -139,7 +146,10 @@ footer .mark b{color:var(--sand)}
 .b1{opacity:1;background:linear-gradient(180deg,#9fb3bf 0%,#d9c6aa 55%,#b08a57 100%)}
 .b2{background:radial-gradient(ellipse 70% 60% at 50% 60%,#e8c690 0%,#8a6440 45%,#3a2a1c 100%)}
 .b3{background:linear-gradient(180deg,#c9d3d6 0%,#efe3cf 45%,#9fb8b6 70%,#6f8f8c 100%)}
-.bg.has{background-color:#1d1610}
+.bg.has{background:#1d1610!important}
+.bg.has::before{content:"";position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(28px) brightness(.75);transform:scale(1.12)}
+.bg.has::after{content:"";position:absolute;inset:0;background:var(--img) center/cover no-repeat}
+@media (min-aspect-ratio:1/1){.bg.has::after{background-size:auto 100%;box-shadow:inset 0 0 0 0 #000}}
 .glow{position:absolute;border-radius:50%;filter:blur(40px)}
 .g1{width:42vw;height:42vw;right:8%;top:-6%;background:#fff1cf;opacity:.65}
 .g2{width:50vw;height:50vw;left:25%;top:20%;background:#ffd99a;opacity:.35}
@@ -317,25 +327,35 @@ const contact = msg => WA ? `https://wa.me/${WA}?text=` + encodeURIComponent(msg
 
 /* Appartements : ajouter les vraies photos dans le dossier img/ et leur nom dans "photo" ; "prix" ex. "À partir de 45 000 F / nuit" */
 const APTS = [
-  { nom: "Appartement F3 meublé", lieu: "Dakar", tag: "Confort & modernité", photo: "",
+  { nom: "Appartement F3 meublé", lieu: "Point E · Dakar", tag: "Quartier calme et sécurisé", prix: "65 000 F / nuit",
+    photos: ["f3-salon-2", "f3-sejour", "f3-salon", "f3-chambre", "f3-chambre-2", "f3-entree", "f3-salon-3", "f3-deco"],
     infos: ["2 chambres", "2 salles de douche et WC, 1 toilette visiteur", "Salon et salle à manger spacieux et lumineux", "Cuisine entièrement équipée", "Ménage 2 fois par semaine", "1 place de parking"] },
-  { nom: "Maison Aéré Lao", lieu: "Point E · Dakar", tag: "Quartier calme et sécurisé", photo: "",
-    infos: ["Dans les beaux quartiers du Point E", "Quartier calme, chic et sécurisé", "Détails et équipements sur demande"] },
-  { nom: "Maison Kanel", lieu: "Dakar", tag: "Bientôt en ligne", photo: "",
-    infos: ["Détails et équipements sur demande"] },
+  { nom: "Chambre-salon meublée", lieu: "Dakar", tag: "Vue dégagée sur la ville", prix: "À partir de 40 000 F / nuit",
+    photos: ["cs-salon", "cs-repas", "cs-entree", "cs-chambre", "cs-cuisine", "cs-vue", "cs-detail"],
+    infos: ["1 chambre", "Salon avec coin repas", "Cuisine équipée", "Balcon avec vue sur la ville", "Télévision et wifi"] },
 ];
 
 document.getElementById("apts").innerHTML = APTS.map(a => `
   <article class="apt rv">
-    <div class="im">${a.photo ? `<img src="img/${a.photo}" alt="${a.nom}" loading="lazy">` : `<div class="ph-empty"><span><div>T</div><small>Photos à venir</small></span></div>`}<span class="tag">${a.tag}</span></div>
+    <div class="im">${a.photos && a.photos.length ? `<div class="gal">${a.photos.map((p, k) => `<img class="${k ? "" : "on"}" src="img/${p}.jpg" alt="${a.nom}, photo ${k + 1}" loading="lazy">`).join("")}</div>
+      <button class="gn p" type="button" aria-label="Photo précédente">‹</button><button class="gn n" type="button" aria-label="Photo suivante">›</button>
+      <div class="dots">${a.photos.map((p, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>` : `<div class="ph-empty"><span><div>T</div><small>Photos à venir</small></span></div>`}<span class="tag">${a.tag}</span></div>
     <div class="bd">
       <h3>${a.nom}</h3><div class="where">${a.lieu}</div>
       <ul>${a.infos.map(i => `<li>${i}</li>`).join("")}</ul>
-      <div class="row"><div class="pr">${a.prix || "Sur demande"}<small>Tarif</small></div>
+      <div class="row"><div class="pr">${a.prix || "Sur demande"}<small>Au mois : sur demande</small></div>
       <a class="btn btn-dark ct" data-msg="Bonjour Maison Tinado, je souhaite connaître les disponibilités et le tarif de : ${a.nom}." href="#">Disponibilités</a></div>
     </div>
   </article>`).join("");
 
+/* galerie photo de chaque appartement : flèches, glisser du doigt */
+document.querySelectorAll(".apt .im").forEach(im => {
+  const imgs = [...im.querySelectorAll(".gal img")], dots = [...im.querySelectorAll(".dots i")]; if (imgs.length < 2) return;
+  let i = 0; const go = d => { i = (i + d + imgs.length) % imgs.length; imgs.forEach((x, k) => x.classList.toggle("on", k === i)); dots.forEach((x, k) => x.classList.toggle("on", k === i)); };
+  im.querySelector(".gn.p").onclick = () => go(-1); im.querySelector(".gn.n").onclick = () => go(1);
+  let x0 = 0; im.addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
+  im.addEventListener("touchend", e => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); }, { passive: true });
+});
 document.querySelectorAll(".ct").forEach(a => {
   a.href = contact(a.dataset.msg || "Bonjour Maison Tinado, je souhaite des informations sur vos appartements.");
   a.target = "_blank"; a.rel = "noopener";
@@ -349,8 +369,8 @@ burger.onclick = () => menu(!document.body.classList.contains("mo"));
 document.querySelectorAll("#links a").forEach(a => a.addEventListener("click", () => menu(false)));
 
 /* Photos plein écran de la scène d'ouverture (extérieur, intérieur, détente) : mettre les noms de fichiers du dossier img/ */
-const CINE = ["", "", ""];
-document.querySelectorAll(".bg[data-photo]").forEach(el => { const f = CINE[+el.dataset.photo]; if (f) { el.style.backgroundImage = `url(img/${f})`; el.classList.add("has"); el.innerHTML = ""; } });
+const CINE = ["f3-salon-2.jpg", "cs-salon.jpg", "f3-chambre.jpg"];
+document.querySelectorAll(".bg[data-photo]").forEach(el => { const f = CINE[+el.dataset.photo]; if (f) { el.style.setProperty("--img", `url(img/${f})`); el.classList.add("has"); el.innerHTML = ""; } });
 const cine = document.getElementById("cine"), lay = [...document.querySelectorAll(".bg")], [c1, c2, c3] = [".ct1", ".ct2", ".ct3"].map(q => document.querySelector(q));
 const cl = x => Math.max(0, Math.min(1, x)), win = (p, a, b, f = .06) => Math.min(cl((p - a) / f), cl((b - p) / f));
 const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
