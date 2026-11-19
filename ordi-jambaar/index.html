@@ -12,7 +12,7 @@
 <link rel="icon" href="img/icon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0b0b0c; --bg2:#121214; --card:#17171a; --line:#ffffff14; --line2:#ffffff24;
@@ -342,6 +342,110 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   .map{height:300px;margin-top:36px;border-radius:22px}
   footer{padding-bottom:110px}
 }
+
+/* ===== Finition premium ===== */
+:root{--bg:#09090a;--bg2:#0e0e10;--card:#111113;--line:#ffffff0f;--line2:#ffffff1f;--muted:#ffffff8c;--r:22px;--ink2:#d8d4cc}
+body{font-family:Inter,system-ui,sans-serif;letter-spacing:-.005em}
+body::before{display:none}
+h1,h2,h3,.sheet h3,.ctab h3,.pn .hd h3{font-family:"Inter Tight",Inter,sans-serif}
+h1 em,h2 em{font-style:normal;color:transparent;background:linear-gradient(100deg,#ff3b47,#E30613 55%,#b3040f);-webkit-background-clip:text;background-clip:text}
+.kicker{font-weight:600;font-size:.7rem;letter-spacing:.34em;color:#ffffffb3}
+.kicker::before{width:22px;height:1px;background:var(--red)}
+h2{font-weight:600;font-size:clamp(2.1rem,4.2vw,3.4rem);letter-spacing:-.045em;line-height:1.02}
+.lead{font-size:1.02rem;line-height:1.7;color:var(--muted)}
+section{padding:140px 0}
+.btn{font-weight:600;border-radius:999px;min-height:52px;padding:0 1.7rem;letter-spacing:-.005em}
+.btn-red{background:var(--red);box-shadow:0 8px 24px #E3061330,inset 0 1px 0 #ffffff30}
+.btn-red:hover{box-shadow:0 14px 34px #E3061345,inset 0 1px 0 #ffffff30}
+.btn-line{border:1px solid var(--line2);background:#ffffff06}
+.btn-wa{background:#fff;color:#0b0b0c;box-shadow:none}
+.btn-wa .wa-ico{fill:#1fb457}
+header.scrolled{background:#09090acc;backdrop-filter:blur(20px) saturate(160%)}
+.links{gap:2.2rem;font-weight:500;font-size:.88rem}
+.links a.l{opacity:.7}.links a.l:hover{color:#fff}
+.logo{border-radius:10px;box-shadow:none}
+/* hero */
+.hero{background:var(--bg)}
+.hero .spot{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 55% 60% at 70% 45%,#ffffff12,transparent 60%),radial-gradient(ellipse 40% 45% at 72% 60%,#E306131f,transparent 70%),radial-gradient(ellipse 80% 50% at 50% 115%,#ffffff08,transparent 70%)}
+.hero .spot::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,#ffffff1f,transparent)}
+.hero h1{font-weight:600;font-size:clamp(2.9rem,6.4vw,5.6rem);letter-spacing:-.055em;line-height:.98}
+.stats span{border-radius:999px;border-color:var(--line);background:#ffffff05;font-weight:500;font-size:.8rem;color:var(--ink2)}
+.stats span svg{width:15px;height:15px;color:#ffffff99}
+.stats i{width:7px;height:7px;box-shadow:0 0 0 3px #22c55e26}
+.phone{box-shadow:0 0 0 1px #4a4a4e,0 0 0 2.5px #0d0d0e,40px 60px 100px #000d,0 0 120px #ffffff0d}
+.cut{filter:drop-shadow(0 34px 44px #000d)}
+.sound{font-weight:600;background:#000a;backdrop-filter:blur(8px);border-color:#ffffff30}
+/* bandeau marques */
+.mq-w{padding:0;margin:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg)}
+.mq{background:transparent;transform:none;margin:0;box-shadow:none;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mq .tr{padding:28px 0;animation-duration:44s}
+.mq span{font-family:"Inter Tight",sans-serif;font-weight:500;font-size:1rem;letter-spacing:.32em;color:#ffffff59;gap:3.4rem;padding:0 1.7rem}
+.mq span::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.8}
+/* catalogue */
+.catalog{padding-top:140px}
+.tools{background:linear-gradient(var(--bg) 80%,transparent)}
+.chips button{min-height:40px;border:1px solid var(--line2);background:transparent;font-weight:500;font-size:.84rem;color:#ffffffc7}
+.chips button:hover{border-color:#ffffff66;color:#fff}
+.chips button.on{background:#f4f2ee;color:#0b0b0c;border-color:#f4f2ee}
+.chips.uchips button.on{background:transparent;color:#fff;border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+.search input,.sort{border:1px solid var(--line2);background:#ffffff05;font-weight:500}
+.grid{gap:26px}
+.p{background:var(--card);border-color:var(--line);border-radius:var(--r)}
+.p:hover{border-color:#ffffff26;box-shadow:0 40px 80px -20px #000;transform:translateY(-4px)}
+.p .im{background:#161618}
+.p .im::after{height:34%;background:linear-gradient(transparent,#111113)}
+.p .br{background:#0b0b0cb3;font-weight:600;font-size:.64rem;letter-spacing:.2em;border:1px solid #ffffff14}
+.p .bd{padding:1.25rem 1.35rem 1.35rem}
+.p h3{font-weight:600;font-size:1.05rem;letter-spacing:-.02em}
+.p .for{color:#ff6b73;font-weight:500;font-size:.72rem;letter-spacing:.01em}
+.p .sp span{font-weight:500;font-size:.7rem;background:transparent;border:1px solid var(--line2);color:#ffffffb8;border-radius:999px;padding:.26rem .6rem}
+.p .pr{font-weight:600}
+.add{border:1px solid #ffffff3d;border-radius:999px;font-weight:600;padding:0 1rem}
+.add:hover{background:#fff;color:#0b0b0c;border-color:#fff}
+.add.in{background:var(--red);border-color:var(--red);color:#fff}
+.cmp{border-radius:999px;font-weight:600;border-color:#ffffff24;background:#0b0b0cb3}
+.p .nph{border-radius:999px;font-weight:500;background:#0b0b0cb3}
+/* fiche, sélection, comparateur */
+.sheet,.ctab{border-radius:26px;background:#0f0f11;border-color:#ffffff14}
+.sheet h3{font-weight:600;letter-spacing:-.035em}
+.use-tags span{background:transparent;border:1px solid #E3061366;color:#ff8088;font-weight:500;border-radius:999px}
+.specs li b{font-weight:500}.specs li span{font-weight:600}
+.pn .hd h3{font-weight:600}
+.it{border-radius:18px;background:#ffffff04}
+.seg input:checked+span{background:#f4f2ee}
+.toast{font-weight:600;border-radius:999px;background:#f4f2ee}
+.cbar{border-radius:999px;background:#f4f2ee}
+/* conseil */
+.help{background:var(--bg2);border-top:1px solid var(--line)}
+.use{background:transparent;border-color:var(--line);border-radius:var(--r);padding:2.2rem;gap:.7rem}
+.use:hover{border-color:#ffffff33;background:#ffffff04}
+.use .em{width:52px;height:52px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;margin-bottom:.8rem;color:#fff}
+.use .em svg{width:22px;height:22px}
+.use h3{font-weight:600;font-size:1.2rem;letter-spacing:-.02em}
+.use b{font-weight:600;color:#fff;display:inline-flex;gap:.4rem}
+.use:hover b{color:var(--red)}
+/* commander */
+.how{border-top:1px solid var(--line)}
+.step{background:transparent;border-color:var(--line);padding:2.2rem}
+.step::after{font-family:"Inter Tight",sans-serif;font-weight:500;color:transparent;-webkit-text-stroke:1px #ffffff12;font-size:9rem;right:10px;top:-30px}
+.step .ic{background:transparent;border:1px solid var(--line2);border-radius:50%;box-shadow:none}
+.step .ic svg{stroke-width:1.6}
+.step h3{font-weight:600;letter-spacing:-.02em}
+/* boutique */
+.shop{background:radial-gradient(ellipse 60% 70% at 20% 40%,#ffffff08,transparent 70%),var(--bg);border-top:1px solid var(--line)}
+.shop-card{border-radius:26px;border-color:#ffffff14}
+.addr>a{border-radius:18px;background:transparent}
+.addr>a:hover{border-color:#ffffff38;background:#ffffff04}
+.addr .ic{background:transparent;border:1px solid var(--line2);border-radius:50%}
+.addr .ic svg{stroke-width:1.6}
+.addr b{font-weight:600}
+.map{border-radius:26px;border-color:#ffffff14}
+.map iframe{filter:grayscale(1) invert(.92) contrast(.9)}
+footer{background:#060607;border-top:1px solid var(--line);font-size:.82rem}
+@media (max-width:680px){section{padding:96px 0}.catalog{padding-top:110px}.mq .tr{padding:20px 0}.mq span{font-size:.82rem}.grid{gap:12px}.p .bd{padding:.9rem}.mbar{border-radius:999px}.mbar a,.mbar button{border-radius:999px}}
+.cbar{visibility:hidden;transform:translate(-50%,calc(100% + 140px))!important;transition:transform .45s var(--ease),visibility 0s .45s}
+.cbar.on{visibility:visible;transform:translate(-50%,0)!important;transition:transform .45s var(--ease)}
 </style>
 </head>
 <body>
@@ -361,23 +465,22 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 
 <main>
 <section class="hero">
-  <div class="rings"></div>
-  <div class="giant" aria-hidden="true">JAMBAAR</div>
+  <div class="spot" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
       <div class="kicker rv">PC · iPad · iPhone · Dakar</div>
-      <h1 class="rv">Le bon PC,<br>au <span class="bar"><span>bon prix.</span></span></h1>
+      <h1 class="rv">Le bon PC,<br>au <em>bon prix.</em></h1>
       <p class="lead rv">PC portables HP, Dell, Lenovo ThinkPad, MacBook, Surface, mais aussi iPad et iPhone : pour étudiants, entrepreneurs et entreprises. Choisissez en ligne, commandez sur WhatsApp.</p>
       <div class="ctas rv">
         <a class="btn btn-red" href="#catalogue">Voir le catalogue <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-wa wa" href="#"><svg class="ico wa-ico" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>78 171 75 38</a>
       </div>
-      <div class="stats rv"><span><i></i>En stock en boutique</span><span>📍 87 Av. Lamine Guèye</span><span>💬 Conseil sur WhatsApp</span></div>
+      <div class="stats rv"><span><i></i>En stock en boutique</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>87 Av. Lamine Guèye</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"/></svg>Conseil sur WhatsApp</span></div>
     </div>
     <div class="stage rv" id="stage">
       <div class="phone" id="phone">
         <video id="vid" src="pub.mp4#t=4.6" autoplay muted loop playsinline preload="metadata" poster="img/pub-poster.jpg"></video>
-        <button class="sound" id="sound" type="button">🔊 Activer le son</button>
+        <button class="sound" id="sound" type="button">Activer le son</button>
       </div>
       <img class="cut c1" src="img/cut/hp-elitebook-840-3.webp" alt="">
       <img class="cut c2" src="img/cut/macbook-pro-touchbar.webp" alt="">
@@ -395,7 +498,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <section class="catalog" id="catalogue">
   <div class="wrap">
     <div class="kicker rv">Catalogue</div>
-    <h2 class="rv">Nos produits <span class="red">disponibles.</span></h2>
+    <h2 class="rv">Nos produits <em>disponibles.</em></h2>
     <p class="lead rv">PC portables, 2-en-1, MacBook, iPad, iPhone : photos réelles, prises en boutique. Comparez jusqu'à 3 produits, ajoutez vos choix à votre sélection et envoyez-la en un clic sur WhatsApp.</p>
     <div class="tools">
       <div class="row">
@@ -415,12 +518,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <section class="help" id="conseil">
   <div class="wrap">
     <div class="kicker rv">Besoin d'aide ?</div>
-    <h2 class="rv">Quel PC <span class="red">pour vous ?</span></h2>
+    <h2 class="rv">Quel PC <em>pour vous ?</em></h2>
     <p class="lead rv">Choisissez votre usage : on vous montre les produits adaptés.</p>
     <div class="uses">
-      <button class="use rv" type="button" data-use="Études & bureautique"><span class="em">🎓</span><h3>Études & bureautique</h3><p>Cours, Word, Excel, Internet, visio. Léger et fiable pour tous les jours.</p><b>Voir les PC →</b></button>
-      <button class="use rv" type="button" data-use="Pro & multitâche"><span class="em">💼</span><h3>Pro & multitâche</h3><p>Plusieurs logiciels ouverts, gestion, comptabilité, beaucoup d'onglets.</p><b>Voir les PC →</b></button>
-      <button class="use rv" type="button" data-use="Création"><span class="em">🎨</span><h3>Création</h3><p>Montage vidéo, retouche photo, design : plus de puissance et un bel écran.</p><b>Voir les PC →</b></button>
+      <button class="use rv" type="button" data-use="Études & bureautique"><span class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span><h3>Études & bureautique</h3><p>Cours, Word, Excel, Internet, visio. Léger et fiable pour tous les jours.</p><b>Voir les PC →</b></button>
+      <button class="use rv" type="button" data-use="Pro & multitâche"><span class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span><h3>Pro & multitâche</h3><p>Plusieurs logiciels ouverts, gestion, comptabilité, beaucoup d'onglets.</p><b>Voir les PC →</b></button>
+      <button class="use rv" type="button" data-use="Création"><span class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 9.8C22 6 17.5 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span><h3>Création</h3><p>Montage vidéo, retouche photo, design : plus de puissance et un bel écran.</p><b>Voir les PC →</b></button>
     </div>
   </div>
 </section>
@@ -428,7 +531,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <section class="how" id="commander">
   <div class="wrap">
     <div class="kicker rv">Comment commander</div>
-    <h2 class="rv">Simple comme <span class="red">1, 2, 3.</span></h2>
+    <h2 class="rv">Simple comme <em>1, 2, 3.</em></h2>
     <div class="steps">
       <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><h3>Ajoutez à votre sélection</h3><p>Un ou plusieurs produits, depuis le catalogue ou la fiche produit.</p></div>
       <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"/></svg></div><h3>Envoyez sur WhatsApp</h3><p>Votre message est déjà rédigé : on vous confirme la disponibilité et le prix.</p></div>
@@ -442,7 +545,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
     <div class="shop-card rv"><img src="img/p/hp-probook-ryzen7-2.jpg" alt="HP ProBook en aluminium, disponible chez ORDI JAMBAAR" loading="lazy"></div>
     <div>
       <div class="kicker rv">Notre boutique</div>
-      <h2 class="rv">Passez nous <span class="red">voir.</span></h2>
+      <h2 class="rv">Passez nous <em>voir.</em></h2>
       <p class="lead rv">Venez voir votre futur PC avant de l'acheter.</p>
       <div class="addr rv">
         <a href="https://www.google.com/maps/search/?api=1&query=87+Avenue+Lamine+Gu%C3%A8ye+Dakar" target="_blank" rel="noopener"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b>87 Avenue Lamine Guèye</b><span>Dakar · Itinéraire Google Maps</span></div></a>
@@ -638,7 +741,7 @@ async function loadSheet() {
     return { id: id || slug(nom), cat: cat || "Autres", marque, nom, prix, accroche: acc,
       usages: usages.split(",").map(x => x.trim()).filter(Boolean),
       specs: specs.split("|").map(x => { const k = x.indexOf(":"); return k < 0 ? ["Info", x.trim()] : [x.slice(0, k).trim(), x.slice(k + 1).trim()]; }).filter(x => x[1]),
-      imgs: imgs.length ? imgs : ["https://ordi-jambaar.onrender.com/img/icon.jpg"] };
+      imgs: imgs.length ? imgs : ["https://ordijambaar.onrender.com/img/icon.jpg"] };
   }).filter(Boolean);
   if (!list.length) throw new Error("tableau vide");
   return list;
@@ -816,7 +919,7 @@ addEventListener("scroll", () => $("hd").classList.toggle("scrolled", scrollY > 
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
 const vid = $("vid"), sound = $("sound");
-sound.onclick = () => { vid.muted = !vid.muted; if (!vid.muted) { vid.currentTime = 0; vid.play(); } sound.textContent = vid.muted ? "🔊 Activer le son" : "🔇 Couper le son"; };
+sound.onclick = () => { vid.muted = !vid.muted; if (!vid.muted) { vid.currentTime = 0; vid.play(); } sound.textContent = vid.muted ? "Activer le son" : "Couper le son"; };
 
 const fine = matchMedia("(hover:hover) and (pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches;
 function bindTilt() {
