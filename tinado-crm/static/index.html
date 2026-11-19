@@ -100,6 +100,7 @@ tr.r{cursor:pointer}tr.r:hover td{background:var(--surface2)}
 .sc b{display:block;font-family:var(--serif);font-size:20px}
 .sc small{color:var(--muted);font-size:11.5px}
 .sc .n{font-family:var(--serif);font-size:26px;margin-top:4px}
+.fam{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}.fam small{font-family:var(--sans,inherit);font-size:12px;color:var(--muted);font-weight:500}
 /* formulaire */
 .drawer{position:fixed;inset:0;z-index:20;display:none}
 .drawer.open{display:block}
@@ -196,7 +197,7 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
     <div class="sp">
       <button class="btn pri" type="button" data-new="resa">+ Réservation</button>
       <button class="btn" type="button" data-new="contact">+ Contact</button>
-      <button class="btn" type="button" data-new="cmd">+ Commande senteurs</button>
+      <button class="btn" type="button" data-new="cmd">+ Commande boutique</button>
     </div>
   </div>
   <div class="wrap"><nav class="tabs" id="tabs">
@@ -206,7 +207,8 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
     <a href="#reservations" data-v="reservations">Réservations</a>
     <a href="#entreprises" data-v="entreprises">Entreprises</a>
     <a href="#proprietaires" data-v="proprietaires">Propriétaires</a>
-    <a href="#senteurs" data-v="senteurs">Senteurs</a>
+    <a href="#reseau" data-v="reseau">Partenaires</a>
+    <a href="#senteurs" data-v="senteurs">Boutique</a>
     <a href="#journal" data-v="journal">Journal</a>
   </nav></div>
 </header>
@@ -228,13 +230,22 @@ const nights = (a, b) => a && b ? Math.max(0, Math.round((D(b) - D(a)) / 864e5))
 const fmtD = s => s ? D(s).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : "";
 const ago = t => { if (!t) return ""; const s = (Date.now() - t) / 1e3; if (s < 60) return "à l'instant"; if (s < 3600) return `il y a ${Math.floor(s / 60)} min`; if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`; return new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
 
-const APTS = [{ id: "f3", nom: "F3 · Point E", court: "F3", nuit: 65000, mois: 1000000 }, { id: "cs", nom: "Chambre-salon", court: "Chambre-salon", nuit: 45000, mois: 850000 }];
-const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Bouche-à-oreille", "Instagram", "Site internet"];
+const APTS = [{ id: "f3", nom: "F3 · Point E", court: "F3", nuit: 65000, mois: 1000000, menage: 2 }, { id: "cs", nom: "F2 · Chambre-salon", court: "F2", nuit: 45000, mois: 850000, menage: 1 }];
+const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Association diaspora", "Bouche-à-oreille", "Instagram", "Site internet"];
 const RSTAT = ["Demande", "Confirmée", "Payée", "Annulée"];
 const RPILL = { "Demande": "p-gold", "Confirmée": "p-info", "Payée": "p-ok", "Annulée": "p-bad" };
 const STAGES = ["À contacter", "Contacté", "Rendez-vous", "Offre envoyée", "Signé", "Perdu"];
 const SCENTS = [["syraa", "Syraa"], ["weldi", "Weldi"], ["yobalema", "Yobalema"], ["upendo", "Upendo"], ["omaad", "Omaad"]];
-const CSTAT = ["À livrer", "Livrée", "Payée"];
+const FAM = [
+  { id: "spray", nom: "Sprays d'ambiance", info: "En stock · fournisseur en Afrique du Sud", items: SCENTS },
+  { id: "maison", nom: "Bougies et diffuseurs", info: "En stock · même fournisseur que les sprays", items: [["bougie", "Bougie parfumée"], ["diffuseur", "Diffuseur à bâtonnets"]] },
+  { id: "linge", nom: "Linge de maison en pagne tissé", info: "Sur commande · tisserandes, via Fatou", items: [["jete", "Jeté de lit"], ["coussin", "Coussin"], ["draps", "Parure de draps coton"]] },
+  { id: "panier", nom: "Paniers en osier", info: "Sur commande · vannières, étiquette cuir au logo", items: [["panier", "Panier en osier"]] }];
+const PRODS = FAM.flatMap(f => f.items.map(([k, n]) => [k, n, f.id]));
+const PNAME = Object.fromEntries(PRODS.map(([k, n]) => [k, n]));
+const CSTAT = ["À fabriquer", "En fabrication", "À livrer", "Livrée", "Payée"];
+const CPILL = { "Payée": "p-ok", "Livrée": "p-info", "À livrer": "p-gold", "En fabrication": "p-gold", "À fabriquer": "p-bad" };
+const CTYPES = ["Entreprise", "Propriétaire", "Partenaire", "Artisan / fournisseur"];
 
 let db = null, user = null, me = null, canWrite = true;
 let R = [], C = [], O = [], A = [], names = {}, view = "bord", ym = today().slice(0, 7), loaded = false;
@@ -279,7 +290,7 @@ function vBord() {
   <div class="kpis">
     <div class="kpi"><small>Chiffre d'affaires séjours</small><b class="num">${F(s.ca)}</b><em>${s.nu} nuit${s.nu > 1 ? "s" : ""} louée${s.nu > 1 ? "s" : ""}</em></div>
     <div class="kpi"><small>Taux d'occupation</small><b class="num">${Math.round(s.occ * 100)} %</b><em>les deux appartements</em></div>
-    <div class="kpi"><small>Senteurs vendues</small><b class="num">${s.sn}</b><em>${F(s.sca)}</em></div>
+    <div class="kpi"><small>Boutique · articles vendus</small><b class="num">${s.sn}</b><em>${F(s.sca)}</em></div>
     <div class="kpi"><small>À encaisser</small><b class="num">${F(toPay.reduce((a, r) => a + (Number(r.prix) || 0), 0))}</b><em>${toPay.length} réservation${toPay.length > 1 ? "s" : ""} confirmée${toPay.length > 1 ? "s" : ""} non payée${toPay.length > 1 ? "s" : ""}</em></div>
   </div>
   <div class="grid2"><div>
@@ -319,22 +330,27 @@ function vResa() {
   ${list.map(r => `<tr class="r" data-open="resa:${esc(r.id)}"><td><b>${esc(r.client)}</b>${r.entreprise ? `<br><small style="color:var(--muted)">${esc(r.entreprise)}</small>` : ""}</td><td>${esc(APTS.find(a => a.id === r.apt)?.court || "")}</td><td>${fmtD(r.arrivee)} → ${fmtD(r.depart)}</td><td class="num">${nights(r.arrivee, r.depart)}</td><td class="num">${F(r.prix)}</td><td>${esc(r.source || "")}</td><td><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></td></tr>`).join("")}
   </tbody></table></div>` : `<p class="empty">Aucune réservation. Ajoutez la première avec « + Réservation ».</p>`}`;
 }
+const PIPES = {
+  Entreprise: ["Entreprises", "Les sociétés, ONG et organismes qui logent des invités ou des collaborateurs : convention par mission ou lettre de référencement, de la prise de contact à la signature."],
+  "Propriétaire": ["Propriétaires", "Les propriétaires qui pourraient confier leur appartement en gestion (conciergerie Maison Tinado)."],
+  "Réseau": ["Partenaires et artisans", "Associations de la diaspora, partenaires qui envoient des clients, et les artisans ou fournisseurs de la gamme Maison Tinado."] };
 function vPipe(type) {
-  const t = today(), cs = C.filter(c => c.type === type);
-  const title = type === "Entreprise" ? "Entreprises" : "Propriétaires", sub = type === "Entreprise" ? "Les sociétés qui logent leurs collaborateurs : de la prise de contact à la convention signée." : "Les propriétaires qui pourraient confier leur appartement en gestion.";
-  return `<h1>${title}</h1><p class="sub">${sub}</p><div class="row"><button class="btn sm" type="button" data-new="contact" data-type="${type}">+ ${type}</button></div>
-  <div class="board">${STAGES.map(s => { const l = cs.filter(c => c.etape === s); return `<section class="col"><h3>${s}<span>${l.length}</span></h3>${l.map(c => { const lt = c.dateAction && c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<div class="card" data-open="contact:${esc(c.id)}"><b>${esc(c.nom)}</b><small>${esc(c.contact || "")}</small>${c.prochaineAction ? `<div class="due ${lt}" style="margin-top:6px">${esc(c.prochaineAction)}${c.dateAction ? " · " + fmtD(c.dateAction) : ""}</div>` : ""}</div>`; }).join("") || `<p class="empty" style="padding:10px">—</p>`}</section>`; }).join("")}</div>`;
+  const t = today(), types = type === "Réseau" ? ["Partenaire", "Artisan / fournisseur"] : [type], cs = C.filter(c => types.includes(c.type));
+  const [title, sub] = PIPES[type];
+  return `<h1>${title}</h1><p class="sub">${sub}</p><div class="row">${types.map(ty => `<button class="btn sm" type="button" data-new="contact" data-type="${ty}">+ ${ty}</button>`).join("")}</div>
+  <div class="board">${STAGES.map(s => { const l = cs.filter(c => c.etape === s); return `<section class="col"><h3>${s}<span>${l.length}</span></h3>${l.map(c => { const lt = c.dateAction && c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<div class="card" data-open="contact:${esc(c.id)}">${types.length > 1 ? `<span class="pill p-gold" style="margin-bottom:4px">${esc(c.type)}</span>` : ""}<b>${esc(c.nom)}</b><small>${esc(c.contact || "")}</small>${c.prochaineAction ? `<div class="due ${lt}" style="margin-top:6px">${esc(c.prochaineAction)}${c.dateAction ? " · " + fmtD(c.dateAction) : ""}</div>` : ""}</div>`; }).join("") || `<p class="empty" style="padding:10px">—</p>`}</section>`; }).join("")}</div>`;
 }
 function vSent() {
   const s = stats(ym), [y, mo] = ym.split("-").map(Number), s0 = new Date(y, mo - 1, 1), e0 = new Date(y, mo, 1);
   const cm = O.filter(o => o.date && D(o.date) >= s0 && D(o.date) < e0);
-  const tot = Object.fromEntries(SCENTS.map(([k]) => [k, cm.reduce((a, o) => a + (Number(o.qte?.[k]) || 0), 0)]));
+  const tot = Object.fromEntries(PRODS.map(([k]) => [k, cm.reduce((a, o) => a + (Number(o.qte?.[k]) || 0), 0)]));
   const list = O.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-  return `<h1>Senteurs</h1><p class="sub">Commandes de sprays d'ambiance. ${s.sn} flacon${s.sn > 1 ? "s" : ""} vendu${s.sn > 1 ? "s" : ""} ce mois-ci, ${F(s.sca)}.</p><div class="row">${monthPicker()}<button class="btn sm pri" type="button" data-new="cmd">+ Commande</button></div>
-  <div class="scents">${SCENTS.map(([k, n]) => `<div class="sc"><b>${n}</b><div class="n num">${tot[k]}</div><small>vendus ce mois</small></div>`).join("")}</div>
-  ${list.length ? `<div class="tblw"><table><thead><tr><th>Date</th><th>Client</th><th>Senteurs</th><th>Montant</th><th>Statut</th></tr></thead><tbody>
-  ${list.map(o => `<tr class="r" data-open="cmd:${esc(o.id)}"><td>${fmtD(o.date)}</td><td><b>${esc(o.client)}</b></td><td>${SCENTS.filter(([k]) => Number(o.qte?.[k])).map(([k, n]) => `${n} × ${o.qte[k]}`).join(", ")}</td><td class="num">${F(o.montant)}</td><td><span class="pill ${o.statut === "Payée" ? "p-ok" : o.statut === "Livrée" ? "p-info" : "p-gold"}">${esc(o.statut)}</span></td></tr>`).join("")}
-  </tbody></table></div>` : `<p class="empty">Aucune commande. Ajoutez-en une avec « + Commande senteurs ».</p>`}`;
+  const open = O.filter(o => ["À fabriquer", "En fabrication", "À livrer"].includes(o.statut || "À livrer"));
+  return `<h1>Boutique</h1><p class="sub">La gamme Maison Tinado : un échantillon dans chaque appartement, un QR code, et chaque commande notée ici. ${s.sn} article${s.sn > 1 ? "s" : ""} vendu${s.sn > 1 ? "s" : ""} ce mois-ci, ${F(s.sca)}.${open.length ? ` <b>${open.length} commande${open.length > 1 ? "s" : ""} en cours</b> (à fabriquer ou à livrer).` : ""}</p><div class="row">${monthPicker()}<button class="btn sm pri" type="button" data-new="cmd">+ Commande</button></div>
+  ${FAM.map(f => `<h3 class="fam">${f.nom}<small>${f.info}</small></h3><div class="scents">${f.items.map(([k, n]) => `<div class="sc"><b>${n}</b><div class="n num">${tot[k]}</div><small>vendus ce mois</small></div>`).join("")}</div>`).join("")}
+  ${list.length ? `<div class="tblw"><table><thead><tr><th>Date</th><th>Client</th><th>Articles</th><th>Montant</th><th>Livraison prévue</th><th>Statut</th></tr></thead><tbody>
+  ${list.map(o => `<tr class="r" data-open="cmd:${esc(o.id)}"><td>${fmtD(o.date)}</td><td><b>${esc(o.client)}</b></td><td>${Object.entries(o.qte || {}).filter(([, q]) => Number(q)).map(([k, q]) => `${esc(PNAME[k] || k)} × ${q}`).join(", ")}</td><td class="num">${F(o.montant)}</td><td>${fmtD(o.livraison)}</td><td><span class="pill ${CPILL[o.statut] || "p-gold"}">${esc(o.statut)}</span></td></tr>`).join("")}
+  </tbody></table></div>` : `<p class="empty">Aucune commande. Ajoutez-en une avec « + Commande ».</p>`}`;
 }
 function vJournal() {
   return `<h1>Journal</h1><p class="sub">Qui a fait quoi, et quand.</p><section class="panel">${A.length ? `<ul class="feed">${A.map(a => `<li><b>${esc(names[a.par]?.name || "Quelqu'un")}</b> ${esc(a.texte)}<time>${ago(a.le)}</time></li>`).join("")}</ul>` : `<p class="empty">Rien pour l'instant.</p>`}</section>`;
@@ -360,7 +376,8 @@ function formResa(id, preset = {}) {
    <label class="full">Notes<textarea id="fn" rows="3" placeholder="Heure d'arrivée, demandes particulières…">${esc(r.notes)}</textarea></label>
   </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
   const upd = () => { const n = nights($("fd1").value, $("fd2").value), a = APTS.find(x => x.id === $("fa").value); const sug = n >= 28 ? a.mois * n / 30 : a.nuit * n;
-    $("calc").innerHTML = n ? `${n} nuit${n > 1 ? "s" : ""} · tarif de référence ${F(sug)} ${n >= 28 ? "(au mois)" : `(${F(a.nuit)} / nuit)`} <button class="btn sm" type="button" id="use">Utiliser</button>` : "Choisissez les dates pour voir le nombre de nuits.";
+    const men = n >= 7 ? Math.ceil(n / 7 * a.menage) : 0;
+    $("calc").innerHTML = n ? `${n} nuit${n > 1 ? "s" : ""} · tarif de référence ${F(sug)} ${n >= 28 ? "(au mois)" : `(${F(a.nuit)} / nuit)`} <button class="btn sm" type="button" id="use">Utiliser</button>${men ? `<br><small>Ménage inclus : ${men} passage${men > 1 ? "s" : ""} (${a.menage} par semaine dans le ${a.court}, séjour de 7 nuits ou plus)</small>` : ""}` : "Choisissez les dates pour voir le nombre de nuits.";
     $("use")?.addEventListener("click", () => $("fp").value = Math.round(sug)); };
   ["fd1", "fd2", "fa"].forEach(k => $(k).addEventListener("change", upd)); upd();
   $("fm").onsubmit = async e => { e.preventDefault();
@@ -373,7 +390,7 @@ function formResa(id, preset = {}) {
 function formContact(id, type) {
   const c = id ? C.find(x => x.id === id) : { type: type || "Entreprise", etape: "À contacter" };
   openDrawer(`${head(id ? esc(c.nom) : "Nouveau contact")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
-   <label>Type<select id="fy">${["Entreprise", "Propriétaire"].map(t => `<option ${c.type === t ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+   <label>Type<select id="fy">${CTYPES.map(t => `<option ${c.type === t ? "selected" : ""}>${t}</option>`).join("")}</select></label>
    <label>Étape<select id="fg">${STAGES.map(s => `<option ${c.etape === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
    <label class="full">Nom (société ou propriétaire)<input id="fo" required value="${esc(c.nom)}"></label>
    <label>Personne à contacter<input id="fk" value="${esc(c.contact)}"></label>
@@ -393,17 +410,18 @@ function formCmd(id) {
   openDrawer(`${head(id ? "Commande" : "Nouvelle commande")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
    <label>Client<input id="fc" required value="${esc(o.client)}"></label>
    <label>Téléphone<input id="ft" type="tel" value="${esc(o.telephone)}"></label>
-   <div class="full"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">Flacons</div><div class="qty">${SCENTS.map(([k, n]) => `<label>${n}<input type="number" min="0" step="1" data-q="${k}" value="${esc(o.qte?.[k] ?? "")}" placeholder="0"></label>`).join("")}</div></div>
+   ${FAM.map(f => `<div class="full"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">${f.nom}</div><div class="qty">${f.items.map(([k, n]) => `<label>${n}<input type="number" min="0" step="1" data-q="${k}" value="${esc(o.qte?.[k] ?? "")}" placeholder="0"></label>`).join("")}</div></div>`).join("")}
    <label>Montant total (F)<input id="fp" type="number" min="0" step="500" value="${esc(o.montant ?? "")}"></label>
-   <label>Date<input id="fd" type="date" value="${esc(o.date)}"></label>
+   <label>Date de la commande<input id="fd" type="date" value="${esc(o.date)}"></label>
+   <label>Livraison prévue<input id="fl" type="date" value="${esc(o.livraison)}"></label>
    <label>Statut<select id="fst">${CSTAT.map(s => `<option ${o.statut === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
-   <label class="full">Notes<textarea id="fn" rows="2" placeholder="Adresse de livraison…">${esc(o.notes)}</textarea></label>
+   <label class="full">Notes<textarea id="fn" rows="2" placeholder="Adresse de livraison, couleur du pagne, taille…">${esc(o.notes)}</textarea></label>
   </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
   $("fm").onsubmit = async e => { e.preventDefault();
     const qte = {}; document.querySelectorAll("[data-q]").forEach(i => { if (Number(i.value) > 0) qte[i.dataset.q] = Number(i.value); });
-    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), qte, montant: $("fp").value === "" ? null : Number($("fp").value), date: $("fd").value, statut: $("fst").value, notes: $("fn").value };
-    if (!d.client || !Object.keys(qte).length) { $("er").hidden = false; $("er").textContent = "Indiquez le client et au moins un flacon."; return; }
-    if (await save("commandes", id, d, `une commande de senteurs pour ${d.client}`)) closeDrawer(); };
+    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), qte, montant: $("fp").value === "" ? null : Number($("fp").value), date: $("fd").value, livraison: $("fl").value, statut: $("fst").value, notes: $("fn").value };
+    if (!d.client || !Object.keys(qte).length) { $("er").hidden = false; $("er").textContent = "Indiquez le client et au moins un article."; return; }
+    if (await save("commandes", id, d, `une commande boutique pour ${d.client}`)) closeDrawer(); };
   $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("commandes", id, `la commande de ${o.client}`)) closeDrawer(); });
 }
 
@@ -610,7 +628,7 @@ function loop3() {
 function show3d() { if (!window.THREE) { $("r3c").innerHTML = `<p class="empty">La vue 3D n'a pas pu se charger. Les autres onglets fonctionnent.</p>`; return; } if (!init3d()) return; resize3d(); sync3d(); if (!X3.raf) loop3(); }
 
 /* ---------- rendu et navigation ---------- */
-const VIEWS = { residence: () => "", bord: vBord, calendrier: vCal, reservations: vResa, entreprises: () => vPipe("Entreprise"), proprietaires: () => vPipe("Propriétaire"), senteurs: vSent, journal: vJournal };
+const VIEWS = { residence: () => "", bord: vBord, calendrier: vCal, reservations: vResa, entreprises: () => vPipe("Entreprise"), proprietaires: () => vPipe("Propriétaire"), reseau: () => vPipe("Réseau"), senteurs: vSent, journal: vJournal };
 function render() {
   document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === view));
   if (!db) { $("main").innerHTML = `<p class="note">Connexion au serveur impossible. Vérifiez votre connexion internet puis rechargez la page.</p>`; return; }
