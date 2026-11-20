@@ -1,0 +1,25 @@
+# Déploiement Render du CRM Maison Tinado (Blueprint) : serveur + base PostgreSQL
+services:
+  - type: web
+    name: tinado-crm
+    runtime: node
+    region: frankfurt
+    plan: starter
+    rootDir: tinado-crm
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ACCESS_CODE
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tinado-crm-db
+          property: connectionString
+databases:
+  - name: tinado-crm-db
+    region: frankfurt
+    plan: basic-256mb

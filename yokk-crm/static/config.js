@@ -1,0 +1,1 @@
+window.YOKK_API = "";

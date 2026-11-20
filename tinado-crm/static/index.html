@@ -1,0 +1,671 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><link rel="icon" href="data:,"><title>Maison Tinado · Gestion</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<script src="three.min.js"></script>
+<style>
+/* Layout : en-tête collant avec onglets ; contenu en grilles qui passent en une colonne sur téléphone */
+:root{
+  --bg:#f6f1e9; --surface:#fffdf9; --surface2:#efe7da; --line:#e2d6c4; --fg:#2b2118; --muted:#76685a;
+  --accent:#8a5f36; --accent-fg:#fffdf9; --gold:#b08a57; --gold-soft:#f1e3cb;
+  --ok:#2f7a4b; --warn:#a8701b; --bad:#b4442a; --info:#3c6a96;
+  --serif:"Cormorant Garamond",Georgia,serif; --body:Inter,ui-sans-serif,system-ui,sans-serif;
+  --r:12px; --shadow:0 1px 2px #2b21180d,0 8px 24px #2b211812;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:.18em}
+.brand small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn.sm{padding:5px 11px;font-size:12.5px}
+.btn.danger{color:var(--bad)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{padding:10px 14px;border-bottom:2px solid transparent;color:var(--muted);text-decoration:none;font-weight:600;white-space:nowrap}
+nav.tabs a.on{color:var(--fg);border-color:var(--gold)}
+main{padding-block:22px 70px}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 18px}
+.note{font-size:12.5px;color:var(--muted);background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:16px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.row>*{min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.kpi small{display:block;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.kpi b{display:block;font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1;margin-top:4px}
+.kpi em{font-style:normal;font-size:12px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+.grid2>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.panel+.panel{margin-top:16px}
+.occ{display:grid;gap:14px}
+.occ .l{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.track{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.fill{height:100%;background:var(--gold);border-radius:6px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer}
+.list li:last-child{border-bottom:0}
+.list small{display:block;color:var(--muted);font-size:12px}
+.list .r{text-align:right;white-space:nowrap}
+.empty{color:var(--muted);text-align:center;padding:24px 10px;font-size:13.5px}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--surface2);color:var(--muted)}
+.p-ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.p-warn{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.p-info{background:color-mix(in srgb,var(--info) 14%,transparent);color:var(--info)}
+.p-bad{background:color-mix(in srgb,var(--bad) 13%,transparent);color:var(--bad)}
+.p-gold{background:var(--gold-soft);color:var(--accent)}
+/* calendrier */
+.calw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.cal{display:grid;gap:3px;min-width:860px}
+.cal .h{font-size:11px;color:var(--muted);text-align:center}
+.cal .h.we{color:var(--gold)}
+.cal .apt{font-family:var(--serif);font-weight:600;font-size:16px;align-self:center;padding-right:8px;white-space:nowrap}
+.cal .d{height:44px;border-radius:5px;background:var(--surface2)}
+.cal .d.today{outline:1.5px solid var(--gold)}
+.cal .bk{height:44px;border-radius:7px;padding:4px 7px;font-size:11.5px;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;color:#fff}
+.bk.s-Demande{background:#a38d6f}.bk.s-Confirmée{background:#3c6a96}.bk.s-Payée{background:#2f7a4b}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+/* tableaux */
+.tblw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{text-align:left;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px}
+tr.r{cursor:pointer}tr.r:hover td{background:var(--surface2)}
+/* pipeline */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:10px;overflow-x:auto;padding-bottom:6px}
+.col{background:var(--surface2);border:1px solid var(--line);border-radius:var(--r);padding:10px;min-height:160px}
+.col h3{display:flex;justify-content:space-between;font-family:var(--serif);font-size:17px;margin:2px 4px 10px}
+.col h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.card:hover{border-color:var(--accent)}
+.card b{display:block}
+.card small{color:var(--muted);font-size:12px}
+.due{font-size:12px;font-weight:600}.due.late{color:var(--bad)}.due.today{color:var(--warn)}
+/* senteurs */
+.scents{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;text-align:center}
+.sc b{display:block;font-family:var(--serif);font-size:20px}
+.sc small{color:var(--muted);font-size:11.5px}
+.sc .n{font-family:var(--serif);font-size:26px;margin-top:4px}
+.fam{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 8px}.fam small{font-family:var(--sans,inherit);font-size:12px;color:var(--muted);font-weight:500}
+/* formulaire */
+.drawer{position:fixed;inset:0;z-index:20;display:none}
+.drawer.open{display:block}
+.drawer .ov{position:absolute;inset:0;background:#0007}
+.drawer .pn{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--surface);overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 20px}
+.drawer .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form label{display:grid;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+.form .full{grid-column:1/-1}
+input,select,textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+.qty{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.qty label{text-align:center}
+.calc{font-size:13px;background:var(--gold-soft);border-radius:9px;padding:8px 10px;color:var(--accent)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.err{color:var(--bad);font-size:12.5px}
+.feed{list-style:none;margin:0;padding:0;max-height:420px;overflow:auto}
+.feed li{padding:8px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.feed time{display:block;color:var(--muted);font-size:11.5px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:10px;font-weight:600;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+#r3{position:relative;height:calc(100vh - 118px);min-height:520px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,var(--surface),var(--bg) 75%);border-bottom:1px solid var(--line)}
+#r3c{position:absolute;inset:0}#r3c canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#r3l{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.l3{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform}
+.l3.apt{display:grid;justify-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 14px;box-shadow:var(--shadow)}
+.l3.apt b{font-family:var(--serif);font-size:19px;font-weight:600}.l3.apt span{font-size:12px;color:var(--muted)}.l3.apt em{font-style:normal;font-size:12px;color:var(--accent);font-weight:600}
+.l3.apt.on{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft),var(--shadow)}
+.l3.bt3{font-family:var(--serif);font-size:14px;font-weight:600;background:color-mix(in srgb,var(--surface) 85%,transparent);border-radius:6px;padding:0 6px}
+.l3.bt3 span{font-family:var(--body);font-size:11px;color:var(--accent)}
+#r3top{position:absolute;top:14px;left:max(14px,env(safe-area-inset-left,0px));display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 28px)}
+#r3top .k3{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:7px 12px;box-shadow:var(--shadow)}
+#r3top small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}#r3top b{font-family:var(--serif);font-size:20px}
+#r3tools{position:absolute;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#r3tools span{font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+#r3p{position:absolute;top:14px;right:max(14px,env(safe-area-inset-right,0px));width:min(340px,calc(100% - 28px));max-height:calc(100% - 28px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.ph3{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.ph3 b{font-family:var(--serif);font-size:22px}
+.kv3{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.kv3 div{background:var(--surface2);border-radius:10px;padding:8px 10px}.kv3 small{display:block;font-size:11px;color:var(--muted)}.kv3 b{font-size:14px}
+#r3p h3{font-family:var(--serif);font-size:17px;margin:6px 0}
+@media (max-width:700px){#r3p{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));width:auto;max-height:55%}#r3top .k3:nth-child(n+3){display:none}#r3tools span{display:none}}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.scents{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.sp .btn:not(.pri){display:none}.l3.apt span,.l3.apt em{display:none}.l3.apt{padding:4px 10px}.l3.apt b{font-size:16px}.form{grid-template-columns:1fr}.scents{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:26px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+#login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 30%,var(--surface),var(--bg) 70%);display:grid;place-items:center;padding:20px}
+#login form{width:min(380px,100%);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;box-shadow:var(--shadow);text-align:center}
+#login .lb{font-family:var(--serif);font-size:38px;font-weight:600;letter-spacing:.3em;padding-left:.3em}
+#login small{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+#login label{display:grid;gap:4px;text-align:left;font-size:12px;font-weight:600;color:var(--muted)}
+#login .btn{justify-content:center;margin-top:6px}
+</style>
+
+</head><body><script src="config.js"></script>
+<script>
+/* Adaptateur : stockage dans Google Sheets via Apps Script (gratuit) */
+(() => {
+  const L = {}, cache = { reservations: [], contacts: [], commandes: [], activite: [] }; let ver = -1, started = false;
+  const get = k => { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } };
+  const who = () => get("tinado-nom") || "Équipe", code = () => get("tinado-code");
+  const api = async body => { const r = await fetch(window.TINADO_API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ ...body, code: code() }) }); const j = await r.json(); if (j.error === "auth") { showLogin(); throw { code: "unavailable" }; } if (j.error) throw { code: "invalid_argument" }; return j; };
+  const snap = c => ({ docs: cache[c].map(d => { const { id, ...rest } = d; return { id, exists: true, data: () => rest }; }), size: cache[c].length, empty: !cache[c].length, metadata: { fromCache: false, hasPendingWrites: false } });
+  const emit = () => Object.entries(L).forEach(([c, fs]) => fs.forEach(f => f(snap(c))));
+  async function pull(force) { try { if (!force) { const { v } = await api({ action: "version" }); if (v === ver) return; } const j = await api({ action: "all" }); ver = j.v; Object.assign(cache, j.data); emit(); } catch (e) {} }
+  const start = () => { if (started) return; started = true; if (!code()) return showLogin(); pull(true); setInterval(pull, 15000); document.addEventListener("visibilitychange", () => !document.hidden && pull()); };
+  const write = async (action, col, id, data) => { const i = cache[col].findIndex(d => d.id === id);
+    if (action === "put") { if (i >= 0) cache[col][i] = { id, ...data }; else cache[col].push({ id, ...data }); } else if (i >= 0) cache[col].splice(i, 1);
+    emit(); await api({ action, col, id, data }); ver = -1; };
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const docRef = (col, id) => ({ id, path: col + "/" + id, set: d => write("put", col, id, d),
+    update: d => { const cur = cache[col].find(x => x.id === id) || {}; const { id: _, ...rest } = cur; return write("put", col, id, { ...rest, ...d }); }, delete: () => write("del", col, id) });
+  const collection = c => { const q = { orderBy() { return q; }, limit() { return q; }, where() { return q; },
+    onSnapshot(next) { (L[c] = L[c] || []).push(next); start(); if (ver >= 0) setTimeout(() => next(snap(c)), 0); return () => { L[c] = L[c].filter(f => f !== next); }; },
+    get: async () => snap(c), doc: id => docRef(c, id || newId()), add: async d => { const id = newId(); await write("put", c, id, d); return docRef(c, id); } }; return q; };
+  window.claude = { use: async n => ({ db: { collection, doc: p => { const [c, id] = p.split("/"); return docRef(c, id); } },
+    user: { id: async () => who(), can: async () => true, profiles: async ids => Object.fromEntries([].concat(ids).map(i => [i, { id: i, name: i }])) } })[n] || null };
+  function showLogin() {
+    if (document.getElementById("login")) return;
+    const d = document.createElement("div"); d.id = "login";
+    d.innerHTML = `<form id="lf"><div class="lb">TINADO</div><small>Maison · Dakar · Gestion</small>
+      <label>Votre prénom<input id="ln" required autocomplete="given-name"></label>
+      <label>Code d'accès<input id="lc" type="password" required autocomplete="current-password"></label>
+      <button class="btn pri" type="submit">Entrer</button><p id="le" class="err" hidden></p></form>`;
+    document.body.appendChild(d); document.getElementById("ln").value = who() === "Équipe" ? "" : who();
+    document.getElementById("lf").onsubmit = async e => { e.preventDefault(); const c = document.getElementById("lc").value, p = document.getElementById("le");
+      let j; try { const r = await fetch(window.TINADO_API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "login", code: c }) }); j = await r.json();
+        if (!j.ok) { p.hidden = false; p.textContent = "Code incorrect."; return; } } catch (x) { p.hidden = false; p.textContent = "Serveur injoignable : vérifiez que le déploiement Apps Script est en accès « Tout le monde »."; return; }
+        if (j.error === "server") { p.hidden = false; p.textContent = "Erreur du serveur Google : " + (j.message || ""); return; }
+      try { localStorage.setItem("tinado-code", c); localStorage.setItem("tinado-nom", document.getElementById("ln").value.trim() || "Équipe"); } catch (x) {}
+      location.reload(); };
+  }
+})();
+</script>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><b>TINADO</b><small>Gestion</small></div>
+    <div class="sp">
+      <button class="btn pri" type="button" data-new="resa">+ Réservation</button>
+      <button class="btn" type="button" data-new="contact">+ Contact</button>
+      <button class="btn" type="button" data-new="cmd">+ Commande boutique</button>
+    </div>
+  </div>
+  <div class="wrap"><nav class="tabs" id="tabs">
+    <a href="#residence" data-v="residence">Résidence 3D</a>
+    <a href="#bord" data-v="bord">Tableau de bord</a>
+    <a href="#calendrier" data-v="calendrier">Calendrier</a>
+    <a href="#reservations" data-v="reservations">Réservations</a>
+    <a href="#entreprises" data-v="entreprises">Entreprises</a>
+    <a href="#proprietaires" data-v="proprietaires">Propriétaires</a>
+    <a href="#reseau" data-v="reseau">Partenaires</a>
+    <a href="#senteurs" data-v="senteurs">Boutique</a>
+    <a href="#journal" data-v="journal">Journal</a>
+  </nav></div>
+</header>
+<section id="r3" hidden aria-label="La résidence en 3D"><div id="r3c"></div><div id="r3l"></div><div id="r3top"></div>
+  <div id="r3tools"><button class="btn sm" type="button" data-reset3>Recentrer</button><span>Glissez pour tourner · molette ou pincer pour zoomer · touchez un appartement, une case du calendrier ou un flacon</span></div><aside id="r3p" hidden></aside></section>
+<main class="wrap" id="main"><p class="note">Chargement des données de Maison Tinado…</p></main>
+<div class="drawer" id="drawer" aria-hidden="true"><div class="ov" data-close></div><aside class="pn" role="dialog" aria-modal="true" aria-labelledby="dT"><div id="dB"></div></aside></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const F = n => (n || n === 0) && n !== "" && !isNaN(n) ? Math.round(Number(n)).toLocaleString("fr-FR").replace(/ | /g, " ") + " F" : "—";
+const toast = m => { const t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 1800); };
+const D = s => new Date(s + "T00:00");
+const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+const today = () => iso(new Date());
+const nights = (a, b) => a && b ? Math.max(0, Math.round((D(b) - D(a)) / 864e5)) : 0;
+const fmtD = s => s ? D(s).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : "";
+const ago = t => { if (!t) return ""; const s = (Date.now() - t) / 1e3; if (s < 60) return "à l'instant"; if (s < 3600) return `il y a ${Math.floor(s / 60)} min`; if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`; return new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
+
+const APTS = [{ id: "f3", nom: "F3 · Point E", court: "F3", nuit: 65000, mois: 1000000, menage: 2 }, { id: "cs", nom: "F2 · Chambre-salon", court: "F2", nuit: 45000, mois: 850000, menage: 1 }];
+const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Association diaspora", "Bouche-à-oreille", "Instagram", "Site internet"];
+const RSTAT = ["Demande", "Confirmée", "Payée", "Annulée"];
+const RPILL = { "Demande": "p-gold", "Confirmée": "p-info", "Payée": "p-ok", "Annulée": "p-bad" };
+const STAGES = ["À contacter", "Contacté", "Rendez-vous", "Offre envoyée", "Signé", "Perdu"];
+const SCENTS = [["syraa", "Syraa"], ["weldi", "Weldi"], ["yobalema", "Yobalema"], ["upendo", "Upendo"], ["omaad", "Omaad"]];
+const FAM = [
+  { id: "spray", nom: "Sprays d'ambiance", info: "En stock · fournisseur en Afrique du Sud", items: SCENTS },
+  { id: "maison", nom: "Bougies et diffuseurs", info: "En stock · même fournisseur que les sprays", items: [["bougie", "Bougie parfumée"], ["diffuseur", "Diffuseur à bâtonnets"]] },
+  { id: "linge", nom: "Linge de maison en pagne tissé", info: "Sur commande · tisserandes, via Fatou", items: [["jete", "Jeté de lit"], ["coussin", "Coussin"], ["draps", "Parure de draps coton"]] },
+  { id: "panier", nom: "Paniers en osier", info: "Sur commande · vannières, étiquette cuir au logo", items: [["panier", "Panier en osier"]] }];
+const PRODS = FAM.flatMap(f => f.items.map(([k, n]) => [k, n, f.id]));
+const PNAME = Object.fromEntries(PRODS.map(([k, n]) => [k, n]));
+const CSTAT = ["À fabriquer", "En fabrication", "À livrer", "Livrée", "Payée"];
+const CPILL = { "Payée": "p-ok", "Livrée": "p-info", "À livrer": "p-gold", "En fabrication": "p-gold", "À fabriquer": "p-bad" };
+const CTYPES = ["Entreprise", "Propriétaire", "Partenaire", "Artisan / fournisseur"];
+
+let db = null, user = null, me = null, canWrite = true;
+let R = [], C = [], O = [], A = [], names = {}, view = "bord", ym = today().slice(0, 7), loaded = false;
+
+/* ---------- calculs ---------- */
+const monthDays = m => { const [y, mo] = m.split("-").map(Number); return new Date(y, mo, 0).getDate(); };
+const active = r => r.statut !== "Annulée";
+function nightsInMonth(r, m) { // nuits de la réservation qui tombent dans le mois m
+  const [y, mo] = m.split("-").map(Number); const s = new Date(y, mo - 1, 1), e = new Date(y, mo, 1);
+  const a = Math.max(D(r.arrivee), s), b = Math.min(D(r.depart), e); return Math.max(0, Math.round((b - a) / 864e5));
+}
+const revInMonth = (r, m) => { const n = nights(r.arrivee, r.depart); return n ? (Number(r.prix) || 0) * nightsInMonth(r, m) / n : 0; };
+function stats(m) {
+  const days = monthDays(m), act = R.filter(active);
+  const per = APTS.map(a => { const rs = act.filter(r => r.apt === a.id); const n = rs.reduce((s, r) => s + nightsInMonth(r, m), 0); return { ...a, nuits: n, occ: Math.min(1, n / days), ca: rs.reduce((s, r) => s + revInMonth(r, m), 0) }; });
+  const ca = per.reduce((s, a) => s + a.ca, 0), nu = per.reduce((s, a) => s + a.nuits, 0);
+  const [y, mo] = m.split("-").map(Number); const s0 = new Date(y, mo - 1, 1).getTime(), e0 = new Date(y, mo, 1).getTime();
+  const cmds = O.filter(o => o.date && D(o.date).getTime() >= s0 && D(o.date).getTime() < e0);
+  return { per, ca, nu, occ: nu / (days * APTS.length), sca: cmds.reduce((s, o) => s + (Number(o.montant) || 0), 0), sn: cmds.reduce((s, o) => s + Object.values(o.qte || {}).reduce((a, b) => a + (Number(b) || 0), 0), 0) };
+}
+function overlap(r, skipId) { return R.find(x => x.id !== skipId && active(x) && x.apt === r.apt && D(x.arrivee) < D(r.depart) && D(r.arrivee) < D(x.depart)); }
+
+/* ---------- écritures ---------- */
+async function guard(fn) { try { await fn(); return true; } catch (e) { if (e && e.code === "invalid_argument") { canWrite = false; toast("Lecture seule : demandez l'accès Contributeur"); } else if (e && e.code === "quota_exceeded") toast("La base est pleine"); else toast("Enregistrement impossible, réessayez"); return false; } }
+async function log(texte) { if (!db) return; try { await db.collection("activite").add({ texte, par: me, le: Date.now() }); } catch (e) {} }
+async function save(col, id, data, label) {
+  const now = Date.now(); const isNew = !id; const ref = isNew ? db.collection(col).doc() : db.doc(col + "/" + id);
+  const ok = await guard(() => isNew ? ref.set({ ...data, creePar: me, creeLe: now, majLe: now }) : ref.update({ ...data, majLe: now }));
+  if (ok) { log((isNew ? "a ajouté " : "a modifié ") + label); toast(isNew ? "Ajouté" : "Enregistré"); }
+  return ok;
+}
+async function remove(col, id, label) { if (await guard(() => db.doc(col + "/" + id).delete())) { log("a supprimé " + label); toast("Supprimé"); return true; } return false; }
+
+/* ---------- vues ---------- */
+const monthPicker = () => { const opts = []; const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 6); for (let i = 0; i < 13; i++) { const m = iso(d).slice(0, 7); opts.push(`<option value="${m}" ${m === ym ? "selected" : ""}>${d.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}</option>`); d.setMonth(d.getMonth() + 1); } return `<select id="ym" aria-label="Mois" style="width:auto">${opts.join("")}</select>`; };
+function vBord() {
+  const s = stats(ym), t = today();
+  const arr = R.filter(r => active(r) && r.arrivee >= t).sort((a, b) => a.arrivee.localeCompare(b.arrivee)).slice(0, 6);
+  const acts = C.filter(c => !["Signé", "Perdu"].includes(c.etape) && c.dateAction).sort((a, b) => a.dateAction.localeCompare(b.dateAction)).slice(0, 6);
+  const toPay = R.filter(r => r.statut === "Confirmée");
+  return `<h1>Tableau de bord</h1><div class="row">${monthPicker()}</div>
+  <div class="kpis">
+    <div class="kpi"><small>Chiffre d'affaires séjours</small><b class="num">${F(s.ca)}</b><em>${s.nu} nuit${s.nu > 1 ? "s" : ""} louée${s.nu > 1 ? "s" : ""}</em></div>
+    <div class="kpi"><small>Taux d'occupation</small><b class="num">${Math.round(s.occ * 100)} %</b><em>les deux appartements</em></div>
+    <div class="kpi"><small>Boutique · articles vendus</small><b class="num">${s.sn}</b><em>${F(s.sca)}</em></div>
+    <div class="kpi"><small>À encaisser</small><b class="num">${F(toPay.reduce((a, r) => a + (Number(r.prix) || 0), 0))}</b><em>${toPay.length} réservation${toPay.length > 1 ? "s" : ""} confirmée${toPay.length > 1 ? "s" : ""} non payée${toPay.length > 1 ? "s" : ""}</em></div>
+  </div>
+  <div class="grid2"><div>
+    <section class="panel"><h2>Occupation du mois</h2><div class="occ">${s.per.map(a => `<div><div class="l"><b>${esc(a.nom)}</b><span class="num">${a.nuits} / ${monthDays(ym)} nuits · ${F(a.ca)}</span></div><div class="track"><div class="fill" style="width:${a.occ * 100}%"></div></div></div>`).join("")}</div>
+    <p class="sub" style="margin:12px 0 0;font-size:12.5px">Repère : le F3 rapporte plus à la nuit qu'au mois à partir de 16 nuits (au mois : ${F(1000000)}).</p></section>
+    <section class="panel"><h2>Prochaines arrivées</h2>${arr.length ? `<ul class="list">${arr.map(r => `<li data-open="resa:${esc(r.id)}"><span><b>${esc(r.client || "Sans nom")}</b><small>${esc(APTS.find(a => a.id === r.apt)?.court || "")} · ${nights(r.arrivee, r.depart)} nuits</small></span><span class="r">${fmtD(r.arrivee)}<br><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></span></li>`).join("")}</ul>` : `<p class="empty">Aucune arrivée prévue. Ajoutez une réservation avec « + Réservation ».</p>`}</section>
+  </div><div>
+    <section class="panel"><h2>Relances à faire</h2>${acts.length ? `<ul class="list">${acts.map(c => { const l = c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<li data-open="contact:${esc(c.id)}"><span><b>${esc(c.nom)}</b><small>${esc(c.prochaineAction || "Relancer")} · ${esc(c.type)}</small></span><span class="r due ${l}">${l === "late" ? "En retard · " : ""}${fmtD(c.dateAction)}</span></li>`; }).join("")}</ul>` : `<p class="empty">Aucune relance planifiée.</p>`}</section>
+    <section class="panel"><h2>Pipeline</h2><ul class="list">${["Entreprise", "Propriétaire"].map(ty => { const cs = C.filter(c => c.type === ty); return `<li data-go="${ty === "Entreprise" ? "entreprises" : "proprietaires"}"><span><b>${ty}s</b><small>${cs.filter(c => c.etape === "Signé").length} signé(s)</small></span><span class="r num">${cs.filter(c => !["Signé", "Perdu"].includes(c.etape)).length} en cours</span></li>`; }).join("")}</ul></section>
+  </div></div>`;
+}
+function vCal() {
+  const days = monthDays(ym), [y, mo] = ym.split("-").map(Number), t = today();
+  const cols = `grid-template-columns:130px repeat(${days},minmax(22px,1fr))`;
+  let h = `<div></div>`;
+  for (let d = 1; d <= days; d++) { const dt = new Date(y, mo - 1, d); const we = dt.getDay() === 0 || dt.getDay() === 6; h += `<div class="h ${we ? "we" : ""}">${"dlmmjvs"[dt.getDay()]}<br>${d}</div>`; }
+  for (const a of APTS) {
+    h += `<div class="apt" style="grid-row:span 1">${esc(a.court)}</div>`;
+    const rs = R.filter(r => active(r) && r.apt === a.id && nightsInMonth(r, ym) > 0).sort((p, q) => p.arrivee.localeCompare(q.arrivee));
+    let day = 1;
+    for (const r of rs) {
+      const s = Math.max(1, D(r.arrivee) < new Date(y, mo - 1, 1) ? 1 : D(r.arrivee).getDate()), n = nightsInMonth(r, ym);
+      while (day < s) { h += `<div class="d ${`${ym}-${String(day).padStart(2, "0")}` === t ? "today" : ""}" data-add="${a.id}:${ym}-${String(day).padStart(2, "0")}" title="Libre"></div>`; day++; }
+      h += `<div class="bk s-${esc(r.statut)}" style="grid-column:span ${n}" data-open="resa:${esc(r.id)}" title="${esc(r.client)} · ${fmtD(r.arrivee)} → ${fmtD(r.depart)}">${esc(r.client || "Réservé")}</div>`; day += n;
+    }
+    while (day <= days) { h += `<div class="d ${`${ym}-${String(day).padStart(2, "0")}` === t ? "today" : ""}" data-add="${a.id}:${ym}-${String(day).padStart(2, "0")}" title="Libre"></div>`; day++; }
+  }
+  return `<h1>Calendrier</h1><p class="sub">Une case = une nuit. Touchez une case vide pour créer une réservation à cette date.</p><div class="row">${monthPicker()}</div>
+  <div class="calw"><div class="cal" style="${cols}">${h}</div>
+  <div class="legend"><span><i style="background:#a38d6f"></i>Demande</span><span><i style="background:#3c6a96"></i>Confirmée</span><span><i style="background:#2f7a4b"></i>Payée</span></div></div>`;
+}
+let fR = "";
+function vResa() {
+  const list = R.filter(r => !fR || r.statut === fR).sort((a, b) => (b.arrivee || "").localeCompare(a.arrivee || ""));
+  return `<h1>Réservations</h1><div class="row"><button class="btn sm pri" type="button" data-new="resa">+ Réservation</button><select id="fR" style="width:auto" aria-label="Statut"><option value="">Tous les statuts</option>${RSTAT.map(s => `<option ${fR === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+  ${list.length ? `<div class="tblw"><table><thead><tr><th>Client</th><th>Appartement</th><th>Dates</th><th>Nuits</th><th>Montant</th><th>Source</th><th>Statut</th></tr></thead><tbody>
+  ${list.map(r => `<tr class="r" data-open="resa:${esc(r.id)}"><td><b>${esc(r.client)}</b>${r.entreprise ? `<br><small style="color:var(--muted)">${esc(r.entreprise)}</small>` : ""}</td><td>${esc(APTS.find(a => a.id === r.apt)?.court || "")}</td><td>${fmtD(r.arrivee)} → ${fmtD(r.depart)}</td><td class="num">${nights(r.arrivee, r.depart)}</td><td class="num">${F(r.prix)}</td><td>${esc(r.source || "")}</td><td><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></td></tr>`).join("")}
+  </tbody></table></div>` : `<p class="empty">Aucune réservation. Ajoutez la première avec « + Réservation ».</p>`}`;
+}
+const PIPES = {
+  Entreprise: ["Entreprises", "Les sociétés, ONG et organismes qui logent des invités ou des collaborateurs : convention par mission ou lettre de référencement, de la prise de contact à la signature."],
+  "Propriétaire": ["Propriétaires", "Les propriétaires qui pourraient confier leur appartement en gestion (conciergerie Maison Tinado)."],
+  "Réseau": ["Partenaires et artisans", "Associations de la diaspora, partenaires qui envoient des clients, et les artisans ou fournisseurs de la gamme Maison Tinado."] };
+function vPipe(type) {
+  const t = today(), types = type === "Réseau" ? ["Partenaire", "Artisan / fournisseur"] : [type], cs = C.filter(c => types.includes(c.type));
+  const [title, sub] = PIPES[type];
+  return `<h1>${title}</h1><p class="sub">${sub}</p><div class="row">${types.map(ty => `<button class="btn sm" type="button" data-new="contact" data-type="${ty}">+ ${ty}</button>`).join("")}</div>
+  <div class="board">${STAGES.map(s => { const l = cs.filter(c => c.etape === s); return `<section class="col"><h3>${s}<span>${l.length}</span></h3>${l.map(c => { const lt = c.dateAction && c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<div class="card" data-open="contact:${esc(c.id)}">${types.length > 1 ? `<span class="pill p-gold" style="margin-bottom:4px">${esc(c.type)}</span>` : ""}<b>${esc(c.nom)}</b><small>${esc(c.contact || "")}</small>${c.prochaineAction ? `<div class="due ${lt}" style="margin-top:6px">${esc(c.prochaineAction)}${c.dateAction ? " · " + fmtD(c.dateAction) : ""}</div>` : ""}</div>`; }).join("") || `<p class="empty" style="padding:10px">—</p>`}</section>`; }).join("")}</div>`;
+}
+function vSent() {
+  const s = stats(ym), [y, mo] = ym.split("-").map(Number), s0 = new Date(y, mo - 1, 1), e0 = new Date(y, mo, 1);
+  const cm = O.filter(o => o.date && D(o.date) >= s0 && D(o.date) < e0);
+  const tot = Object.fromEntries(PRODS.map(([k]) => [k, cm.reduce((a, o) => a + (Number(o.qte?.[k]) || 0), 0)]));
+  const list = O.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const open = O.filter(o => ["À fabriquer", "En fabrication", "À livrer"].includes(o.statut || "À livrer"));
+  return `<h1>Boutique</h1><p class="sub">La gamme Maison Tinado : un échantillon dans chaque appartement, un QR code, et chaque commande notée ici. ${s.sn} article${s.sn > 1 ? "s" : ""} vendu${s.sn > 1 ? "s" : ""} ce mois-ci, ${F(s.sca)}.${open.length ? ` <b>${open.length} commande${open.length > 1 ? "s" : ""} en cours</b> (à fabriquer ou à livrer).` : ""}</p><div class="row">${monthPicker()}<button class="btn sm pri" type="button" data-new="cmd">+ Commande</button></div>
+  ${FAM.map(f => `<h3 class="fam">${f.nom}<small>${f.info}</small></h3><div class="scents">${f.items.map(([k, n]) => `<div class="sc"><b>${n}</b><div class="n num">${tot[k]}</div><small>vendus ce mois</small></div>`).join("")}</div>`).join("")}
+  ${list.length ? `<div class="tblw"><table><thead><tr><th>Date</th><th>Client</th><th>Articles</th><th>Montant</th><th>Livraison prévue</th><th>Statut</th></tr></thead><tbody>
+  ${list.map(o => `<tr class="r" data-open="cmd:${esc(o.id)}"><td>${fmtD(o.date)}</td><td><b>${esc(o.client)}</b></td><td>${Object.entries(o.qte || {}).filter(([, q]) => Number(q)).map(([k, q]) => `${esc(PNAME[k] || k)} × ${q}`).join(", ")}</td><td class="num">${F(o.montant)}</td><td>${fmtD(o.livraison)}</td><td><span class="pill ${CPILL[o.statut] || "p-gold"}">${esc(o.statut)}</span></td></tr>`).join("")}
+  </tbody></table></div>` : `<p class="empty">Aucune commande. Ajoutez-en une avec « + Commande ».</p>`}`;
+}
+function vJournal() {
+  return `<h1>Journal</h1><p class="sub">Qui a fait quoi, et quand.</p><section class="panel">${A.length ? `<ul class="feed">${A.map(a => `<li><b>${esc(names[a.par]?.name || "Quelqu'un")}</b> ${esc(a.texte)}<time>${ago(a.le)}</time></li>`).join("")}</ul>` : `<p class="empty">Rien pour l'instant.</p>`}</section>`;
+}
+
+/* ---------- formulaires ---------- */
+function openDrawer(html) { $("dB").innerHTML = html; $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false"); }
+function closeDrawer() { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); }
+const head = t => `<div class="hd"><h2 id="dT">${t}</h2><button class="btn sm" type="button" data-close aria-label="Fermer">✕</button></div>`;
+function formResa(id, preset = {}) {
+  const r = id ? R.find(x => x.id === id) : { apt: preset.apt || "f3", arrivee: preset.date || today(), depart: "", statut: "Demande", source: SOURCES[0] };
+  openDrawer(`${head(id ? "Réservation" : "Nouvelle réservation")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label class="full">Client<input id="fc" required value="${esc(r.client)}" placeholder="Nom du voyageur"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(r.telephone)}" placeholder="+221 …"></label>
+   <label>Entreprise<input id="fe" value="${esc(r.entreprise)}" placeholder="Si séjour d'entreprise"></label>
+   <label>Appartement<select id="fa">${APTS.map(a => `<option value="${a.id}" ${r.apt === a.id ? "selected" : ""}>${a.nom}</option>`).join("")}</select></label>
+   <label>Source<select id="fs">${SOURCES.map(s => `<option ${r.source === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label>Arrivée<input id="fd1" type="date" required value="${esc(r.arrivee)}"></label>
+   <label>Départ<input id="fd2" type="date" required value="${esc(r.depart)}"></label>
+   <label>Montant total (F)<input id="fp" type="number" min="0" step="1000" value="${esc(r.prix ?? "")}"></label>
+   <label>Statut<select id="fst">${RSTAT.map(s => `<option ${r.statut === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <div class="full calc" id="calc"></div>
+   <label class="full">Notes<textarea id="fn" rows="3" placeholder="Heure d'arrivée, demandes particulières…">${esc(r.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  const upd = () => { const n = nights($("fd1").value, $("fd2").value), a = APTS.find(x => x.id === $("fa").value); const sug = n >= 28 ? a.mois * n / 30 : a.nuit * n;
+    const men = n >= 7 ? Math.ceil(n / 7 * a.menage) : 0;
+    $("calc").innerHTML = n ? `${n} nuit${n > 1 ? "s" : ""} · tarif de référence ${F(sug)} ${n >= 28 ? "(au mois)" : `(${F(a.nuit)} / nuit)`} <button class="btn sm" type="button" id="use">Utiliser</button>${men ? `<br><small>Ménage inclus : ${men} passage${men > 1 ? "s" : ""} (${a.menage} par semaine dans le ${a.court}, séjour de 7 nuits ou plus)</small>` : ""}` : "Choisissez les dates pour voir le nombre de nuits.";
+    $("use")?.addEventListener("click", () => $("fp").value = Math.round(sug)); };
+  ["fd1", "fd2", "fa"].forEach(k => $(k).addEventListener("change", upd)); upd();
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), entreprise: $("fe").value.trim(), apt: $("fa").value, source: $("fs").value, arrivee: $("fd1").value, depart: $("fd2").value, prix: $("fp").value === "" ? null : Number($("fp").value), statut: $("fst").value, notes: $("fn").value };
+    if (!d.client || nights(d.arrivee, d.depart) < 1) { $("er").hidden = false; $("er").textContent = "Indiquez le client et un départ après l'arrivée."; return; }
+    const ov = d.statut !== "Annulée" && overlap(d, id); if (ov) { $("er").hidden = false; $("er").textContent = `Ces dates chevauchent la réservation de ${ov.client} (${fmtD(ov.arrivee)} → ${fmtD(ov.depart)}).`; return; }
+    if (await save("reservations", id, d, `la réservation de ${d.client}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("reservations", id, `la réservation de ${r.client}`)) closeDrawer(); });
+}
+function formContact(id, type) {
+  const c = id ? C.find(x => x.id === id) : { type: type || "Entreprise", etape: "À contacter" };
+  openDrawer(`${head(id ? esc(c.nom) : "Nouveau contact")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label>Type<select id="fy">${CTYPES.map(t => `<option ${c.type === t ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+   <label>Étape<select id="fg">${STAGES.map(s => `<option ${c.etape === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label class="full">Nom (société ou propriétaire)<input id="fo" required value="${esc(c.nom)}"></label>
+   <label>Personne à contacter<input id="fk" value="${esc(c.contact)}"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(c.telephone)}"></label>
+   <label>Prochaine action<input id="fx" value="${esc(c.prochaineAction)}" placeholder="Ex. Envoyer l'offre"></label>
+   <label>Date<input id="fz" type="date" value="${esc(c.dateAction)}"></label>
+   <label class="full">Notes<textarea id="fn" rows="4" placeholder="Besoins, nombre de collaborateurs, adresse de l'appartement…">${esc(c.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const d = { type: $("fy").value, etape: $("fg").value, nom: $("fo").value.trim(), contact: $("fk").value.trim(), telephone: $("ft").value.trim(), prochaineAction: $("fx").value.trim(), dateAction: $("fz").value, notes: $("fn").value };
+    if (!d.nom) { $("er").hidden = false; $("er").textContent = "Indiquez un nom."; return; }
+    if (await save("contacts", id, d, `${d.type.toLowerCase()} « ${d.nom} »${id && c.etape !== d.etape ? " (" + d.etape + ")" : ""}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("contacts", id, `« ${c.nom} »`)) closeDrawer(); });
+}
+function formCmd(id) {
+  const o = id ? O.find(x => x.id === id) : { date: today(), statut: "À livrer", qte: {} };
+  openDrawer(`${head(id ? "Commande" : "Nouvelle commande")}<form id="fm"><fieldset ${canWrite ? "" : "disabled"} style="border:0;padding:0;margin:0"><div class="form">
+   <label>Client<input id="fc" required value="${esc(o.client)}"></label>
+   <label>Téléphone<input id="ft" type="tel" value="${esc(o.telephone)}"></label>
+   ${FAM.map(f => `<div class="full"><div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px">${f.nom}</div><div class="qty">${f.items.map(([k, n]) => `<label>${n}<input type="number" min="0" step="1" data-q="${k}" value="${esc(o.qte?.[k] ?? "")}" placeholder="0"></label>`).join("")}</div></div>`).join("")}
+   <label>Montant total (F)<input id="fp" type="number" min="0" step="500" value="${esc(o.montant ?? "")}"></label>
+   <label>Date de la commande<input id="fd" type="date" value="${esc(o.date)}"></label>
+   <label>Livraison prévue<input id="fl" type="date" value="${esc(o.livraison)}"></label>
+   <label>Statut<select id="fst">${CSTAT.map(s => `<option ${o.statut === s ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+   <label class="full">Notes<textarea id="fn" rows="2" placeholder="Adresse de livraison, couleur du pagne, taille…">${esc(o.notes)}</textarea></label>
+  </div><p class="err" id="er" hidden></p><div class="acts"><button class="btn pri" type="submit">${id ? "Enregistrer" : "Ajouter"}</button>${id ? `<button class="btn danger" type="button" id="del">Supprimer</button>` : ""}</div></fieldset></form>`);
+  $("fm").onsubmit = async e => { e.preventDefault();
+    const qte = {}; document.querySelectorAll("[data-q]").forEach(i => { if (Number(i.value) > 0) qte[i.dataset.q] = Number(i.value); });
+    const d = { client: $("fc").value.trim(), telephone: $("ft").value.trim(), qte, montant: $("fp").value === "" ? null : Number($("fp").value), date: $("fd").value, livraison: $("fl").value, statut: $("fst").value, notes: $("fn").value };
+    if (!d.client || !Object.keys(qte).length) { $("er").hidden = false; $("er").textContent = "Indiquez le client et au moins un article."; return; }
+    if (await save("commandes", id, d, `une commande boutique pour ${d.client}`)) closeDrawer(); };
+  $("del")?.addEventListener("click", async e => { const b = e.currentTarget; if (b.dataset.c !== "1") { b.dataset.c = "1"; b.textContent = "Confirmer la suppression"; return; } if (await remove("commandes", id, `la commande de ${o.client}`)) closeDrawer(); });
+}
+
+/* ================= Résidence 3D ================= */
+let X3 = null, sel3 = null;
+const RM3 = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function m3(c, o = {}) { return new THREE.MeshStandardMaterial({ color: new THREE.Color(c), roughness: .8, metalness: .02, ...o }); }
+function bx(w, h, d, mat, x, y, z, parent) { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); b.position.set(x, y, z); b.castShadow = b.receiveShadow = true; (parent || X3.scene).add(b); return b; }
+function cy(rt, rb, h, mat, x, y, z, parent, seg = 24) { const c = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat); c.position.set(x, y, z); c.castShadow = true; (parent || X3.scene).add(c); return c; }
+const dark3 = () => false;
+
+function suite(apt, ox) {
+  const g = new THREE.Group(); g.position.x = ox; X3.scene.add(g);
+  const D3 = dark3(), wall = m3(D3 ? "#3a2f25" : "#fbf7f0"), floor = m3(D3 ? "#5a4330" : "#b8895a"), trim = m3("#b08a57", { metalness: .35, roughness: .4 });
+  const W = 9, Dp = 7, H = 2.2;
+  const fl = bx(W, .2, Dp, floor, 0, .1, 0, g); fl.userData = { kind: "apt", id: apt.id };
+  bx(W, H, .18, wall, 0, H / 2, -Dp / 2, g); bx(.18, H, Dp, wall, -W / 2, H / 2, 0, g);
+  bx(W, .06, .22, trim, 0, H + .03, -Dp / 2, g); bx(.22, .06, Dp, trim, -W / 2, H + .03, 0, g);
+  bx(.06, 1.3, 1.6, m3("#a9d6e6", { transparent: true, opacity: .55, emissive: new THREE.Color("#ffe9c4"), emissiveIntensity: .15 }), -W / 2 + .12, 1.25, -1, g);
+  const sofaM = m3(apt.id === "f3" ? "#e8e0d2" : "#cbb79c"), wood = m3("#7a5638");
+  // salon
+  bx(2.4, .45, .9, sofaM, -2.2, .45, -2.6, g); bx(2.4, .55, .25, sofaM, -2.2, .8, -3.0, g);
+  cy(.35, .35, .38, m3("#eee6d8"), -2.2, .4, -1.5, g); bx(2.6, .02, 1.8, m3("#efe7da"), -2.2, .21, -1.9, g);
+  // chambre
+  bx(2.2, .4, 2.8, m3("#f4efe6"), 2.4, .4, -1.6, g); bx(2.3, .9, .15, m3("#d9cbb5"), 2.4, .65, -3.05, g);
+  bx(.5, .5, .4, wood, 1.0, .35, -2.8, g); bx(.5, .5, .4, wood, 3.8, .35, -2.8, g);
+  cy(.12, .18, .5, trim, 3.8, .85, -2.8, g, 12);
+  // plante
+  cy(.25, .2, .45, m3("#e9e2d6"), -3.9, .32, 2.6, g); const lf = new THREE.Mesh(new THREE.SphereGeometry(.45, 14, 12), m3("#4f8a5c")); lf.position.set(-3.9, 1, 2.6); lf.castShadow = true; g.add(lf);
+  // lumière de nuit
+  const lamp = new THREE.PointLight(0xffc98a, 0, 9); lamp.position.set(0, 1.8, -1); g.add(lamp);
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(W - .3, Dp - .3), new THREE.MeshBasicMaterial({ color: 0xffd7a0, transparent: true, opacity: 0 }));
+  glow.rotation.x = -Math.PI / 2; glow.position.y = .22; g.add(glow);
+  // calendrier du mois en relief, au bord avant
+  const tiles = [];
+  for (let d = 0; d < 31; d++) { const t = new THREE.Mesh(new THREE.BoxGeometry(.24, .1, .5), m3(D3 ? "#3a2f25" : "#e9dfcf")); t.position.set(-W / 2 + .3 + d * .28, .25, Dp / 2 - .45); t.castShadow = true; t.userData = { kind: "day", apt: apt.id, day: d + 1 }; g.add(t); tiles.push(t); }
+  return { g, lamp, glow, tiles, apt, W, Dp };
+}
+const TINADO_LOGO = "data:image/png;base64,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";
+/* ---- Maison Tinado en vrai : murs, logo géant, boutique, équipe et clients ---- */
+function logoPanel(w, h, withText) {
+  const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d");
+  const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, "#f6efe3"); g.addColorStop(1, "#ead9bf"); x.fillStyle = g; x.fillRect(0, 0, w, h);
+  x.strokeStyle = "#b08a57"; x.lineWidth = h * .012; x.strokeRect(h * .04, h * .04, w - h * .08, h - h * .08);
+  const tex = new THREE.CanvasTexture(c); tex.anisotropy = 4;
+  const img = new Image(); img.onload = () => {
+    const s = h * (withText ? .5 : .78), iw = s * img.width / img.height; const lx = withText ? w / 2 - iw / 2 : w / 2 - iw / 2;
+    x.drawImage(img, lx, withText ? h * .08 : (h - s) / 2, iw, s);
+    if (withText) { x.fillStyle = "#2b2118"; x.textAlign = "center"; x.font = `500 ${h * .07}px "Cormorant Garamond",Georgia,serif`; x.fillText("M A I S O N", w / 2, h * .68);
+      x.font = `600 ${h * .16}px "Cormorant Garamond",Georgia,serif`; x.fillText("T I N A D O", w / 2, h * .84);
+      x.fillStyle = "#b08a57"; x.font = `500 ${h * .045}px Inter,sans-serif`; x.fillText("L'ART DE RECEVOIR À L'AFRICAINE", w / 2, h * .93); }
+    tex.needsUpdate = true; };
+  img.src = TINADO_LOGO; return tex;
+}
+function person3(coat, skin = "#5a3d2b", head = null) {
+  const g = new THREE.Group(), cm = m3(coat), sm = m3(skin), pm = m3("#3a2f25");
+  const torso = new THREE.Mesh(new THREE.BoxGeometry(.44, .58, .28), cm); torso.position.y = 1.07;
+  const hd = new THREE.Mesh(new THREE.SphereGeometry(.17, 14, 12), sm); hd.position.y = 1.55;
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(.18, 14, 12, 0, Math.PI * 2, 0, Math.PI / 2), m3(head || "#1d1712")); cap.position.y = 1.58;
+  const limb = (w, h, m, x, y) => { const p = new THREE.Group(); p.position.set(x, y, 0); const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, w * 1.1), m); b.position.y = -h / 2; b.castShadow = true; p.add(b); return p; };
+  const lL = limb(.16, .76, pm, -.1, .78), lR = limb(.16, .76, pm, .1, .78), aL = limb(.11, .56, cm, -.29, 1.33), aR = limb(.11, .56, cm, .29, 1.33);
+  const bag = new THREE.Mesh(new THREE.BoxGeometry(.16, .22, .1), m3("#e9dcc6")); bag.position.set(0, -.6, .08); bag.visible = false; aR.add(bag);
+  [torso, hd, cap].forEach(o => o.castShadow = true); g.add(torso, hd, cap, lL, lR, aL, aR);
+  X3.scene.add(g); return { g, lL, lR, aL, aR, bag, ph: Math.random() * 6 };
+}
+function walk3(a, dt) { // avance vers le prochain point, anime jambes et bras
+  const p = a.p.g.position; if (!a.path.length) { ["lL", "lR", "aL", "aR"].forEach(k => a.p[k].rotation.x *= .8); return false; }
+  const [tx, tz] = a.path[0], dx = tx - p.x, dz = tz - p.z, d = Math.hypot(dx, dz), sp = (a.speed || 1.4) * dt;
+  if (d <= sp) { p.x = tx; p.z = tz; a.path.shift(); } else { p.x += dx / d * sp; p.z += dz / d * sp; a.p.g.rotation.y = Math.atan2(dx, dz); }
+  if (!RM3) { a.p.ph += dt * 8; const s = Math.sin(a.p.ph) * .5; a.p.lL.rotation.x = s; a.p.lR.rotation.x = -s; a.p.aL.rotation.x = -s * .7; a.p.aR.rotation.x = s * .7; }
+  return true;
+}
+function buildHouse() {
+  const S = X3.scene, wall = m3("#fbf6ee"), trim = m3("#b08a57", { metalness: .35, roughness: .4 }), H = 4.2;
+  // sol de la maison (carrelage beige) et boutique devant
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(26, 17), m3("#e8dccb")); fl.rotation.x = -Math.PI / 2; fl.position.set(0, .005, 2.2); fl.receiveShadow = true; S.add(fl);
+  const rug = new THREE.Mesh(new THREE.PlaneGeometry(9, 3.4), m3("#d9c3a2")); rug.rotation.x = -Math.PI / 2; rug.position.set(0, .012, 6.4); rug.receiveShadow = true; S.add(rug);
+  // grands murs : fond et gauche
+  bx(26, H, .3, wall, 0, H / 2, -6.3); bx(.3, H, 17, wall, -13, H / 2, 2.2);
+  bx(26.2, .12, .4, trim, 0, H + .06, -6.3); bx(.4, .12, 17.2, trim, -13, H + .06, 2.2);
+  bx(26, .25, .34, m3("#e2cfb2"), 0, .12, -6.12); bx(.34, .25, 17, m3("#e2cfb2"), -12.83, .12, 2.2);
+  // logo géant au mur du fond, plus petits logos sur le mur gauche
+  const big = new THREE.Mesh(new THREE.PlaneGeometry(10.5, 3.7), new THREE.MeshStandardMaterial({ map: logoPanel(1400, 493, true), roughness: .6 }));
+  big.rotation.y = Math.PI / 2; big.position.set(-12.83, 2.15, 3.6); S.add(big);
+  const top = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 1.6), new THREE.MeshStandardMaterial({ map: logoPanel(480, 320, false), roughness: .6 })); top.position.set(0, 3.2, -6.13); S.add(top);
+  const spot = new THREE.PointLight(0xffd9a0, .6, 13); spot.position.set(-10.5, 3.8, 3.6); S.add(spot);
+
+  // fenêtres
+  const glass = m3("#cfe6ee", { transparent: true, opacity: .6, emissive: new THREE.Color("#fff1d6"), emissiveIntensity: .25, roughness: .1 });
+  [-9, 9].forEach(x => { bx(3, 2, .06, glass, x, 2.3, -6.13); bx(3.2, .1, .14, trim, x, 1.25, -6.1); });
+  bx(.06, 2, 2.6, glass, -12.83, 2.3, -4.2); bx(.06, 2, 2.4, glass, -12.83, 2.3, 9.6);
+  // comptoir d'accueil avec logo, à droite de la boutique
+  bx(2.6, 1.05, 1, m3("#fffaf2"), 7.2, .53, 6.6); bx(2.8, .08, 1.2, trim, 7.2, 1.09, 6.6);
+  const dl = new THREE.Mesh(new THREE.PlaneGeometry(1.1, .9), new THREE.MeshStandardMaterial({ map: logoPanel(256, 210, false) })); dl.position.set(7.2, .55, 7.12); S.add(dl);
+  // entrée (tapis + portes vitrées) en bas à droite
+  const mat = new THREE.Mesh(new THREE.PlaneGeometry(2, 1.4), m3("#8a5f36")); mat.rotation.x = -Math.PI / 2; mat.position.set(11.5, .015, 9.6); S.add(mat);
+  bx(.08, 2.6, .08, trim, 10.4, 1.3, 10.6); bx(.08, 2.6, .08, trim, 12.6, 1.3, 10.6); bx(2.3, .08, .08, trim, 11.5, 2.6, 10.6);
+  // plantes de la boutique
+  [[-5, 9.2], [4.6, 9.2], [12, 4.4], [-12, 9.6]].forEach(([x, z]) => { cy(.3, .24, .5, m3("#efe7da"), x, .25, z); const lf = new THREE.Mesh(new THREE.SphereGeometry(.5, 14, 12), m3("#4f8a5c")); lf.position.set(x, 1, z); lf.castShadow = true; S.add(lf); });
+  // équipe : une hôtesse à l'accueil, une personne à la boutique, une femme de ménage qui passe d'un appartement à l'autre
+  X3.staff = [
+    { p: person3("#8a5f36", "#4a3324"), path: [], home: [7.2, 7.5], face: Math.PI, label: "Accueil" },
+    { p: person3("#2b2118", "#6b4a33"), path: [], home: [-3.1, 6.2], face: Math.PI, label: "Boutique senteurs" },
+    { p: person3("#7a8f7a", "#5a3d2b", "#e9dcc6"), path: [], home: [-5, 3.9], loop: [[-5, 3.9], [-5, 1.5], [-2.5, 0], [-5, 3.9], [5, 3.9], [5, 1.5], [7.5, 0], [5, 3.9]], i: 0, wait: 0, speed: 1.1, label: "Ménage" },
+  ];
+  X3.staff.forEach(s => { s.p.g.position.set(s.home[0], 0, s.home[1]); s.p.g.rotation.y = s.face || 0; });
+  // clients qui viennent sentir et acheter un parfum, puis repartent
+  const COATS = ["#d6588e", "#3d7bd6", "#e2a83a", "#3aa79a", "#8a6bd1", "#e07a3f"];
+  X3.clients = [0, 1, 2].map(i => ({ p: person3(COATS[i * 2 % 6], ["#4a3324", "#6b4a33", "#3d2a1d"][i]), path: [], state: "off", t: 2 + i * 6, speed: 1.3 + i * .15, k: i }));
+  X3.clients.forEach(c => c.p.g.visible = false);
+}
+function tickHouse(dt) {
+  if (!X3.staff) return;
+  X3.staff.forEach(s => { if (s.loop) { if (!walk3(s, dt)) { s.wait -= dt; if (s.wait <= 0) { s.i = (s.i + 1) % s.loop.length; s.path = [s.loop[s.i]]; s.wait = 1.5; } } } else { walk3(s, dt); s.p.g.rotation.y = s.face; } });
+  const spots = [[-2, 6.2], [-1, 6.2], [0, 6.2], [1, 6.2], [2, 6.2]];
+  X3.clients.forEach(c => {
+    const moving = walk3(c, dt); if (moving) return; c.t -= dt;
+    if (c.state === "off" && c.t <= 0) { const sp = spots[(Math.random() * 5) | 0]; c.p.g.visible = true; c.p.bag.visible = false; c.p.g.position.set(11.5, 0, 11.2); c.path = [[11.5, 8.6], [sp[0], 7.4], sp]; c.state = "in"; c.spot = sp; }
+    else if (c.state === "in") { c.state = "smell"; c.t = 2.5; c.p.g.rotation.y = Math.PI; }
+    else if (c.state === "smell" && c.t <= 0) { c.p.bag.visible = true; c.state = "pay"; c.path = [[c.spot[0], 7.4], [7.2, 7.6]]; }
+    else if (c.state === "pay") { c.state = "paid"; c.t = 1.5; c.p.g.rotation.y = Math.PI; }
+    else if (c.state === "paid" && c.t <= 0) { c.state = "out"; c.path = [[11.5, 8.6], [11.5, 11.5]]; }
+    else if (c.state === "out") { c.p.g.visible = false; c.state = "off"; c.t = 3 + Math.random() * 5; }
+  });
+}
+
+function init3d() {
+  if (X3 || !window.THREE) return !!X3;
+  const host = $("r3c"), renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; host.appendChild(renderer.domElement);
+  const scene = new THREE.Scene(), cam = new THREE.OrthographicCamera(-10, 10, 10, -10, -200, 400);
+  scene.add(new THREE.HemisphereLight(0xfff8ee, 0xb9a688, .5));
+  const sun = new THREE.DirectionalLight(0xfff1dc, .5); sun.position.set(-14, 22, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -18, right: 18, top: 16, bottom: -16, near: 1, far: 70 }); scene.add(sun);
+  X3 = { renderer, scene, cam, host, th: -.72, ph: .95, zoom: 1, target: new THREE.Vector3(0, 0, 2), goal: null, t0: performance.now(), raf: 0, labels: {} };
+  X3.suites = [suite(APTS[0], -5), suite(APTS[1], 5)];
+  // étagère des senteurs
+  const sh = new THREE.Group(); sh.position.set(0, 0, 5.2); scene.add(sh);
+  bx(5.4, .12, .8, m3("#b08a57", { metalness: .3, roughness: .4 }), 0, .9, 0, sh); bx(.12, .9, .8, m3("#7a5638"), -2.6, .45, 0, sh); bx(.12, .9, .8, m3("#7a5638"), 2.6, .45, 0, sh);
+  const TINTS = { syraa: "#f2e2bf", weldi: "#e8d1b0", yobalema: "#cfe0c4", upendo: "#f2c9cf", omaad: "#efe8dd" };
+  X3.bottles = SCENTS.map(([k], i) => { const b = new THREE.Group(); b.position.set(-2 + i, .96, 0); sh.add(b);
+    const body = cy(.22, .22, .7, m3(TINTS[k], { transparent: true, opacity: .9, roughness: .2 }), 0, .35, 0, b); const cap = cy(.12, .12, .22, m3("#c9a25e", { metalness: .7, roughness: .25 }), 0, .82, 0, b);
+    body.userData = cap.userData = { kind: "scent", id: k }; b.userData = { kind: "scent", id: k }; return { b, k }; });
+  buildHouse(); X3.last = performance.now();
+  bind3d(); new ResizeObserver(resize3d).observe(host); resize3d(); return true;
+}
+function resize3d() { if (!X3) return; const w = X3.host.clientWidth, h = X3.host.clientHeight; X3.renderer.setSize(w, h, false); X3.aspect = w / h; cam3(); }
+function cam3() { const s = X3, half = (s.aspect < 1 ? 19 : 11.2) / s.zoom; s.cam.left = -half * s.aspect; s.cam.right = half * s.aspect; s.cam.top = half; s.cam.bottom = -half; s.cam.updateProjectionMatrix();
+  s.cam.position.set(s.target.x + 60 * Math.sin(s.ph) * Math.cos(s.th), 60 * Math.cos(s.ph), s.target.z - 60 * Math.sin(s.ph) * Math.sin(s.th)); s.cam.lookAt(s.target); }
+function bind3d() {
+  const el = X3.renderer.domElement, pts = new Map(); let st = null, moved = 0, pinch = null;
+  el.addEventListener("pointerdown", e => { el.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); st = { x: e.clientX, y: e.clientY, th: X3.th, ph: X3.ph }; moved = 0; if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), z: X3.zoom }; } });
+  el.addEventListener("pointermove", e => { if (!pts.has(e.pointerId)) { el.style.cursor = hit3d(e) ? "pointer" : "grab"; return; } pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2 && pinch) { const [a, b] = [...pts.values()]; X3.zoom = Math.min(3.5, Math.max(.7, pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d)); moved = 99; X3.goal = null; cam3(); return; }
+    const dx = e.clientX - st.x, dy = e.clientY - st.y; moved = Math.max(moved, Math.abs(dx) + Math.abs(dy)); if (moved > 6) { X3.th = st.th + dx * .006; X3.ph = Math.min(1.25, Math.max(.45, st.ph - dy * .004)); X3.goal = null; cam3(); } });
+  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size && moved <= 6 && e.type === "pointerup") pick3d(e); };
+  el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+  el.addEventListener("wheel", e => { e.preventDefault(); X3.zoom = Math.min(3.5, Math.max(.7, X3.zoom * (e.deltaY < 0 ? 1.1 : .9))); X3.goal = null; cam3(); }, { passive: false });
+}
+function hit3d(e) { const r = X3.renderer.domElement.getBoundingClientRect(), v = new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), rc = new THREE.Raycaster(); rc.setFromCamera(v, X3.cam);
+  const h = rc.intersectObjects(X3.scene.children, true).find(i => { let o = i.object; while (o && !o.userData.kind) o = o.parent; return o; }); if (!h) return null; let o = h.object; while (!o.userData.kind) o = o.parent; return o.userData; }
+function pick3d(e) { const h = hit3d(e); if (!h) { sel3 = null; panel3(); X3.goal = { x: 0, z: 2, zoom: 1 }; return; }
+  if (h.kind === "day") { const date = `${ym}-${String(h.day).padStart(2, "0")}`; const r = R.find(x => active(x) && x.apt === h.apt && x.arrivee <= date && date < x.depart); if (r) return formResa(r.id); if (canWrite) return formResa(null, { apt: h.apt, date }); return; }
+  sel3 = h; const s = h.kind === "apt" ? X3.suites.find(x => x.apt.id === h.id) : null; X3.goal = s ? { x: s.g.position.x, z: 0, zoom: 1.6 } : { x: 0, z: 4, zoom: 1.7 }; panel3(); }
+function sync3d() {
+  if (!X3) return; const days = monthDays(ym), t = today(), STC = { Demande: "#a38d6f", Confirmée: "#3c6a96", Payée: "#2f7a4b" };
+  X3.suites.forEach(s => { const rs = R.filter(r => active(r) && r.apt === s.apt.id);
+    s.tiles.forEach((tl, i) => { const date = `${ym}-${String(i + 1).padStart(2, "0")}`; tl.visible = i < days; const r = rs.find(x => x.arrivee <= date && date < x.depart);
+      tl.userData.h = r ? .55 : .1; tl.material.color.set(r ? STC[r.statut] : (dark3() ? "#3a2f25" : "#e9dfcf")); tl.material.emissive.set(date === t ? "#b08a57" : "#000"); tl.material.emissiveIntensity = date === t ? .5 : 0; });
+    s.tonight = rs.find(x => x.arrivee <= t && t < x.depart) || null; s.next = rs.filter(x => x.arrivee > t).sort((a, b) => a.arrivee.localeCompare(b.arrivee))[0] || null; });
+  const [y, mo] = ym.split("-").map(Number), s0 = new Date(y, mo - 1, 1), e0 = new Date(y, mo, 1), cm = O.filter(o => o.date && D(o.date) >= s0 && D(o.date) < e0);
+  X3.bottles.forEach(b => { b.n = cm.reduce((a, o) => a + (Number(o.qte?.[b.k]) || 0), 0); b.target = 1 + Math.min(1.2, b.n * .12); });
+  panel3();
+}
+function label3(key, html, cls) { let l = X3.labels[key]; if (!l) { l = document.createElement("div"); l.className = "l3 " + (cls || ""); $("r3l").appendChild(l); X3.labels[key] = l; } if (l._h !== html) { l.innerHTML = html; l._h = html; } return l; }
+function place3(l, v) { const p = v.clone().project(X3.cam), w = X3.host.clientWidth, h = X3.host.clientHeight; if (p.z > 1 || Math.abs(p.x) > 1.2 || Math.abs(p.y) > 1.2) { l.style.display = "none"; return; } l.style.display = ""; l.style.transform = `translate(${(p.x + 1) / 2 * w}px,${(1 - p.y) / 2 * h}px) translate(-50%,-100%)`; }
+function labels3() {
+  const st = stats(ym);
+  X3.suites.forEach(s => { const a = st.per.find(p => p.id === s.apt.id);
+    place3(label3("a" + s.apt.id, `<b>${esc(s.apt.nom)}</b><span>${s.tonight ? "Occupé ce soir · " + esc(s.tonight.client) : "Libre ce soir"}</span><em class="num">${Math.round(a.occ * 100)} % · ${F(a.ca)}</em>`, "apt" + (s.tonight ? " on" : "")), new THREE.Vector3(s.g.position.x, 3.1, -3.4)); });
+  place3(label3("sc", `<b>Senteurs</b><span>${X3.bottles.map(b => `${esc(SCENTS.find(x => x[0] === b.k)[1])} <b class="num" style="font-family:var(--body);font-size:12px">${b.n}</b>`).join(" · ")}</span>`, "apt"), new THREE.Vector3(-6.5, 0, 9.4));
+}
+function panel3() {
+  const el = $("r3p"); if (!el) return; if (!sel3) { el.hidden = true; return; } el.hidden = false;
+  if (sel3.kind === "apt") { const s = X3.suites.find(x => x.apt.id === sel3.id), a = stats(ym).per.find(p => p.id === sel3.id), up = R.filter(r => active(r) && r.apt === sel3.id && r.depart >= today()).sort((p, q) => p.arrivee.localeCompare(q.arrivee)).slice(0, 5);
+    el.innerHTML = `<div class="ph3"><b>${esc(s.apt.nom)}</b><button class="btn sm" type="button" data-x3 aria-label="Fermer">✕</button></div>
+    <div class="kv3"><div><small>Ce soir</small><b>${s.tonight ? esc(s.tonight.client) : "Libre"}</b></div><div><small>Occupation</small><b class="num">${Math.round(a.occ * 100)} %</b></div><div><small>Nuits louées</small><b class="num">${a.nuits}</b></div><div><small>Chiffre du mois</small><b class="num">${F(a.ca)}</b></div></div>
+    <h3>Séjours à venir</h3>${up.length ? `<ul class="list">${up.map(r => `<li data-open="resa:${esc(r.id)}"><span><b>${esc(r.client)}</b><small>${fmtD(r.arrivee)} → ${fmtD(r.depart)}</small></span><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></li>`).join("")}</ul>` : `<p class="empty">Aucun séjour à venir.</p>`}
+    <div class="acts"><button class="btn pri" type="button" data-new3="${esc(sel3.id)}">+ Réservation ici</button></div>`; }
+  else { const st = stats(ym); el.innerHTML = `<div class="ph3"><b>Senteurs</b><button class="btn sm" type="button" data-x3 aria-label="Fermer">✕</button></div><p class="sub">${st.sn} flacon${st.sn > 1 ? "s" : ""} vendu${st.sn > 1 ? "s" : ""} ce mois, ${F(st.sca)}.</p>
+    <ul class="list">${X3.bottles.map(b => `<li><span><b>${esc(SCENTS.find(x => x[0] === b.k)[1])}</b></span><span class="num">${b.n}</span></li>`).join("")}</ul><div class="acts"><button class="btn pri" type="button" data-new="cmd">+ Commande</button><a class="btn" href="#senteurs">Voir les commandes</a></div>`; }
+}
+document.addEventListener("click", e => { if (e.target.closest("[data-x3]")) { sel3 = null; panel3(); if (X3) X3.goal = { x: 0, z: 0, zoom: 1 }; } const n = e.target.closest("[data-new3]"); if (n) formResa(null, { apt: n.dataset.new3, date: today() }); if (e.target.closest("[data-reset3]") && X3) { sel3 = null; panel3(); X3.th = -.72; X3.ph = .95; X3.goal = { x: 0, z: 2, zoom: 1 }; } });
+function loop3() {
+  if (!X3 || view !== "residence") { if (X3) X3.raf = 0; return; } X3.raf = requestAnimationFrame(loop3);
+  const t = (performance.now() - X3.t0) / 1e3;
+  if (X3.goal) { const g = X3.goal; X3.target.x += (g.x - X3.target.x) * .1; X3.target.z += (g.z - X3.target.z) * .1; X3.zoom += (g.zoom - X3.zoom) * .1; if (Math.abs(g.zoom - X3.zoom) < .004 && Math.abs(g.x - X3.target.x) < .01) X3.goal = null; cam3(); }
+  X3.suites.forEach(s => { const on = !!s.tonight; s.lamp.intensity += ((on ? .7 : 0) - s.lamp.intensity) * .08; s.glow.material.opacity += ((on ? .1 + (RM3 ? 0 : .03 * Math.sin(t * 2)) : 0) - s.glow.material.opacity) * .08;
+    s.tiles.forEach(tl => { const h = tl.userData.h || .1; tl.scale.y += (h / .1 - tl.scale.y) * .12; tl.position.y = .2 + tl.scale.y * .05; }); });
+  X3.bottles.forEach((b, i) => { b.b.scale.y += ((b.target || 1) - b.b.scale.y) * .1; if (!RM3) b.b.rotation.y = Math.sin(t * .6 + i) * .25; });
+  const nw = performance.now(), dt = Math.min(.05, (nw - X3.last) / 1e3); X3.last = nw; tickHouse(dt);
+  X3.renderer.render(X3.scene, X3.cam); labels3();
+}
+function show3d() { if (!window.THREE) { $("r3c").innerHTML = `<p class="empty">La vue 3D n'a pas pu se charger. Les autres onglets fonctionnent.</p>`; return; } if (!init3d()) return; resize3d(); sync3d(); if (!X3.raf) loop3(); }
+
+/* ---------- rendu et navigation ---------- */
+const VIEWS = { residence: () => "", bord: vBord, calendrier: vCal, reservations: vResa, entreprises: () => vPipe("Entreprise"), proprietaires: () => vPipe("Propriétaire"), reseau: () => vPipe("Réseau"), senteurs: vSent, journal: vJournal };
+function render() {
+  document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("on", a.dataset.v === view));
+  if (!db) { $("main").innerHTML = `<p class="note">Connexion au serveur impossible. Vérifiez votre connexion internet puis rechargez la page.</p>`; return; }
+  const is3 = view === "residence"; $("r3").hidden = !is3; $("main").hidden = is3;
+  if (!loaded) return;
+  if (is3) { const s = stats(ym), ar = R.filter(r => active(r) && r.arrivee >= today()).sort((a, b) => a.arrivee.localeCompare(b.arrivee))[0];
+    $("r3top").innerHTML = `${monthPicker()}<div class="k3"><small>Chiffre du mois</small><b class="num">${F(s.ca)}</b></div><div class="k3"><small>Occupation</small><b class="num">${Math.round(s.occ * 100)} %</b></div><div class="k3"><small>Prochaine arrivée</small><b>${ar ? esc(ar.client) + " · " + fmtD(ar.arrivee) : "—"}</b></div>`;
+    $("ym")?.addEventListener("change", e => { ym = e.target.value; render(); }); show3d(); return; }
+  $("main").innerHTML = (canWrite ? "" : `<p class="note">Lecture seule : demandez l'accès Contributeur pour modifier.</p>`) + VIEWS[view]();
+  $("ym")?.addEventListener("change", e => { ym = e.target.value; render(); });
+  $("fR")?.addEventListener("change", e => { fR = e.target.value; render(); });
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-close]")) return closeDrawer();
+  const n = e.target.closest("[data-new]"); if (n) { const k = n.dataset.new; return k === "resa" ? formResa(null) : k === "contact" ? formContact(null, n.dataset.type) : formCmd(null); }
+  const o = e.target.closest("[data-open]"); if (o) { const [k, id] = o.dataset.open.split(":"); return k === "resa" ? formResa(id) : k === "contact" ? formContact(id) : formCmd(id); }
+  const a = e.target.closest("[data-add]"); if (a && canWrite) { const [apt, date] = a.dataset.add.split(":"); return formResa(null, { apt, date }); }
+  const g = e.target.closest("[data-go]"); if (g) location.hash = "#" + g.dataset.go;
+});
+addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+function route() { const h = location.hash.slice(1); view = VIEWS[h] ? h : "residence"; render(); }
+addEventListener("hashchange", route);
+
+(async () => {
+  route();
+  if (!window.claude?.use) return render();
+  [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+  if (user) { me = await user.id(); if (await user.can("data.write") === false) canWrite = false; }
+  if (!db) return render();
+  const timer = setTimeout(() => { if (!loaded) $("main").innerHTML = `<p class="note">Les données mettent du temps à arriver. La page se mettra à jour toute seule.</p>`; }, 10e3);
+  const err = () => { clearTimeout(timer); };
+  const resolve = async () => { if (!user) return; const ids = [...new Set(A.map(a => a.par).filter(Boolean))]; if (ids.length) { names = await user.profiles(ids); if (view === "journal") render(); } };
+  const got = { r: 0, c: 0, o: 0 }; const ready = () => { if (got.r && got.c && got.o && !loaded) { loaded = true; clearTimeout(timer); } render(); };
+  db.collection("reservations").onSnapshot(s => { R = s.docs.map(d => ({ id: d.id, ...d.data() })); got.r = 1; ready(); }, err);
+  db.collection("contacts").onSnapshot(s => { C = s.docs.map(d => ({ id: d.id, ...d.data() })); got.c = 1; ready(); }, err);
+  db.collection("commandes").onSnapshot(s => { O = s.docs.map(d => ({ id: d.id, ...d.data() })); got.o = 1; ready(); }, err);
+  db.collection("activite").orderBy("le", "desc").limit(200).onSnapshot(s => { A = s.docs.map(d => ({ id: d.id, ...d.data() })); if (view === "journal") render(); resolve(); }, err);
+})();
+</script>
+</body></html>
