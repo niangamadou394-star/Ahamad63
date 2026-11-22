@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#2B2118">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --ivory:#F6F1E9; --sand:#EADFCF; --sand2:#D9C6AA; --clay:#B08A57; --brown:#6B4A2E; --ink:#2B2118; --muted:#6f6254;
@@ -297,14 +297,24 @@ body.sb .float{opacity:0;pointer-events:none}
   .grid,.how .three,.inc{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
 }
+
+/* logo officiel */
+.wm{display:flex;flex-direction:column;align-items:center;line-height:1}
+.wm small{font-family:"Cinzel",serif;font-size:.62rem;letter-spacing:.42em;padding-left:.42em;color:inherit;margin:0 0 3px}
+.mark .wm b{font-family:"Cinzel",serif;font-weight:500;font-size:1.3rem;letter-spacing:.2em;padding-left:.2em}
+.mark .wm small{color:var(--ink);margin:0 0 4px}
+header.top .mark .wm small{color:#fff}
+.wm em{font-style:normal;font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;color:#c9a46c;margin-top:6px}
+footer .mark .wm small{color:var(--sand)}
+.veil img.vlogo{width:min(300px,62vw);height:auto}
 </style>
 </head>
 <body>
-<div class="veil" aria-hidden="true"><div><b>TINADO</b><small>Maison · Dakar</small></div></div>
+<div class="veil" aria-hidden="true"><div><img src="img/logo-tinado.png" alt="" class="vlogo"></div></div>
 
 <header id="hd">
   <div class="wrap nav">
-    <a href="#" class="mark" aria-label="Maison Tinado, accueil"><span class="mono lg" aria-hidden="true"></span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></a>
+    <a href="#" class="mark" aria-label="Maison Tinado, accueil"><span class="mono lg" aria-hidden="true"></span><span class="wm"><small>MAISON</small><b>TINADO</b></span></a>
     <nav class="links" id="links">
       <a class="l" href="#visite">Séjours</a>
       <a class="l" href="#senteurs">Senteurs</a>
@@ -478,7 +488,7 @@ body.sb .float{opacity:0;pointer-events:none}
 
 <footer>
   <div class="wrap">
-    <span class="mark"><span class="mono lg" aria-hidden="true" style="filter:brightness(0) invert(1) sepia(.4)"></span><span><b>TINADO</b><small>MAISON · DAKAR</small></span></span>
+    <span class="mark"><span class="mono lg" aria-hidden="true" style="filter:brightness(0) invert(1) sepia(.4)"></span><span class="wm"><small>MAISON</small><b>TINADO</b><em>L'art de recevoir à l'Africaine</em></span></span>
     <span>© <span id="y"></span> Maison Tinado · L'art de recevoir à l'Africaine</span>
   </div>
 </footer>

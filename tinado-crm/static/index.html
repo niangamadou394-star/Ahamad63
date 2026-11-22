@@ -1,7 +1,7 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><link rel="icon" href="data:,"><title>Maison Tinado · Gestion</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
 <script src="three.min.js"></script>
 <style>
 /* Layout : en-tête collant avec onglets ; contenu en grilles qui passent en une colonne sur téléphone */
@@ -21,8 +21,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .bar{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
-.brand{display:flex;align-items:baseline;gap:10px}
-.brand b{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:.18em}
+.brand{display:flex;align-items:center;gap:10px}.brand .ic{height:34px;width:auto}.brand .wm{display:flex;flex-direction:column;align-items:center;line-height:1}.brand .wm i{font-style:normal;font-family:"Cinzel",serif;font-size:9px;letter-spacing:.42em;padding-left:.42em;margin-bottom:3px}
+.brand b{font-family:"Cinzel",serif;font-weight:500;font-size:20px;letter-spacing:.18em;padding-left:.18em}
 .brand small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
 .sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
@@ -145,7 +145,7 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 #login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 30%,var(--surface),var(--bg) 70%);display:grid;place-items:center;padding:20px}
 #login form{width:min(380px,100%);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;box-shadow:var(--shadow);text-align:center}
-#login .lb{font-family:var(--serif);font-size:38px;font-weight:600;letter-spacing:.3em;padding-left:.3em}
+#login .lb{width:190px;height:auto;margin:0 auto 4px;display:block}
 #login small{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 #login label{display:grid;gap:4px;text-align:left;font-size:12px;font-weight:600;color:var(--muted)}
 #login .btn{justify-content:center;margin-top:6px}
@@ -177,7 +177,7 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
   function showLogin() {
     if (document.getElementById("login")) return;
     const d = document.createElement("div"); d.id = "login";
-    d.innerHTML = `<form id="lf"><div class="lb">TINADO</div><small>Maison · Dakar · Gestion</small>
+    d.innerHTML = `<form id="lf"><img src="logo-tinado.png" alt="Maison Tinado" class="lb"><small>Outil de gestion</small>
       <label>Votre prénom<input id="ln" required autocomplete="given-name"></label>
       <label>Code d'accès<input id="lc" type="password" required autocomplete="current-password"></label>
       <button class="btn pri" type="submit">Entrer</button><p id="le" class="err" hidden></p></form>`;
@@ -193,7 +193,7 @@ input,select,textarea{width:100%;background:var(--surface);border:1px solid var(
 </script>
 <header>
   <div class="wrap bar">
-    <div class="brand"><b>TINADO</b><small>Gestion</small></div>
+    <div class="brand"><img src="logo-maison.png" alt="" class="ic"><span class="wm"><i>MAISON</i><b>TINADO</b></span><small>Gestion</small></div>
     <div class="sp">
       <button class="btn pri" type="button" data-new="resa">+ Réservation</button>
       <button class="btn" type="button" data-new="contact">+ Contact</button>
@@ -295,7 +295,7 @@ function vBord() {
   </div>
   <div class="grid2"><div>
     <section class="panel"><h2>Occupation du mois</h2><div class="occ">${s.per.map(a => `<div><div class="l"><b>${esc(a.nom)}</b><span class="num">${a.nuits} / ${monthDays(ym)} nuits · ${F(a.ca)}</span></div><div class="track"><div class="fill" style="width:${a.occ * 100}%"></div></div></div>`).join("")}</div>
-    <p class="sub" style="margin:12px 0 0;font-size:12.5px">Repère : le F3 rapporte plus à la nuit qu'au mois à partir de 16 nuits (au mois : ${F(1000000)}).</p></section>
+    <p class="sub" style="margin:12px 0 0;font-size:12.5px">Repère : à la nuit, le F3 dépasse son loyer au mois (${F(1000000)}) à partir de 16 nuits, le F2 (${F(850000)}) à partir de 19 nuits.</p></section>
     <section class="panel"><h2>Prochaines arrivées</h2>${arr.length ? `<ul class="list">${arr.map(r => `<li data-open="resa:${esc(r.id)}"><span><b>${esc(r.client || "Sans nom")}</b><small>${esc(APTS.find(a => a.id === r.apt)?.court || "")} · ${nights(r.arrivee, r.depart)} nuits</small></span><span class="r">${fmtD(r.arrivee)}<br><span class="pill ${RPILL[r.statut]}">${esc(r.statut)}</span></span></li>`).join("")}</ul>` : `<p class="empty">Aucune arrivée prévue. Ajoutez une réservation avec « + Réservation ».</p>`}</section>
   </div><div>
     <section class="panel"><h2>Relances à faire</h2>${acts.length ? `<ul class="list">${acts.map(c => { const l = c.dateAction < t ? "late" : c.dateAction === t ? "today" : ""; return `<li data-open="contact:${esc(c.id)}"><span><b>${esc(c.nom)}</b><small>${esc(c.prochaineAction || "Relancer")} · ${esc(c.type)}</small></span><span class="r due ${l}">${l === "late" ? "En retard · " : ""}${fmtD(c.dateAction)}</span></li>`; }).join("")}</ul>` : `<p class="empty">Aucune relance planifiée.</p>`}</section>
@@ -470,8 +470,8 @@ function logoPanel(w, h, withText) {
   const img = new Image(); img.onload = () => {
     const s = h * (withText ? .5 : .78), iw = s * img.width / img.height; const lx = withText ? w / 2 - iw / 2 : w / 2 - iw / 2;
     x.drawImage(img, lx, withText ? h * .08 : (h - s) / 2, iw, s);
-    if (withText) { x.fillStyle = "#2b2118"; x.textAlign = "center"; x.font = `500 ${h * .07}px "Cormorant Garamond",Georgia,serif`; x.fillText("M A I S O N", w / 2, h * .68);
-      x.font = `600 ${h * .16}px "Cormorant Garamond",Georgia,serif`; x.fillText("T I N A D O", w / 2, h * .84);
+    if (withText) { x.fillStyle = "#2b2118"; x.textAlign = "center"; x.font = `500 ${h * .07}px "Cinzel","Cormorant Garamond",serif`; x.fillText("M A I S O N", w / 2, h * .68);
+      x.font = `500 ${h * .16}px "Cinzel","Cormorant Garamond",serif`; x.fillText("T I N A D O", w / 2, h * .84);
       x.fillStyle = "#b08a57"; x.font = `500 ${h * .045}px Inter,sans-serif`; x.fillText("L'ART DE RECEVOIR À L'AFRICAINE", w / 2, h * .93); }
     tex.needsUpdate = true; };
   img.src = TINADO_LOGO; return tex;
