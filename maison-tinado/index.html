@@ -163,7 +163,7 @@ footer .mark b{color:var(--sand)}
 .water{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,#8fb7b5,#4f7d7a);opacity:.85}
 .grain{position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,#00000038 0%,transparent 30%,transparent 55%,#00000066 100%)}
-.cx{position:absolute;left:0;right:0;padding:0 6vw;color:#fff;opacity:0;will-change:opacity,transform}
+.cx{position:absolute;left:0;right:0;padding:0 6vw;color:#fff;opacity:0;will-change:opacity,transform;pointer-events:none}.cx.on{pointer-events:auto}
 .ct1{bottom:12vh;opacity:1}
 .ct1 h1,.ct3 h1{font-size:clamp(3rem,8vw,7.2rem);line-height:.98;margin:.8rem 0 2rem;text-shadow:0 10px 40px #0004}
 .ct1 h1 i,.ct2 h1 i,.ct3 h1 i{color:#fff;font-style:italic}
@@ -245,7 +245,7 @@ header.top .mono.lg{filter:brightness(0) invert(1) sepia(.3)}
 .uni a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .uni a:hover img{transform:scale(1.05)}
 .uni a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#1d161000 40%,#1d1610d9)}
-.uni a span{position:absolute;left:34px;right:34px;bottom:34px;z-index:1}
+.uni a>span{position:absolute;left:34px;right:34px;bottom:34px;z-index:1}
 .uni .num{font-family:var(--serif);font-style:italic;color:var(--sand2);font-size:1.1rem}
 .uni b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;margin:.3rem 0 .6rem}
 .uni small{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sand)}
@@ -332,6 +332,7 @@ footer .mark .wm small{color:var(--sand)}
 .mg .lk{position:relative;z-index:1;align-self:flex-start;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--clay);padding-bottom:4px;margin-top:.6rem}
 .mnote{text-align:center;font-family:var(--serif);font-style:italic;color:var(--brown);font-size:1.1rem;margin-top:2.2rem}
 @media (max-width:900px){.mg{grid-template-columns:1fr}}
+@media (max-width:620px){.apt .row{flex-direction:column;align-items:flex-start;gap:.9rem}.apt .row .btn{width:100%;justify-content:center}.uni a>span{left:24px;right:24px;bottom:26px}}
 </style>
 </head>
 <body>
@@ -359,7 +360,7 @@ footer .mark .wm small{color:var(--sand)}
     <div class="bg b2" data-photo="1"><div class="glow g2"></div><div class="room"><i></i><i></i></div></div>
     <div class="bg b3" data-photo="2"><div class="glow g3"></div><div class="water"></div></div>
     <div class="grain"></div><div class="shade"></div>
-    <div class="ct1 cx"><div class="kk">Séjours &amp; senteurs · Dakar</div><h1>Pour ceux qui<br><i>remarquent les détails.</i></h1>
+    <div class="ct1 cx on"><div class="kk">Séjours &amp; senteurs · Dakar</div><h1>Pour ceux qui<br><i>remarquent les détails.</i></h1>
       <a class="btn btn-ivory" href="#appartements">Découvrir</a></div>
     <div class="ct2 cx"><h1 class="huge"><i>Bienvenue.</i></h1></div>
     <div class="ct3 cx"><h1>Ici, on ne compte<br><i>plus les jours.</i></h1><p>Quelques nuits ou plusieurs mois : un appartement prêt à vivre, l'art de recevoir à l'Africaine.</p></div>
@@ -380,7 +381,7 @@ footer .mark .wm small{color:var(--sand)}
     <h2 class="rv">Deux façons <i>de vous recevoir.</i></h2>
     <div class="grid2">
       <a class="rv" href="#visite"><img src="img/f3-p-salon.jpg" alt="Salon d'un appartement Maison Tinado" loading="lazy"><span><span class="num">I.</span><b>Séjourner</b><small>Appartements meublés · Dakar</small><br><span class="go">Visiter</span></span></a>
-      <a class="rv" href="#senteurs"><img src="img/senteurs-gamme.jpg" alt="Les cinq sprays d'ambiance Maison Tinado" loading="lazy" style="object-position:center 85%"><span><span class="num">II.</span><b>Les senteurs</b><small>Sprays d'ambiance · 100 ml</small><br><span class="go">Découvrir</span></span></a>
+      <a class="rv" href="#senteurs"><img src="img/senteurs-gamme.jpg" alt="La boutique Maison Tinado" loading="lazy" style="object-position:center 85%"><span><span class="num">II.</span><b>La boutique</b><small>Senteurs · Linge · Paniers</small><br><span class="go">Découvrir</span></span></a>
     </div>
   </div>
 </section>
@@ -631,12 +632,13 @@ function cineFrame() {
   if (reduce) return;
   const r = cine.getBoundingClientRect(), p = cl(-r.top / (r.height - innerHeight));
   hd.classList.toggle("top", p < .98 && r.top <= 0 || scrollY < 30);
+  hd.classList.toggle("s", scrollY > 30 && !hd.classList.contains("top"));
   lay[0].style.opacity = 1 - cl((p - .26) / .1); lay[0].style.transform = `scale(${1 + p * .9})`;
   lay[1].style.opacity = cl((p - .24) / .1) * (1 - cl((p - .62) / .1)); lay[1].style.transform = `scale(${1.25 - cl((p - .24) / .45) * .2})`;
   lay[2].style.opacity = cl((p - .6) / .1); lay[2].style.transform = `scale(${1.15 - cl((p - .6) / .4) * .15})`;
-  const o1 = 1 - cl(p / .16); c1.style.opacity = o1; c1.style.transform = `translateY(${-p * 300}px)`; c1.style.filter = `blur(${(1 - o1) * 10}px)`;
-  const o2 = win(p, .3, .56); c2.style.opacity = o2; c2.style.transform = `translateY(-50%) scale(${.9 + cl((p - .3) / .26) * .15})`; c2.style.filter = `blur(${(1 - o2) * 12}px)`;
-  const o3 = win(p, .68, 1.2, .08); c3.style.opacity = o3; c3.style.transform = `translateY(${(1 - o3) * 40}px)`;
+  const o1 = 1 - cl(p / .16); c1.style.opacity = o1; c1.style.transform = `translateY(${-p * 300}px)`; c1.style.filter = `blur(${(1 - o1) * 10}px)`; c1.classList.toggle("on", o1 > .5);
+  const o2 = win(p, .3, .56); c2.style.opacity = o2; c2.style.transform = `translateY(-50%) scale(${.9 + cl((p - .3) / .26) * .15})`; c2.style.filter = `blur(${(1 - o2) * 12}px)`; c2.classList.toggle("on", o2 > .5);
+  const o3 = win(p, .68, 1.2, .08); c3.style.opacity = o3; c3.style.transform = `translateY(${(1 - o3) * 40}px)`; c3.classList.toggle("on", o3 > .5);
 }
 addEventListener("scroll", cineFrame, { passive: true }); addEventListener("resize", cineFrame); cineFrame();
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
