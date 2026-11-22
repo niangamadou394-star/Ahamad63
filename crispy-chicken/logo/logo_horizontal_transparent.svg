@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-120 -120 790 240" width="1975" height="600"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD84D"/><stop offset=".55" stop-color="#F5B400"/><stop offset="1" stop-color="#E08600"/></linearGradient>
+<linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F23A2E"/><stop offset="1" stop-color="#B3140D"/></linearGradient></defs><style>@import url('https://fonts.googleapis.com/css2?family=Anton&amp;family=Montserrat:wght@700&amp;display=swap');.w{font-family:Anton,Impact,sans-serif;letter-spacing:2px}.t{font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:5px}</style>
+<g><circle r="104" fill="#0c0c0c"/><circle r="100" fill="none" stroke="url(#g)" stroke-width="4"/><circle r="92" fill="none" stroke="#F5B400" stroke-opacity=".3" stroke-width="1"/><g transform="translate(-10 6)">
+<g fill="url(#r)"><circle cx="-26" cy="-60" r="13"/><circle cx="-5" cy="-71" r="15.5"/><circle cx="17" cy="-63" r="13"/><rect x="-34" y="-62" width="53" height="16" rx="6"/></g>
+<path d="M 34 -36 A 52 52 0 1 0 34 36" fill="none" stroke="url(#g)" stroke-width="30" stroke-linecap="round"/>
+<path d="M 38 -45 L 76 -28 L 40 -12 Z" fill="#E58A00"/><path d="M 38 -45 L 76 -28 L 44 -30 Z" fill="#FFD84D"/>
+<path d="M 41 -15 C 56 -8 57 12 45 17 C 37 9 37 -4 41 -15 Z" fill="url(#r)"/>
+<circle cx="16" cy="-26" r="7" fill="#fff"/><circle cx="18.2" cy="-26" r="3.3" fill="#0c0c0c"/>
+<path d="M 5 2 L -10 30 L 2 28 L -6 54 L 19 19 L 7 21 L 15 2 Z" fill="#fff"/></g></g>
+<text class="w" x="128" y="-8" font-size="86" fill="#111111">CRISPY</text>
+<text class="w" x="128" y="78" font-size="86" fill="url(#g)">CHICKEN</text>
+<rect x="132" y="92" width="92" height="5" rx="2.5" fill="url(#r)"/>
+<text class="t" x="236" y="98" font-size="15" fill="#111111" fill-opacity=".75">NAAN · WINGS · TENDERS</text></svg>

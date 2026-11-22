@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crispy Chicken · Naan, Wings & Tenders</title>
+<meta name="description" content="Crispy Chicken, spécialiste Naan, Wings & Tenders. Naans cuits au tandoor, tenders croustillants, wings, burgers, wraps et family packs.">
+<meta name="theme-color" content="#0c0c0c">
+<link rel="icon" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0b;--bg2:#121212;--card:#161616;--line:#ffffff14;--gold:#F5B400;--gold2:#FFD84D;--red:#E0281E;--cream:#F6EFE2;--muted:#ffffff9e;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:140px;overflow-x:hidden}
+body{background:var(--bg);color:#fff;font-family:Montserrat,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1220px,100% - 40px);margin-inline:auto}
+.H{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.5px;line-height:.95;text-transform:uppercase}
+.k{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.k::before{content:"";width:28px;height:2px;background:var(--red)}
+.gold{color:transparent;background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,#E08600);-webkit-background-clip:text;background-clip:text}
+section{padding:110px 0;position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.8rem;border-radius:999px;font-weight:800;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;transition:transform .3s var(--ease),box-shadow .3s,background .3s;border:0;cursor:pointer}
+.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#141006;box-shadow:0 12px 34px #F5B40038}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 44px #F5B40055}
+.btn-line{border:1.5px solid #ffffff33;color:#fff}.btn-line:hover{border-color:#fff}
+/* en-tête */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s}
+header.s{background:#0b0b0bdd;backdrop-filter:blur(16px) saturate(150%);box-shadow:0 1px 0 var(--line)}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.8rem}.brand img{width:48px;height:48px}
+.brand b{font-family:Anton,sans-serif;font-weight:400;font-size:1.45rem;letter-spacing:1px;line-height:.9}.brand b span{display:block}.brand b span+span{color:var(--gold)}
+.links{display:flex;align-items:center;gap:2rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.links a.l{opacity:.75;transition:opacity .2s,color .2s}.links a.l:hover{opacity:1;color:var(--gold)}
+.links .btn{min-height:44px;padding:0 1.3rem;font-size:.76rem}
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden;background:radial-gradient(ellipse 60% 60% at 75% 45%,#F5B40024,transparent 65%),radial-gradient(ellipse 50% 50% at 20% 90%,#E0281E1c,transparent 70%),var(--bg)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(3.4rem,8.6vw,7.6rem);margin:1.2rem 0 1.4rem}
+.hero p{color:var(--muted);font-size:1.06rem;max-width:520px}
+.ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
+.badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.2rem}
+.badges span{padding:.5rem .95rem;border-radius:999px;border:1px solid var(--line);background:#ffffff06;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffffffcc}
+.stage{position:relative;aspect-ratio:1;max-width:560px;margin-left:auto;width:100%}
+.stage .logo{position:absolute;left:14%;top:14%;width:72%;height:72%;filter:drop-shadow(0 40px 60px #000c) drop-shadow(0 0 80px #F5B40033);animation:fl 7s ease-in-out infinite}
+.stage .halo{position:absolute;inset:4%;border-radius:50%;border:1px solid #F5B40033}
+.stage .halo.h2{inset:-4%;border-color:#F5B40018}
+.fi{position:absolute;width:19%;aspect-ratio:1;border-radius:50%;background:#151515;border:1px solid #ffffff12;display:grid;place-items:center;box-shadow:0 20px 40px #0009;animation:fl 6s ease-in-out infinite}
+.fi svg{width:66%;height:66%}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+/* bandeau */
+.mq{background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));color:#140f05;overflow:hidden;transform:rotate(-1.2deg);margin:-20px -10px 0;box-shadow:0 20px 40px #0008;position:relative;z-index:2}
+.mq .tr{display:flex;width:max-content;animation:mq 30s linear infinite;padding:16px 0}
+.mq span{font-family:Anton,sans-serif;font-size:1.5rem;letter-spacing:.06em;padding:0 1.4rem;display:flex;align-items:center;gap:2.8rem;white-space:nowrap}
+.mq span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--red)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* signatures */
+.sig .head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.sig h2,.carte h2,.form h2,.infos h2{font-size:clamp(2.6rem,5.4vw,4.4rem);margin-top:.9rem}
+.lead{color:var(--muted);max-width:520px}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:3rem}
+.sc{position:relative;border-radius:26px;padding:2rem 1.8rem 1.8rem;background:linear-gradient(170deg,#1b1b1b,#101010);border:1px solid var(--line);overflow:hidden;transition:transform .5s var(--ease),border-color .4s}
+.sc:hover{transform:translateY(-6px);border-color:#F5B40066}
+.sc::before{content:"";position:absolute;width:280px;height:280px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(circle,#F5B40030,transparent 65%)}
+.sc .tag{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#140f05;background:var(--gold);padding:.32rem .7rem;border-radius:6px}
+.sc h3{font-size:2.3rem;margin:1.1rem 0 .4rem}
+.sc p{color:var(--muted);font-size:.9rem;min-height:4.4em}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin:1.3rem 0 1.4rem}
+.ing{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem .3rem .3rem;border-radius:999px;background:#ffffff0a;border:1px solid #ffffff10;font-size:.72rem;font-weight:600;color:#ffffffd9}
+.ing i{width:26px;height:26px;border-radius:50%;background:#0c0c0c;display:grid;place-items:center}.ing i svg{width:20px;height:20px}
+.ing b{color:var(--gold);font-weight:800}
+.pr{font-family:Anton,sans-serif;font-size:2.3rem;color:var(--gold)}
+/* carte */
+.carte{background:var(--bg2)}
+.tabs{position:sticky;top:78px;z-index:20;display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;padding:14px 0;margin:2.2rem 0 1rem;background:linear-gradient(var(--bg2) 75%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;padding:.6rem 1.1rem;border-radius:999px;border:1px solid #ffffff1f;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ffffffc2;transition:all .25s}
+.tabs a:hover{border-color:#fff;color:#fff}.tabs a.on{background:var(--gold);border-color:var(--gold);color:#140f05}
+.cat{padding-top:2.4rem}
+.cat h3{font-size:2.2rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.cat h3 small{font-family:Montserrat;font-size:.8rem;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:1.3rem}
+.it{display:grid;grid-template-columns:1fr auto;gap:.4rem 1.2rem;padding:1.2rem 1.3rem;border-radius:18px;background:var(--card);border:1px solid var(--line);transition:border-color .3s}
+.it:hover{border-color:#F5B4004d}
+.it b{font-weight:800;font-size:1rem}
+.it .p{font-family:Anton,sans-serif;font-size:1.35rem;color:var(--gold);white-space:nowrap}
+.it .d{grid-column:1/-1;color:var(--muted);font-size:.84rem}
+.it .ics{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:.3rem}
+.it .ics i{width:30px;height:30px;border-radius:50%;background:#0c0c0c;border:1px solid #ffffff10;display:grid;place-items:center}.it .ics svg{width:22px;height:22px}
+.it.star{border-color:#F5B40055;background:linear-gradient(160deg,#1e1a0e,#161616)}
+.it .st{font-size:.6rem;font-weight:800;letter-spacing:.2em;color:#140f05;background:var(--gold);padding:.18rem .45rem;border-radius:4px;margin-left:.5rem;vertical-align:2px}
+.items.compact{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* formules */
+.fg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:3rem}
+.fc{border-radius:24px;padding:1.8rem 1.5rem;background:#141414;border:1px solid var(--line);display:flex;flex-direction:column;gap:.5rem}
+.fc .pr{font-size:2.6rem;margin-top:auto}
+.fc h3{font-size:1.7rem}
+.fc p{color:var(--muted);font-size:.86rem}
+.fam{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.fam .fc{background:linear-gradient(160deg,#2a0d0a,#141414);border-color:#E0281E44}
+.fam .fc .k{color:#ff7b70}
+/* infos */
+.infos{background:radial-gradient(ellipse 60% 70% at 80% 30%,#F5B40018,transparent 70%),var(--bg)}
+.ig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:2.6rem}
+.ic{border-radius:22px;padding:1.6rem;background:#141414;border:1px solid var(--line)}
+.ic small{display:block;font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.ic b{font-size:1.1rem;font-weight:700}
+footer{padding:46px 0;border-top:1px solid var(--line);color:#ffffff80;font-size:.82rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.rv.in{opacity:1;transform:none}
+.call{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media (max-width:1000px){.hero .grid{grid-template-columns:1fr}.stage{max-width:420px;margin:0 auto}.sg,.ig{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.fam{grid-template-columns:1fr}.items.compact{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){section{padding:84px 0}.links a.l{display:none}.nav{height:68px}.tabs{top:68px}.brand img{width:42px;height:42px}.brand b{font-size:1.2rem}
+ .hero{padding-top:100px;min-height:auto}.ctas .btn{flex:1 1 100%}.items,.items.compact{grid-template-columns:1fr}.fg{grid-template-columns:1fr}
+ .call{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;gap:8px}
+ .call a{flex:1;min-height:54px}footer{padding-bottom:100px}}
+</style>
+</head>
+<body>
+<header id="hd"><div class="wrap nav">
+  <a class="brand" href="#" aria-label="Crispy Chicken, accueil"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a>
+  <nav class="links"><a class="l" href="#signatures">Signatures</a><a class="l" href="#carte">La carte</a><a class="l" href="#formules">Formules</a><a class="l" href="#infos">Infos</a><a class="btn btn-gold js-order" href="#carte">Commander</a></nav>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap grid">
+  <div>
+    <div class="k rv">Spécialiste Naan, Wings &amp; Tenders</div>
+    <h1 class="H rv">Le croustillant,<br><span class="gold">c'est sérieux.</span></h1>
+    <p class="rv">Des naans cuits au tandoor, des tenders panés et croustillants, des wings et des burgers généreux. Préparés à la commande, servis chauds.</p>
+    <div class="ctas rv"><a class="btn btn-gold" href="#carte">Voir la carte</a><a class="btn btn-line js-tel" href="#infos">Nous appeler</a></div>
+    <div class="badges rv"><span>Naan au tandoor</span><span>Préparé à la commande</span><span>Sur place · À emporter</span></div>
+  </div>
+  <div class="stage rv" aria-hidden="true">
+    <div class="halo"></div><div class="halo h2"></div>
+    <img class="logo" src="img/icone.svg" alt="">
+    <div class="fi" style="left:-2%;top:12%;animation-delay:-1s" data-i="tender"></div>
+    <div class="fi" style="right:-2%;top:6%;animation-delay:-3s" data-i="cheddar"></div>
+    <div class="fi" style="right:2%;bottom:10%;animation-delay:-2s" data-i="sauce"></div>
+    <div class="fi" style="left:4%;bottom:6%;animation-delay:-4s" data-i="galette"></div>
+  </div>
+</div></section>
+
+<div class="mq" aria-hidden="true"><div class="tr" id="mq"></div></div>
+
+<section class="sig" id="signatures"><div class="wrap">
+  <div class="head"><div><div class="k rv">Nos signatures</div><h2 class="H rv">Les incontournables<br><span class="gold">de la maison.</span></h2></div>
+  <p class="lead rv">Trois recettes qui résument Crispy Chicken : du tender croustillant, du cheddar fondant et des sauces qui ont du caractère.</p></div>
+  <div class="sg" id="sg"></div>
+</div></section>
+
+<section class="carte" id="carte"><div class="wrap">
+  <div class="k rv">La carte</div><h2 class="H rv">Tout ce qu'on <span class="gold">prépare.</span></h2>
+  <nav class="tabs" id="tabs" aria-label="Catégories"></nav>
+  <div id="cats"></div>
+</div></section>
+
+<section class="form" id="formules"><div class="wrap">
+  <div class="k rv">Formules &amp; family packs</div><h2 class="H rv">Le bon menu, <span class="gold">au bon prix.</span></h2>
+  <p class="lead rv" style="margin-top:1rem">Tous nos menus sont servis avec frites et boisson.</p>
+  <div class="fg" id="fg"></div>
+  <div class="fam" id="fam"></div>
+</div></section>
+
+<section class="infos" id="infos"><div class="wrap">
+  <div class="k rv">Nous trouver</div><h2 class="H rv">Passez nous <span class="gold">voir.</span></h2>
+  <div class="ig" id="ig"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken · Spécialiste Naan, Wings &amp; Tenders</span></div></footer>
+<div class="call"><a class="btn btn-gold js-order" href="#carte">Commander</a><a class="btn btn-line js-tel" href="#infos" style="background:#0b0b0bee">Appeler</a></div>
+
+<script src="menu.js"></script>
+<script src="icons.js"></script>
+<script>
+const $ = id => document.getElementById(id), I = window.CC_INFO, M = window.CC_MENU, IC = window.CC_ICON, ING = window.CC_ING, P = window.ccPrix;
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cat = id => M.find(c => c.id === id);
+/* ingrédients regroupés : 3 tenders -> « 3 × Tender » */
+const group = list => { const m = new Map(); (list || []).forEach(k => m.set(k, (m.get(k) || 0) + 1)); return [...m]; };
+document.querySelectorAll(".fi").forEach(el => el.innerHTML = IC[el.dataset.i]);
+$("mq").innerHTML = Array(2).fill(["Naan au tandoor", "Wings", "Tenders", "Crousty", "Burgers", "Wraps", "Family packs"].map(t => `<span>${t}</span>`).join("")).join("");
+
+/* signatures */
+const SIG = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["wraps", "Wrap Crispy Star"]];
+$("sg").innerHTML = SIG.map(([c, n]) => { const it = cat(c).items.find(x => x.n === n);
+  return `<article class="sc rv"><span class="tag">${esc(cat(c).titre)}</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p>
+  <div class="stack">${group(it.i).map(([k, q]) => `<span class="ing"><i>${IC[k]}</i>${q > 1 ? `<b>${q}×</b>` : ""}${esc(ING[k])}</span>`).join("")}</div>
+  <div class="pr">${P(it.p)}</div></article>`; }).join("");
+
+/* carte */
+const SHOW = ["naans", "burgers", "wraps", "wings", "crousty", "sides", "desserts", "boissons"];
+$("tabs").innerHTML = SHOW.map(id => `<a href="#c-${id}" data-c="${id}">${esc(cat(id).titre)}</a>`).join("");
+$("cats").innerHTML = SHOW.map(id => { const c = cat(id), compact = c.items.every(x => !x.d);
+  return `<div class="cat" id="c-${id}"><h3 class="H rv">${esc(c.titre)}${c.sous ? `<small>${esc(c.sous)}</small>` : ""}</h3>
+  <div class="items ${compact ? "compact" : ""}">${c.items.map(it => `<div class="it rv ${it.star ? "star" : ""}"><b>${esc(it.n)}${it.star ? `<span class="st">SIGNATURE</span>` : ""}</b><span class="p">${P(it.p)}</span>
+   ${it.d ? `<span class="d">${esc(it.d)}</span>` : ""}${it.i && it.i.length > 1 ? `<span class="ics">${it.i.map(k => `<i title="${esc(ING[k])}">${IC[k]}</i>`).join("")}</span>` : ""}</div>`).join("")}</div></div>`; }).join("");
+
+/* formules */
+$("fg").innerHTML = cat("formules").items.map(it => `<div class="fc rv"><span class="k">Formule</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p><span class="pr">${P(it.p)}</span></div>`).join("");
+$("fam").innerHTML = cat("family").items.map(it => `<div class="fc rv"><span class="k">À partager</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p><span class="pr">${P(it.p)}</span></div>`).join("");
+
+/* infos : n'affiche que ce qui est renseigné */
+const tel = (I.telephone || "").replace(/[^\d+]/g, "");
+const blocks = [["Adresse", [I.adresse, I.ville].filter(Boolean).join(", ")], ["Horaires", I.horaires], ["Téléphone", I.telephone]];
+$("ig").innerHTML = blocks.map(([t, v]) => `<div class="ic rv"><small>${t}</small><b>${esc(v || "Bientôt disponible")}</b></div>`).join("");
+if (tel) document.querySelectorAll(".js-tel").forEach(a => a.href = "tel:" + tel); else document.querySelectorAll(".js-tel").forEach(a => a.remove());
+if (!blocks.some(b => b[1])) { $("infos").remove(); document.querySelectorAll('a[href="#infos"]').forEach(a => a.remove()); }
+if (I.commande) document.querySelectorAll(".js-order").forEach(a => { a.href = I.commande; a.target = "_blank"; a.rel = "noopener"; });
+$("y").textContent = new Date().getFullYear();
+
+/* onglets actifs + animations */
+const hd = $("hd"); addEventListener("scroll", () => hd.classList.toggle("s", scrollY > 30), { passive: true });
+const tabs = [...document.querySelectorAll("#tabs a")];
+const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { tabs.forEach(t => t.classList.toggle("on", t.dataset.c === e.target.id.slice(2)));
+  const on = $("tabs").querySelector(".on"); on && on.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }); } }), { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll(".cat").forEach(c => so.observe(c));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
