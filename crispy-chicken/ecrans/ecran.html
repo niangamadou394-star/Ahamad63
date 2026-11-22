@@ -54,6 +54,25 @@ body{width:1920px;height:1080px;overflow:hidden;background:#0a0a0a;color:#fff;fo
 .intro{display:grid;place-items:center;text-align:center}
 .intro img{width:420px;height:420px}
 .intro .H{font-size:120px;margin-top:30px}.intro .t{font-size:26px;font-weight:700;letter-spacing:.5em;color:#ffffffb0;margin-top:22px;text-transform:uppercase}
+
+/* photo produit, style cinéma */
+.spot .photo{position:absolute;left:50%;top:50%;width:760px;height:620px;margin:-310px 0 0 -380px;display:grid;place-items:center;z-index:3}
+.spot .photo img{max-width:100%;max-height:100%;filter:drop-shadow(0 50px 60px #000) drop-shadow(0 0 40px #F5B40022)}
+.spot .floor{position:absolute;left:50%;bottom:80px;width:620px;height:90px;margin-left:-310px;border-radius:50%;background:radial-gradient(ellipse,#F5B40030,transparent 70%);filter:blur(6px)}
+.spot .spotl{position:absolute;left:50%;top:-200px;width:900px;height:1300px;margin-left:-450px;background:radial-gradient(ellipse 40% 50% at 50% 55%,#fff4d61a,transparent 70%);z-index:1}
+.spot svg.draw{position:absolute;left:50%;top:50%;width:720px;height:720px;margin:-360px 0 0 -360px;z-index:2;overflow:visible}
+.spot svg.draw *{fill:none;stroke:#F5B400;stroke-width:3;stroke-linecap:round}
+.smk{position:absolute;left:50%;top:22%;z-index:4;pointer-events:none}.smk i{position:absolute;width:120px;height:260px;border-radius:50%;background:radial-gradient(ellipse,#ffffff26,transparent 70%);filter:blur(18px)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 8px;border-radius:999px;background:#ffffff0d;border:1.5px solid #ffffff1a;font-size:21px;font-weight:700;color:#ffffffd8}
+.chip i{width:44px;height:44px;border-radius:50%;background:#0c0c0c;display:grid;place-items:center}.chip i svg{width:32px;height:32px}.chip b{color:#F5B400}
+.bshot{position:absolute;right:20px;top:0;width:520px;height:420px;display:grid;place-items:center;opacity:0}
+.bshot img{max-width:100%;max-height:100%;filter:drop-shadow(0 40px 50px #000)}
+.board.withshot .rows{margin-right:620px;grid-template-columns:1fr;margin-top:26px}.board.withshot .row{padding:7px 0}.board.withshot h2{font-size:92px}.board.withshot .bshot{width:600px;height:520px}.board.withshot .bshot{top:120px}
+.card .cph{height:170px;margin:-20px -10px 10px;display:grid;place-items:center;position:relative;z-index:1}.card .cph img{max-height:170px;max-width:100%;filter:drop-shadow(0 26px 30px #000c)}
+.spot .txt{top:180px!important}.spot .H.nm{font-size:128px!important;margin:16px 0 20px!important}.spot .ds{font-size:28px!important}
+.chip{font-size:18px!important;padding:6px 14px 6px 6px!important}.chip i{width:36px!important;height:36px!important}.chip i svg{width:26px!important;height:26px!important}
+.seal{margin-top:36px!important}.cards .card{padding:30px 32px!important}.cards .card .H{font-size:54px!important}.cards .card .p{font-size:72px!important;margin-top:10px!important}.cards .card p{min-height:56px!important;font-size:21px!important}
 </style></head><body>
 <div class="bgfx"></div><div class="grain"></div>
 <div class="top" id="top"><div class="b"><img src="../site/img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></div><div style="display:flex;align-items:center;gap:30px"><div class="tg">Spécialiste Naan · Wings · Tenders</div><div style="border:2px solid #F5B400;color:#F5B400;border-radius:999px;padding:10px 22px;font-weight:800;font-size:20px;letter-spacing:.16em">100 % HALAL</div></div></div>
@@ -81,22 +100,24 @@ SC.forEach((s, i) => {
   if (s.type === "intro") el.innerHTML = `<div><img src="../site/img/icone.svg"><div class="H">Crispy <span class="gold">Chicken</span></div><div class="t">Naan · Wings · Tenders</div></div>`, el.classList.add("intro");
   if (s.type === "board") { const c = cat(s.o.c), c2 = s.o.c2 && cat(s.o.c2);
     const its = c.items.map(x => ({ ...x, cat: c.titre })).concat(c2 ? c2.items.map(x => ({ ...x, cat: c2.titre })) : []);
-    el.innerHTML = `<div class="board"><div class="k">${c2 ? "La carte" : "Notre carte"}</div><h2 class="H">${esc(c.titre)}${c2 ? ` <span class="gold">&amp; ${esc(c2.titre)}</span>` : ""}</h2>${c.sous ? `<div class="sub">${esc(c.sous)}</div>` : ""}
+    const shot = (its.find(x => x.star && x.img) || its.find(x => x.img) || {}).img;
+    el.innerHTML = `<div class="board ${shot && !(!c2 && its.length > 6) ? "withshot" : ""}">${shot && !(!c2 && its.length > 6) ? `<div class="bshot"><img src="../site/img/p/${shot}.webp"></div>` : ""}<div class="k">${c2 ? "La carte" : "Notre carte"}</div><h2 class="H">${esc(c.titre)}${c2 ? ` <span class="gold">&amp; ${esc(c2.titre)}</span>` : ""}</h2>${c.sous ? `<div class="sub">${esc(c.sous)}</div>` : ""}
       <div class="rows">${its.map(x => `<div class="row"><span class="hl"></span><span class="n">${esc(x.n)}</span><span class="dots"></span><span class="p">${P(x.p)}</span>${x.d && !c2 ? `<span class="d">${esc(x.d)}</span>` : ""}</div>`).join("")}</div></div>`;
     if (!c2 && its.length > 6) el.querySelector(".board").classList.add("dense");
   }
   if (s.type === "multi") el.innerHTML = `<div class="board multi"><div class="rows">${s.o.cs.map(id => { const c = cat(id); return `<div><div class="colh">${esc(c.titre)}${c.sous ? `<small>${esc(c.sous)}</small>` : ""}</div>${c.items.map(x => `<div class="row"><span class="hl"></span><span class="n" style="font-size:32px;white-space:normal">${esc(x.n)}</span><span class="dots"></span><span class="p" style="font-size:48px">${P(x.p)}</span>${x.d ? `<span class="d">${esc(x.d)}</span>` : ""}</div>`).join("")}</div>`; }).join("")}</div></div>`;
   if (s.type === "cards") { const c = cat(s.o.c);
     el.innerHTML = `<div class="board"><div class="k">${s.o.red ? "À partager" : "Nos formules"}</div><h2 class="H">${s.o.red ? `Family <span class="gold">Packs</span>` : `Nos <span class="gold">formules</span>`}</h2>${c.sous ? `<div class="sub">${esc(c.sous)}</div>` : ""}
-      <div class="cards" style="grid-template-columns:repeat(${c.items.length},1fr)">${c.items.map(x => `<div class="card ${s.o.red ? "red" : ""}"><div class="H">${esc(x.n)}</div><p>${esc(x.d || "")}</p><div class="p">${P(x.p)}</div></div>`).join("")}</div></div>`; }
+      <div class="cards" style="grid-template-columns:repeat(${c.items.length},1fr)">${c.items.map(x => `<div class="card ${s.o.red ? "red" : ""}">${x.img ? `<div class="cph"><img src="../site/img/p/${x.img}.webp"></div>` : ""}<div class="H">${esc(x.n)}</div><p>${esc(x.d || "")}</p><div class="p">${P(x.p)}</div></div>`).join("")}</div></div>`; }
   if (s.type === "spot") { const it = item(s.o.c, s.o.n), g = group(it.i || []);
     const n = g.length, step = n > 1 ? Math.min(150, 600 / (n - 1)) : 0, top0 = 380 - (n - 1) * step / 2;
-    el.innerHTML = `<div class="art"><div class="glow"></div><div class="ring r2"></div><div class="ring"></div>
-      ${g.length ? g.map(([k, q], j) => `<div class="ing" style="top:${top0 + j * step - 75}px"><i>${IC[k]}</i><span style="${j % 2 ? "right" : "left"}:180px">${q > 1 ? `<b>${q}×</b> ` : ""}${esc(ING[k])}</span></div>`).join("")
-       : `<div class="ing" style="top:305px;width:300px;height:300px;margin-left:-150px"><img src="../site/img/icone.svg" style="width:250px"></div>`}</div>
+    el.innerHTML = `<div class="art"><div class="spotl"></div><div class="glow"></div>
+      <svg class="draw" viewBox="-360 -360 720 720"><circle r="330" pathLength="1"/><circle r="300" pathLength="1" style="stroke-opacity:.35;stroke-width:1.5"/>
+       <path pathLength="1" d="M -60 -345 l -18 -40 M 0 -350 l 0 -46 M 60 -345 l 18 -40"/><path pathLength="1" d="M 300 -150 l 40 -14 M 318 -96 l 44 0"/><path pathLength="1" d="M -300 150 l -40 14 M -318 96 l -44 0"/></svg>
+      <div class="photo"><img src="../site/img/p/${it.img}.webp"></div><div class="floor"></div><div class="smk"><i style="left:-140px"></i><i style="left:-20px"></i><i style="left:90px"></i></div></div>
       <div class="txt"><div class="k">${s.o.promo ? "La formule du moment" : esc(cat(s.o.c).titre)}</div><div class="H nm">${esc(it.n).replace(/ ([^ ]+)$/, ' <span class="gold">$1</span>')}</div>
-      <div class="ds">${esc(it.d || "")}</div><div class="seal"><b>${P(it.p)}</b>${s.o.promo ? "<small>frites + boisson</small>" : ""}</div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}</div>`;
-    el.querySelectorAll(".ing").forEach((d, j) => d.querySelector("i") && d.querySelectorAll("i").forEach(i => i.style.display = "contents"));
+      <div class="ds">${esc(it.d || "")}</div>${g.length ? `<div class="chips">${g.map(([k, q]) => `<span class="chip"><i>${IC[k]}</i>${q > 1 ? `<b>${q}×</b>` : ""}${esc(ING[k])}</span>`).join("")}</div>` : ""}<div class="seal"><b>${P(it.p)}</b>${s.o.promo ? "<small>frites + boisson</small>" : ""}</div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}</div>`;
+    
   }
 });
 const FADE = .7;
@@ -117,14 +138,18 @@ function render(t) {
       rows.forEach((r, j) => { const k = eo(pr(u, .45 + j * .09, .7)); r.style.opacity = k; r.style.transform = `translateX(${(1 - k) * -40}px)`;
         const hs = 2.2 + j * ((s.dur - 3.4) / rows.length), hk = pr(u, hs, .9); r.querySelector(".hl").style.opacity = Math.sin(hk * Math.PI) * 1; });
       const h2 = s.el.querySelector("h2"); if (h2) h2.style.transform = `translateY(${(1 - eo(pr(u, 0, .9))) * 40}px)`;
+      const bs = s.el.querySelector(".bshot"); if (bs) { const k = eob(pr(u, .3, 1)); bs.style.opacity = cl(k); bs.style.transform = `translateX(${(1 - k) * 160}px) rotate(${(1 - cl(k)) * 10 + Math.sin(u) * 1.5}deg)`; }
     }
     if (s.type === "cards") { s.el.querySelectorAll(".card").forEach((c, j) => { const k = eob(pr(u, .5 + j * .22, .9)); c.style.opacity = cl(k); c.style.transform = `translateY(${(1 - k) * 80}px) scale(${.94 + .06 * cl(k)})`;
         const pulse = Math.sin(pr(u, 2.4 + j * 1.1, 1) * Math.PI); c.style.borderColor = `rgba(245,180,0,${.07 + pulse * .6})`; });
       s.el.querySelector("h2").style.transform = `translateY(${(1 - eo(pr(u, 0, .9))) * 40}px)`; }
     if (s.type === "spot") {
-      s.el.querySelectorAll(".ing").forEach((d, j) => { const k = eob(pr(u, .3 + j * .22, .8)); d.style.opacity = cl(k * 1.4);
-        d.style.transform = `translateY(${(1 - k) * -120 + Math.sin(u * 1.6 + j) * 6}px) scale(${.7 + .3 * cl(k)})`; });
-      s.el.querySelectorAll(".ring").forEach((r, j) => r.style.transform = `scale(${.9 + .1 * eo(pr(u, 0, 1.2))}) rotate(${u * (j ? -6 : 8)}deg)`);
+      { const ph = s.el.querySelector(".photo"), k = eob(pr(u, .15, 1.1)); ph.style.opacity = cl(k * 1.3);
+        ph.style.transform = `translateY(${(1 - k) * 140 + Math.sin(u * 1.2) * 8}px) scale(${(.8 + .2 * cl(k)) * (1 + u * .012)}) rotate(${(1 - cl(k)) * -8 + Math.sin(u * .8) * 1.2}deg)`; }
+      s.el.querySelectorAll("svg.draw > *").forEach((e, j) => { const k = eo(pr(u, .5 + j * .25, 1.1)); e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - k; });
+      s.el.querySelector("svg.draw").style.transform = `rotate(${u * 4}deg)`;
+      s.el.querySelectorAll(".smk i").forEach((m, j) => { const ph2 = ((u * .35 + j * .33) % 1); m.style.opacity = Math.sin(ph2 * Math.PI) * .9; m.style.transform = `translateY(${-ph2 * 260}px) scale(${.6 + ph2})`; });
+      s.el.querySelectorAll(".chip").forEach((c, j) => { const k = eob(pr(u, 1.4 + j * .12, .6)); c.style.opacity = cl(k); c.style.transform = `scale(${.6 + .4 * cl(k)})`; });
       const tx = s.el.querySelector(".txt"); [...tx.children].forEach((c, j) => { const k = eo(pr(u, .2 + j * .18, .8)); c.style.opacity = k; c.style.transform = `translateX(${(1 - k) * 60}px)`; });
       const seal = tx.querySelector(".seal"); const sk = eob(pr(u, 1.1, .7)); seal.style.transform = `scale(${.6 + .4 * sk})`; seal.style.transformOrigin = "left center";
     }
