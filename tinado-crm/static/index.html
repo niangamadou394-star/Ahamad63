@@ -231,7 +231,7 @@ const fmtD = s => s ? D(s).toLocaleDateString("fr-FR", { day: "numeric", month: 
 const ago = t => { if (!t) return ""; const s = (Date.now() - t) / 1e3; if (s < 60) return "à l'instant"; if (s < 3600) return `il y a ${Math.floor(s / 60)} min`; if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`; return new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
 
 const APTS = [{ id: "f3", nom: "F3 · Point E", court: "F3", nuit: 65000, mois: 1000000, menage: 2 }, { id: "cs", nom: "F2 · Chambre-salon", court: "F2", nuit: 45000, mois: 850000, menage: 1 }];
-const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Association diaspora", "Bouche-à-oreille", "Instagram", "Site internet"];
+const SOURCES = ["Direct / WhatsApp", "Airbnb", "Entreprise", "Association diaspora", "Expat-Dakar", "Bouche-à-oreille", "Instagram", "Site internet"];
 const RSTAT = ["Demande", "Confirmée", "Payée", "Annulée"];
 const RPILL = { "Demande": "p-gold", "Confirmée": "p-info", "Payée": "p-ok", "Annulée": "p-bad" };
 const STAGES = ["À contacter", "Contacté", "Rendez-vous", "Offre envoyée", "Signé", "Perdu"];
