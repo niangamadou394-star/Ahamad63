@@ -132,7 +132,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <h1 class="H rv">Le croustillant,<br><span class="gold">c'est sérieux.</span></h1>
     <p class="rv">Des naans cuits au tandoor, des tenders panés et croustillants, des wings et des burgers généreux. Préparés à la commande, servis chauds.</p>
     <div class="ctas rv"><a class="btn btn-gold" href="#carte">Voir la carte</a><a class="btn btn-line js-tel" href="#infos">Nous appeler</a></div>
-    <div class="badges rv"><span>Naan au tandoor</span><span>Préparé à la commande</span><span>Sur place · À emporter</span></div>
+    <div class="badges rv"><span style="border-color:#F5B40066;color:#F5B400">100 % poulet halal</span><span>Naan au tandoor</span><span>Préparé à la commande</span><span>Sur place · À emporter</span></div>
   </div>
   <div class="stage rv" aria-hidden="true">
     <div class="halo"></div><div class="halo h2"></div>
@@ -183,7 +183,7 @@ const cat = id => M.find(c => c.id === id);
 /* ingrédients regroupés : 3 tenders -> « 3 × Tender » */
 const group = list => { const m = new Map(); (list || []).forEach(k => m.set(k, (m.get(k) || 0) + 1)); return [...m]; };
 document.querySelectorAll(".fi").forEach(el => el.innerHTML = IC[el.dataset.i]);
-$("mq").innerHTML = Array(2).fill(["Naan au tandoor", "Wings", "Tenders", "Crousty", "Burgers", "Wraps", "Family packs"].map(t => `<span>${t}</span>`).join("")).join("");
+$("mq").innerHTML = Array(2).fill(["100 % poulet halal", "Naan au tandoor", "Wings", "Tenders", "Crousty", "Burgers", "Wraps", "Family packs"].map(t => `<span>${t}</span>`).join("")).join("");
 
 /* signatures */
 const SIG = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["wraps", "Wrap Crispy Star"]];
