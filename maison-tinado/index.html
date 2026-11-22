@@ -255,7 +255,7 @@ header.top .mono.lg{filter:brightness(0) invert(1) sepia(.3)}
 /* senteurs */
 .scent{background:#efe6d8;padding-top:0}
 .scent .hero-s{position:relative;height:min(70vh,640px);overflow:hidden}
-.scent .hero-s img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.scent .hero-s img{width:100%;height:100%;object-fit:cover;object-position:center 72%}
 .scent .hero-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#00000000 50%,#efe6d8)}
 .scent .intro{max-width:620px;margin:-40px 0 3.2rem;position:relative;z-index:1}
 .scent .quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.3;color:var(--brown);margin:1rem 0 1.2rem}
@@ -307,6 +307,31 @@ header.top .mark .wm small{color:#fff}
 .wm em{font-style:normal;font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;color:#c9a46c;margin-top:6px}
 footer .mark .wm small{color:var(--sand)}
 .veil img.vlogo{width:min(300px,62vw);height:auto}
+
+/* avis */
+.avis{background:var(--ivory);padding-top:110px}
+.scores{display:flex;justify-content:center;align-items:center;gap:clamp(18px,5vw,64px);margin:2.4rem 0 3.4rem}
+.scores div{text-align:center}.scores b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;color:var(--ink)}
+.scores b::before{content:"★ ";font-size:.42em;color:var(--clay);vertical-align:.55em}
+.scores span{display:block;margin-top:.6rem;font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--clay)}
+.scores i{width:1px;height:56px;background:var(--line,#d9ccb8)}
+.qs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#e2d6c4;border:1px solid #e2d6c4}
+.qs figure{background:var(--ivory);padding:2.2rem 2rem;margin:0;display:flex;flex-direction:column;justify-content:space-between;gap:1.4rem}
+.qs blockquote{font-family:var(--serif);font-style:italic;font-size:1.32rem;line-height:1.4;color:var(--brown);margin:0}
+.qs figcaption{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--clay)}
+@media (max-width:900px){.qs{grid-template-columns:1fr}.qs figure{padding:1.7rem 1.4rem}}
+/* gamme */
+.more{margin-top:90px;padding-top:70px;border-top:1px solid #d9ccb866}
+.more h3{text-align:center;font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);margin:.6rem 0 2.6rem}.more h3 i{color:var(--brown)}
+.mg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mg article{background:#f7f1e7;border:1px solid #dccfb9;padding:2.2rem 1.9rem;display:flex;flex-direction:column;gap:.7rem;position:relative}
+.mg article::after{content:"";position:absolute;inset:6px;border:1px solid #e8dcc8;pointer-events:none}
+.mg .n{font-family:var(--serif);font-style:italic;color:var(--clay);font-size:1.4rem}
+.mg b{font-family:var(--serif);font-weight:500;font-size:1.55rem;color:var(--ink)}
+.mg p{font-size:.86rem;line-height:1.7;color:#5f5245;flex:1}
+.mg .lk{position:relative;z-index:1;align-self:flex-start;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--clay);padding-bottom:4px;margin-top:.6rem}
+.mnote{text-align:center;font-family:var(--serif);font-style:italic;color:var(--brown);font-size:1.1rem;margin-top:2.2rem}
+@media (max-width:900px){.mg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -317,7 +342,7 @@ footer .mark .wm small{color:var(--sand)}
     <a href="#" class="mark" aria-label="Maison Tinado, accueil"><span class="mono lg" aria-hidden="true"></span><span class="wm"><small>MAISON</small><b>TINADO</b></span></a>
     <nav class="links" id="links">
       <a class="l" href="#visite">Séjours</a>
-      <a class="l" href="#senteurs">Senteurs</a>
+      <a class="l" href="#senteurs">Boutique</a>
       <a class="l" href="#entreprises">Entreprises</a>
       <a class="l" href="#proprietaires">Propriétaires</a>
       <a class="l" href="#contact">Contact</a>
@@ -401,16 +426,42 @@ footer .mark .wm small{color:var(--sand)}
   </div>
 </section>
 
+<section class="avis" id="avis">
+  <div class="wrap">
+    <div class="k rv" style="text-align:center">Ils ont séjourné chez nous</div>
+    <h2 class="rv" style="text-align:center">Ce que disent <i>nos voyageurs.</i></h2>
+    <div class="scores rv"><div><b>4,8</b><span>F3 · Airbnb</span></div><i></i><div><b>5,0</b><span>F2 · Airbnb</span></div><i></i><div><b>5,0</b><span>Propreté</span></div></div>
+    <div class="qs">
+      <figure class="rv"><blockquote>« Je suis très maniaque, et pourtant je m'y suis sentie comme chez moi. »</blockquote><figcaption>Amayele · Paris</figcaption></figure>
+      <figure class="rv"><blockquote>« C'est de loin l'un des meilleurs appartements dans lequel j'ai séjourné à Dakar. »</blockquote><figcaption>Maimouna</figcaption></figure>
+      <figure class="rv"><blockquote>« Propre, calme, sécurisé, accessible : vraiment un endroit cinq étoiles. »</blockquote><figcaption>Tidiany · Amsterdam</figcaption></figure>
+      <figure class="rv"><blockquote>« Un des meilleurs rapports qualité-prix que j'ai connus sur Airbnb. »</blockquote><figcaption>Valentin</figcaption></figure>
+      <figure class="rv"><blockquote>« Place is nicer than actual pictures, with a great view. My favorite so far in Dakar. »</blockquote><figcaption>Ibrahima</figcaption></figure>
+      <figure class="rv"><blockquote>« Point E is a great area. I really appreciated the location and feeling safe. »</blockquote><figcaption>David · Maryland</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 
 <section class="scent" id="senteurs">
   <div class="hero-s"><img src="img/senteurs-gamme.jpg" alt="Syraa, Weldi, Yobalema, Upendo et Omaad" loading="lazy"></div>
   <div class="wrap">
     <div class="intro">
-      <div class="chap rv">II. Les senteurs</div>
+      <div class="chap rv">II. La boutique</div>
       <p class="quote rv">« L'art de recevoir commence par une délicate attention. »</p>
       <p class="lead rv">Cinq sprays d'ambiance, ceux que vous sentez en entrant dans nos appartements. Un pschitt sur les rideaux ou le canapé, et la maison sent comme chez nous.</p>
     </div>
     <div class="bottles" id="bottles"></div>
+    <div class="more">
+      <div class="k rv" style="text-align:center">La gamme Maison Tinado</div>
+      <h3 class="rv">Fait main au Sénégal, <i>sur commande.</i></h3>
+      <div class="mg">
+        <article class="rv"><div class="n">I</div><b>Diffuseurs &amp; bougies</b><p>Les parfums de la maison en bouquets à bâtonnets et en bougies, pour prolonger l'ambiance chez vous.</p><a class="lk ct" data-msg="Bonjour Maison Tinado, les diffuseurs et bougies parfumées m'intéressent. Quels sont les parfums et les prix ?" href="#">Se renseigner</a></article>
+        <article class="rv"><div class="n">II</div><b>Linge en pagne tissé</b><p>Jetés de lit, coussins et draps en coton, tissés à la main par des artisanes de Dakar. Chaque pièce est unique.</p><a class="lk ct" data-msg="Bonjour Maison Tinado, je suis intéressé(e) par votre linge en pagne tissé (jeté de lit, coussins). Pouvez-vous m'en dire plus ?" href="#">Commander</a></article>
+        <article class="rv"><div class="n">III</div><b>Paniers tressés</b><p>Paniers de vannerie sénégalaise, signés d'une étiquette en cuir Maison Tinado. Pour ranger, offrir, décorer.</p><a class="lk ct" data-msg="Bonjour Maison Tinado, vos paniers tressés m'intéressent. Quels modèles et quels prix ?" href="#">Commander</a></article>
+      </div>
+      <p class="mnote rv">Vous les découvrez dans nos appartements : un QR code près de chaque pièce vous ramène ici.</p>
+    </div>
   </div>
 </section>
 <div class="sbar" id="sbar"><span id="sbt"></span><a class="ct-s" id="sgo" href="#" target="_blank" rel="noopener">Commander</a></div>
@@ -503,12 +554,12 @@ const contact = msg => WA ? `https://wa.me/${WA}?text=` + encodeURIComponent(msg
 
 /* Appartements : ajouter les vraies photos dans le dossier img/ et leur nom dans "photo" ; "prix" ex. "À partir de 45 000 F / nuit" */
 const APTS = [
-  { nom: "Appartement F3 meublé", lieu: "Point E · Dakar", tag: "Quartier calme et sécurisé", prix: "65 000 F / nuit",
+  { nom: "Appartement F3 meublé", lieu: "Point E · Dakar", tag: "★ 4,8 · Vue sur la ville", prix: "65 000 F / nuit",
     photos: ["f3-p-salon", "f3-p-chambre-vue", "f3-p-repas", "f3-p-cuisine", "f3-p-chambre", "f3-p-chambre-bleue", "f3-p-sdb", "f3-p-sdb-2", "f3-p-couloir", "f3-p-detente", "f3-p-cafe", "f3-p-buanderie"],
     infos: ["2 chambres, dont une avec vue sur la ville", "2 salles de douche et WC, 1 toilette visiteur", "Salon et salle à manger spacieux et lumineux", "Cuisine entièrement équipée, machine à café", "Machine à laver, coin détente", "Ménage 2 fois par semaine", "1 place de parking"] },
-  { nom: "Chambre-salon meublée", lieu: "Dakar", tag: "Vue dégagée sur la ville", prix: "À partir de 40 000 F / nuit",
-    photos: ["cs-salon", "cs-repas", "cs-entree", "cs-chambre", "cs-cuisine", "cs-vue", "cs-detail"],
-    infos: ["1 chambre", "Salon avec coin repas", "Cuisine équipée", "Balcon avec vue sur la ville", "Télévision et wifi"] },
+  { nom: "Appartement F2 meublé", lieu: "Point E · Dakar", tag: "★ 5,0 · Coup de cœur des voyageurs", prix: "À partir de 40 000 F / nuit",
+    photos: ["f2-sejour", "f2-chambre", "f2-salon", "f2-entree", "f2-coin-repas", "f2-cuisine", "f2-sdb", "f2-canape", "f2-tv", "f2-chambre-detail", "f2-accueil"],
+    infos: ["1 chambre avec grand lit", "Salon, télévision et wifi", "Coin repas", "Cuisine équipée : four, plaques, micro-ondes", "Salle de douche", "Climatisation", "Kit d'accueil : chaussons et produits de bain"] },
 ];
 
 document.getElementById("apts").innerHTML = APTS.map(a => `
