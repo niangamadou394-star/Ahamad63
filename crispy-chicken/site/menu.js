@@ -3,7 +3,8 @@
 window.CC_INFO = {
   nom: "Crispy Chicken",
   slogan: "Spécialiste Naan, Wings & Tenders",
-  telephone: "",          // à compléter, ex. "01 23 45 67 89"
+  telephone: "07 51 05 36 56",
+  email: "nirobsm4@gmail.com",
   adresse: "",            // à compléter
   ville: "",              // à compléter
   horaires: "",           // à compléter, ex. "Tous les jours · 11h30 – 23h30"

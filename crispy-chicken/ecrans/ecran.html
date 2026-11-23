@@ -90,9 +90,8 @@ const cl = x => Math.max(0, Math.min(1, x)), pr = (t, a, d) => cl((t - a) / d), 
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const group = l => { const m = new Map(); (l || []).forEach(k => m.set(k, (m.get(k) || 0) + 1)); return [...m]; };
 const SCREENS = {
-  naans: [["intro", 4], ["board", 9, { c: "naans" }], ...["Naan Crispy Dynamite", "Naan Mix", "Naan Tikka", "Naan Tenders", "Naan Suprême", "Naan Curry", "Naan Farmer"].map(n => ["spot", 5, { c: "naans", n }]), ["board", 8, { c: "naans" }]],
-  burgers: [["intro", 4], ["board", 8, { c: "burgers", c2: "wraps" }], ...[["burgers", "Crispy Burger"], ["burgers", "Crispy Twice Burger"], ["burgers", "Big Steak Burger"], ["wraps", "Wrap Crispy Star"], ["wraps", "Wrap Tenders"], ["wraps", "Mini Wrap Tenders"]].map(([c, n]) => ["spot", 5, { c, n }]), ["multi", 9, { cs: ["wings", "crousty", "family"] }]],
-  formules: [["intro", 4], ["cards", 9, { c: "formules" }], ["cards", 8, { c: "family", red: true }], ["multi", 10, { cs: ["sides", "desserts", "boissons"] }], ["spot", 6, { c: "formules", n: "Menu Étudiant", promo: true }], ["cards", 7, { c: "formules" }]],
+  naans: [["intro", 4], ["board", 9, { c: "naans" }], ...["Naan Crispy Dynamite", "Naan Mix", "Naan Tikka", "Naan Tenders", "Naan Suprême"].map(n => ["spot", 5, { c: "naans", n }]), ["cards", 9, { c: "formules" }], ["spot", 6, { c: "formules", n: "Menu Étudiant", promo: true }], ["multi", 10, { cs: ["sides", "desserts", "boissons"] }], ["board", 8, { c: "naans" }]],
+  burgers: [["intro", 4], ["board", 8, { c: "burgers", c2: "wraps" }], ...[["burgers", "Crispy Burger"], ["burgers", "Crispy Twice Burger"], ["burgers", "Big Steak Burger"], ["wraps", "Wrap Crispy Star"], ["wraps", "Wrap Tenders"]].map(([c, n]) => ["spot", 5, { c, n }]), ["multi", 9, { cs: ["wings", "crousty", "family"] }], ["cards", 8, { c: "family", red: true }]],
 };
 const KEY = new URLSearchParams(location.search).get("s") || "naans";
 let t0 = 0; const SC = SCREENS[KEY].map(([type, dur, o = {}]) => { const s = { type, dur, o, a: t0 }; t0 += dur; return s; });
