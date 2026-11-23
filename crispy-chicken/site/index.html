@@ -164,7 +164,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .find svg{position:absolute;left:1.1rem;top:50%;width:18px;height:18px;transform:translateY(-50%);stroke:#fff9;fill:none;stroke-width:2}
 .it.hide{display:none}.cat.hide{display:none}
 @media (max-width:760px){.sheet{padding:0;align-items:flex-end}.sheet .box{grid-template-columns:1fr;border-radius:26px 26px 0 0;padding:26px 20px 34px}.sheet .im{min-height:220px}.sheet .im img{max-height:260px}}
-.hp,.mq .tr,.stage .logo,.fi{will-change:transform}
+.hp,.stage .logo,.fi{will-change:transform}
 @media (max-width:760px),(hover:none){
  header.s{backdrop-filter:none;-webkit-backdrop-filter:none;background:#0b0b0bf5}
  .smoke{display:none}.glowp{filter:none}
@@ -172,6 +172,37 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .sheet{backdrop-filter:none;background:#000000e6}
  .it,.sc,.fc{transition:none}
 }
+
+/* burger qui se compose */
+.build{height:320vh;padding:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,#F5B40014,transparent 70%),var(--bg);position:relative}
+.bst{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+.bgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;align-items:center}
+.btx h2{font-size:clamp(2.4rem,4.6vw,4rem);margin:.9rem 0 1rem}
+.btx p{color:var(--muted);max-width:440px}
+.bpr{display:flex;align-items:center;gap:1.4rem;margin-top:1.6rem;flex-wrap:wrap}.bpr .pr{font-family:WH,sans-serif;font-size:2.8rem;color:var(--gold);line-height:1}
+.bbar{margin-top:2rem;height:3px;width:min(260px,60%);background:#ffffff14;border-radius:3px;overflow:hidden}.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold))}
+.bstage{position:relative;aspect-ratio:900/721;width:min(100%,640px);justify-self:center;margin-top:8%}
+.bstage .bl{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 26px 30px #000b);will-change:transform,opacity}
+.bglow{position:absolute;left:10%;right:10%;top:20%;bottom:0;border-radius:50%;background:radial-gradient(circle,#F5B40030,transparent 65%);filter:blur(20px)}
+.lab{position:absolute;display:flex;flex-direction:column;font-size:.8rem;color:#ffffffa8;line-height:1.35;width:210px;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none}
+.lab b{font-family:WH,sans-serif;font-weight:400;font-size:1.25rem;color:#fff;letter-spacing:.3px}
+.lab::before{content:"";position:absolute;top:.75rem;width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.lab.r{left:84%;padding-left:66px}.lab.r::before{left:0}
+.lab.l{right:96%;padding-right:66px;text-align:right;align-items:flex-end}.lab.l::before{right:0;transform:scaleX(-1)}
+.lab.on{opacity:1}
+.bcap{display:none;position:absolute;left:0;right:0;bottom:-2.6rem;text-align:center;font-size:.8rem;color:#ffffffb0;transition:opacity .3s}.bcap b{display:block;font-family:WH,sans-serif;font-weight:400;font-size:1.2rem;color:var(--gold)}
+.fly{position:absolute;width:64px;height:64px;border-radius:50%;object-fit:cover;opacity:0;box-shadow:0 14px 30px #000a;will-change:transform,opacity}
+.f1{left:-6%;top:6%}.f2{right:-4%;top:58%}.f3{left:4%;top:78%}
+@media (max-width:900px){.build{height:300vh}.bgrid{grid-template-columns:1fr;gap:.4rem}.btx{text-align:left}.btx h2{font-size:2.1rem;margin:.5rem 0 .4rem}.btx p{display:none}.bpr{margin-top:.8rem}.bpr .pr{font-size:2.1rem}.bbar{display:none}
+ .bstage{width:min(80vw,400px);margin-top:2.6rem}.lab,.fly{display:none}.bcap{display:block}
+ .btx .btn{min-height:44px;padding:0 1.2rem;font-size:.74rem}}
+
+@media (prefers-reduced-motion:reduce){.build{height:auto}.bst{position:relative;height:auto;padding:90px 0}.lab{opacity:1}}
+/* animations d'apparition plus riches */
+.rv{transition-delay:var(--d,0s)}
+.H .w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);transition:opacity .6s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i)*.06s)}
+.H.in .w,.in .H .w{opacity:1;transform:none}
+@media (hover:hover){.sc,.fc{transform-style:preserve-3d}.sc .ph img,.fc .ph img{transition:transform .6s var(--ease)}.it.has .th img{transition:transform .5s var(--ease)}.it.has:hover .th img{transform:scale(1.12) rotate(-4deg)}}
 </style>
 </head>
 <body>
@@ -199,7 +230,30 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   </div>
 </div></section>
 
-<div class="mq" aria-hidden="true"><div class="tr" id="mq"></div></div>
+<section class="build" id="recette" aria-label="La recette du Crispy Burger"><div class="bst">
+  <div class="wrap bgrid">
+    <div class="btx">
+      <div class="k">La recette signature</div>
+      <h2 class="H">Couche après couche,<br><span class="gold">le Crispy Burger.</span></h2>
+      <p>2 tenders de poulet, une galette de pommes de terre, du cheddar fondant, de la salade fraîche et notre mayonnaise au poivre, entre deux pains briochés au sésame.</p>
+      <div class="bpr"><span class="pr" id="bpr">7,90 €</span><a class="btn btn-gold" href="#carte">Voir la carte</a></div>
+      <div class="bbar"><i id="bbar"></i></div>
+    </div>
+    <div class="bstage" id="bstage">
+      <div class="bglow"></div>
+      <img class="bl" data-l="3" src="img/build/bas.webp" alt="">
+      <img class="bl" data-l="2" src="img/build/poulet.webp" alt="">
+      <img class="bl" data-l="1" src="img/build/salade.webp" alt="">
+      <img class="bl" data-l="0" src="img/build/top.webp" alt="Crispy Burger">
+      <span class="lab r" data-l="0"><b>Pain brioché</b>au sésame, toasté</span>
+      <span class="lab r" data-l="1"><b>Salade fraîche</b>& mayonnaise au poivre</span>
+      <span class="lab r" data-l="2"><b>2 tenders croustillants</b>galette de pommes de terre & cheddar</span>
+      <span class="lab r" data-l="3"><b>Pain du bas</b>& sauce maison</span>
+      <div class="bcap" id="bcap"></div>
+      <img class="fly f1" src="img/ing/salade.webp" alt=""><img class="fly f2" src="img/ing/cheddar.webp" alt=""><img class="fly f3" src="img/ing/tender.webp" alt="">
+    </div>
+  </div>
+</div></section>
 
 <section class="sig" id="signatures"><div class="wrap">
   <div class="head"><div><div class="k rv">Nos signatures</div><h2 class="H rv">Les incontournables<br><span class="gold">de la maison.</span></h2></div>
@@ -240,7 +294,7 @@ const cat = id => M.find(c => c.id === id);
 /* ingrédients regroupés : 3 tenders -> « 3 × Tender » */
 const group = list => { const m = new Map(); (list || []).forEach(k => m.set(k, (m.get(k) || 0) + 1)); return [...m]; };
 
-$("mq").innerHTML = Array(2).fill(["100 % poulet halal", "Naan au tandoor", "Wings", "Tenders", "Crousty", "Burgers", "Wraps", "Family packs"].map(t => `<span>${t}</span>`).join("")).join("");
+
 
 /* signatures */
 const SIG = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["wraps", "Wrap Crispy Star"]];
@@ -287,6 +341,42 @@ document.addEventListener("click", e => { const el = e.target.closest("[data-n]"
 /* recherche instantanée */
 $("q").addEventListener("input", e => { const q = e.target.value.trim().toLowerCase();
   document.querySelectorAll(".cat").forEach(c => { let any = false; c.querySelectorAll(".it").forEach(it => { const ok = !q || it.textContent.toLowerCase().includes(q); it.classList.toggle("hide", !ok); any ||= ok; }); c.classList.toggle("hide", !any); }); });
+
+
+/* burger qui se compose au défilement */
+(() => { const sec = $("recette"), st = $("bstage"), L = [...st.querySelectorAll(".bl")], LAB = [...st.querySelectorAll(".lab")], FL = [...st.querySelectorAll(".fly")], bar = $("bbar");
+  const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => cl((p - a) / (b - a));
+  const outBack = t => { const c = 1.5; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+  const order = [3, 2, 1, 0]; /* le pain du bas arrive en premier */
+  const gapK = [-1.5, -0.5, 0.5, 1.5];
+  function frame() {
+    const r = sec.getBoundingClientRect(), H = st.offsetHeight, tot = sec.offsetHeight - innerHeight;
+    const p = RM ? 1 : cl(-r.top / tot);
+    const G = H * (innerWidth < 900 ? 0.085 : 0.13);
+    const comp = 1 - seg(p, 0.66, 0.86);            /* écartement puis compression finale */
+    L.forEach(img => { const l = +img.dataset.l, k = order.indexOf(l), t = seg(p, 0.0 + k * 0.13, 0.14 + k * 0.13);
+      const y = -(1 - outBack(t)) * innerHeight * 0.75 + gapK[l] * G * comp, rot = (1 - t) * (l % 2 ? -6 : 6);
+      img.style.opacity = t > 0 ? Math.min(1, t * 3) : 0; img.style.transform = `translate3d(0,${y}px,0) rotate(${rot}deg)`; });
+    LAB.forEach(lb => { const l = +lb.dataset.l, k = order.indexOf(l); const on = p > 0.1 + k * 0.13 && p < 0.7;
+      lb.classList.toggle("on", RM || on); lb.style.top = `calc(${[10, 34, 50, 70][l]}% + ${gapK[l] * G * comp}px)`; });
+    FL.forEach((f, i) => { const t = seg(p, 0.1 + i * 0.12, 0.5 + i * 0.12); f.style.opacity = t > 0 && t < 1 ? Math.sin(t * Math.PI) : 0; f.style.transform = `translate3d(${(i - 1) * 40 * t}px,${-160 * t}px,0) rotate(${t * 220}deg)`; });
+    let cur = -1; order.forEach((l, k) => { if (p > 0.1 + k * 0.13) cur = l; });
+    const cap = $("bcap"), lb = cur >= 0 && p < 0.7 ? LAB.find(x => +x.dataset.l === cur) : null;
+    if (lb) { if (cap.dataset.l != cur) { cap.innerHTML = lb.innerHTML.replace("</b>", "</b> "); cap.dataset.l = cur; } cap.style.opacity = 1; } else cap.style.opacity = p >= 0.7 ? 0 : 0;
+    bar.style.width = p * 100 + "%";
+  }
+  let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; frame(); }); }, { passive: true });
+  addEventListener("resize", frame); frame();
+})();
+/* titres : apparition mot par mot */
+document.querySelectorAll("h2.H").forEach(h => { if (h.closest(".build")) return; let i = 0;
+  const walk = n => [...n.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) f.append(w); else { const s = document.createElement("span"); s.className = "w"; s.style.setProperty("--i", i++); s.textContent = w; f.append(s); } }); c.replaceWith(f); } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c); });
+  walk(h); });
+/* apparitions en cascade dans les grilles */
+document.querySelectorAll(".sg,.items,.fg,.fam,.ig").forEach(g => [...g.children].forEach((c, i) => c.style.setProperty("--d", Math.min(i, 8) * 0.07 + "s")));
+/* inclinaison 3D au survol */
+if (matchMedia("(hover:hover)").matches) document.querySelectorAll(".sc,.fc").forEach(c => { c.addEventListener("mousemove", e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) translateY(-4px)`; }); c.addEventListener("mouseleave", () => c.style.transform = ""); });
 
 /* onglets actifs + animations */
 const hd = $("hd"); addEventListener("scroll", () => hd.classList.toggle("s", scrollY > 30), { passive: true });
