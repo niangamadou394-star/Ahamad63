@@ -50,10 +50,37 @@ body{width:1920px;height:1080px;overflow:hidden;background:#121212;color:#fff;fo
 .emb{position:absolute;inset:0;pointer-events:none;z-index:6}
 .emb i{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFD84D;box-shadow:0 0 12px 3px #F5B40088}
 .smk{position:absolute;width:110px;height:200px;border-radius:50%;background:radial-gradient(ellipse,#ffffff26,transparent 70%);filter:blur(16px);pointer-events:none;z-index:4}
+
+/* --- premium --- */
+.frame{position:absolute;inset:18px;border:1.5px solid #F5B40040;border-radius:14px;z-index:7;pointer-events:none}
+.frame::before,.frame::after{content:"";position:absolute;width:70px;height:70px;border:3px solid #F5B400}
+.frame::before{left:-3px;top:-3px;border-right:0;border-bottom:0;border-radius:14px 0 0 0}
+.frame::after{right:-3px;bottom:-3px;border-left:0;border-top:0;border-radius:0 0 14px 0}
+.wm{position:absolute;right:-260px;bottom:-300px;width:1000px;height:1000px;opacity:.06;z-index:1;filter:grayscale(1) brightness(2)}
+.corner{right:40px;top:30px}
+.corner .ring{position:absolute;inset:-10px;border-radius:50%;border:2px solid #F5B400;opacity:0}
+.corner img{width:120px;height:120px}
+.ttl em{background:linear-gradient(180deg,#FF5A47,#D41A10);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #0007)}
+.ttl{text-shadow:none;filter:drop-shadow(0 6px 0 #0006)}
+.shine{position:absolute;inset:0;z-index:6;pointer-events:none;background:linear-gradient(105deg,transparent 40%,#ffffff12 48%,#ffffff26 50%,#ffffff12 52%,transparent 60%);background-size:300% 100%}
+/* séquence logo */
+.lg{position:absolute;inset:0;z-index:5;display:grid;place-items:center;opacity:0;visibility:hidden;background:radial-gradient(circle at 50% 46%,#2a1d00 0%,#0d0d0d 55%,#070707 100%)}
+.lg .rays{position:absolute;left:50%;top:44%;width:2400px;height:2400px;margin:-1200px 0 0 -1200px;background:repeating-conic-gradient(from 0deg,#F5B40016 0deg 6deg,transparent 6deg 18deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 10%,transparent 60%);mask:radial-gradient(circle,#000 10%,transparent 60%)}
+.lg .hal{position:absolute;left:50%;top:44%;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,#F5B40055,transparent 62%);filter:blur(10px)}
+.lg .ring2{position:absolute;left:50%;top:44%;border-radius:50%;border:3px solid #F5B400}
+.lg .in{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:-40px}
+.lg .in img{width:420px;height:420px;filter:drop-shadow(0 30px 50px #000) drop-shadow(0 0 60px #F5B40055)}
+.lg .wd{font-family:WH;font-size:120px;line-height:1;margin-top:26px;letter-spacing:2px;white-space:nowrap}
+.lg .wd span{display:inline-block}
+.lg .wd .g{background:linear-gradient(180deg,#FFE27A,#F5B400 55%,#C97A00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg .tl{font-family:Cond;font-size:30px;letter-spacing:.55em;color:#ffffffc0;margin-top:22px;display:flex;align-items:center;gap:26px}
+.lg .tl::before,.lg .tl::after{content:"";width:90px;height:2px;background:linear-gradient(90deg,transparent,#F5B400)}.lg .tl::after{transform:scaleX(-1)}
 </style></head><body>
 <div class="bg"><div class="cloud"></div><div class="slate"></div><div class="brick"></div></div>
-<div class="corner"><img src="../site/img/icone.svg" alt=""></div>
+<img class="wm" id="wm" src="../site/img/icone.svg" alt=""><div class="corner"><span class="ring" id="cring"></span><img id="cimg" src="../site/img/icone.svg" alt=""></div><div class="frame"></div><div class="shine" id="shine"></div>
 <div id="pages"></div>
+<div class="lg" id="lg"><div class="rays"></div><div class="hal"></div><div class="ring2" id="r1"></div><div class="ring2" id="r2"></div>
+<div class="in"><img id="lgi" src="../site/img/icone.svg" alt=""><div class="wd" id="lgw">Crispy <span class="g">Chicken</span></div><div class="tl" id="lgt">NAAN · WINGS · TENDERS</div></div></div>
 <div class="emb" id="emb"></div>
 <div class="wipe" id="wipe"></div>
 <div class="vig"></div>
@@ -102,17 +129,19 @@ const PAGES = {
   ]
 };
 const KEY = new URLSearchParams(location.search).get("s") || "naans";
-const PD = 15, P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); el.className = "page"; el.innerHTML = f(); $("pages").appendChild(el);
+const PD = 15, LD = 3.2, SEG = PD + LD, P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); el.className = "page"; el.innerHTML = f(); $("pages").appendChild(el);
   const q = s => [...el.querySelectorAll(`[data-a="${s}"]`)];
-  return { el, a: i * PD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
-const T0 = P.length * PD; window.DURATION = T0;
+  return { el, a: i * SEG + LD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
+const T0 = P.length * SEG; window.DURATION = T0;
 /* fumée au-dessus des produits mis en avant */
 P.forEach(pg => pg.spots.forEach(c => { for (let j = 0; j < 2; j++) { const s = document.createElement("div"); s.className = "smk"; c.querySelector(".ph").appendChild(s); s.style.left = (30 + j * 30) + "%"; s.style.top = "-10%"; pg.smk.push([s, c, j]); } }));
 const EMB = [...Array(30)].map((_, i) => { const e = document.createElement("i"); $("emb").appendChild(e); const r = n => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); }; return { e, x: r(1) * 1920, sp: 40 + r(2) * 70, ph: r(3), sz: .5 + r(4), sw: 20 + r(5) * 40 }; });
+const LW = $("lgw"); LW.innerHTML = "Crispy".split("").map(c => `<span>${c}</span>`).join("") + "&nbsp;" + "Chicken".split("").map(c => `<span class="g">${c}</span>`).join("");
+const LS = [...LW.querySelectorAll("span")];
 function render(t) {
   t = ((t % T0) + T0) % T0;
   P.forEach((pg, pi) => {
-    let u = t - pg.a; if (u < 0) u += T0; if (u >= PD) { pg.el.style.visibility = "hidden"; return; }
+    let u = t - pg.a; if (u < 0) u += T0; if (u >= PD || u < 0) { pg.el.style.visibility = "hidden"; return; }
     const out = pr(u, PD - .55, .55); pg.el.style.visibility = "visible"; pg.el.style.opacity = 1 - out;
     pg.el.style.transform = `scale(${1 + out * .04})`;
     pg.titles.forEach((e, j) => { const k = eo(pr(u, .35 + j * .35, 1.1)); e.style.clipPath = `inset(-20% ${100 - k * 100}% -30% -5%)`; e.style.transform = `translateY(${(1 - k) * 12}px) rotate(${(1 - k) * -2}deg)`; });
@@ -131,8 +160,26 @@ function render(t) {
     pg.tags.forEach((e, j) => { const k = eob(pr(u, 1.2 + j * .05, .5)); e.style.scale = String(.4 + .6 * k); e.style.opacity = cl(k * 2);
       const sh = ((u * .45 + j * .13) % 2.2); e.style.setProperty("--sh", (-60 + sh * 110) + "%"); });
   });
+
+  /* séquence logo */
+  { let lu = -1; for (let i = 0; i < P.length; i++) { const v = t - i * SEG; if (v >= -0.4 && v < LD) lu = v; } if (t > T0 - .4) lu = t - T0;
+    const L = $("lg");
+    if (lu < -0.4 || lu >= LD) { L.style.visibility = "hidden"; L.style.opacity = 0; }
+    else { L.style.visibility = "visible"; L.style.opacity = cl((lu + .4) / .4) * (1 - pr(lu, LD - .35, .35));
+      const k = eob(pr(lu, .05, .9)); $("lgi").style.transform = `scale(${.3 + .7 * k}) rotate(${(1 - cl(k)) * -200}deg)`; $("lgi").style.opacity = cl(k * 2);
+      LS.forEach((s, j) => { const q = eob(pr(lu, .7 + j * .045, .5)); s.style.opacity = cl(q * 2); s.style.transform = `translateY(${(1 - q) * 60}px) rotate(${(1 - cl(q)) * 12}deg)`; });
+      const tq = eo(pr(lu, 1.45, .6)); $("lgt").style.opacity = tq; $("lgt").style.letterSpacing = (.9 - .35 * tq) + "em";
+      L.querySelector(".rays").style.transform = `rotate(${lu * 14}deg) scale(${.8 + .2 * eo(pr(lu, 0, 1))})`;
+      L.querySelector(".hal").style.opacity = .6 + .4 * Math.sin(lu * 3);
+      ["r1", "r2"].forEach((id, j) => { const q = pr(lu, .35 + j * .35, 1.4), s = 440 + q * 900; const r = $(id); r.style.width = r.style.height = s + "px"; r.style.margin = `${-s / 2}px 0 0 ${-s / 2}px`; r.style.opacity = (1 - q) * .8 * (q > 0); });
+      L.querySelector(".in").style.transform = `scale(${1 + pr(lu, 1.6, 1.6) * .05})`; } }
+  /* logo du coin, filigrane, reflet */
+  $("cimg").style.transform = `rotate(${Math.sin(t * .6) * 4}deg) scale(${1 + Math.max(0, Math.sin(t * 1.6)) * .04})`;
+  { const q = (t % 4) / 4; $("cring").style.opacity = (1 - q) * .8; $("cring").style.transform = `scale(${1 + q * .6})`; }
+  $("wm").style.transform = `rotate(${t * 3}deg)`;
+  $("shine").style.backgroundPosition = `${150 - ((t % 7) / 7) * 300}% 0`;
   /* volet doré entre deux pages */
-  const pu = t % PD, w = pr(pu, PD - .45, .9) || (pu < .45 ? pr(pu + PD, PD - .45, .9) : 0);
+  const pu = t % SEG, w = pu > LD - .45 && pu < LD + .45 ? pr(pu, LD - .45, .9) : 0;
   $("wipe").style.left = (-700 + w * 3400) + "px"; $("wipe").style.opacity = w > 0 && w < 1 ? .95 : 0;
   EMB.forEach(m => { const y = 1080 - ((t * m.sp + m.ph * 1300) % 1300); const life = cl((1080 - y) / 1080); m.e.style.transform = `translate(${m.x + Math.sin(t * .8 + m.ph * 9) * m.sw}px,${y}px) scale(${m.sz})`; m.e.style.opacity = Math.sin(life * Math.PI) * .5; });
 }
