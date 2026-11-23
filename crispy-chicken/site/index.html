@@ -173,31 +173,24 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .it,.sc,.fc{transition:none}
 }
 
-/* burger qui se compose */
-.build{height:320vh;padding:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,#F5B40014,transparent 70%),var(--bg);position:relative}
-.bst{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
-.bgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;align-items:center}
-.btx h2{font-size:clamp(2.4rem,4.6vw,4rem);margin:.9rem 0 1rem}
-.btx p{color:var(--muted);max-width:440px}
-.bpr{display:flex;align-items:center;gap:1.4rem;margin-top:1.6rem;flex-wrap:wrap}.bpr .pr{font-family:WH,sans-serif;font-size:2.8rem;color:var(--gold);line-height:1}
-.bbar{margin-top:2rem;height:3px;width:min(260px,60%);background:#ffffff14;border-radius:3px;overflow:hidden}.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold))}
-.bstage{position:relative;aspect-ratio:900/721;width:min(100%,640px);justify-self:center;margin-top:8%}
-.bstage .bl{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 26px 30px #000b);will-change:transform,opacity}
-.bglow{position:absolute;left:10%;right:10%;top:20%;bottom:0;border-radius:50%;background:radial-gradient(circle,#F5B40030,transparent 65%);filter:blur(20px)}
-.lab{position:absolute;display:flex;flex-direction:column;font-size:.8rem;color:#ffffffa8;line-height:1.35;width:210px;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none}
-.lab b{font-family:WH,sans-serif;font-weight:400;font-size:1.25rem;color:#fff;letter-spacing:.3px}
-.lab::before{content:"";position:absolute;top:.75rem;width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
-.lab.r{left:84%;padding-left:66px}.lab.r::before{left:0}
-.lab.l{right:96%;padding-right:66px;text-align:right;align-items:flex-end}.lab.l::before{right:0;transform:scaleX(-1)}
-.lab.on{opacity:1}
-.bcap{display:none;position:absolute;left:0;right:0;bottom:-2.6rem;text-align:center;font-size:.8rem;color:#ffffffb0;transition:opacity .3s}.bcap b{display:block;font-family:WH,sans-serif;font-weight:400;font-size:1.2rem;color:var(--gold)}
-.fly{position:absolute;width:64px;height:64px;border-radius:50%;object-fit:cover;opacity:0;box-shadow:0 14px 30px #000a;will-change:transform,opacity}
-.f1{left:-6%;top:6%}.f2{right:-4%;top:58%}.f3{left:4%;top:78%}
-@media (max-width:900px){.build{height:300vh}.bgrid{grid-template-columns:1fr;gap:.4rem}.btx{text-align:left}.btx h2{font-size:2.1rem;margin:.5rem 0 .4rem}.btx p{display:none}.bpr{margin-top:.8rem}.bpr .pr{font-size:2.1rem}.bbar{display:none}
- .bstage{width:min(80vw,400px);margin-top:2.6rem}.lab,.fly{display:none}.bcap{display:block}
- .btx .btn{min-height:44px;padding:0 1.2rem;font-size:.74rem}}
-
-@media (prefers-reduced-motion:reduce){.build{height:auto}.bst{position:relative;height:auto;padding:90px 0}.lab{opacity:1}}
+/* vitrine horizontale */
+.show{height:340vh;padding:0;position:relative;background:radial-gradient(ellipse 60% 50% at 50% 60%,#F5B40012,transparent 70%),var(--bg)}
+.sst{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.shd{position:relative;z-index:2;margin-bottom:2rem}.shd h2{font-size:clamp(2.4rem,5vw,4.2rem);margin-top:.8rem}
+.bigt{position:absolute;left:0;top:50%;transform:translateY(-30%);white-space:nowrap;pointer-events:none;z-index:0}
+.bigt span{display:inline-block;font-family:WH,sans-serif;font-size:clamp(7rem,17vw,15rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px #ffffff14;will-change:transform}
+.trk{position:relative;z-index:1;display:flex;gap:clamp(34px,4.5vw,70px);padding-left:max(20px,calc((100vw - 1220px)/2));will-change:transform}
+.scd{flex:none;width:clamp(250px,26vw,360px);border-radius:28px;padding:22px 22px 24px;background:linear-gradient(170deg,#1c1c1c,#0f0f0f);border:1px solid var(--line);cursor:pointer;position:relative;transform-origin:50% 80%;will-change:transform}
+.scd::after{content:"";position:absolute;inset:auto 12% -1px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
+.scd .ph{height:clamp(200px,24vw,300px);display:grid;place-items:center}.scd .ph img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 26px 30px #000c);will-change:transform}
+.scd small,.scd h3,.scd .pr{position:relative;z-index:2}.scd .ph{position:relative;z-index:1}
+.scd small{display:block;font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-top:.8rem}
+.scd h3{font-size:1.9rem;margin:.3rem 0 .2rem}.scd .pr{font-family:WH,sans-serif;font-size:2rem;color:var(--gold)}
+.scd .go{position:absolute;right:20px;bottom:24px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#140f05;font-weight:900;font-size:1.3rem;transition:transform .3s var(--ease)}.scd:hover .go{transform:rotate(-45deg) scale(1.08)}
+.shint{display:flex;align-items:center;gap:14px;margin-top:2rem;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:#ffffff80;position:relative;z-index:2}
+.sbar{width:160px;height:3px;border-radius:3px;background:#ffffff14;overflow:hidden}.sbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold))}
+@media (max-width:760px){.show{height:300vh}.shd{margin-bottom:1.2rem}.scd{width:70vw;padding:18px}.scd .ph{height:52vw}.scd h3{font-size:1.6rem}}
+@media (prefers-reduced-motion:reduce){.show{height:auto}.sst{position:relative;height:auto;padding:90px 0}.trk{overflow-x:auto}}
 /* animations d'apparition plus riches */
 .rv{transition-delay:var(--d,0s)}
 .H .w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);transition:opacity .6s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i)*.06s)}
@@ -230,29 +223,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   </div>
 </div></section>
 
-<section class="build" id="recette" aria-label="La recette du Crispy Burger"><div class="bst">
-  <div class="wrap bgrid">
-    <div class="btx">
-      <div class="k">La recette signature</div>
-      <h2 class="H">Couche après couche,<br><span class="gold">le Crispy Burger.</span></h2>
-      <p>2 tenders de poulet, une galette de pommes de terre, du cheddar fondant, de la salade fraîche et notre mayonnaise au poivre, entre deux pains briochés au sésame.</p>
-      <div class="bpr"><span class="pr" id="bpr">7,90 €</span><a class="btn btn-gold" href="#carte">Voir la carte</a></div>
-      <div class="bbar"><i id="bbar"></i></div>
-    </div>
-    <div class="bstage" id="bstage">
-      <div class="bglow"></div>
-      <img class="bl" data-l="3" src="img/build/bas.webp" alt="">
-      <img class="bl" data-l="2" src="img/build/poulet.webp" alt="">
-      <img class="bl" data-l="1" src="img/build/salade.webp" alt="">
-      <img class="bl" data-l="0" src="img/build/top.webp" alt="Crispy Burger">
-      <span class="lab r" data-l="0"><b>Pain brioché</b>au sésame, toasté</span>
-      <span class="lab r" data-l="1"><b>Salade fraîche</b>& mayonnaise au poivre</span>
-      <span class="lab r" data-l="2"><b>2 tenders croustillants</b>galette de pommes de terre & cheddar</span>
-      <span class="lab r" data-l="3"><b>Pain du bas</b>& sauce maison</span>
-      <div class="bcap" id="bcap"></div>
-      <img class="fly f1" src="img/ing/salade.webp" alt=""><img class="fly f2" src="img/ing/cheddar.webp" alt=""><img class="fly f3" src="img/ing/tender.webp" alt="">
-    </div>
-  </div>
+<section class="show" id="stars" aria-label="Nos produits stars"><div class="sst">
+  <div class="bigt" aria-hidden="true"><span id="bigt">CRISPY · CHICKEN · NAAN · WINGS · TENDERS · CRISPY · CHICKEN · NAAN · WINGS · TENDERS ·</span></div>
+  <div class="wrap shd"><div class="k rv">Nos stars</div><h2 class="H rv">Choisis ton <span class="gold">crispy.</span></h2></div>
+  <div class="trk" id="trk"></div>
+  <div class="wrap shint"><span class="sbar"><i id="sbar"></i></span><span>Faites défiler</span></div>
 </div></section>
 
 <section class="sig" id="signatures"><div class="wrap">
@@ -343,34 +318,20 @@ $("q").addEventListener("input", e => { const q = e.target.value.trim().toLowerC
   document.querySelectorAll(".cat").forEach(c => { let any = false; c.querySelectorAll(".it").forEach(it => { const ok = !q || it.textContent.toLowerCase().includes(q); it.classList.toggle("hide", !ok); any ||= ok; }); c.classList.toggle("hide", !any); }); });
 
 
-/* burger qui se compose au défilement */
-(() => { const sec = $("recette"), st = $("bstage"), L = [...st.querySelectorAll(".bl")], LAB = [...st.querySelectorAll(".lab")], FL = [...st.querySelectorAll(".fly")], bar = $("bbar");
-  const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), seg = (p, a, b) => cl((p - a) / (b - a));
-  const outBack = t => { const c = 1.5; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
-  const order = [3, 2, 1, 0]; /* le pain du bas arrive en premier */
-  const gapK = [-1.5, -0.5, 0.5, 1.5];
-  function frame() {
-    const r = sec.getBoundingClientRect(), H = st.offsetHeight, tot = sec.offsetHeight - innerHeight;
-    const p = RM ? 1 : cl(-r.top / tot);
-    const G = H * (innerWidth < 900 ? 0.085 : 0.13);
-    const comp = 1 - seg(p, 0.66, 0.86);            /* écartement puis compression finale */
-    L.forEach(img => { const l = +img.dataset.l, k = order.indexOf(l), t = seg(p, 0.0 + k * 0.13, 0.14 + k * 0.13);
-      const y = -(1 - outBack(t)) * innerHeight * 0.75 + gapK[l] * G * comp, rot = (1 - t) * (l % 2 ? -6 : 6);
-      img.style.opacity = t > 0 ? Math.min(1, t * 3) : 0; img.style.transform = `translate3d(0,${y}px,0) rotate(${rot}deg)`; });
-    LAB.forEach(lb => { const l = +lb.dataset.l, k = order.indexOf(l); const on = p > 0.1 + k * 0.13 && p < 0.7;
-      lb.classList.toggle("on", RM || on); lb.style.top = `calc(${[10, 34, 50, 70][l]}% + ${gapK[l] * G * comp}px)`; });
-    FL.forEach((f, i) => { const t = seg(p, 0.1 + i * 0.12, 0.5 + i * 0.12); f.style.opacity = t > 0 && t < 1 ? Math.sin(t * Math.PI) : 0; f.style.transform = `translate3d(${(i - 1) * 40 * t}px,${-160 * t}px,0) rotate(${t * 220}deg)`; });
-    let cur = -1; order.forEach((l, k) => { if (p > 0.1 + k * 0.13) cur = l; });
-    const cap = $("bcap"), lb = cur >= 0 && p < 0.7 ? LAB.find(x => +x.dataset.l === cur) : null;
-    if (lb) { if (cap.dataset.l != cur) { cap.innerHTML = lb.innerHTML.replace("</b>", "</b> "); cap.dataset.l = cur; } cap.style.opacity = 1; } else cap.style.opacity = p >= 0.7 ? 0 : 0;
-    bar.style.width = p * 100 + "%";
-  }
-  let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; frame(); }); }, { passive: true });
-  addEventListener("resize", frame); frame();
+/* vitrine horizontale pilotée par le défilement */
+(() => { const STAR = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["naans", "Naan Tenders"], ["wraps", "Wrap Crispy Star"], ["naans", "Naan Mix"], ["wings", "10 Wings"], ["family", "Family Box Tenders"], ["naans", "Naan Suprême"]];
+  $("trk").innerHTML = STAR.map(([c, n]) => { const it = cat(c).items.find(x => x.n === n); return `<article class="scd" data-n="${esc(it.n)}"><div class="ph"><img src="img/p/${it.img}.webp" alt="${esc(it.n)}" loading="lazy"></div><small>${esc(cat(c).titre)}</small><h3 class="H">${esc(it.n)}</h3><div class="pr">${P(it.p)}</div><span class="go">→</span></article>`; }).join("");
+  const sec = $("stars"), trk = $("trk"), cards = [...trk.children], big = $("bigt"), bar = $("sbar"), RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function frame() { if (RM) return; const r = sec.getBoundingClientRect(), tot = sec.offsetHeight - innerHeight, p = Math.min(1, Math.max(0, -r.top / tot));
+    const max = trk.scrollWidth - innerWidth + Math.max(20, (innerWidth - 1220) / 2); trk.style.transform = `translate3d(${-p * max}px,0,0)`;
+    big.style.transform = `translate3d(${-p * innerWidth * .6}px,0,0)`; bar.style.width = p * 100 + "%";
+    const cx = innerWidth / 2; cards.forEach(c => { const b = c.getBoundingClientRect(), d = (b.left + b.width / 2 - cx) / innerWidth, ad = Math.min(1, Math.abs(d) * 1.6);
+      c.style.transform = `translateY(${ad * 40}px) rotate(${d * 4}deg) scale(${1 - ad * .08})`; c.style.opacity = 1 - ad * .45;
+      c.querySelector("img").style.transform = `translateX(${-d * 30}px) rotate(${-d * 10}deg) scale(${1 - ad * .1})`; }); }
+  let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; frame(); }); }, { passive: true }); addEventListener("resize", frame); frame();
 })();
 /* titres : apparition mot par mot */
-document.querySelectorAll("h2.H").forEach(h => { if (h.closest(".build")) return; let i = 0;
+document.querySelectorAll("h2.H").forEach(h => { let i = 0;
   const walk = n => [...n.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) f.append(w); else { const s = document.createElement("span"); s.className = "w"; s.style.setProperty("--i", i++); s.textContent = w; f.append(s); } }); c.replaceWith(f); } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c); });
   walk(h); });
 /* apparitions en cascade dans les grilles */
