@@ -75,10 +75,28 @@ body{width:1920px;height:1080px;overflow:hidden;background:#0a0a0a;color:#fff;fo
 .spot .txt{top:180px!important}.spot .H.nm{font-size:128px!important;margin:16px 0 20px!important}.spot .ds{font-size:28px!important}
 .chip{font-size:18px!important;padding:6px 14px 6px 6px!important}.chip i{width:36px!important;height:36px!important}.chip i svg{width:26px!important;height:26px!important}
 .seal{margin-top:36px!important}.cards .card{padding:30px 32px!important}.cards .card .H{font-size:54px!important}.cards .card .p{font-size:72px!important;margin-top:10px!important}.cards .card p{min-height:56px!important;font-size:21px!important}
+
+/* scène : le burger se compose */
+.build .stg{position:absolute;left:170px;top:250px;width:900px;height:721px}
+.build .stg .bl{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 40px 40px #000c)}
+.build .bglow{position:absolute;left:90px;right:90px;top:180px;bottom:-40px;border-radius:50%;background:radial-gradient(circle,#F5B40038,transparent 62%);filter:blur(30px)}
+.build .bfloor{position:absolute;left:180px;right:180px;bottom:120px;height:60px;border-radius:50%;background:radial-gradient(ellipse,#000d,transparent 70%)}
+.build .lb{position:absolute;left:880px;display:flex;align-items:center;gap:22px;white-space:nowrap}
+.build .lb .ln{width:150px;height:3px;background:linear-gradient(90deg,transparent,#F5B400);transform-origin:left}
+.build .lb .dot{width:16px;height:16px;border-radius:50%;background:#F5B400;box-shadow:0 0 0 6px #F5B40033}
+.build .lb div b{display:block;font-family:WH;font-weight:400;font-size:46px;line-height:1;color:#fff}
+.build .lb div small{font-size:22px;font-weight:600;color:#ffffff99}
+.build .tx{position:absolute;left:1130px;top:300px;width:700px}
+.build .tx .H{font-size:110px;margin-top:22px}
+.build .tx .ds{font-size:26px;color:#ffffffa6;margin-top:22px;font-weight:600;line-height:1.4}
+.build .hd{position:absolute;left:1090px;top:170px}
+.build .hd .H{font-size:64px;margin-top:10px}
+.emb{position:absolute;inset:0;pointer-events:none;z-index:3}
+.emb i{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFD84D;box-shadow:0 0 12px 3px #F5B40088}
 </style></head><body>
 <div class="bgfx"></div><div class="grain"></div>
 <div class="top" id="top"><div class="b"><img src="../site/img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></div><div style="display:flex;align-items:center;gap:30px"><div class="tg">Spécialiste Naan · Wings · Tenders</div><div style="border:2px solid #F5B400;color:#F5B400;border-radius:999px;padding:10px 22px;font-weight:800;font-size:20px;letter-spacing:.16em">100 % HALAL</div></div></div>
-<div id="scenes"></div>
+<div id="scenes"></div><div class="emb" id="emb"></div>
 <div class="prog"><i id="pg"></i></div>
 <script src="../site/menu.js"></script>
 <script>window.CC_IMG_BASE="../site/img/"</script>
@@ -91,7 +109,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "
 const group = l => { const m = new Map(); (l || []).forEach(k => m.set(k, (m.get(k) || 0) + 1)); return [...m]; };
 const SCREENS = {
   naans: [["intro", 4], ["board", 9, { c: "naans" }], ...["Naan Crispy Dynamite", "Naan Mix", "Naan Tikka", "Naan Tenders", "Naan Suprême"].map(n => ["spot", 5, { c: "naans", n }]), ["cards", 9, { c: "formules" }], ["spot", 6, { c: "formules", n: "Menu Étudiant", promo: true }], ["multi", 10, { cs: ["sides", "desserts", "boissons"] }], ["board", 8, { c: "naans" }]],
-  burgers: [["intro", 4], ["board", 8, { c: "burgers", c2: "wraps" }], ...[["burgers", "Crispy Burger"], ["burgers", "Crispy Twice Burger"], ["burgers", "Big Steak Burger"], ["wraps", "Wrap Crispy Star"], ["wraps", "Wrap Tenders"]].map(([c, n]) => ["spot", 5, { c, n }]), ["multi", 9, { cs: ["wings", "crousty", "family"] }], ["cards", 8, { c: "family", red: true }]],
+  burgers: [["intro", 4], ["board", 8, { c: "burgers", c2: "wraps" }], ["build", 11, { c: "burgers", n: "Crispy Burger" }], ...[["burgers", "Crispy Twice Burger"], ["burgers", "Big Steak Burger"], ["wraps", "Wrap Crispy Star"], ["wraps", "Wrap Tenders"]].map(([c, n]) => ["spot", 5, { c, n }]), ["multi", 9, { cs: ["wings", "crousty", "family"] }], ["cards", 8, { c: "family", red: true }]],
 };
 const KEY = new URLSearchParams(location.search).get("s") || "naans";
 let t0 = 0; const SC = SCREENS[KEY].map(([type, dur, o = {}]) => { const s = { type, dur, o, a: t0 }; t0 += dur; return s; });
@@ -111,6 +129,11 @@ SC.forEach((s, i) => {
   if (s.type === "cards") { const c = cat(s.o.c);
     el.innerHTML = `<div class="board"><div class="k">${s.o.red ? "À partager" : "Nos formules"}</div><h2 class="H">${s.o.red ? `Family <span class="gold">Packs</span>` : `Nos <span class="gold">formules</span>`}</h2>${c.sous ? `<div class="sub">${esc(c.sous)}</div>` : ""}
       <div class="cards" style="grid-template-columns:repeat(${c.items.length},1fr)">${c.items.map(x => `<div class="card ${s.o.red ? "red" : ""}">${x.img ? `<div class="cph"><img src="../site/img/p/${x.img}.webp"></div>` : ""}<div class="H">${esc(x.n)}</div><p>${esc(x.d || "")}</p><div class="p">${P(x.p)}</div></div>`).join("")}</div></div>`; }
+  if (s.type === "build") { const it = item(s.o.c, s.o.n);
+    const LB = [["Pain brioché", "au sésame, toasté"], ["Salade fraîche", "& mayonnaise au poivre"], ["2 tenders croustillants", "galette de pommes de terre & cheddar"], ["Pain du bas", "& sauce maison"]];
+    el.innerHTML = `<div class="hd"><div class="k">Couche après couche</div></div><div class="bglow"></div><div class="bfloor"></div><div class="stg">${["bas", "poulet", "salade", "top"].map((f, j) => `<img class="bl" data-l="${3 - j}" src="../site/img/build/${f}.webp">`).join("")}</div>
+      ${LB.map(([b, sm], l) => `<div class="lb" data-l="${l}"><span class="dot"></span><span class="ln"></span><div><b>${b}</b><small>${sm}</small></div></div>`).join("")}
+      <div class="tx"><div class="k">Signature</div><div class="H">${esc(it.n).replace(/ ([^ ]+)$/, ' <span class="gold">$1</span>')}</div><div class="ds">${esc(it.d || "")}</div><div class="seal"><b>${P(it.p)}</b></div></div>`; }
   if (s.type === "spot") { const it = item(s.o.c, s.o.n), g = group(it.i || []);
     const n = g.length, step = n > 1 ? Math.min(150, 600 / (n - 1)) : 0, top0 = 380 - (n - 1) * step / 2;
     el.innerHTML = `<div class="art"><div class="spotl"></div><div class="glow"></div>
@@ -123,7 +146,7 @@ SC.forEach((s, i) => {
   }
 });
 const FADE = .7;
-function render(t) {
+let render = function (t) {
   t = ((t % t0) + t0) % t0;
   $("pg").style.width = (t / t0 * 100) + "%";
   SC.forEach((s, i) => {
@@ -145,6 +168,17 @@ function render(t) {
     if (s.type === "cards") { s.el.querySelectorAll(".card").forEach((c, j) => { const k = eob(pr(u, .5 + j * .22, .9)); c.style.opacity = cl(k); c.style.transform = `translateY(${(1 - k) * 80}px) scale(${.94 + .06 * cl(k)})`;
         const pulse = Math.sin(pr(u, 2.4 + j * 1.1, 1) * Math.PI); c.style.borderColor = `rgba(245,180,0,${.07 + pulse * .6})`; });
       s.el.querySelector("h2").style.transform = `translateY(${(1 - eo(pr(u, 0, .9))) * 40}px)`; }
+    if (s.type === "build") {
+      const G = 62, comp = 1 - eo(pr(u, 6.2, 1.1)), order = [3, 2, 1, 0], gk = [-1.5, -.5, .5, 1.5], ly = [18, 36, 52, 70];
+      s.el.querySelectorAll(".bl").forEach(img => { const l = +img.dataset.l, k = order.indexOf(l), t = pr(u, .5 + k * .8, .85), e = eob(t);
+        img.style.opacity = cl(t * 4); img.style.transform = `translateY(${-(1 - e) * 1000 + gk[l] * G * comp + Math.sin(u * 1.3 + l) * 4 * comp}px) rotate(${(1 - cl(t)) * (l % 2 ? -9 : 9)}deg)`; });
+      const zoom = 1 + .05 * eo(pr(u, 6.2, 1.4)) + u * .004; s.el.querySelector(".stg").style.transform = `scale(${zoom}) translateX(${-eo(pr(u, 6.2, 1.2)) * 20}px)`;
+      s.el.querySelectorAll(".lb").forEach(lb => { const l = +lb.dataset.l, k = order.indexOf(l), a = eo(pr(u, 1.1 + k * .8, .6)) * (1 - eo(pr(u, 5.7, .6)));
+        lb.style.opacity = a; lb.style.top = (250 + 721 * ly[l] / 100 + gk[l] * G * comp - 30) + "px"; lb.querySelector(".ln").style.transform = `scaleX(${a})`; lb.style.transform = `translateX(${(1 - a) * 40}px)`; });
+      const hd = s.el.querySelector(".hd"); hd.style.opacity = eo(pr(u, .2, .6)) * (1 - eo(pr(u, 5.8, .5)));
+      const tx = s.el.querySelector(".tx"); [...tx.children].forEach((c, j) => { const k = eo(pr(u, 6.6 + j * .2, .7)); c.style.opacity = k; c.style.transform = `translateX(${(1 - k) * 70}px)`; });
+      const seal = tx.querySelector(".seal"), sk = eob(pr(u, 7.3, .7)); seal.style.transform = `scale(${.6 + .4 * sk}) rotate(${(1 - cl(sk)) * -6}deg)`; seal.style.transformOrigin = "left center";
+    }
     if (s.type === "spot") {
       { const ph = s.el.querySelector(".photo"), k = eob(pr(u, .15, 1.1)); ph.style.opacity = cl(k * 1.3);
         ph.style.transform = `translateY(${(1 - k) * 140 + Math.sin(u * 1.2) * 8}px) scale(${(.8 + .2 * cl(k)) * (1 + u * .012)}) rotate(${(1 - cl(k)) * -8 + Math.sin(u * .8) * 1.2}deg)`; }
@@ -157,5 +191,7 @@ function render(t) {
     }
   });
 }
+const EMB = [...Array(26)].map((_, i) => { const e = document.createElement("i"); $("emb").appendChild(e); const r = n => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); }; return { e, x: r(1) * 1920, sp: 40 + r(2) * 70, ph: r(3), sz: .5 + r(4), sw: 20 + r(5) * 40 }; });
+const render0 = render; render = function (t) { render0(t); EMB.forEach(m => { const y = 1080 - ((t * m.sp + m.ph * 1300) % 1300); const life = cl((1080 - y) / 1080); m.e.style.transform = `translate(${m.x + Math.sin(t * .8 + m.ph * 9) * m.sw}px,${y}px) scale(${m.sz})`; m.e.style.opacity = Math.sin(life * Math.PI) * .55; }); };
 window.render = render; render(0);
 </script></body></html>
