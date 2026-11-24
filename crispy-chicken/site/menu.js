@@ -10,13 +10,13 @@ window.CC_INFO = {
   horaires: "",           // à compléter, ex. "Tous les jours · 11h30 – 23h30"
   instagram: "",          // à compléter, ex. "crispychicken"
   // Mentions légales : à compléter dès que le client les donne
-  societe: "",            // raison sociale, ex. "SAS CRISPY CHICKEN"
-  forme: "",              // forme juridique et capital, ex. "SAS au capital de 1 000 €"
-  siret: "",              // numéro SIRET (14 chiffres)
-  rcs: "",                // ex. "RCS Paris 123 456 789"
+  societe: "INDIAN SHOP",            // raison sociale, ex. "SAS CRISPY CHICKEN"
+  forme: "SARL au capital de 1 000 €",              // forme juridique et capital, ex. "SAS au capital de 1 000 €"
+  siret: "100 583 954 00019",              // numéro SIRET (14 chiffres)
+  rcs: "RCS Clermont-Ferrand 100 583 954",                // ex. "RCS Paris 123 456 789"
   tva: "",                // numéro de TVA intracommunautaire
-  siege: "",              // adresse du siège social
-  directeur: "",          // nom du directeur de la publication
+  siege: "62 rue Fontgiève, 63000 Clermont-Ferrand",              // adresse du siège social
+  directeur: "Shahjahan Monwar, gérant",          // nom du directeur de la publication
   domaine: "",            // nom de domaine définitif, ex. "crispychicken.fr"
   commande: "https://www.ubereats.com/store-browse-uuid/cabf92a0-9efb-5406-9217-25480c896916?diningMode=DELIVERY"
 };

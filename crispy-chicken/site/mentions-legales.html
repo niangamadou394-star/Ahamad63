@@ -57,6 +57,7 @@ footer{color:#ffffff70;font-size:.85rem;padding:30px 0 50px;text-align:center}
 <dt>Forme juridique</dt><dd data-f="forme"></dd>
 <dt>Siège social</dt><dd data-f="siege"></dd>
 <dt>SIRET</dt><dd data-f="siret"></dd>
+<dt>SIREN</dt><dd>100 583 954</dd>
 <dt>RCS</dt><dd data-f="rcs"></dd>
 <dt>TVA intracommunautaire</dt><dd data-f="tva"></dd>
 <dt>Téléphone</dt><dd data-f="telephone"></dd>
@@ -126,6 +127,7 @@ footer{color:#ffffff70;font-size:.85rem;padding:30px 0 50px;text-align:center}
 const I = window.CC_INFO || {};
 document.querySelectorAll("[data-f]").forEach(el => {
   const v = (I[el.dataset.f] || "").trim() || el.dataset.def || "";
+  if (!v && el.dataset.f === "tva") { el.previousElementSibling.remove(); el.remove(); return; }
   if (!v) { el.innerHTML = '<span class="todo">À compléter</span>'; return; }
   if (el.dataset.f === "email") el.innerHTML = `<a href="mailto:${v}">${v}</a>`;
   else if (el.dataset.f === "telephone") el.innerHTML = `<a href="tel:${v.replace(/[^\d+]/g, "")}">${v}</a>`;
