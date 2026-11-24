@@ -362,7 +362,15 @@ h2 i,h1 i,h3 i{font-style:italic;color:var(--clay)}
 .bt .fmt{font-family:Jost;font-size:.72rem;letter-spacing:.2em}
 .bt .add{font-family:Jost;font-size:.78rem;letter-spacing:.18em;border-radius:999px;min-height:48px}
 @keyframes sway{0%,100%{transform:translateZ(40px) rotateY(-9deg) translateY(0)}50%{transform:translateZ(40px) rotateY(9deg) translateY(-8px)}}
-@media (hover:none){.bt .pic img{animation:sway 6s ease-in-out infinite}.bt:nth-child(2n) .pic img{animation-delay:-3s}}
+@keyframes sway2{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+@media (hover:none),(max-width:760px){
+ .bottles{perspective:none}
+ .bt,.bt .pic{transform-style:flat!important}
+ .bt{transform:none!important}
+ .bt .pic img{transform:none;animation:sway2 5s ease-in-out infinite;position:relative;z-index:1}
+ .bt:nth-child(2n) .pic img{animation-delay:-2.5s}
+ .bt .spot{filter:none;z-index:0}
+}
 @media (max-width:620px){.bt .pic{height:220px}.bt .pic img{max-height:220px}.bt h3{font-size:1.6rem}body{font-size:16.5px}}
 /* barre d'action mobile */
 .mbar{display:none}
