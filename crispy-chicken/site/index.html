@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#0c0c0c">
 <link rel="icon" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<link href="fonts/roboto.css" rel="stylesheet">
 <style>
 :root{--bg:#0b0b0b;--bg2:#121212;--card:#161616;--line:#ffffff14;--gold:#F5B400;--gold2:#FFD84D;--red:#E0281E;--cream:#F6EFE2;--muted:#ffffff9e;--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -242,6 +242,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .hp.h2,.hp.h3{animation:flh 5.5s ease-in-out infinite!important}.hp.h3{animation-delay:-2.5s!important}
  .stage .shd2{display:block;position:absolute;left:18%;right:18%;bottom:4%;height:7%;border-radius:50%;background:radial-gradient(ellipse,#000c,transparent 70%);animation:shh 4.5s ease-in-out infinite;z-index:1}
 }
+
+footer .legal{display:flex;gap:1.4rem;flex-wrap:wrap}footer .legal a{color:#ffffff99;font-size:.82rem}footer .legal a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -303,7 +305,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </main>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="box" id="sbox"></div></div>
 
-<footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken</span></div></footer>
+<footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken</span><nav class="legal"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#confidentialite">Confidentialité</a><a href="mentions-legales.html#allergenes">Allergènes</a></nav></div></footer>
 <div class="call"><a class="btn btn-gold js-order" href="#carte">Commander</a><a class="btn btn-line js-tel" href="#infos">Appeler</a></div>
 
 <script src="menu.js"></script>

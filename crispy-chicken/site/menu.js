@@ -9,6 +9,15 @@ window.CC_INFO = {
   ville: "",              // à compléter
   horaires: "",           // à compléter, ex. "Tous les jours · 11h30 – 23h30"
   instagram: "",          // à compléter, ex. "crispychicken"
+  // Mentions légales : à compléter dès que le client les donne
+  societe: "",            // raison sociale, ex. "SAS CRISPY CHICKEN"
+  forme: "",              // forme juridique et capital, ex. "SAS au capital de 1 000 €"
+  siret: "",              // numéro SIRET (14 chiffres)
+  rcs: "",                // ex. "RCS Paris 123 456 789"
+  tva: "",                // numéro de TVA intracommunautaire
+  siege: "",              // adresse du siège social
+  directeur: "",          // nom du directeur de la publication
+  domaine: "",            // nom de domaine définitif, ex. "crispychicken.fr"
   commande: "https://www.ubereats.com/store-browse-uuid/cabf92a0-9efb-5406-9217-25480c896916?diningMode=DELIVERY"
 };
 
