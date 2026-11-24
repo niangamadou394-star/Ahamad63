@@ -9,7 +9,7 @@ window.CC_INFO = {
   ville: "",              // à compléter
   horaires: "",           // à compléter, ex. "Tous les jours · 11h30 – 23h30"
   instagram: "",          // à compléter, ex. "crispychicken"
-  commande: ""            // lien Uber Eats / Deliveroo / commande en ligne, à compléter
+  commande: "https://www.ubereats.com/store-browse-uuid/cabf92a0-9efb-5406-9217-25480c896916?diningMode=DELIVERY"
 };
 
 window.CC_MENU = [

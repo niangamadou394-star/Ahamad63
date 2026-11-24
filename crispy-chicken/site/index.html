@@ -353,7 +353,7 @@ function openItem(n) { const it = ALL.find(x => x.n === n); if (!it) return;
   $("sbox").innerHTML = `<button class="x" type="button" aria-label="Fermer">✕</button><div class="im">${it.img ? `<img src="img/p/${it.img}.webp" alt="${esc(it.n)}">` : `<img src="img/icone.svg" alt="" style="width:220px">`}</div>
   <div><span class="k">${esc(it.cat)}</span><h3 class="H">${esc(it.n)}</h3>${it.d ? `<p>${esc(it.d)}</p>` : ""}
   ${it.i && it.i.length ? `<div class="ings">${group(it.i).map(([k, q]) => `<div><img src="img/ing/${k}.webp" alt="">${q > 1 ? `<b>${q}× </b>` : ""}${esc(ING[k])}</div>`).join("")}</div>` : ""}
-  <div class="pp">${P(it.p)}</div><a class="btn btn-gold js-order" href="${I.commande || "#infos"}" style="margin-top:1rem">Commander</a></div>`;
+  <div class="pp">${P(it.p)}</div><a class="btn btn-gold js-order" href="${I.commande || "#infos"}"${I.commande ? ' target="_blank" rel="noopener"' : ""} style="margin-top:1rem">Commander sur Uber Eats</a></div>`;
   $("sheet").classList.add("on"); document.body.style.overflow = "hidden"; }
 const closeItem = () => { $("sheet").classList.remove("on"); document.body.style.overflow = ""; };
 $("sheet").addEventListener("click", e => { if (e.target.id === "sheet" || e.target.closest(".x")) closeItem(); });
