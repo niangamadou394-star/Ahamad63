@@ -196,6 +196,30 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .H .w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);transition:opacity .6s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i)*.06s)}
 .H.in .w,.in .H .w{opacity:1;transform:none}
 @media (hover:hover){.sc,.fc{transform-style:preserve-3d}.sc .ph img,.fc .ph img{transition:transform .6s var(--ease)}.it.has .th img{transition:transform .5s var(--ease)}.it.has:hover .th img{transform:scale(1.12) rotate(-4deg)}}
+
+/* --- style typographique Chicken Street : police WoodHeinz, sans contours ni lettres espacées --- */
+.btn,.k,.links,.badges span,.tabs a,.sc .tag,.it .st,.ic small,.scd small,.shint,.lab,.cat h3 small,.call .btn{font-family:WH,Impact,sans-serif!important;font-weight:400!important;letter-spacing:.02em!important}
+.btn{font-size:1.35rem;text-transform:uppercase;border-radius:25px;min-height:58px;padding:0 2rem;text-shadow:0 0 10px rgba(0,0,0,.18)}
+.btn-gold{background:#FCD403;color:#000;box-shadow:0 12px 30px #FCD40030}
+.btn-gold:hover{background:#000;color:#FCD403;box-shadow:0 0 0 2px #FCD403}
+.btn-line{border:0!important;background:#fff;color:#000}.btn-line:hover{background:#000;color:#FCD403}
+.links{font-size:1.15rem;text-transform:uppercase}.links .btn{font-size:1.05rem;min-height:46px}
+.k{font-size:1.35rem;text-transform:uppercase;color:var(--gold)}.k::before{display:none!important}
+.badges{gap:.4rem 1.4rem!important}
+.badges span{border:0!important;background:none!important;padding:0!important;border-radius:0!important;font-size:1.3rem!important;text-transform:uppercase;color:#fff;display:inline-flex;align-items:center;gap:.55rem}
+.badges span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+.tabs a{border:0!important;font-size:1.2rem;text-transform:uppercase;padding:.5rem 1rem;border-radius:25px}
+.tabs a.on{background:#FCD403;color:#000}
+.sc .tag,.it .st{font-size:.95rem;letter-spacing:.02em;border-radius:6px}
+.ic small,.scd small{font-size:1.15rem;text-transform:uppercase}
+.shint{font-size:1rem}
+.cat h3 small{font-size:1.05rem;text-transform:none}
+.call .btn{font-size:1.2rem}
+@media (max-width:680px){.btn{font-size:1.15rem;min-height:52px;padding:0 1.5rem}.k{font-size:1.15rem}.badges span{font-size:1.05rem!important}.tabs a{font-size:1.05rem}}
+
+.stack .ing{border:0!important;background:none!important;padding:0!important;font-family:WH,sans-serif!important;font-weight:400!important;font-size:1.05rem!important;letter-spacing:.02em;text-transform:uppercase}
+.it b{font-family:WH,sans-serif;font-weight:400;font-size:1.3rem;letter-spacing:.02em;text-transform:uppercase}
+.sheet .ings div{font-family:WH,sans-serif;font-size:1rem;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -207,11 +231,10 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <main>
 <section class="hero"><div class="wrap grid">
   <div>
-    <div class="k rv">Spécialiste Naan, Wings &amp; Tenders</div>
     <h1 class="H rv">Le croustillant,<br><span class="gold">c'est sérieux.</span></h1>
     <p class="rv">Des naans cuits au tandoor, des tenders panés et croustillants, des wings et des burgers généreux. Préparés à la commande, servis chauds.</p>
     <div class="ctas rv"><a class="btn btn-gold" href="#carte">Voir la carte</a><a class="btn btn-line js-tel" href="#infos">Nous appeler</a></div>
-    <div class="badges rv"><span style="border-color:#F5B40066;color:#F5B400">100 % poulet halal</span><span>Naan au tandoor</span><span>Préparé à la commande</span><span>Sur place · À emporter</span></div>
+    <div class="badges rv"><span style="color:#F5B400">100 % poulet halal</span><span>Naan au tandoor</span><span>Préparé à la commande</span><span>Sur place · À emporter</span></div>
   </div>
   <div class="stage rv" aria-hidden="true">
     <div class="halo"></div><div class="halo h2"></div>
@@ -258,7 +281,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="box" id="sbox"></div></div>
 
 <footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken · Spécialiste Naan, Wings &amp; Tenders</span></div></footer>
-<div class="call"><a class="btn btn-gold js-order" href="#carte">Commander</a><a class="btn btn-line js-tel" href="#infos" style="background:#0b0b0bee">Appeler</a></div>
+<div class="call"><a class="btn btn-gold js-order" href="#carte">Commander</a><a class="btn btn-line js-tel" href="#infos">Appeler</a></div>
 
 <script src="menu.js"></script>
 <script src="icons.js"></script>
