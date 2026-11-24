@@ -231,6 +231,17 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .btn-gold{animation:pulse 2.6s ease-in-out infinite}
  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #FCD40055}50%{box-shadow:0 0 0 12px #FCD40000}}
 }
+
+/* téléphone : l'image principale flotte nettement (sans filtre lourd pour Safari) */
+@keyframes flh{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-20px,0) rotate(-2.5deg)}}
+@keyframes shh{0%,100%{transform:scaleX(1);opacity:.75}50%{transform:scaleX(.82);opacity:.45}}
+.stage .shd2{display:none}
+@media (hover:none),(max-width:760px){
+ .hp{will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+ .hp.h1{filter:none!important;animation:flh 4.5s ease-in-out infinite!important}
+ .hp.h2,.hp.h3{animation:flh 5.5s ease-in-out infinite!important}.hp.h3{animation-delay:-2.5s!important}
+ .stage .shd2{display:block;position:absolute;left:18%;right:18%;bottom:4%;height:7%;border-radius:50%;background:radial-gradient(ellipse,#000c,transparent 70%);animation:shh 4.5s ease-in-out infinite;z-index:1}
+}
 </style>
 </head>
 <body>
@@ -250,6 +261,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   <div class="stage rv" aria-hidden="true">
     <div class="halo"></div><div class="halo h2"></div>
     <div class="glowp"></div>
+    <span class="shd2"></span>
     <img class="hp h1" src="img/p/naan-mix.webp" alt="">
     <img class="hp h2" src="img/p/family-tenders.webp" alt="">
     <img class="hp h3" src="img/p/crispy-twice.webp" alt="">
