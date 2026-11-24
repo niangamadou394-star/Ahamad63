@@ -250,7 +250,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   <div class="bigt" aria-hidden="true"><span id="bigt">CRISPY · CHICKEN · NAAN · WINGS · TENDERS · CRISPY · CHICKEN · NAAN · WINGS · TENDERS ·</span></div>
   <div class="wrap shd"><div class="k rv">Nos stars</div><h2 class="H rv">Choisis ton <span class="gold">crispy.</span></h2></div>
   <div class="trk" id="trk"></div>
-  <div class="wrap shint"><span class="sbar"><i id="sbar"></i></span><span>Faites défiler</span></div>
+  <div class="wrap shint"><span class="sbar"><i id="sbar"></i></span></div>
 </div></section>
 
 <section class="sig" id="signatures"><div class="wrap">
@@ -260,7 +260,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </div></section>
 
 <section class="carte" id="carte"><div class="wrap">
-  <div class="k rv">La carte</div><h2 class="H rv">Tout ce qu'on <span class="gold">prépare.</span></h2>
+  <h2 class="H rv">Tout ce qu'on <span class="gold">prépare.</span></h2>
   <label class="find"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Rechercher un produit : tenders, naan, cheddar…" aria-label="Rechercher"></label>
   <nav class="tabs" id="tabs" aria-label="Catégories"></nav>
   <div id="cats"></div>
@@ -280,7 +280,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </main>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="box" id="sbox"></div></div>
 
-<footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken · Spécialiste Naan, Wings &amp; Tenders</span></div></footer>
+<footer><div class="wrap"><a class="brand" href="#"><img src="img/icone.svg" alt=""><b><span>Crispy</span><span>Chicken</span></b></a><span>© <span id="y"></span> Crispy Chicken</span></div></footer>
 <div class="call"><a class="btn btn-gold js-order" href="#carte">Commander</a><a class="btn btn-line js-tel" href="#infos">Appeler</a></div>
 
 <script src="menu.js"></script>
@@ -320,7 +320,7 @@ $("ig").innerHTML = blocks.filter(b => b[1]).map(([t, v, l]) => `<div class="ic 
 if (tel) document.querySelectorAll(".js-tel").forEach(a => a.href = "tel:" + tel); else document.querySelectorAll(".js-tel").forEach(a => a.remove());
 if (!blocks.some(b => b[1])) { $("infos").remove(); document.querySelectorAll('a[href="#infos"]').forEach(a => a.remove()); }
 if (I.commande) document.querySelectorAll(".js-order").forEach(a => { a.href = I.commande; a.target = "_blank"; a.rel = "noopener"; });
-if (!I.adresse) { $("ik").textContent = "Contact"; $("ih").innerHTML = `Une question ? <span class="gold">Appelez-nous.</span>`; }
+if (!I.adresse) { $("ik").remove(); $("ih").innerHTML = `Une question ? <span class="gold">Appelez-nous.</span>`; }
 $("y").textContent = new Date().getFullYear();
 
 
