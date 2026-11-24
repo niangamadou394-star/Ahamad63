@@ -227,7 +227,9 @@ header.top .btn-dark{background:#F6F1E9;color:var(--ink)}
 .doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:3rem}
 .door{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:2px;display:flex;align-items:flex-end;padding:26px}
 .door img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.door::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#1d1610e6)}
+.door::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#1d1610b8 100%)}
+.door img{filter:brightness(1.06) saturate(1.05)}
+.door b{text-shadow:0 2px 14px #000a}.door small{text-shadow:0 1px 8px #000a}
 .door:hover img{transform:scale(1.06)}
 .door span{position:relative;z-index:1}
 .door b{display:block;font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1.1}
@@ -554,9 +556,9 @@ h2 i,h1 i,h3 i{font-style:italic;color:var(--clay)}
     <div class="k rv">Et maintenant ?</div>
     <h2 class="rv">Dites-nous <i>ce que vous cherchez.</i></h2>
     <div class="doors">
-      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je voudrais réserver un séjour. Mes dates : " href="#"><img src="img/f3-p-chambre.jpg" alt="" loading="lazy"><span><b>Un séjour</b><small>Quelques nuits ou plusieurs mois</small></span></a>
-      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je cherche un logement pour un collaborateur de mon entreprise." href="#"><img src="img/f3-p-repas.jpg" alt="" loading="lazy"><span><b>Loger une équipe</b><small>Entreprises, ONG, missions</small></span></a>
-      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je suis propriétaire d'un appartement à Dakar et la gestion m'intéresse." href="#"><img src="img/f3-p-couloir.jpg" alt="" loading="lazy"><span><b>Confier mon appartement</b><small>Pour les propriétaires</small></span></a>
+      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je voudrais réserver un séjour. Mes dates : " href="#"><img src="img/f3-p-salon.jpg" alt="Le salon de Seno Palel" loading="lazy"><span><b>Un séjour</b><small>Quelques nuits ou plusieurs mois</small></span></a>
+      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je cherche un logement pour un collaborateur de mon entreprise." href="#"><img src="img/f2-salon.jpg" alt="Le salon de Kanel" loading="lazy" style="object-position:center 60%"><span><b>Loger une équipe</b><small>Entreprises, ONG, missions</small></span></a>
+      <a class="door ct rv" data-msg="Bonjour Maison Tinado, je suis propriétaire d'un appartement à Dakar et la gestion m'intéresse." href="#"><img src="img/f2-sejour.jpg" alt="Le séjour lumineux de Kanel" loading="lazy" style="object-position:center 55%"><span><b>Confier mon appartement</b><small>Pour les propriétaires</small></span></a>
     </div>
   </div>
 </section>
