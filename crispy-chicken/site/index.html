@@ -167,8 +167,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .hp,.stage .logo,.fi{will-change:transform}
 @media (max-width:760px),(hover:none){
  header.s{backdrop-filter:none;-webkit-backdrop-filter:none;background:#0b0b0bf5}
- .smoke{display:none}.glowp{filter:none}
- .hp,.stage .logo,.fi{animation:none}
+ .glowp{filter:none}
+ .smoke i{filter:none;width:120px;height:220px;background:radial-gradient(ellipse,#ffffff16,transparent 65%)}
  .sheet{backdrop-filter:none;background:#000000e6}
  .it,.sc,.fc{transition:none}
 }
@@ -220,6 +220,17 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .stack .ing{border:0!important;background:none!important;padding:0!important;font-family:WH,sans-serif!important;font-weight:400!important;font-size:1.05rem!important;letter-spacing:.02em;text-transform:uppercase}
 .it b{font-family:WH,sans-serif;font-weight:400;font-size:1.3rem;letter-spacing:.02em;text-transform:uppercase}
 .sheet .ings div{font-family:WH,sans-serif;font-size:1rem;text-transform:uppercase}
+
+/* téléphone : remplace les effets de survol par des animations automatiques */
+@media (hover:none){
+ @keyframes flp{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-1.5deg)}}
+ .sc.in .ph img,.fc.in .ph img{animation:flp 5s ease-in-out infinite}
+ .it.has.in .th img{animation:flp 4.5s ease-in-out infinite}
+ .sc.rv,.fc.rv,.it.rv{transform:translateY(40px) scale(.96)}
+ .sc.rv.in,.fc.rv.in,.it.rv.in{transform:none;transition:opacity .7s var(--ease),transform .8s var(--ease)!important}
+ .btn-gold{animation:pulse 2.6s ease-in-out infinite}
+ @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #FCD40055}50%{box-shadow:0 0 0 12px #FCD40000}}
+}
 </style>
 </head>
 <body>
