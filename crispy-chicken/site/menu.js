@@ -5,8 +5,8 @@ window.CC_INFO = {
   slogan: "Spécialiste Naan, Wings & Tenders",
   telephone: "07 51 05 36 56",
   email: "nirobsm4@gmail.com",
-  adresse: "",            // à compléter
-  ville: "",              // à compléter
+  adresse: "62 rue Fontgiève",
+  ville: "63000 Clermont-Ferrand",
   horaires: "",           // à compléter, ex. "Tous les jours · 11h30 – 23h30"
   instagram: "",          // à compléter, ex. "crispychicken"
   // Mentions légales : à compléter dès que le client les donne

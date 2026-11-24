@@ -243,6 +243,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .stage .shd2{display:block;position:absolute;left:18%;right:18%;bottom:4%;height:7%;border-radius:50%;background:radial-gradient(ellipse,#000c,transparent 70%);animation:shh 4.5s ease-in-out infinite;z-index:1}
 }
 
+.ic small.go{display:block;margin:.5rem 0 0;color:var(--gold);font-size:1rem}
 footer .legal{display:flex;gap:1.4rem;flex-wrap:wrap}footer .legal a{color:#ffffff99;font-size:.82rem}footer .legal a:hover{color:var(--gold)}
 </style>
 </head>
@@ -340,12 +341,13 @@ $("fam").innerHTML = cat("family").items.map(it => `<div class="fc rv">${it.img 
 
 /* infos : n'affiche que ce qui est renseigné */
 const tel = (I.telephone || "").replace(/[^\d+]/g, "");
-const blocks = [["Téléphone", I.telephone, I.telephone && "tel:" + (I.telephone || "").replace(/[^\d+]/g, "")], ["E-mail", I.email, I.email && "mailto:" + I.email], ["Adresse", [I.adresse, I.ville].filter(Boolean).join(", ")], ["Horaires", I.horaires]];
-$("ig").innerHTML = blocks.filter(b => b[1]).map(([t, v, l]) => `<div class="ic rv"><small>${t}</small><b>${l ? `<a href="${esc(l)}">${esc(v)}</a>` : esc(v)}</b></div>`).join("");
+const blocks = [["Téléphone", I.telephone, I.telephone && "tel:" + (I.telephone || "").replace(/[^\d+]/g, "")], ["E-mail", I.email, I.email && "mailto:" + I.email], ["Adresse", [I.adresse, I.ville].filter(Boolean).join(", "), I.adresse && "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(["Crispy Chicken", I.adresse, I.ville].join(" "))], ["Horaires", I.horaires]];
+$("ig").innerHTML = blocks.filter(b => b[1]).map(([t, v, l]) => `<div class="ic rv"><small>${t}</small><b>${l ? `<a href="${esc(l)}"${/^https/.test(l) ? ' target="_blank" rel="noopener"' : ""}>${esc(v)}</a>` : esc(v)}${t === "Adresse" ? `<small class="go">Voir l'itinéraire →</small>` : ""}</b></div>`).join("");
 if (tel) document.querySelectorAll(".js-tel").forEach(a => a.href = "tel:" + tel); else document.querySelectorAll(".js-tel").forEach(a => a.remove());
 if (!blocks.some(b => b[1])) { $("infos").remove(); document.querySelectorAll('a[href="#infos"]').forEach(a => a.remove()); }
 if (I.commande) document.querySelectorAll(".js-order").forEach(a => { a.href = I.commande; a.target = "_blank"; a.rel = "noopener"; });
-if (!I.adresse) { $("ik").remove(); $("ih").innerHTML = `Une question ? <span class="gold">Appelez-nous.</span>`; }
+$("ik").remove();
+if (!I.adresse) { $("ih").innerHTML = `Une question ? <span class="gold">Appelez-nous.</span>`; }
 $("y").textContent = new Date().getFullYear();
 
 
