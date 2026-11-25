@@ -101,38 +101,50 @@ const CARD = (it, x, y, w, ph, o = {}) => `<div class="card" data-a="card" data-
 const LIST = (x, y, w, items, o = {}) => `<div class="list" style="left:${x}px;top:${y}px;width:${w}px">${items.map(it => `<div class="row" data-a="row"><span class="n" style="${o.fs ? `font-size:${o.fs}px` : ""}">${esc(it.n)}</span>${o.q && it.d ? `<span class="q">${esc(short(it.d))}</span>` : ""}<span class="sp"></span>${tag(it.p)}</div>`).join("")}</div>`;
 const HERO = (src, x, y, w, extra = "") => `<div class="hero" data-a="hero" style="left:${x}px;top:${y}px;width:${w}px">${extra}<img src="${src}" alt=""></div>`;
 const BAR = (x, y, w) => `<div class="bar" data-a="bar" style="left:${x}px;top:${y}px;width:${w}px"></div>`;
+const SPOT = (c, n, kick) => { const it = item(c, n), w = esc(it.n).split(" "), last = w.pop();
+  return HERO(img(it), 110, 150, 860) + `<div class="sub" data-a="fade" style="left:1066px;top:300px">${kick || esc(cat(c).titre)}</div>`
+    + `<div class="ttl" data-a="title" style="left:1056px;top:346px;width:800px;white-space:normal">${w.join(" ")} <em>${last}</em></div>`
+    + (it.d ? `<div data-a="fade" style="position:absolute;left:1066px;top:640px;width:760px;font:700 27px Arial,sans-serif;color:#ffffffc4;text-transform:uppercase;line-height:1.4">${esc(short(it.d))}</div>` : "")
+    + `<div style="position:absolute;left:1066px;top:${it.d ? 800 : 640}px">${tag(it.p, true)}</div>` + (it.star ? `<span class="star" style="position:absolute;left:1066px;top:232px;font-family:Cond;font-size:22px;letter-spacing:.18em;background:#F5B400;color:#140f05;padding:6px 14px;border-radius:6px">SIGNATURE</span>` : ""); };
+const L1 = f => Object.assign(f, { logo: 1, dur: 16 }), SP = (c, n, k) => Object.assign(() => SPOT(c, n, k), { dur: 8 });
 /* --- pages --- */
 const naans = cat("naans").items, NA = (i, x, y) => CARD(naans[i], x, y, 340, naans[i].img ? 220 : 150, { fb: "../site/img/ing/cheddar.webp" });
 const PAGES = {
   naans: [
-    () => T(60, 34, "Nos Naans", "Spéciaux") + SUB(66, 168, "Pain naan cuit au tandoor · 100 % poulet halal · sauce au choix") + BAR(66, 206, 260)
-      + [0, 1, 2, 3, 4].map(i => NA(i, 50 + i * 366, 232)).join("") + [5, 6, 7, 8, 9].map((i, k) => NA(i, 50 + k * 366, 640)).join(""),
-    () => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Tous nos menus sont servis avec frites et boisson") + BAR(66, 206, 260)
+    L1(() => T(60, 34, "Nos Naans", "Spéciaux") + SUB(66, 168, "Pain naan cuit au tandoor · 100 % poulet halal · sauce au choix") + BAR(66, 206, 260)
+      + [0, 1, 2, 3, 4].map(i => NA(i, 50 + i * 366, 232)).join("") + [5, 6, 7, 8, 9].map((i, k) => NA(i, 50 + k * 366, 640)).join("")),
+    SP("naans", "Naan Crispy Dynamite", "La signature de la maison"), SP("naans", "Naan Mix"), SP("naans", "Naan Tenders"), SP("naans", "Naan Suprême"),
+    L1(() => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Tous nos menus sont servis avec frites et boisson") + BAR(66, 206, 260)
       + cat("formules").items.map((it, k) => CARD(it, 40 + (k % 2) * 470, 236 + Math.floor(k / 2) * 420, 440, 210)).join("")
       + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 160, 840, cat("sides").items)
       + T(1010, 640, "Desserts", "", "sm") + LIST(1016, 735, 400, cat("desserts").items, { fs: 30 })
-      + T(1460, 640, "Boissons", "", "sm") + LIST(1466, 735, 400, cat("boissons").items, { fs: 26 })
+      + T(1460, 640, "Boissons", "", "sm") + LIST(1466, 735, 400, cat("boissons").items, { fs: 26 })),
+    SP("formules", "Menu Étudiant", "Frites et boisson comprises"), SP("naans", "Naan Tikka"), SP("naans", "Naan Curry"), SP("naans", "Naan Farmer")
   ],
   burgers: [
-    () => T(60, 30, "Nos", "Burgers") + BAR(66, 158, 220)
+    L1(() => T(60, 30, "Nos", "Burgers") + BAR(66, 158, 220)
       + cat("burgers").items.map((it, k) => CARD(it, 40 + k * 372, 168, 352, 190, { nod: k < 2 })).join("")
       + T(60, 560, "Nos", "Wraps") + BAR(66, 688, 200)
       + cat("wraps").items.map((it, k) => CARD(it, 40 + k * 372, 690, 352, 180)).join("")
-      + HERO("../site/img/p/crispy-burger.webp", 1230, 690, 600, `<div class="ttl sm" style="position:absolute;left:300px;top:-64px;font-size:64px">Le <em>Crispy</em></div>`),
-    () => T(60, 34, "Wings &", "Tenders", "sm") + BAR(66, 140, 220)
+      + HERO("../site/img/p/crispy-burger.webp", 1230, 690, 600, `<div class="ttl sm" style="position:absolute;left:300px;top:-64px;font-size:64px">Le <em>Crispy</em></div>`)),
+    SP("burgers", "Crispy Burger", "La signature de la maison"), SP("burgers", "Crispy Twice Burger"), SP("burgers", "Big Steak Burger"), SP("wraps", "Wrap Crispy Star"), SP("wraps", "Wrap Tenders"),
+    L1(() => T(60, 34, "Wings &", "Tenders", "sm") + BAR(66, 140, 220)
       + HERO("../site/img/p/wings-box.webp", 40, 170, 330) + HERO("../site/img/p/tenders-box.webp", 340, 190, 330)
       + LIST(66, 470, 600, cat("wings").items)
       + T(740, 34, "Crousty", "", "sm") + SUB(746, 140, "Riz, poulet et sauce au choix") + HERO("../site/img/p/tenders-cheese.webp", 760, 190, 440)
       + LIST(746, 620, 440, cat("crousty").items)
       + T(1280, 150, "Family", "Packs", "sm") + BAR(1286, 256, 220)
-      + cat("family").items.map((it, k) => `<div class="card" data-a="card" data-spot="1" style="left:1270px;top:${290 + k * 255}px;width:600px;flex-direction:row;text-align:left;gap:24px"><div class="ph" style="width:230px;height:230px"><div class="glowc"></div><img src="${img(it)}" alt=""></div><div><div class="nm" style="margin:0">${esc(it.n)}</div><div class="ds">${esc(short(it.d))}</div>${tag(it.p)}</div></div>`).join("")
+      + cat("family").items.map((it, k) => `<div class="card" data-a="card" data-spot="1" style="left:1270px;top:${290 + k * 255}px;width:600px;flex-direction:row;text-align:left;gap:24px"><div class="ph" style="width:230px;height:230px"><div class="glowc"></div><img src="${img(it)}" alt=""></div><div><div class="nm" style="margin:0">${esc(it.n)}</div><div class="ds">${esc(short(it.d))}</div>${tag(it.p)}</div></div>`).join("")),
+    SP("wings", "10 Wings", "À partager… ou pas"), SP("wings", "5 Tenders"), SP("family", "Family Box Tenders", "Pour toute la famille"), SP("family", "Family Mix Box", "Pour toute la famille")
   ]
 };
 const KEY = new URLSearchParams(location.search).get("s") || "naans";
-const PD = 15, LD = 3.2, SEG = PD + LD, P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); el.className = "page"; el.innerHTML = f(); $("pages").appendChild(el);
+const LD = 3.2; let TT = 0; const LOGOS = [], WIPES = [];
+const P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); el.className = "page"; el.innerHTML = f(); $("pages").appendChild(el);
+  if (f.logo) { LOGOS.push(TT); TT += LD; } WIPES.push(TT); const a = TT, PD = f.dur || 15; TT += PD;
   const q = s => [...el.querySelectorAll(`[data-a="${s}"]`)];
-  return { el, a: i * SEG + LD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
-const T0 = P.length * SEG; window.DURATION = T0;
+  return { el, a, PD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
+const T0 = TT; window.DURATION = T0;
 /* fumée au-dessus des produits mis en avant */
 P.forEach(pg => pg.spots.forEach(c => { for (let j = 0; j < 2; j++) { const s = document.createElement("div"); s.className = "smk"; c.querySelector(".ph").appendChild(s); s.style.left = (30 + j * 30) + "%"; s.style.top = "-10%"; pg.smk.push([s, c, j]); } }));
 const EMB = [...Array(30)].map((_, i) => { const e = document.createElement("i"); $("emb").appendChild(e); const r = n => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); }; return { e, x: r(1) * 1920, sp: 40 + r(2) * 70, ph: r(3), sz: .5 + r(4), sw: 20 + r(5) * 40 }; });
@@ -141,7 +153,7 @@ const LS = [...LW.querySelectorAll("span")];
 function render(t) {
   t = ((t % T0) + T0) % T0;
   P.forEach((pg, pi) => {
-    let u = t - pg.a; if (u < 0) u += T0; if (u >= PD || u < 0) { pg.el.style.visibility = "hidden"; return; }
+    const PD = pg.PD; let u = t - pg.a; if (u < 0) u += T0; if (u >= PD || u < 0) { pg.el.style.visibility = "hidden"; return; }
     const out = pr(u, PD - .55, .55); pg.el.style.visibility = "visible"; pg.el.style.opacity = 1 - out;
     pg.el.style.transform = `scale(${1 + out * .04})`;
     pg.titles.forEach((e, j) => { const k = eo(pr(u, .35 + j * .35, 1.1)); e.style.clipPath = `inset(-20% ${100 - k * 100}% -30% -5%)`; e.style.transform = `translateY(${(1 - k) * 12}px) rotate(${(1 - k) * -2}deg)`; });
@@ -162,7 +174,7 @@ function render(t) {
   });
 
   /* séquence logo */
-  { let lu = -1; for (let i = 0; i < P.length; i++) { const v = t - i * SEG; if (v >= -0.4 && v < LD) lu = v; } if (t > T0 - .4) lu = t - T0;
+  { let lu = -1; LOGOS.forEach(s => { const v = t - s; if (v >= -0.4 && v < LD) lu = v; }); if (t > T0 - .4) lu = t - T0;
     const L = $("lg");
     if (lu < -0.4 || lu >= LD) { L.style.visibility = "hidden"; L.style.opacity = 0; }
     else { L.style.visibility = "visible"; L.style.opacity = cl((lu + .4) / .4) * (1 - pr(lu, LD - .35, .35));
@@ -179,7 +191,7 @@ function render(t) {
   $("wm").style.transform = `rotate(${t * 3}deg)`;
   $("shine").style.backgroundPosition = `${150 - ((t % 7) / 7) * 300}% 0`;
   /* volet doré entre deux pages */
-  const pu = t % SEG, w = pu > LD - .45 && pu < LD + .45 ? pr(pu, LD - .45, .9) : 0;
+  let w = 0; WIPES.forEach(s => { const d = t - s; if (d > -.45 && d < .45) w = pr(d, -.45, .9); }); if (t > T0 - .45) w = pr(t - T0, -.45, .9);
   $("wipe").style.left = (-700 + w * 3400) + "px"; $("wipe").style.opacity = w > 0 && w < 1 ? .95 : 0;
   EMB.forEach(m => { const y = 1080 - ((t * m.sp + m.ph * 1300) % 1300); const life = cl((1080 - y) / 1080); m.e.style.transform = `translate(${m.x + Math.sin(t * .8 + m.ph * 9) * m.sw}px,${y}px) scale(${m.sz})`; m.e.style.opacity = Math.sin(life * Math.PI) * .5; });
 }
