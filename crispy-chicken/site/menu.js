@@ -32,7 +32,7 @@ window.CC_MENU = [
     { n: "Naan Suprême", img: "naan-supreme", p: 9.0, d: "3 steaks hachés, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
     { n: "Naan Crispy Dynamite", img: "naan-dynamite", p: 10.0, d: "2 tenders de poulet, 1 steak haché, 1 galette de pommes de terre, cheddar fondant, oignons frits et sauce Dynamite.", i: ["tender", "tender", "steak", "galette", "cheddar", "oignons", "sauce"], star: true },
     { n: "Naan Farmer", img: "naan-farmer", p: 9.0, d: "2 steaks hachés, 1 tender de poulet, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "tender", "cheddar", "legumes", "sauce"] },
-    { n: "Cheese Naan", p: 2.5, d: "Naan maison au fromage fondant.", i: ["cheddar"] } ] },
+    { n: "Cheese Naan", img: "cheese-naan", p: 2.5, d: "Naan maison au fromage fondant.", i: ["cheddar"] } ] },
   { id: "burgers", titre: "Burgers", items: [
     { n: "Cheeseburger", img: "cheeseburger", p: 3.9 },
     { n: "Double Cheeseburger", img: "double-cheeseburger", p: 5.9 },
