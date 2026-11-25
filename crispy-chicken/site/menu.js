@@ -17,7 +17,7 @@ window.CC_INFO = {
   tva: "",                // numéro de TVA intracommunautaire
   siege: "62 rue Fontgiève, 63000 Clermont-Ferrand",              // adresse du siège social
   directeur: "Shahjahan Monwar, gérant",          // nom du directeur de la publication
-  domaine: "",            // nom de domaine définitif, ex. "crispychicken.fr"
+  domaine: "crispychicken63.fr",
   commande: "https://www.ubereats.com/store-browse-uuid/cabf92a0-9efb-5406-9217-25480c896916?diningMode=DELIVERY"
 };
 
