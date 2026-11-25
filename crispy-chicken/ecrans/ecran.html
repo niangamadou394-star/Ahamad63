@@ -98,7 +98,7 @@ const img = (it, fb) => it.img ? `../site/img/p/${it.img}.webp` : fb;
 const T = (x, y, a, b, cls = "") => `<div class="ttl ${cls}" data-a="title" style="left:${x}px;top:${y}px">${a}${b ? ` <em>${b}</em>` : ""}</div>`;
 const SUB = (x, y, s) => `<div class="sub" data-a="fade" style="left:${x}px;top:${y}px">${s}</div>`;
 const CARD = (it, x, y, w, ph, o = {}) => `<div class="card" data-a="card" data-spot="1" style="left:${x}px;top:${y}px;width:${w}px"><div class="ph" style="height:${ph}px">${it.img ? `<div class="glowc"></div><img src="${img(it)}" alt="">` : ""}</div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}<div class="nm">${esc(it.n)}</div>${o.nod ? "" : `<div class="ds">${esc(short(it.d))}</div>`}${tag(it.p)}</div>`;
-const LIST = (x, y, w, items, o = {}) => `<div class="list" style="left:${x}px;top:${y}px;width:${w}px">${items.map(it => `<div class="row" data-a="row"><span class="n" style="${o.fs ? `font-size:${o.fs}px` : ""}">${esc(it.n)}</span>${o.q && it.d ? `<span class="q">${esc(short(it.d))}</span>` : ""}<span class="sp"></span>${tag(it.p)}</div>`).join("")}</div>`;
+const LIST = (x, y, w, items, o = {}) => `<div class="list" style="left:${x}px;top:${y}px;width:${w}px">${items.map(it => `<div class="row" data-a="row"${o.rh ? ` style="height:${o.rh}px"` : ""}><span class="n" style="${o.fs ? `font-size:${o.fs}px` : ""}">${esc(it.n)}</span>${o.q && it.d ? `<span class="q">${esc(short(it.d))}</span>` : ""}<span class="sp"></span>${tag(it.p)}</div>`).join("")}</div>`;
 const HERO = (src, x, y, w, extra = "") => `<div class="hero" data-a="hero" style="left:${x}px;top:${y}px;width:${w}px">${extra}<img src="${src}" alt=""></div>`;
 const BAR = (x, y, w) => `<div class="bar" data-a="bar" style="left:${x}px;top:${y}px;width:${w}px"></div>`;
 const SPOT = (c, n, kick) => { const it = item(c, n), w = esc(it.n).split(" "), last = w.pop();
@@ -116,7 +116,7 @@ const PAGES = {
     SP("naans", "Naan Crispy Dynamite", "La signature de la maison"), SP("naans", "Naan Mix"), SP("naans", "Naan Tenders"), SP("naans", "Naan Suprême"),
     L1(() => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Boisson comprise dans tous nos menus") + BAR(66, 206, 260)
       + cat("formules").items.map((it, k) => CARD(it, 40 + (k % 2) * 470, 236 + Math.floor(k / 2) * 420, 440, 210)).join("")
-      + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 160, 840, cat("sides").items)
+      + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 150, 840, cat("sides").items, { rh: 66, fs: 30 })
       + T(1010, 640, "Desserts", "", "sm") + LIST(1016, 735, 420, cat("desserts").items, { fs: 21 })
       + T(1460, 640, "Boissons", "", "sm") + LIST(1466, 735, 400, cat("boissons").items, { fs: 26 })),
     SP("formules", "Menu Étudiant", "Frites et boisson comprises"), SP("naans", "Naan Tikka"), SP("naans", "Naan Curry"), SP("naans", "Naan Farmer")

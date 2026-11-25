@@ -62,8 +62,8 @@ window.CC_MENU = [
     { n: "Family Box Tenders", img: "family-tenders", p: 26.5, d: "20 Chicken Tenders." },
     { n: "Family Mix Box", img: "family-mix", p: 25.9, d: "15 Wings + 10 Tenders." } ] },
   { id: "sides", titre: "Accompagnements", items: [
-    { n: "Frites", img: "frites", p: 2.5 }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
-    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.9, d: "Anneaux d'oignon panés, ultra croustillants et dorés." } ] },
+    { n: "Frites", img: "frites", p: 2.5 }, { n: "Naan Nature", img: "cheese-naan", p: 2.5, d: "Naan fait maison, moelleux et doré, pour accompagner vos plats." }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
+    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", img: "pdt-rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.9, d: "Anneaux d'oignon panés, ultra croustillants et dorés." } ] },
   { id: "desserts", titre: "Desserts", items: [
     { n: "Tiramisu Spéculoos Caramel", img: "tiramisu-speculoos", p: 4.0, d: "Tiramisu crémeux au mascarpone, morceaux de spéculoos et caramel." }, { n: "Donut", img: "donut", p: 2.0 }, { n: "Tarte au Daim", p: 3.5 } ] },
   { id: "boissons", titre: "Boissons", items: [
