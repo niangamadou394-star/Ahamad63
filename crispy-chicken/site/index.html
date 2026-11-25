@@ -381,7 +381,7 @@ $("q").addEventListener("input", e => { const q = e.target.value.trim().toLowerC
   let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; frame(); }); }, { passive: true }); addEventListener("resize", frame); frame();
 })();
 /* titres : apparition mot par mot */
-document.querySelectorAll("h2.H").forEach(h => { let i = 0;
+document.querySelectorAll("h2.H").forEach(h => { if (h.id === "ih") return; let i = 0;
   const walk = n => [...n.childNodes].forEach(c => { if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) f.append(w); else { const s = document.createElement("span"); s.className = "w"; s.style.setProperty("--i", i++); s.textContent = w; f.append(s); } }); c.replaceWith(f); } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c); });
   walk(h); });
 /* apparitions en cascade dans les grilles */
