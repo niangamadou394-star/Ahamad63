@@ -55,15 +55,15 @@ window.CC_MENU = [
   { id: "formules", titre: "Formules", sous: "Tous nos menus sont servis avec frites et boisson.", items: [
     { n: "Menu Étudiant", img: "naan-tenders", p: 10.0, d: "Naan Tenders ou 10 Wings, avec frites et boisson." },
     { n: "Menu Enfant", img: "menu-enfant", p: 7.0, d: "Mini Wrap, frites et boisson." },
-    { n: "Menu Crousti Mini", img: "crousti-original", p: 8.9, d: "Tasty Crousti Mini, frites et boisson." },
+    { n: "Menu Crousti Mini", img: "menu-crousti-mini", p: 12.5, d: "1 Tasty Crousti Mini, 1 tiramisu et 1 boisson au choix." },
     { n: "Menu Mix", img: "wings-box", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
   { id: "family", titre: "Family Packs", items: [
     { n: "Family Box Wings", img: "family-wings", p: 25.0, d: "30 Wings." },
     { n: "Family Box Tenders", img: "family-tenders", p: 26.5, d: "20 Chicken Tenders." },
     { n: "Family Mix Box", img: "family-mix", p: 25.9, d: "15 Wings + 10 Tenders." } ] },
   { id: "sides", titre: "Accompagnements", items: [
-    { n: "Frites", p: 2.5 }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
-    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.5 } ] },
+    { n: "Frites", img: "frites", p: 2.5 }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
+    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.9, d: "Anneaux d'oignon panés, ultra croustillants et dorés." } ] },
   { id: "desserts", titre: "Desserts", items: [
     { n: "Tiramisu Spéculoos Caramel", img: "tiramisu-speculoos", p: 4.0, d: "Tiramisu crémeux au mascarpone, morceaux de spéculoos et caramel." }, { n: "Donut", img: "donut", p: 2.0 }, { n: "Tarte au Daim", p: 3.5 } ] },
   { id: "boissons", titre: "Boissons", items: [
