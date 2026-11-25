@@ -97,7 +97,7 @@ const img = (it, fb) => it.img ? `../site/img/p/${it.img}.webp` : fb;
 /* --- composants --- */
 const T = (x, y, a, b, cls = "") => `<div class="ttl ${cls}" data-a="title" style="left:${x}px;top:${y}px">${a}${b ? ` <em>${b}</em>` : ""}</div>`;
 const SUB = (x, y, s) => `<div class="sub" data-a="fade" style="left:${x}px;top:${y}px">${s}</div>`;
-const CARD = (it, x, y, w, ph, o = {}) => `<div class="card" data-a="card" data-spot="1" style="left:${x}px;top:${y}px;width:${w}px"><div class="ph" style="height:${ph}px"><div class="glowc"></div><img src="${img(it, o.fb || "../site/img/ing/cheddar.webp")}" alt="" style="${it.img ? "" : "width:150px;height:150px;border-radius:50%;border:3px solid #F5B400"}"></div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}<div class="nm">${esc(it.n)}</div>${o.nod ? "" : `<div class="ds">${esc(short(it.d))}</div>`}${tag(it.p)}</div>`;
+const CARD = (it, x, y, w, ph, o = {}) => `<div class="card" data-a="card" data-spot="1" style="left:${x}px;top:${y}px;width:${w}px"><div class="ph" style="height:${ph}px">${it.img ? `<div class="glowc"></div><img src="${img(it)}" alt="">` : ""}</div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}<div class="nm">${esc(it.n)}</div>${o.nod ? "" : `<div class="ds">${esc(short(it.d))}</div>`}${tag(it.p)}</div>`;
 const LIST = (x, y, w, items, o = {}) => `<div class="list" style="left:${x}px;top:${y}px;width:${w}px">${items.map(it => `<div class="row" data-a="row"><span class="n" style="${o.fs ? `font-size:${o.fs}px` : ""}">${esc(it.n)}</span>${o.q && it.d ? `<span class="q">${esc(short(it.d))}</span>` : ""}<span class="sp"></span>${tag(it.p)}</div>`).join("")}</div>`;
 const HERO = (src, x, y, w, extra = "") => `<div class="hero" data-a="hero" style="left:${x}px;top:${y}px;width:${w}px">${extra}<img src="${src}" alt=""></div>`;
 const BAR = (x, y, w) => `<div class="bar" data-a="bar" style="left:${x}px;top:${y}px;width:${w}px"></div>`;
@@ -108,7 +108,7 @@ const SPOT = (c, n, kick) => { const it = item(c, n), w = esc(it.n).split(" "), 
     + `<div style="position:absolute;left:1066px;top:${it.d ? 800 : 640}px">${tag(it.p, true)}</div>` + (it.star ? `<span class="star" style="position:absolute;left:1066px;top:232px;font-family:Cond;font-size:22px;letter-spacing:.18em;background:#F5B400;color:#140f05;padding:6px 14px;border-radius:6px">SIGNATURE</span>` : ""); };
 const L1 = f => Object.assign(f, { logo: 1, dur: 16 }), SP = (c, n, k) => Object.assign(() => SPOT(c, n, k), { dur: 8 });
 /* --- pages --- */
-const naans = cat("naans").items, NA = (i, x, y) => CARD(naans[i], x, y, 340, naans[i].img ? 220 : 150, { fb: "../site/img/ing/cheddar.webp" });
+const naans = cat("naans").items, NA = (i, x, y) => CARD(naans[i], x, y + (naans[i].img ? 0 : 120), 340, naans[i].img ? 220 : 0);
 const PAGES = {
   naans: [
     L1(() => T(60, 34, "Nos Naans", "Spéciaux") + SUB(66, 168, "Pain naan cuit au tandoor · 100 % poulet halal · sauce au choix") + BAR(66, 206, 260)
@@ -146,7 +146,7 @@ const P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); e
   return { el, a, PD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
 const T0 = TT; window.DURATION = T0;
 /* fumée au-dessus des produits mis en avant */
-P.forEach(pg => pg.spots.forEach(c => { for (let j = 0; j < 2; j++) { const s = document.createElement("div"); s.className = "smk"; c.querySelector(".ph").appendChild(s); s.style.left = (30 + j * 30) + "%"; s.style.top = "-10%"; pg.smk.push([s, c, j]); } }));
+P.forEach(pg => pg.spots.forEach(c => { if (!c.querySelector(".ph img")) return; for (let j = 0; j < 2; j++) { const s = document.createElement("div"); s.className = "smk"; c.querySelector(".ph").appendChild(s); s.style.left = (30 + j * 30) + "%"; s.style.top = "-10%"; pg.smk.push([s, c, j]); } }));
 const EMB = [...Array(30)].map((_, i) => { const e = document.createElement("i"); $("emb").appendChild(e); const r = n => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); }; return { e, x: r(1) * 1920, sp: 40 + r(2) * 70, ph: r(3), sz: .5 + r(4), sw: 20 + r(5) * 40 }; });
 const LW = $("lgw"); LW.innerHTML = "Crispy".split("").map(c => `<span>${c}</span>`).join("") + "&nbsp;" + "Chicken".split("").map(c => `<span class="g">${c}</span>`).join("");
 const LS = [...LW.querySelectorAll("span")];
@@ -166,8 +166,8 @@ function render(t) {
     pg.cards.forEach((e, j) => { const k = eob(pr(u, .5 + j * .09, .9));
       const on = u > 2.4 && cur % n === j ? Math.sin(cl(ph) * Math.PI) : 0;
       e.style.opacity = cl(k * 1.4); e.style.transform = `translateY(${(1 - k) * 70}px) scale(${(.9 + .1 * cl(k)) * (1 + on * .06)})`; e.style.zIndex = on > 0 ? 5 : 1;
-      const im = e.querySelector(".ph img"); im.style.transform = `translateY(${Math.sin(u * 1.4 + j * .8) * 6 - on * 14}px) rotate(${Math.sin(u * .9 + j) * 1.4 + on * -3}deg) scale(${1 + on * .1})`;
-      e.querySelector(".glowc").style.opacity = on; });
+      const im = e.querySelector(".ph img") || { style: {} }; im.style.transform = `translateY(${Math.sin(u * 1.4 + j * .8) * 6 - on * 14}px) rotate(${Math.sin(u * .9 + j) * 1.4 + on * -3}deg) scale(${1 + on * .1})`;
+      const gc = e.querySelector(".glowc"); if (gc) gc.style.opacity = on; });
     pg.smk.forEach(([s, c, j], q) => { const p2 = ((u * .32 + q * .37) % 1); s.style.opacity = Math.sin(p2 * Math.PI) * .7; s.style.transform = `translateY(${-p2 * 170}px) scale(${.6 + p2})`; });
     pg.tags.forEach((e, j) => { const k = eob(pr(u, 1.2 + j * .05, .5)); e.style.scale = String(.4 + .6 * k); e.style.opacity = cl(k * 2);
       const sh = ((u * .45 + j * .13) % 2.2); e.style.setProperty("--sh", (-60 + sh * 110) + "%"); });

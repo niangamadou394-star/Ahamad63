@@ -50,7 +50,7 @@ window.CC_MENU = [
     { n: "Crousty Mini", img: "tenders-cheese", p: 5.0 }, { n: "Crousty Medium", img: "tenders-cheese", p: 10.0 }, { n: "Crousty Max", img: "tenders-cheese", p: 12.5 } ] },
   { id: "formules", titre: "Formules", sous: "Tous nos menus sont servis avec frites et boisson.", items: [
     { n: "Menu Étudiant", img: "naan-tenders", p: 10.0, d: "Naan Tenders ou 10 Wings, avec frites et boisson." },
-    { n: "Menu Enfant", img: "wrap-tenders", p: 7.0, d: "Mini Wrap, frites et boisson." },
+    { n: "Menu Enfant", img: "menu-enfant", p: 7.0, d: "Mini Wrap, frites et boisson." },
     { n: "Menu Crousty Mini", img: "tenders-cheese", p: 8.9, d: "Crousty Mini, frites et boisson." },
     { n: "Menu Mix", img: "wings-box", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
   { id: "family", titre: "Family Packs", items: [

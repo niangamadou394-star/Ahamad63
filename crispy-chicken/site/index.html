@@ -336,7 +336,7 @@ $("cats").innerHTML = SHOW.map(id => { const c = cat(id), compact = c.items.ever
    ${it.d ? `<span class="d">${esc(it.d)}</span>` : ""}${it.i && it.i.length > 1 ? `<span class="ics">${it.i.map(k => `<i title="${esc(ING[k])}">${IC[k]}</i>`).join("")}</span>` : ""}</div>`).join("")}</div></div>`; }).join("");
 
 /* formules */
-$("fg").innerHTML = cat("formules").items.map(it => `<div class="fc rv"><span class="k">Formule</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p><span class="pr">${P(it.p)}</span></div>`).join("");
+$("fg").innerHTML = cat("formules").items.map(it => `<div class="fc rv">${it.img ? `<div class="ph"><img src="img/p/${it.img}.webp" alt="" loading="lazy"></div>` : ""}<span class="k">Formule</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p><span class="pr">${P(it.p)}</span></div>`).join("");
 $("fam").innerHTML = cat("family").items.map(it => `<div class="fc rv">${it.img ? `<div class="ph"><img src="img/p/${it.img}.webp" alt="" loading="lazy"></div>` : ""}<span class="k">À partager</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p><span class="pr">${P(it.p)}</span></div>`).join("");
 
 /* infos : n'affiche que ce qui est renseigné */
