@@ -52,7 +52,7 @@ window.CC_MENU = [
     { n: "Tasty Crousti pommes de terre", img: "crousti-pdt", p: 11.5, d: "Poulet frit ultra croustillant, pommes de terre en rondelles, sauce blanche maison ou sauce au choix, oignons frits et persil frais.", i: ["poulet", "galette", "sauce", "oignons"] },
     { n: "Crousti Alloco Crunch", img: "crousti-alloco", p: 12.9, d: "Riz blanc, tenders croustillants, banane plantain, sauce maison et oignons frits.", i: ["tender", "sauce", "oignons"] },
     { n: "Bowl Tenders Dynamite", img: "bowl-dynamite", p: 7.5, d: "3 tenders coupés en morceaux, mélangés à la sauce Dynamite et garnis d'oignons frits croustillants.", i: ["tender", "tender", "tender", "sauce", "oignons"] } ] },
-  { id: "formules", titre: "Formules", sous: "Tous nos menus sont servis avec frites et boisson.", items: [
+  { id: "formules", titre: "Formules", sous: "Boisson comprise dans tous nos menus.", items: [
     { n: "Menu Étudiant", img: "naan-tenders", p: 10.0, d: "Naan Tenders ou 10 Wings, avec frites et boisson." },
     { n: "Menu Enfant", img: "menu-enfant", p: 7.0, d: "Mini Wrap, frites et boisson." },
     { n: "Menu Crousti Mini", img: "menu-crousti-mini", p: 12.5, d: "1 Tasty Crousti Mini, 1 tiramisu et 1 boisson au choix." },
