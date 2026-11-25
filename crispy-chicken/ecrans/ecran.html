@@ -117,7 +117,7 @@ const PAGES = {
     L1(() => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Tous nos menus sont servis avec frites et boisson") + BAR(66, 206, 260)
       + cat("formules").items.map((it, k) => CARD(it, 40 + (k % 2) * 470, 236 + Math.floor(k / 2) * 420, 440, 210)).join("")
       + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 160, 840, cat("sides").items)
-      + T(1010, 640, "Desserts", "", "sm") + LIST(1016, 735, 400, cat("desserts").items, { fs: 30 })
+      + T(1010, 640, "Desserts", "", "sm") + LIST(1016, 735, 420, cat("desserts").items, { fs: 21 })
       + T(1460, 640, "Boissons", "", "sm") + LIST(1466, 735, 400, cat("boissons").items, { fs: 26 })),
     SP("formules", "Menu Étudiant", "Frites et boisson comprises"), SP("naans", "Naan Tikka"), SP("naans", "Naan Curry"), SP("naans", "Naan Farmer")
   ],
@@ -131,11 +131,11 @@ const PAGES = {
     L1(() => T(60, 34, "Wings &", "Tenders", "sm") + BAR(66, 140, 220)
       + HERO("../site/img/p/wings-box.webp", 40, 170, 330) + HERO("../site/img/p/tenders-box.webp", 340, 190, 330)
       + LIST(66, 470, 600, cat("wings").items)
-      + T(740, 34, "Crousty", "", "sm") + SUB(746, 140, "Riz, poulet et sauce au choix") + HERO("../site/img/p/tenders-cheese.webp", 760, 190, 440)
-      + LIST(746, 620, 440, cat("crousty").items)
+      + T(720, 34, "Crousti", "", "sm") + SUB(726, 140, "Riz thaï · poulet · sauce maison") + HERO("../site/img/p/crousti-original.webp", 800, 180, 330)
+      + LIST(716, 500, 520, cat("crousty").items, { fs: 25 })
       + T(1280, 150, "Family", "Packs", "sm") + BAR(1286, 256, 220)
       + cat("family").items.map((it, k) => `<div class="card" data-a="card" data-spot="1" style="left:1270px;top:${290 + k * 255}px;width:600px;flex-direction:row;text-align:left;gap:24px"><div class="ph" style="width:230px;height:230px"><div class="glowc"></div><img src="${img(it)}" alt=""></div><div><div class="nm" style="margin:0">${esc(it.n)}</div><div class="ds">${esc(short(it.d))}</div>${tag(it.p)}</div></div>`).join("")),
-    SP("wings", "10 Wings", "À partager… ou pas"), SP("wings", "5 Tenders"), SP("family", "Family Box Tenders", "Pour toute la famille"), SP("family", "Family Mix Box", "Pour toute la famille")
+    SP("crousty", "Crousti Alloco Crunch", "Nouveau"), SP("crousty", "Bowl Tenders Dynamite"), SP("wings", "10 Wings", "À partager… ou pas"), SP("wings", "5 Tenders"), SP("family", "Family Box Tenders", "Pour toute la famille"), SP("family", "Family Mix Box", "Pour toute la famille")
   ]
 };
 const KEY = new URLSearchParams(location.search).get("s") || "naans";
@@ -156,7 +156,7 @@ function render(t) {
     const PD = pg.PD; let u = t - pg.a; if (u < 0) u += T0; if (u >= PD || u < 0) { pg.el.style.visibility = "hidden"; return; }
     const out = pr(u, PD - .55, .55); pg.el.style.visibility = "visible"; pg.el.style.opacity = 1 - out;
     pg.el.style.transform = `scale(${1 + out * .04})`;
-    pg.titles.forEach((e, j) => { const k = eo(pr(u, .35 + j * .35, 1.1)); e.style.clipPath = `inset(-20% ${100 - k * 100}% -30% -5%)`; e.style.transform = `translateY(${(1 - k) * 12}px) rotate(${(1 - k) * -2}deg)`; });
+    pg.titles.forEach((e, j) => { const k = eo(pr(u, .35 + j * .35, 1.1)); e.style.clipPath = `inset(-20% ${100 - k * 112}% -30% -5%)`; e.style.transform = `translateY(${(1 - k) * 12}px) rotate(${(1 - k) * -2}deg)`; });
     pg.fades.forEach((e, j) => { const k = eo(pr(u, .9 + j * .2, .7)); e.style.opacity = k; e.style.transform = `translateX(${(1 - k) * -30}px)`; });
     pg.bars.forEach((e, j) => { const k = eo(pr(u, .7 + j * .3, .8)); e.style.transform = `scaleX(${k})`; e.style.transformOrigin = "left"; });
     pg.heros.forEach((e, j) => { const k = eob(pr(u, .6 + j * .25, 1.1)); e.style.opacity = cl(k * 1.5); e.style.transform = `translateY(${(1 - k) * 120 + Math.sin(u * 1.1 + j) * 8}px) rotate(${(1 - cl(k)) * 8 + Math.sin(u * .7 + j) * 1.5}deg) scale(${.85 + .15 * cl(k)})`; });

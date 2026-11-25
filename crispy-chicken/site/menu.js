@@ -46,12 +46,16 @@ window.CC_MENU = [
   { id: "wings", titre: "Wings & Tenders", items: [
     { n: "3 Wings", img: "wings", p: 4.0 }, { n: "6 Wings", img: "wings-box", p: 5.9 }, { n: "10 Wings", img: "wings-box", p: 9.5 },
     { n: "3 Tenders", img: "tenders", p: 4.9 }, { n: "5 Tenders", img: "tenders-box", p: 7.0 }, { n: "10 Tenders", img: "tenders-box", p: 13.9 } ] },
-  { id: "crousty", titre: "Crousty", sous: "Riz, poulet et sauce au choix.", items: [
-    { n: "Crousty Mini", img: "tenders-cheese", p: 5.0 }, { n: "Crousty Medium", img: "tenders-cheese", p: 10.0 }, { n: "Crousty Max", img: "tenders-cheese", p: 12.5 } ] },
+  { id: "crousty", titre: "Crousti", sous: "Riz thaï parfumé, poulet croustillant et sauce maison au choix.", items: [
+    { n: "Tasty Crousti Mini", img: "crousti-original", p: 6.9, d: "Poulet frit croustillant, riz thaï parfumé, sauce maison au choix et oignons frits.", i: ["poulet", "sauce", "oignons"] },
+    { n: "Crousti Original", img: "crousti-original", p: 11.5, d: "Poulet frit ultra croustillant, riz thaï parfumé, sauce blanche maison ou sauce au choix, oignons frits et persil frais.", i: ["poulet", "sauce", "oignons"], star: true },
+    { n: "Tasty Crousti pommes de terre", img: "crousti-pdt", p: 11.5, d: "Poulet frit ultra croustillant, pommes de terre en rondelles, sauce blanche maison ou sauce au choix, oignons frits et persil frais.", i: ["poulet", "galette", "sauce", "oignons"] },
+    { n: "Crousti Alloco Crunch", img: "crousti-alloco", p: 12.9, d: "Riz blanc, tenders croustillants, banane plantain, sauce maison et oignons frits.", i: ["tender", "sauce", "oignons"] },
+    { n: "Bowl Tenders Dynamite", img: "bowl-dynamite", p: 7.5, d: "3 tenders coupés en morceaux, mélangés à la sauce Dynamite et garnis d'oignons frits croustillants.", i: ["tender", "tender", "tender", "sauce", "oignons"] } ] },
   { id: "formules", titre: "Formules", sous: "Tous nos menus sont servis avec frites et boisson.", items: [
     { n: "Menu Étudiant", img: "naan-tenders", p: 10.0, d: "Naan Tenders ou 10 Wings, avec frites et boisson." },
     { n: "Menu Enfant", img: "menu-enfant", p: 7.0, d: "Mini Wrap, frites et boisson." },
-    { n: "Menu Crousty Mini", img: "tenders-cheese", p: 8.9, d: "Crousty Mini, frites et boisson." },
+    { n: "Menu Crousti Mini", img: "crousti-original", p: 8.9, d: "Tasty Crousti Mini, frites et boisson." },
     { n: "Menu Mix", img: "wings-box", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
   { id: "family", titre: "Family Packs", items: [
     { n: "Family Box Wings", img: "family-wings", p: 25.0, d: "30 Wings." },
@@ -61,7 +65,7 @@ window.CC_MENU = [
     { n: "Frites", p: 2.5 }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
     { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.5 } ] },
   { id: "desserts", titre: "Desserts", items: [
-    { n: "Tiramisu", img: "tiramisu", p: 3.5 }, { n: "Donut", img: "donut", p: 2.0 }, { n: "Tarte au Daim", p: 3.5 } ] },
+    { n: "Tiramisu Spéculoos Caramel", img: "tiramisu-speculoos", p: 4.0, d: "Tiramisu crémeux au mascarpone, morceaux de spéculoos et caramel." }, { n: "Donut", img: "donut", p: 2.0 }, { n: "Tarte au Daim", p: 3.5 } ] },
   { id: "boissons", titre: "Boissons", items: [
     { n: "Boisson soft (33 cl)", p: 2.0 }, { n: "Eau", p: 1.5 }, { n: "Coca-Cola (1,5 L)", p: 4.0 } ] },
 ];
