@@ -44,8 +44,8 @@ window.CC_MENU = [
     { n: "Wrap Tenders", img: "wrap-tenders", p: 8.5, d: "3 tenders de poulet, cheddar fondant, salade et sauce mayonnaise au poivre.", i: ["tender", "tender", "tender", "cheddar", "salade", "sauce"] },
     { n: "Mini Wrap Tenders", img: "wrap-tenders", p: 3.0, d: "1 tender de poulet, cheddar fondant, salade et sauce Biggy.", i: ["tender", "cheddar", "salade", "sauce"] } ] },
   { id: "wings", titre: "Wings & Tenders", items: [
-    { n: "3 Wings", img: "wings", p: 4.0 }, { n: "6 Wings", img: "wings-box", p: 5.9 }, { n: "10 Wings", img: "wings-box", p: 9.5 },
-    { n: "3 Tenders", img: "tenders", p: 4.9 }, { n: "5 Tenders", img: "tenders-box", p: 7.0 }, { n: "10 Tenders", img: "tenders-box", p: 13.9 } ] },
+    { n: "3 Wings", img: "wings-cc", p: 4.0 }, { n: "6 Wings", img: "wings-cc", p: 5.9 }, { n: "10 Wings", img: "wings-cc", p: 9.5 },
+    { n: "3 Tenders", img: "tenders-cc", p: 4.9 }, { n: "5 Tenders", img: "tenders-cc", p: 7.0 }, { n: "10 Tenders", img: "tenders-cc", p: 13.9 } ] },
   { id: "crousty", titre: "Crousti", sous: "Riz thaï parfumé, poulet croustillant et sauce maison au choix.", items: [
     { n: "Tasty Crousti Mini", img: "crousti-original", p: 6.9, d: "Poulet frit croustillant, riz thaï parfumé, sauce maison au choix et oignons frits.", i: ["poulet", "sauce", "oignons"] },
     { n: "Crousti Original", img: "crousti-original", p: 11.5, d: "Poulet frit ultra croustillant, riz thaï parfumé, sauce blanche maison ou sauce au choix, oignons frits et persil frais.", i: ["poulet", "sauce", "oignons"], star: true },
@@ -56,7 +56,7 @@ window.CC_MENU = [
     { n: "Menu Étudiant", img: "naan-tenders", p: 10.0, d: "Naan Tenders ou 10 Wings, avec frites et boisson." },
     { n: "Menu Enfant", img: "menu-enfant", p: 7.0, d: "Mini Wrap, frites et boisson." },
     { n: "Menu Crousti Mini", img: "menu-crousti-mini", p: 12.5, d: "1 Tasty Crousti Mini, 1 tiramisu et 1 boisson au choix." },
-    { n: "Menu Mix", img: "wings-box", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
+    { n: "Menu Mix", img: "wings-cc", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
   { id: "family", titre: "Family Packs", items: [
     { n: "Family Box Wings", img: "family-wings", p: 25.0, d: "30 Wings." },
     { n: "Family Box Tenders", img: "family-tenders", p: 26.5, d: "20 Chicken Tenders." },
