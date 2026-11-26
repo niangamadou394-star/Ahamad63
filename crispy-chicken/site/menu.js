@@ -26,11 +26,11 @@ window.CC_MENU = [
     { n: "Naan Tenders", img: "naan-tenders", p: 8.5, d: "3 tenders de poulet, cheddar fondant, légumes et sauce au choix.", i: ["tender", "tender", "tender", "cheddar", "legumes", "sauce"] },
     { n: "Naan Tenders/Steak", img: "naan-tenders-steak", p: 9.5, d: "2 steaks hachés, 1 tender de poulet, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "tender", "cheddar", "legumes", "sauce"] },
     { n: "Naan Steak", img: "naan-steak", p: 8.5, d: "3 steaks hachés, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "steak", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Mix", img: "naan-mix", p: 9.5, d: "2 tenders de poulet, 1 steak haché, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["tender", "tender", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Tikka", img: "naan-tikka", p: 9.0, d: "250 g de poulet mariné à la sauce Tikka, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Curry", img: "naan-curry", p: 9.0, d: "250 g de poulet mariné à la sauce Curry, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Suprême", img: "naan-supreme", p: 9.0, d: "3 steaks hachés, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Crispy Dynamite", img: "naan-dynamite", p: 10.0, d: "2 tenders de poulet, 1 steak haché, 1 galette de pommes de terre, cheddar fondant, oignons frits et sauce Dynamite.", i: ["tender", "tender", "steak", "galette", "cheddar", "oignons", "sauce"], star: true },
+    { n: "Naan Mix", img: "naan-mix-cc", p: 9.5, d: "2 tenders de poulet, 1 steak haché, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["tender", "tender", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
+    { n: "Naan Tikka", img: "naan-tikka-cc", p: 9.0, d: "250 g de poulet mariné à la sauce Tikka, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
+    { n: "Naan Curry", img: "naan-curry-cc", p: 9.0, d: "250 g de poulet mariné à la sauce Curry, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
+    { n: "Naan Suprême", img: "naan-supreme-cc", p: 9.0, d: "3 steaks hachés, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
+    { n: "Naan Crispy Dynamite", img: "naan-dynamite-cc", p: 10.0, d: "2 tenders de poulet, 1 steak haché, 1 galette de pommes de terre, cheddar fondant, oignons frits et sauce Dynamite.", i: ["tender", "tender", "steak", "galette", "cheddar", "oignons", "sauce"], star: true },
     { n: "Naan Farmer", img: "naan-farmer", p: 9.0, d: "2 steaks hachés, 1 tender de poulet, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "tender", "cheddar", "legumes", "sauce"] },
     { n: "Cheese Naan", img: "cheese-naan", p: 2.5, d: "Naan maison au fromage fondant." } ] },
   { id: "burgers", titre: "Burgers", items: [
@@ -41,8 +41,8 @@ window.CC_MENU = [
     { n: "Crispy Twice Burger", img: "crispy-twice", p: 7.9, d: "3 tenders de poulet, 2 tranches de cheddar fondant, salade et sauce mayonnaise.", i: ["tender", "tender", "tender", "cheddar", "salade", "sauce"] } ] },
   { id: "wraps", titre: "Wraps", items: [
     { n: "Wrap Crispy Star", img: "wrap-star", p: 8.5, d: "2 tenders de poulet, 1 galette de pommes de terre, cheddar fondant, salade et sauce mayonnaise au poivre.", i: ["tender", "tender", "galette", "cheddar", "salade", "sauce"], star: true },
-    { n: "Wrap Tenders", img: "wrap-tenders", p: 8.5, d: "3 tenders de poulet, cheddar fondant, salade et sauce mayonnaise au poivre.", i: ["tender", "tender", "tender", "cheddar", "salade", "sauce"] },
-    { n: "Mini Wrap Tenders", img: "wrap-tenders", p: 3.0, d: "1 tender de poulet, cheddar fondant, salade et sauce Biggy.", i: ["tender", "cheddar", "salade", "sauce"] } ] },
+    { n: "Wrap Tenders", img: "wrap-tenders-cc", p: 8.5, d: "3 tenders de poulet, cheddar fondant, salade et sauce mayonnaise au poivre.", i: ["tender", "tender", "tender", "cheddar", "salade", "sauce"] },
+    { n: "Mini Wrap Tenders", img: "wrap-tenders-cc", p: 3.0, d: "1 tender de poulet, cheddar fondant, salade et sauce Biggy.", i: ["tender", "cheddar", "salade", "sauce"] } ] },
   { id: "wings", titre: "Wings & Tenders", items: [
     { n: "3 Wings", img: "wings-cc", p: 4.0 }, { n: "6 Wings", img: "wings-cc", p: 5.9 }, { n: "10 Wings", img: "wings-cc", p: 9.5 },
     { n: "3 Tenders", img: "tenders-cc", p: 4.9 }, { n: "5 Tenders", img: "tenders-cc", p: 7.0 }, { n: "10 Tenders", img: "tenders-cc", p: 13.9 } ] },
@@ -59,11 +59,11 @@ window.CC_MENU = [
     { n: "Menu Mix", img: "wings-cc", p: 10.0, d: "3 Wings + 3 Tenders, avec frites et boisson." } ] },
   { id: "family", titre: "Family Packs", items: [
     { n: "Family Box Wings", img: "family-wings", p: 25.0, d: "30 Wings." },
-    { n: "Family Box Tenders", img: "family-tenders", p: 26.5, d: "20 Chicken Tenders." },
+    { n: "Family Box Tenders", img: "family-tenders-cc", p: 26.5, d: "20 Chicken Tenders." },
     { n: "Family Mix Box", img: "family-mix", p: 25.9, d: "15 Wings + 10 Tenders." } ] },
   { id: "sides", titre: "Accompagnements", items: [
     { n: "Frites", img: "frites", p: 2.5 }, { n: "Naan Nature", img: "cheese-naan", p: 2.5, d: "Naan fait maison, moelleux et doré, pour accompagner vos plats." }, { n: "Frites au cheddar", p: 4.5 }, { n: "Tenders Cheese", img: "tenders-cheese", p: 5.5 },
-    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", img: "pdt-rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings", p: 3.9, d: "Anneaux d'oignon panés, ultra croustillants et dorés." } ] },
+    { n: "Tenders Dynamite", p: 5.5 }, { n: "Pommes de terre en rondelles", img: "pdt-rondelles", p: 4.5 }, { n: "Onion Rings (6 pièces)", img: "onion-rings-cc", p: 3.9, d: "Anneaux d'oignon panés, ultra croustillants et dorés." } ] },
   { id: "desserts", titre: "Desserts", items: [
     { n: "Tiramisu Spéculoos Caramel", img: "tiramisu-speculoos", p: 4.0, d: "Tiramisu crémeux au mascarpone, morceaux de spéculoos et caramel." }, { n: "Donut", img: "donut", p: 2.0 }, { n: "Tarte au Daim", p: 3.5 } ] },
   { id: "boissons", titre: "Boissons", items: [

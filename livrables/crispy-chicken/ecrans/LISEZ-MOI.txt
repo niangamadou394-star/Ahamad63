@@ -1,0 +1,19 @@
+CRISPY CHICKEN - MENUS ÉCRANS (FIXES, SANS ANIMATION)
+
+Écran 1 : Naans, Formules, Desserts, Boissons
+Écran 2 : Burgers, Wraps, Crousti, Wings & Tenders, Family Packs, Accompagnements
+
+MEILLEURE SOLUTION : l'image fixe (aucune pause, aucune coupure)
+  Ecran1_Menu_4K.png / Ecran2_Menu_4K.png        -> télé 4K
+  Ecran1_Menu_FullHD.png / Ecran2_Menu_FullHD.png -> télé Full HD
+  Sur la télé : clé USB > Photos > ouvrir l'image > désactiver le diaporama.
+
+SI LA TÉLÉ NE GARDE PAS UNE IMAGE AFFICHÉE : la vidéo d'une heure
+  Ecran1_Menu_1h_FullHD.mp4 / Ecran2_Menu_1h_FullHD.mp4
+  Même image pendant 60 minutes : une seule relance par heure, invisible.
+  Activer la lecture en boucle (Répéter).
+
+Version de secours 4K (1 minute, en boucle) :
+  Ecran1_Menu_1min_4K.mp4 / Ecran2_Menu_1min_4K.mp4
+
+Penser à désactiver la mise en veille automatique de la télé.
