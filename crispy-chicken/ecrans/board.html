@@ -31,9 +31,15 @@ body{background:#141414;color:#fff;font-family:Cond,Impact,sans-serif;position:r
 .list .row .sp{flex:1}
 .list .row .tag{margin-top:0}.list .row .tag b{font-size:24px}.list .row .tag i{font-size:15px}.list .row .tag sup{font-size:14px}
 .foot{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:18px;letter-spacing:.2em;color:#ffffff70}
+
+.tag{position:relative;overflow:hidden}
+.tag::after{content:"";position:absolute;top:0;bottom:0;width:45%;left:var(--sh,-60%);background:linear-gradient(100deg,transparent,#ffffff70,transparent);transform:skewX(-20deg)}
+.card .glow{position:absolute;inset:0;border-radius:14px;box-shadow:0 0 0 2px #F5B400,0 0 26px #F5B40066;opacity:0;pointer-events:none}
+.emb{position:absolute;inset:0;pointer-events:none;z-index:4}.emb i{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:50%;background:#FFD84D;box-shadow:0 0 10px 3px #F5B40088}
+.logo{transform-origin:50% 50%}
 </style></head><body>
 <div class="bg"><div class="brick"></div></div><div class="frame"></div>
-<div class="halal">100 % POULET HALAL</div><img class="logo" src="../site/img/icone.svg" alt="">
+<img class="logo" src="../site/img/icone.svg" alt="">
 <div id="root"></div>
 <script src="../site/menu.js"></script>
 <script>
@@ -62,5 +68,28 @@ if (KEY === "naans") {
   html += Z(1220, 640, 670) + T("Accompagnements", "") + LIST(cat("sides").items, { fs: 19 }) + "</div>";
 }
 document.getElementById("root").innerHTML = html;
+
+/* animations douces, périodiques (boucle parfaite de LOOP secondes) */
+const LOOP = 20; window.DURATION = LOOP;
+const TAU = Math.PI * 2, w = t => TAU * t / LOOP;
+const cards = [...document.querySelectorAll(".card")], imgs = cards.map(c => c.querySelector(".ph img")), tags = [...document.querySelectorAll(".tag")];
+cards.forEach(c => { const g = document.createElement("div"); g.className = "glow"; c.appendChild(g); });
+const rows = [...document.querySelectorAll(".list .row img")];
+const emb = document.createElement("div"); emb.className = "emb"; document.body.appendChild(emb);
+const R = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const E = [...Array(28)].map((_, i) => { const e = document.createElement("i"); emb.appendChild(e); return { e, x: R(i) * 1920, k: 1 + Math.floor(R(i + 50) * 2), ph: R(i + 99), s: .5 + R(i + 7) * .8 }; });
+const logo = document.querySelector(".logo");
+window.render = t => {
+  t = ((t % LOOP) + LOOP) % LOOP; const a = w(t);
+  imgs.forEach((im, i) => { if (!im) return; const p = i * 0.9; im.style.transform = `translateY(${Math.sin(a * 2 + p) * 5}px) rotate(${Math.sin(a + p) * 1.2}deg) scale(${1 + Math.sin(a * 2 + p + 1) * 0.015})`; });
+  rows.forEach((im, i) => { im.style.transform = `translateY(${Math.sin(a * 2 + i) * 3}px) rotate(${Math.sin(a + i) * 3}deg)`; });
+  /* un produit mis en lumière à tour de rôle : chaque carte une fois par boucle */
+  const n = cards.length, slot = LOOP / n;
+  cards.forEach((c, i) => { const u = (t - i * slot + LOOP) % LOOP, on = u < slot * 1.6 ? Math.sin(Math.PI * u / (slot * 1.6)) : 0; c.querySelector(".glow").style.opacity = on * 0.9; c.style.transform = `scale(${1 + on * 0.025})`; });
+  tags.forEach((g, i) => { const ph = ((t / LOOP) * 4 + i * 0.137) % 1; g.style.setProperty("--sh", (-60 + ph * 260) + "%"); });
+  E.forEach(m => { const ph = ((t / LOOP) * m.k + m.ph) % 1, y = 1080 - ph * 1200; m.e.style.transform = `translate(${m.x + Math.sin(a * 2 + m.ph * 9) * 25}px,${y}px) scale(${m.s})`; m.e.style.opacity = Math.sin(ph * Math.PI) * .5; });
+  logo.style.transform = `rotate(${Math.sin(a) * 4}deg) scale(${1 + Math.sin(a * 2) * 0.03})`;
+};
+window.render(0);
 window.READY = true;
 </script></body></html>
