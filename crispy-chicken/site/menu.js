@@ -30,7 +30,7 @@ window.CC_MENU = [
     { n: "Naan Tikka", img: "naan-tikka-cc", p: 9.0, d: "250 g de poulet mariné à la sauce Tikka, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
     { n: "Naan Curry", img: "naan-curry-cc", p: 9.0, d: "250 g de poulet mariné à la sauce Curry, cheddar fondant, légumes et sauce au choix.", i: ["poulet", "cheddar", "legumes", "sauce"] },
     { n: "Naan Suprême", img: "naan-supreme-cc", p: 9.0, d: "3 steaks hachés, 1 œuf, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "steak", "oeuf", "cheddar", "legumes", "sauce"] },
-    { n: "Naan Crispy Dynamite", img: "naan-dynamite-cc", p: 10.0, d: "2 tenders de poulet, 1 steak haché, 1 galette de pommes de terre, cheddar fondant, oignons frits et sauce Dynamite.", i: ["tender", "tender", "steak", "galette", "cheddar", "oignons", "sauce"], star: true },
+    { n: "Naan Dynamite Crispy", img: "naan-dynamite-cc", p: 10.0, d: "2 tenders de poulet, 1 steak haché, 1 galette de pommes de terre, cheddar fondant, oignons frits et sauce Dynamite.", i: ["tender", "tender", "steak", "galette", "cheddar", "oignons", "sauce"], star: true },
     { n: "Naan Farmer", img: "naan-farmer", p: 9.0, d: "2 steaks hachés, 1 tender de poulet, cheddar fondant, légumes et sauce au choix.", i: ["steak", "steak", "tender", "cheddar", "legumes", "sauce"] },
     { n: "Cheese Naan", img: "cheese-naan", p: 2.5, d: "Naan maison au fromage fondant." } ] },
   { id: "burgers", titre: "Burgers", items: [

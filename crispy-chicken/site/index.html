@@ -324,7 +324,7 @@ const group = list => { const m = new Map(); (list || []).forEach(k => m.set(k, 
 
 
 /* signatures */
-const SIG = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["wraps", "Wrap Crispy Star"]];
+const SIG = [["naans", "Naan Dynamite Crispy"], ["burgers", "Crispy Burger"], ["wraps", "Wrap Crispy Star"]];
 $("sg").innerHTML = SIG.map(([c, n]) => { const it = cat(c).items.find(x => x.n === n);
   return `<article class="sc rv" data-n="${esc(it.n)}"><div class="ph"><img src="img/p/${it.img}.webp" alt="${esc(it.n)}" loading="lazy"></div><span class="tag">${esc(cat(c).titre)}</span><h3 class="H">${esc(it.n)}</h3><p>${esc(it.d)}</p>
   <div class="stack">${group(it.i).map(([k, q]) => `<span class="ing"><i>${IC[k]}</i>${q > 1 ? `<b>${q}×</b>` : ""}${esc(ING[k])}</span>`).join("")}</div>
@@ -372,7 +372,7 @@ $("q").addEventListener("input", e => { const q = e.target.value.trim().toLowerC
 
 
 /* vitrine horizontale pilotée par le défilement */
-(() => { const STAR = [["naans", "Naan Crispy Dynamite"], ["burgers", "Crispy Burger"], ["naans", "Naan Tenders"], ["wraps", "Wrap Crispy Star"], ["naans", "Naan Mix"], ["wings", "10 Wings"], ["family", "Family Box Tenders"], ["naans", "Naan Suprême"]];
+(() => { const STAR = [["naans", "Naan Dynamite Crispy"], ["burgers", "Crispy Burger"], ["naans", "Naan Tenders"], ["wraps", "Wrap Crispy Star"], ["naans", "Naan Mix"], ["wings", "10 Wings"], ["family", "Family Box Tenders"], ["naans", "Naan Suprême"]];
   $("trk").innerHTML = STAR.map(([c, n]) => { const it = cat(c).items.find(x => x.n === n); return `<article class="scd" data-n="${esc(it.n)}"><div class="ph"><img src="img/p/${it.img}.webp" alt="${esc(it.n)}" loading="lazy"></div><small>${esc(cat(c).titre)}</small><h3 class="H">${esc(it.n)}</h3><div class="pr">${P(it.p)}</div><span class="go">→</span></article>`; }).join("");
   const sec = $("stars"), trk = $("trk"), cards = [...trk.children], big = $("bigt"), bar = $("sbar"), RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
   function frame() { if (RM) return; const r = sec.getBoundingClientRect(), tot = sec.offsetHeight - innerHeight, p = Math.min(1, Math.max(0, -r.top / tot));

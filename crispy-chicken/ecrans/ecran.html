@@ -113,7 +113,7 @@ const PAGES = {
   naans: [
     L1(() => T(60, 34, "Nos Naans", "Spéciaux") + SUB(66, 168, "Pain naan cuit au tandoor · 100 % poulet halal · sauce au choix") + BAR(66, 206, 260)
       + [0, 1, 2, 3, 4].map(i => NA(i, 50 + i * 366, 232)).join("") + [5, 6, 7, 8, 9].map((i, k) => NA(i, 50 + k * 366, 640)).join("")),
-    SP("naans", "Naan Crispy Dynamite", "La signature de la maison"), SP("naans", "Naan Mix"), SP("naans", "Naan Tenders"), SP("naans", "Naan Suprême"),
+    SP("naans", "Naan Dynamite Crispy", "La signature de la maison"), SP("naans", "Naan Mix"), SP("naans", "Naan Tenders"), SP("naans", "Naan Suprême"),
     L1(() => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Boisson comprise dans tous nos menus") + BAR(66, 206, 260)
       + cat("formules").items.map((it, k) => CARD(it, 40 + (k % 2) * 470, 236 + Math.floor(k / 2) * 420, 440, 210)).join("")
       + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 150, 840, cat("sides").items, { rh: 66, fs: 30 })
