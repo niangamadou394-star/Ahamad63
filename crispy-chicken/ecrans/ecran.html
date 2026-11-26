@@ -1,0 +1,199 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Brush;src:url(fonts/KaushanScript.woff2) format("woff2")}
+@font-face{font-family:Cond;src:url(fonts/Anton.woff2) format("woff2")}
+@font-face{font-family:WH;src:url(../site/fonts/lilita-one-latin-ext.woff2) format("woff2");font-display:swap;unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:WH;src:url(../site/fonts/lilita-one-latin.woff2) format("woff2");font-display:swap;unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#121212;color:#fff;font-family:Cond,Impact,sans-serif;position:relative}
+/* fond ardoise + briques */
+.bg{position:absolute;inset:-40px;background:
+  radial-gradient(ellipse 60% 70% at 78% 40%,#F5B4001c,transparent 70%),
+  radial-gradient(ellipse 50% 60% at 10% 100%,#E0281E22,transparent 70%),
+  #171717}
+.slate{position:absolute;inset:0;opacity:.55;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .9 0'/></filter><rect width='600' height='600' filter='url(%23n)'/></svg>")}
+.brick{position:absolute;inset:0;opacity:.16;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='120'><g fill='none' stroke='%23000' stroke-width='5'><path d='M0 2.5H240M0 62.5H240M2.5 0V60M122.5 0V60M62.5 60V120M182.5 60V120'/></g></svg>")}
+.cloud{position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='.004' numOctaves='4' seed='7'/><feColorMatrix values='0 0 0 0 .6  0 0 0 0 .6  0 0 0 0 .6  0 0 0 .55 -.1'/></filter><rect width='1920' height='1080' filter='url(%23c)'/></svg>")}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 45%,transparent 55%,#000a 100%);pointer-events:none;z-index:8}
+.corner{position:absolute;right:46px;top:30px;display:flex;align-items:center;gap:18px;z-index:7}
+.corner img{width:104px;height:104px;filter:drop-shadow(0 10px 20px #000c)}
+.corner .hl{font-family:Cond;font-size:20px;letter-spacing:.2em;color:#F5B400;border:2px solid #F5B400;border-radius:999px;padding:8px 18px}
+.page{position:absolute;inset:0;z-index:2;opacity:0;visibility:hidden}
+/* titres pinceau */
+.ttl{position:absolute;font-family:Brush;font-size:118px;line-height:.95;white-space:nowrap;text-shadow:0 6px 0 #0006,0 0 40px #0008}
+.ttl em{font-style:normal;color:#E83A2E}
+.ttl.sm{font-size:84px}.ttl.small2{font-size:74px}
+.sub{position:absolute;font-family:Cond;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#ffffffb0}
+/* cartes produits */
+.card{position:absolute;display:flex;flex-direction:column;align-items:center;text-align:center}
+.card .ph{position:relative;width:100%;display:grid;place-items:center}
+.card .ph img{position:absolute;inset:0;margin:auto;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 26px 24px #000d)}
+.card .nm{font-family:Cond;font-size:36px;line-height:1;text-transform:uppercase;margin-top:12px;letter-spacing:.5px}
+.card .ds{font-family:Arial,sans-serif;font-weight:700;font-size:16px;line-height:1.3;color:#ffffffa0;text-transform:uppercase;margin-top:8px;max-width:330px}
+.card .star{position:absolute;top:0;left:10px;font-family:Cond;font-size:18px;letter-spacing:.18em;background:#F5B400;color:#140f05;padding:5px 12px;border-radius:6px;transform:rotate(-6deg);z-index:3}
+.glowc{position:absolute;left:10%;right:10%;top:15%;bottom:0;border-radius:50%;background:radial-gradient(circle,#F5B40055,transparent 65%);filter:blur(14px);opacity:0}
+/* étiquette prix */
+.tag{position:relative;display:inline-flex;align-items:flex-start;background:linear-gradient(180deg,#F2402F,#C3170E);color:#fff;font-family:Cond;padding:6px 16px 4px;border-radius:6px;box-shadow:0 8px 18px #0009,inset 0 0 0 2px #ffffff2a;overflow:hidden;line-height:1;margin-top:12px}
+.tag b{font-weight:400;font-size:46px}.tag i{font-style:normal;font-size:30px;margin:4px 1px 0}.tag sup{font-size:26px;margin-top:4px}
+.tag::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:var(--sh,-60%);background:linear-gradient(100deg,transparent,#ffffff70,transparent);transform:skewX(-20deg)}
+.tag.big b{font-size:72px}.tag.big i{font-size:44px}.tag.big sup{font-size:40px}
+/* listes */
+.list{position:absolute}
+.list .row{display:flex;align-items:center;gap:14px;height:76px;border-bottom:2px dashed #ffffff1c}
+.list .row .n{font-family:Cond;font-size:34px;text-transform:uppercase;white-space:nowrap}
+.list .row .q{font-family:Arial,sans-serif;font-weight:700;font-size:15px;color:#ffffff90;text-transform:uppercase}
+.list .row .sp{flex:1}
+.list .row .tag{margin-top:0;transform:rotate(-2deg)}.list .row .tag b{font-size:36px}.list .row .tag i{font-size:24px}.list .row .tag sup{font-size:20px}
+.bar{position:absolute;height:6px;border-radius:3px;background:linear-gradient(90deg,#E0281E,#F5B400)}
+.hero{position:absolute}
+.hero img{width:100%;filter:drop-shadow(0 40px 40px #000d)}
+.wipe{position:absolute;top:-200px;bottom:-200px;width:520px;left:-700px;background:linear-gradient(90deg,transparent,#F5B400 30%,#FFD84D 50%,#F5B400 70%,transparent);transform:skewX(-18deg);z-index:9;opacity:.95;mix-blend-mode:normal}
+.emb{position:absolute;inset:0;pointer-events:none;z-index:6}
+.emb i{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFD84D;box-shadow:0 0 12px 3px #F5B40088}
+.smk{position:absolute;width:110px;height:200px;border-radius:50%;background:radial-gradient(ellipse,#ffffff26,transparent 70%);filter:blur(16px);pointer-events:none;z-index:4}
+
+/* --- premium --- */
+.frame{position:absolute;inset:18px;border:1.5px solid #F5B40040;border-radius:14px;z-index:7;pointer-events:none}
+.frame::before,.frame::after{content:"";position:absolute;width:70px;height:70px;border:3px solid #F5B400}
+.frame::before{left:-3px;top:-3px;border-right:0;border-bottom:0;border-radius:14px 0 0 0}
+.frame::after{right:-3px;bottom:-3px;border-left:0;border-top:0;border-radius:0 0 14px 0}
+.wm{position:absolute;right:-260px;bottom:-300px;width:1000px;height:1000px;opacity:.06;z-index:1;filter:grayscale(1) brightness(2)}
+.corner{right:40px;top:30px}
+.corner .ring{position:absolute;inset:-10px;border-radius:50%;border:2px solid #F5B400;opacity:0}
+.corner img{width:120px;height:120px}
+.ttl em{background:linear-gradient(180deg,#FF5A47,#D41A10);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #0007)}
+.ttl{text-shadow:none;filter:drop-shadow(0 6px 0 #0006)}
+.shine{position:absolute;inset:0;z-index:6;pointer-events:none;background:linear-gradient(105deg,transparent 40%,#ffffff12 48%,#ffffff26 50%,#ffffff12 52%,transparent 60%);background-size:300% 100%}
+/* séquence logo */
+.lg{position:absolute;inset:0;z-index:5;display:grid;place-items:center;opacity:0;visibility:hidden;background:radial-gradient(circle at 50% 46%,#2a1d00 0%,#0d0d0d 55%,#070707 100%)}
+.lg .rays{position:absolute;left:50%;top:44%;width:2400px;height:2400px;margin:-1200px 0 0 -1200px;background:repeating-conic-gradient(from 0deg,#F5B40016 0deg 6deg,transparent 6deg 18deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 10%,transparent 60%);mask:radial-gradient(circle,#000 10%,transparent 60%)}
+.lg .hal{position:absolute;left:50%;top:44%;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,#F5B40055,transparent 62%);filter:blur(10px)}
+.lg .ring2{position:absolute;left:50%;top:44%;border-radius:50%;border:3px solid #F5B400}
+.lg .in{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:-40px}
+.lg .in img{width:420px;height:420px;filter:drop-shadow(0 30px 50px #000) drop-shadow(0 0 60px #F5B40055)}
+.lg .wd{font-family:WH;font-size:120px;line-height:1;margin-top:26px;letter-spacing:2px;white-space:nowrap}
+.lg .wd span{display:inline-block}
+.lg .wd .g{background:linear-gradient(180deg,#FFE27A,#F5B400 55%,#C97A00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg .tl{font-family:Cond;font-size:30px;letter-spacing:.55em;color:#ffffffc0;margin-top:22px;display:flex;align-items:center;gap:26px}
+.lg .tl::before,.lg .tl::after{content:"";width:90px;height:2px;background:linear-gradient(90deg,transparent,#F5B400)}.lg .tl::after{transform:scaleX(-1)}
+</style></head><body>
+<div class="bg"><div class="cloud"></div><div class="slate"></div><div class="brick"></div></div>
+<img class="wm" id="wm" src="../site/img/icone.svg" alt=""><div class="corner"><span class="ring" id="cring"></span><img id="cimg" src="../site/img/icone.svg" alt=""></div><div class="frame"></div><div class="shine" id="shine"></div>
+<div id="pages"></div>
+<div class="lg" id="lg"><div class="rays"></div><div class="hal"></div><div class="ring2" id="r1"></div><div class="ring2" id="r2"></div>
+<div class="in"><img id="lgi" src="../site/img/icone.svg" alt=""><div class="wd" id="lgw">Crispy <span class="g">Chicken</span></div><div class="tl" id="lgt">NAAN · WINGS · TENDERS</div></div></div>
+<div class="emb" id="emb"></div>
+<div class="wipe" id="wipe"></div>
+<div class="vig"></div>
+<script src="../site/menu.js"></script>
+<script>
+const $ = id => document.getElementById(id), M = window.CC_MENU;
+const cat = id => M.find(c => c.id === id), item = (c, n) => cat(c).items.find(x => x.n === n);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cl = x => Math.max(0, Math.min(1, x)), pr = (t, a, d) => cl((t - a) / d), eo = x => 1 - Math.pow(1 - cl(x), 3);
+const eob = x => { x = cl(x); const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const tag = (p, big) => { const [e, c] = p.toFixed(2).split("."); return `<span class="tag ${big ? "big" : ""}"><b>${e}</b><i>€</i><sup>${c}</sup></span>`; };
+const short = d => (d || "").replace(/\.$/, "");
+const img = (it, fb) => it.img ? `../site/img/p/${it.img}.webp` : fb;
+/* --- composants --- */
+const T = (x, y, a, b, cls = "") => `<div class="ttl ${cls}" data-a="title" style="left:${x}px;top:${y}px">${a}${b ? ` <em>${b}</em>` : ""}</div>`;
+const SUB = (x, y, s) => `<div class="sub" data-a="fade" style="left:${x}px;top:${y}px">${s}</div>`;
+const CARD = (it, x, y, w, ph, o = {}) => `<div class="card" data-a="card" data-spot="1" style="left:${x}px;top:${y}px;width:${w}px"><div class="ph" style="height:${ph}px">${it.img ? `<div class="glowc"></div><img src="${img(it)}" alt="">` : ""}</div>${it.star ? `<span class="star">SIGNATURE</span>` : ""}<div class="nm">${esc(it.n)}</div>${o.nod ? "" : `<div class="ds">${esc(short(it.d))}</div>`}${tag(it.p)}</div>`;
+const LIST = (x, y, w, items, o = {}) => `<div class="list" style="left:${x}px;top:${y}px;width:${w}px">${items.map(it => `<div class="row" data-a="row"${o.rh ? ` style="height:${o.rh}px"` : ""}><span class="n" style="${o.fs ? `font-size:${o.fs}px` : ""}">${esc(it.n)}</span>${o.q && it.d ? `<span class="q">${esc(short(it.d))}</span>` : ""}<span class="sp"></span>${tag(it.p)}</div>`).join("")}</div>`;
+const HERO = (src, x, y, w, extra = "") => `<div class="hero" data-a="hero" style="left:${x}px;top:${y}px;width:${w}px">${extra}<img src="${src}" alt=""></div>`;
+const BAR = (x, y, w) => `<div class="bar" data-a="bar" style="left:${x}px;top:${y}px;width:${w}px"></div>`;
+const SPOT = (c, n, kick) => { const it = item(c, n), w = esc(it.n).split(" "), last = w.pop();
+  return HERO(img(it), 110, 150, 860) + `<div class="sub" data-a="fade" style="left:1066px;top:300px">${kick || esc(cat(c).titre)}</div>`
+    + `<div class="ttl" data-a="title" style="left:1056px;top:346px;width:800px;white-space:normal">${w.join(" ")} <em>${last}</em></div>`
+    + (it.d ? `<div data-a="fade" style="position:absolute;left:1066px;top:640px;width:760px;font:700 27px Arial,sans-serif;color:#ffffffc4;text-transform:uppercase;line-height:1.4">${esc(short(it.d))}</div>` : "")
+    + `<div style="position:absolute;left:1066px;top:${it.d ? 800 : 640}px">${tag(it.p, true)}</div>` + (it.star ? `<span class="star" style="position:absolute;left:1066px;top:232px;font-family:Cond;font-size:22px;letter-spacing:.18em;background:#F5B400;color:#140f05;padding:6px 14px;border-radius:6px">SIGNATURE</span>` : ""); };
+const L1 = f => Object.assign(f, { logo: 1, dur: 16 }), SP = (c, n, k) => Object.assign(() => SPOT(c, n, k), { dur: 8 });
+/* --- pages --- */
+const naans = cat("naans").items, NA = (i, x, y) => CARD(naans[i], x, y + (naans[i].img ? 0 : 120), 340, naans[i].img ? 220 : 0);
+const PAGES = {
+  naans: [
+    L1(() => T(60, 34, "Nos Naans", "Spéciaux") + SUB(66, 168, "Pain naan cuit au tandoor · 100 % poulet halal · sauce au choix") + BAR(66, 206, 260)
+      + [0, 1, 2, 3, 4].map(i => NA(i, 50 + i * 366, 232)).join("") + [5, 6, 7, 8, 9].map((i, k) => NA(i, 50 + k * 366, 640)).join("")),
+    SP("naans", "Naan Dynamite Crispy", "La signature de la maison"), SP("naans", "Naan Mix"), SP("naans", "Naan Tenders"), SP("naans", "Naan Suprême"),
+    L1(() => T(60, 34, "Nos", "Formules") + SUB(66, 168, "Boisson comprise dans tous nos menus") + BAR(66, 206, 260)
+      + cat("formules").items.map((it, k) => CARD(it, 40 + (k % 2) * 470, 236 + Math.floor(k / 2) * 420, 440, 210)).join("")
+      + T(1010, 60, "Accompagnements", "", "sm small2") + LIST(1016, 150, 840, cat("sides").items, { rh: 66, fs: 30 })
+      + T(1010, 640, "Desserts", "", "sm") + LIST(1016, 735, 420, cat("desserts").items, { fs: 21 })
+      + T(1460, 640, "Boissons", "", "sm") + LIST(1466, 735, 400, cat("boissons").items, { fs: 26 })),
+    SP("formules", "Menu Étudiant", "Frites et boisson comprises"), SP("naans", "Naan Tikka"), SP("naans", "Naan Curry"), SP("naans", "Naan Farmer")
+  ],
+  burgers: [
+    L1(() => T(60, 30, "Nos", "Burgers") + BAR(66, 158, 220)
+      + cat("burgers").items.map((it, k) => CARD(it, 40 + k * 372, 168, 352, 190, { nod: k < 2 })).join("")
+      + T(60, 560, "Nos", "Wraps") + BAR(66, 688, 200)
+      + cat("wraps").items.map((it, k) => CARD(it, 40 + k * 372, 690, 352, 180)).join("")
+      + HERO("../site/img/p/crispy-burger.webp", 1230, 690, 600, `<div class="ttl sm" style="position:absolute;left:300px;top:-64px;font-size:64px">Le <em>Crispy</em></div>`)),
+    SP("burgers", "Crispy Burger", "La signature de la maison"), SP("burgers", "Crispy Twice Burger"), SP("burgers", "Big Steak Burger"), SP("wraps", "Wrap Crispy Star"), SP("wraps", "Wrap Tenders"),
+    L1(() => T(60, 34, "Wings &", "Tenders", "sm") + BAR(66, 140, 220)
+      + HERO("../site/img/p/wings-box.webp", 40, 170, 330) + HERO("../site/img/p/tenders-box.webp", 340, 190, 330)
+      + LIST(66, 470, 600, cat("wings").items)
+      + T(720, 34, "Crousti", "", "sm") + SUB(726, 140, "Riz thaï · poulet · sauce maison") + HERO("../site/img/p/crousti-original.webp", 800, 180, 330)
+      + LIST(716, 500, 520, cat("crousty").items, { fs: 25 })
+      + T(1280, 150, "Family", "Packs", "sm") + BAR(1286, 256, 220)
+      + cat("family").items.map((it, k) => `<div class="card" data-a="card" data-spot="1" style="left:1270px;top:${290 + k * 255}px;width:600px;flex-direction:row;text-align:left;gap:24px"><div class="ph" style="width:230px;height:230px"><div class="glowc"></div><img src="${img(it)}" alt=""></div><div><div class="nm" style="margin:0">${esc(it.n)}</div><div class="ds">${esc(short(it.d))}</div>${tag(it.p)}</div></div>`).join("")),
+    SP("crousty", "Crousti Alloco Crunch", "Nouveau"), SP("crousty", "Bowl Tenders Dynamite"), SP("wings", "10 Wings", "À partager… ou pas"), SP("wings", "5 Tenders"), SP("family", "Family Box Tenders", "Pour toute la famille"), SP("family", "Family Mix Box", "Pour toute la famille")
+  ]
+};
+const KEY = new URLSearchParams(location.search).get("s") || "naans";
+const LD = 3.2; let TT = 0; const LOGOS = [], WIPES = [];
+const P = PAGES[KEY].map((f, i) => { const el = document.createElement("div"); el.className = "page"; el.innerHTML = f(); $("pages").appendChild(el);
+  if (f.logo) { LOGOS.push(TT); TT += LD; } WIPES.push(TT); const a = TT, PD = f.dur || 15; TT += PD;
+  const q = s => [...el.querySelectorAll(`[data-a="${s}"]`)];
+  return { el, a, PD, titles: q("title"), fades: q("fade"), cards: q("card"), rows: q("row"), heros: q("hero"), bars: q("bar"), tags: [...el.querySelectorAll(".tag")], spots: [...el.querySelectorAll("[data-spot]")], smk: [] }; });
+const T0 = TT; window.DURATION = T0;
+/* fumée au-dessus des produits mis en avant */
+P.forEach(pg => pg.spots.forEach(c => { if (!c.querySelector(".ph img")) return; for (let j = 0; j < 2; j++) { const s = document.createElement("div"); s.className = "smk"; c.querySelector(".ph").appendChild(s); s.style.left = (30 + j * 30) + "%"; s.style.top = "-10%"; pg.smk.push([s, c, j]); } }));
+const EMB = [...Array(30)].map((_, i) => { const e = document.createElement("i"); $("emb").appendChild(e); const r = n => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); }; return { e, x: r(1) * 1920, sp: 40 + r(2) * 70, ph: r(3), sz: .5 + r(4), sw: 20 + r(5) * 40 }; });
+const LW = $("lgw"); LW.innerHTML = "Crispy".split("").map(c => `<span>${c}</span>`).join("") + "&nbsp;" + "Chicken".split("").map(c => `<span class="g">${c}</span>`).join("");
+const LS = [...LW.querySelectorAll("span")];
+function render(t) {
+  t = ((t % T0) + T0) % T0;
+  P.forEach((pg, pi) => {
+    const PD = pg.PD; let u = t - pg.a; if (u < 0) u += T0; if (u >= PD || u < 0) { pg.el.style.visibility = "hidden"; return; }
+    const out = pr(u, PD - .55, .55); pg.el.style.visibility = "visible"; pg.el.style.opacity = 1 - out;
+    pg.el.style.transform = `scale(${1 + out * .04})`;
+    pg.titles.forEach((e, j) => { const k = eo(pr(u, .35 + j * .35, 1.1)); e.style.clipPath = `inset(-20% ${100 - k * 112}% -30% -5%)`; e.style.transform = `translateY(${(1 - k) * 12}px) rotate(${(1 - k) * -2}deg)`; });
+    pg.fades.forEach((e, j) => { const k = eo(pr(u, .9 + j * .2, .7)); e.style.opacity = k; e.style.transform = `translateX(${(1 - k) * -30}px)`; });
+    pg.bars.forEach((e, j) => { const k = eo(pr(u, .7 + j * .3, .8)); e.style.transform = `scaleX(${k})`; e.style.transformOrigin = "left"; });
+    pg.heros.forEach((e, j) => { const k = eob(pr(u, .6 + j * .25, 1.1)); e.style.opacity = cl(k * 1.5); e.style.transform = `translateY(${(1 - k) * 120 + Math.sin(u * 1.1 + j) * 8}px) rotate(${(1 - cl(k)) * 8 + Math.sin(u * .7 + j) * 1.5}deg) scale(${.85 + .15 * cl(k)})`; });
+    pg.rows.forEach((e, j) => { const k = eo(pr(u, 1 + j * .07, .6)); e.style.opacity = k; e.style.transform = `translateX(${(1 - k) * 50}px)`; });
+    /* produit mis en avant à tour de rôle */
+    const n = pg.cards.length, cyc = 1.25, cur = Math.floor((u - 2.4) / cyc), ph = ((u - 2.4) / cyc) % 1;
+    pg.cards.forEach((e, j) => { const k = eob(pr(u, .5 + j * .09, .9));
+      const on = u > 2.4 && cur % n === j ? Math.sin(cl(ph) * Math.PI) : 0;
+      e.style.opacity = cl(k * 1.4); e.style.transform = `translateY(${(1 - k) * 70}px) scale(${(.9 + .1 * cl(k)) * (1 + on * .06)})`; e.style.zIndex = on > 0 ? 5 : 1;
+      const im = e.querySelector(".ph img") || { style: {} }; im.style.transform = `translateY(${Math.sin(u * 1.4 + j * .8) * 6 - on * 14}px) rotate(${Math.sin(u * .9 + j) * 1.4 + on * -3}deg) scale(${1 + on * .1})`;
+      const gc = e.querySelector(".glowc"); if (gc) gc.style.opacity = on; });
+    pg.smk.forEach(([s, c, j], q) => { const p2 = ((u * .32 + q * .37) % 1); s.style.opacity = Math.sin(p2 * Math.PI) * .7; s.style.transform = `translateY(${-p2 * 170}px) scale(${.6 + p2})`; });
+    pg.tags.forEach((e, j) => { const k = eob(pr(u, 1.2 + j * .05, .5)); e.style.scale = String(.4 + .6 * k); e.style.opacity = cl(k * 2);
+      const sh = ((u * .45 + j * .13) % 2.2); e.style.setProperty("--sh", (-60 + sh * 110) + "%"); });
+  });
+
+  /* séquence logo */
+  { let lu = -1; LOGOS.forEach(s => { const v = t - s; if (v >= -0.4 && v < LD) lu = v; }); if (t > T0 - .4) lu = t - T0;
+    const L = $("lg");
+    if (lu < -0.4 || lu >= LD) { L.style.visibility = "hidden"; L.style.opacity = 0; }
+    else { L.style.visibility = "visible"; L.style.opacity = cl((lu + .4) / .4) * (1 - pr(lu, LD - .35, .35));
+      const k = eob(pr(lu, .05, .9)); $("lgi").style.transform = `scale(${.3 + .7 * k}) rotate(${(1 - cl(k)) * -200}deg)`; $("lgi").style.opacity = cl(k * 2);
+      LS.forEach((s, j) => { const q = eob(pr(lu, .7 + j * .045, .5)); s.style.opacity = cl(q * 2); s.style.transform = `translateY(${(1 - q) * 60}px) rotate(${(1 - cl(q)) * 12}deg)`; });
+      const tq = eo(pr(lu, 1.45, .6)); $("lgt").style.opacity = tq; $("lgt").style.letterSpacing = (.9 - .35 * tq) + "em";
+      L.querySelector(".rays").style.transform = `rotate(${lu * 14}deg) scale(${.8 + .2 * eo(pr(lu, 0, 1))})`;
+      L.querySelector(".hal").style.opacity = .6 + .4 * Math.sin(lu * 3);
+      ["r1", "r2"].forEach((id, j) => { const q = pr(lu, .35 + j * .35, 1.4), s = 440 + q * 900; const r = $(id); r.style.width = r.style.height = s + "px"; r.style.margin = `${-s / 2}px 0 0 ${-s / 2}px`; r.style.opacity = (1 - q) * .8 * (q > 0); });
+      L.querySelector(".in").style.transform = `scale(${1 + pr(lu, 1.6, 1.6) * .05})`; } }
+  /* logo du coin, filigrane, reflet */
+  $("cimg").style.transform = `rotate(${Math.sin(t * .6) * 4}deg) scale(${1 + Math.max(0, Math.sin(t * 1.6)) * .04})`;
+  { const q = (t % 4) / 4; $("cring").style.opacity = (1 - q) * .8; $("cring").style.transform = `scale(${1 + q * .6})`; }
+  $("wm").style.transform = `rotate(${t * 3}deg)`;
+  $("shine").style.backgroundPosition = `${150 - ((t % 7) / 7) * 300}% 0`;
+  /* volet doré entre deux pages */
+  let w = 0; WIPES.forEach(s => { const d = t - s; if (d > -.45 && d < .45) w = pr(d, -.45, .9); }); if (t > T0 - .45) w = pr(t - T0, -.45, .9);
+  $("wipe").style.left = (-700 + w * 3400) + "px"; $("wipe").style.opacity = w > 0 && w < 1 ? .95 : 0;
+  EMB.forEach(m => { const y = 1080 - ((t * m.sp + m.ph * 1300) % 1300); const life = cl((1080 - y) / 1080); m.e.style.transform = `translate(${m.x + Math.sin(t * .8 + m.ph * 9) * m.sw}px,${y}px) scale(${m.sz})`; m.e.style.opacity = Math.sin(life * Math.PI) * .5; });
+}
+window.render = render; render(0);
+</script></body></html>
